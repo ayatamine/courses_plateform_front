@@ -1,60 +1,54 @@
 <template>
-  <div class="container">
-         <v-app>
-           <div>this is amine</div>
-           <v-checkbox label="label" v-model="name" value="value"></v-checkbox>
-         </v-app>
+  <div>
+
+     <slider/>
+    <why-coose-us/>
+     <tutorials :tutorials="tutorials"/>
+    <achivement2/>
+    <video-intro2/>
+    <posts :posts="posts"/>
+    <footer2 />
 
   </div>
 </template>
-
 <script>
+import HomeBanner from "~/components/Home/HomeBanner.vue";
+import Bg from "~/assets/images/background/1.png";
+import Achivement2 from "~/components/Home/Achivement2";
+import WhyCooseUs from "~/components/Home/WhyUs";
+import Posts from "~/components/Home/Posts";
+import VideoIntro2 from "../components/Home/VideoIntro2";
+import Slider from "../components/Home/Slider";
+import Footer2 from "../components/Footer2";
+import Tutorials from "../components/Home/Tutorials";
 export default {
-  data(){
-    return {
-      name :false
+    data(){
+      return {
+        Bg,
+      }
+    },
+     components:{
+       Tutorials,
+       Footer2,
+       Slider,
+       VideoIntro2,
+       WhyCooseUs,
+       Achivement2,
+      HomeBanner,
+       Posts
+    },
+    computed:{
+      tutorials(){
+           return this.$store.getters["tuto/tutorials"];
+      },
+      posts(){
+           return this.$store.getters["posts/homeposts"];
+      }
     }
-  }
+
 }
 </script>
+<style >
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
 </style>
+
