@@ -1,21 +1,11 @@
 <template>
   <div>
     <!-- Page Title -->
-    <section class="page-title">
+    <section class="page-title" :style="`background-image:url(${backgroundUrl})`">
       <div class="auto-container">
-        <h1>Courses</h1>
+        <h1>Tutorials</h1>
 
-        <!-- Search Boxed -->
-        <div class="search-boxed">
-          <div class="search-box">
-            <form method="post" action="contact.html">
-              <div class="form-group">
-                <input type="search" name="search-field" value="" placeholder="What do you want to learn?" required>
-                <button type="submit"><span class="icon fa fa-search"></span></button>
-              </div>
-            </form>
-          </div>
-        </div>
+        <search-box />
 
       </div>
     </section>
@@ -23,8 +13,8 @@
 
     <!--Sidebar Page Container-->
     <div class="sidebar-page-container">
-      <div class="patern-layer-one paroller" data-paroller-factor="0.40" data-paroller-factor-lg="0.20" data-paroller-type="foreground" data-paroller-direction="vertical" style="background-image: url(images/icons/icon-1.png)"></div>
-      <div class="patern-layer-two paroller" data-paroller-factor="0.40" data-paroller-factor-lg="-0.20" data-paroller-type="foreground" data-paroller-direction="vertical" style="background-image: url(images/icons/icon-2.png)"></div>
+<!--      <div class="patern-layer-one paroller" data-paroller-factor="0.40" data-paroller-factor-lg="0.20" data-paroller-type="foreground" data-paroller-direction="vertical" style="background-image: url(images/icons/icon-1.png)"></div>-->
+<!--      <div class="patern-layer-two paroller" data-paroller-factor="0.40" data-paroller-factor-lg="-0.20" data-paroller-type="foreground" data-paroller-direction="vertical" style="background-image: url(images/icons/icon-2.png)"></div>-->
       <div class="circle-one"></div>
       <div class="circle-two"></div>
       <div class="auto-container">
@@ -38,7 +28,7 @@
               <div class="options-view">
                 <div class="clearfix">
                   <div class="pull-left">
-                    <h3>Browse UI/ UX Courses</h3>
+                    <h3>Browse Dev Tutorials</h3>
                   </div>
                   <div class="pull-right clearfix">
                     <!-- List View -->
@@ -54,8 +44,8 @@
                         <!-- Form Group -->
                         <div class="form-group">
                           <select class="custom-select-box">
-                            <option>Newest</option>
-                            <option>Old</option>
+                            <option class="ui-menu-item-wrapper">Newest</option>
+                            <option class="ui-menu-item-wrapper">Old</option>
                           </select>
                         </div>
 
@@ -69,188 +59,20 @@
               <div class="row clearfix">
 
                 <!-- Cource Block Two -->
-                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
+                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12" v-for="(tuto,k) in tutorials" :key="k">
                   <div class="inner-box">
                     <div class="image">
-                      <a href="course-detail.html"><img src="https://via.placeholder.com/270x150" alt="" /></a>
+                      <nuxt-link :to="'/tutorials/'+tuto.slug"><img src="https://via.placeholder.com/270x150" :alt="tuto.title_en" /></nuxt-link>
                     </div>
                     <div class="lower-content">
-                      <h5><a href="course-detail.html">Interaction Design</a></h5>
-                      <div class="text">Replenish of  third creature and meat blessed void a fruit gathered waters.</div>
+                      <h5><nuxt-link :to="'/tutorials/'+tuto.slug">{{ tuto.title_en }}</nuxt-link></h5>
+                      <div class="text">{{ tuto.description_en.slice(0,60) }}</div>
                       <div class="clearfix">
                         <div class="pull-left">
-                          <div class="students">12 Lecturer</div>
+                          <div class="students" style="    font-size: 15px;">{{ tuto.date }}</div>
                         </div>
                         <div class="pull-right">
-                          <div class="hours">54 Hours</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Cource Block Two -->
-                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-                  <div class="inner-box">
-                    <div class="image">
-                      <a href="course-detail.html"><img src="https://via.placeholder.com/270x150" alt="" /></a>
-                    </div>
-                    <div class="lower-content">
-                      <h5><a href="course-detail.html">Visual Design</a></h5>
-                      <div class="text">Replenish of  third creature and meat blessed void a fruit gathered waters.</div>
-                      <div class="clearfix">
-                        <div class="pull-left">
-                          <div class="students">12 Lecturer</div>
-                        </div>
-                        <div class="pull-right">
-                          <div class="hours">54 Hours</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Cource Block Two -->
-                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-                  <div class="inner-box">
-                    <div class="image">
-                      <a href="course-detail.html"><img src="https://via.placeholder.com/270x150" alt="" /></a>
-                    </div>
-                    <div class="lower-content">
-                      <h5><a href="course-detail.html">Wireframe Protos</a></h5>
-                      <div class="text">Replenish of  third creature and meat blessed void a fruit gathered waters.</div>
-                      <div class="clearfix">
-                        <div class="pull-left">
-                          <div class="students">12 Lecturer</div>
-                        </div>
-                        <div class="pull-right">
-                          <div class="hours">54 Hours</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Cource Block Two -->
-                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-                  <div class="inner-box">
-                    <div class="image">
-                      <a href="course-detail.html"><img src="https://via.placeholder.com/270x150" alt="" /></a>
-                    </div>
-                    <div class="lower-content">
-                      <h5><a href="course-detail.html">Color Theory</a></h5>
-                      <div class="text">Replenish of  third creature and meat blessed void a fruit gathered waters.</div>
-                      <div class="clearfix">
-                        <div class="pull-left">
-                          <div class="students">12 Lecturer</div>
-                        </div>
-                        <div class="pull-right">
-                          <div class="hours">54 Hours</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Cource Block Two -->
-                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-                  <div class="inner-box">
-                    <div class="image">
-                      <a href="course-detail.html"><img src="https://via.placeholder.com/270x150" alt="" /></a>
-                    </div>
-                    <div class="lower-content">
-                      <h5><a href="course-detail.html">Typography</a></h5>
-                      <div class="text">Replenish of  third creature and meat blessed void a fruit gathered waters.</div>
-                      <div class="clearfix">
-                        <div class="pull-left">
-                          <div class="students">12 Lecturer</div>
-                        </div>
-                        <div class="pull-right">
-                          <div class="hours">54 Hours</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Cource Block Two -->
-                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-                  <div class="inner-box">
-                    <div class="image">
-                      <a href="course-detail.html"><img src="https://via.placeholder.com/270x150" alt="" /></a>
-                    </div>
-                    <div class="lower-content">
-                      <h5><a href="course-detail.html">Picture Selection</a></h5>
-                      <div class="text">Replenish of  third creature and meat blessed void a fruit gathered waters.</div>
-                      <div class="clearfix">
-                        <div class="pull-left">
-                          <div class="students">12 Lecturer</div>
-                        </div>
-                        <div class="pull-right">
-                          <div class="hours">54 Hours</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Cource Block Two -->
-                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-                  <div class="inner-box">
-                    <div class="image">
-                      <a href="course-detail.html"><img src="https://via.placeholder.com/270x150" alt="" /></a>
-                    </div>
-                    <div class="lower-content">
-                      <h5><a href="course-detail.html">Interaction Design</a></h5>
-                      <div class="text">Replenish of  third creature and meat blessed void a fruit gathered waters.</div>
-                      <div class="clearfix">
-                        <div class="pull-left">
-                          <div class="students">12 Lecturer</div>
-                        </div>
-                        <div class="pull-right">
-                          <div class="hours">54 Hours</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Cource Block Two -->
-                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-                  <div class="inner-box">
-                    <div class="image">
-                      <a href="course-detail.html"><img src="https://via.placeholder.com/270x150" alt="" /></a>
-                    </div>
-                    <div class="lower-content">
-                      <h5><a href="course-detail.html">Visual Design</a></h5>
-                      <div class="text">Replenish of  third creature and meat blessed void a fruit gathered waters.</div>
-                      <div class="clearfix">
-                        <div class="pull-left">
-                          <div class="students">12 Lecturer</div>
-                        </div>
-                        <div class="pull-right">
-                          <div class="hours">54 Hours</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Cource Block Two -->
-                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-                  <div class="inner-box">
-                    <div class="image">
-                      <a href="course-detail.html"><img src="https://via.placeholder.com/270x150" alt="" /></a>
-                    </div>
-                    <div class="lower-content">
-                      <h5><a href="course-detail.html">Wireframe Protos</a></h5>
-                      <div class="text">Replenish of  third creature and meat blessed void a fruit gathered waters.</div>
-                      <div class="clearfix">
-                        <div class="pull-left">
-                          <div class="students">12 Lecturer</div>
-                        </div>
-                        <div class="pull-right">
-                          <div class="hours">54 Hours</div>
+                          <div class="hours">{{tuto.main_category.name_en}}</div>
                         </div>
                       </div>
                     </div>
@@ -277,7 +99,7 @@
                     <!-- Skills Form -->
                     <div class="skills-form">
                       <form method="post" action="index.html">
-                        <span>Skill Level</span>
+                        <span> Categories</span>
 
                         <!-- Radio Box -->
                         <div class="radio-box">
@@ -302,12 +124,12 @@
 
                   </div>
 
-                  <div class="skills-box-two">
+                  <div class="skills-box-two skills-box">
 
                     <!-- Skills Form -->
                     <div class="skills-form-two">
                       <form method="post" action="index.html">
-                        <span>Skill Level</span>
+                        <span>Tags</span>
 
                         <!-- Radio Box -->
                         <div class="radio-box">
@@ -326,35 +148,6 @@
 
                   </div>
 
-                  <div class="skills-box-three">
-
-                    <!-- Skills Form -->
-                    <div class="skills-form-three">
-                      <form method="post" action="index.html">
-                        <span>Duration Time</span>
-
-                        <!-- Radio Box -->
-                        <div class="radio-box-three">
-                          <input type="radio" name="remember-password" checked id="type-7">
-                          <label for="type-7">5+ hours (30)</label>
-                        </div>
-
-                        <!-- Radio Box -->
-                        <div class="radio-box-three">
-                          <input type="radio" name="remember-password" id="type-8">
-                          <label for="type-8">10+ hours (20)</label>
-                        </div>
-
-                        <!-- Radio Box -->
-                        <div class="radio-box-three">
-                          <input type="radio" name="remember-password" id="type-9">
-                          <label for="type-9">15+ hours (5)</label>
-                        </div>
-
-                      </form>
-                    </div>
-
-                  </div>
 
                 </div>
 
@@ -460,11 +253,46 @@
 </template>
 
 <script>
+import backgroundUrl from '~/assets/images/main-slider/3.png';
+import SearchBox from "../../components/Globals/SearchBox";
 export default {
-  name: "index"
+  components: {SearchBox},
+  data(){
+    return {
+      backgroundUrl
+    }
+  },
+  computed:{
+    tutorials(){
+      return this.$store.getters["tuto/tutorials"];
+    }
+  }
 }
 </script>
 
 <style scoped>
+.page-title{
+  background-color: #fff;
+}
+.page-title .search-box .form-group button,
+.options-view .type-form .ui-selectmenu-button.ui-button, .options-view .type-form .form-group input, .options-view .type-form .form-group select, .options-view .type-form .form-group textarea,
+.options-view .list-view li.active a, .options-view .list-view li:hover a{
+  background: #ff5773;
+}
+.ui-menu-item-wrapper:hover,
+.styled-pagination li.active a, .styled-pagination li:hover a{
+  background: #ff5773;color:#fff;
+}
 
+.ui-menu-item-wrapper{
+  background: #fff;color: #000;
+}
+.skills-box .radio-box input[type="radio"]:checked + label:before {
+  border: 5px solid #ff5773;
+  background: red;
+}
+.cource-block-two .inner-box .lower-content h5 a:hover,
+.cource-block-two .inner-box .lower-content .hours{
+  color: #ff5773;
+}
 </style>
