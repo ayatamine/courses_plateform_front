@@ -39,7 +39,7 @@ export default {
     },
     computed:{
       tutorials(){
-           return this.$store.getters["tuto/tutorials"];
+           return this.$store.getters["tutorial/tutorials"];
       },
       posts(){
            return this.$store.getters["posts/homeposts"];

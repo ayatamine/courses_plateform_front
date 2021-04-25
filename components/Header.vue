@@ -28,37 +28,6 @@
                   <li><nuxt-link to="/">Home</nuxt-link></li>
                   <li><nuxt-link to="/courses">Courses</nuxt-link></li>
                   <li><nuxt-link to="/tutorials">Tutorials</nuxt-link></li>
-                  <li class="dropdown"><nuxt-link to="#">Pages</nuxt-link>
-                    <ul>
-                      <li><nuxt-link to="price.html">Pricing</nuxt-link></li>
-                      <li><nuxt-link to="login.html">Login</nuxt-link></li>
-                      <li><nuxt-link to="register.html">Register</nuxt-link></li>
-                      <li><nuxt-link to="privacy.html">Privacy Policy</nuxt-link></li>
-                      <li><nuxt-link to="comming-soon.html">Coming Soon</nuxt-link></li>
-                    </ul>
-                  </li>
-<!--                  <li class="dropdown"><nuxt-link to="#">Courses</nuxt-link>-->
-<!--                    <ul>-->
-<!--                      <li><nuxt-link to="course.html">Courses As Grid</nuxt-link></li>-->
-<!--                      <li><nuxt-link to="course-list.html">Courses As List</nuxt-link></li>-->
-<!--                      <li><nuxt-link to="course-path.html">Course Topics</nuxt-link></li>-->
-<!--                      <li><nuxt-link to="course-lesson.html">Course Lesson</nuxt-link></li>-->
-<!--                      <li><nuxt-link to="course-detail.html">Course Details</nuxt-link></li>-->
-<!--                    </ul>-->
-<!--                  </li>-->
-<!--                  <li class="dropdown"><nuxt-link to="#">Books</nuxt-link>-->
-<!--                    <ul>-->
-<!--                      <li><nuxt-link to="books.html">Books</nuxt-link></li>-->
-<!--                      <li><nuxt-link to="books-detail.html">Book Detail</nuxt-link></li>-->
-<!--                    </ul>-->
-<!--                  </li>-->
-                  <li class="dropdown"><nuxt-link to="#">Profiles</nuxt-link>
-                    <ul>
-                      <li><nuxt-link to="intro-profile.html">Instructor Profile</nuxt-link></li>
-                      <li><nuxt-link to="student-profile.html">Student Profile</nuxt-link></li>
-                      <li><nuxt-link to="edit-profile.html">Edit Profile</nuxt-link></li>
-                    </ul>
-                  </li>
                   <li class="dropdown"><nuxt-link to="#">Blog</nuxt-link>
                     <ul>
                       <li><nuxt-link to="blog.html">Blog</nuxt-link></li>
@@ -76,8 +45,8 @@
 
               <!-- Login Nav -->
               <ul class="login-nav">
-                <li><nuxt-link to="login.html">Log In</nuxt-link></li>
-                <li><nuxt-link to="register.html">Register</nuxt-link></li>
+                <li><nuxt-link to="auth/login">Log In</nuxt-link></li>
+                <li><nuxt-link to="auth/register">Register</nuxt-link></li>
               </ul>
 
             </div>

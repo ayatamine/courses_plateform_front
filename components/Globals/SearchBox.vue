@@ -18,5 +18,7 @@ export default {
 </script>
 
 <style>
-
+.page-title .search-box .form-group button{
+  background: #ff5773
+}
 </style>

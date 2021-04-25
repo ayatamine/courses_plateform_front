@@ -13,20 +13,20 @@
                 <h2>Our latest Tutorials</h2>
                 <div class="text">With A guaranted promise of getting the good informations we made this tutorials only for you.</div>
               </div>
-              <a href="course.html" class="theme-btn btn-style-four"><span class="txt">Get Stared <i class="fa fa-angle-right"></i></span></a>
+              <nuxt-link to="/tutorials" class="theme-btn btn-style-four"><span class="txt">Get Stared <i class="fa fa-angle-right"></i></span></nuxt-link>
             </div>
           </div>
 
           <!-- Cource Block -->
-          <div class="cource-block col-lg-4 col-md-6 col-sm-12" v-for="tuto in tutorials">
+          <div class="cource-block col-lg-4 col-md-6 col-sm-12" v-for="tuto in tutorials.data">
             <div class="inner-box">
               <div class="image">
-                <a href="course-detail.html"><img :src="tuto.thumbnail" alt="" /></a>
+                <nuxt-link :to="`/tutorials/${tuto.slug}`"><img :src="tuto.thumbnail" alt="" /></nuxt-link>
               </div>
               <div class="lower-content">
                 <div class="clearfix">
                   <div class="pull-left">
-                    <h5><a href="course-detail.html">{{ tuto.title_en }}</a></h5>
+                    <h5><nuxt-link :to="`/tutorials/${tuto.slug}`">{{ tuto.title_en }}</nuxt-link></h5>
                   </div>
                   <div class="pull-right">
                     <div class="price">{{ tuto.main_category.name_en }}</div>
@@ -38,7 +38,7 @@
 <!--                    <div class="students">125 Student</div>-->
 <!--                  </div>-->
                   <div class="pull-right">
-                    <a href="course-detail.html" class="enroll">Visit Now</a>
+                    <nuxt-link :to="`/tutorials/${tuto.slug}`" class="enroll">Visit Now</nuxt-link>
                   </div>
                 </div>
               </div>
@@ -90,7 +90,6 @@
 export default {
   props:{
     tutorials: {
-      type:Array,
       required:true
     }
   }

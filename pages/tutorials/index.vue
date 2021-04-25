@@ -33,8 +33,8 @@
                   <div class="pull-right clearfix">
                     <!-- List View -->
                     <ul class="list-view">
-                      <li class="active"><a href="course.html"><span class="icon flaticon-grid"></span></a></li>
-                      <li><a href="course-list.html"><span class="icon flaticon-list-1"></span></a></li>
+                      <li @click.prevent="grid=true"  :class="grid &&'active'"><nuxt-link to="/tutorials" ><span class="icon flaticon-grid"></span></nuxt-link></li>
+                      <li @click.prevent="grid=false" :class="!grid && 'active'"><nuxt-link to="/tutorials"  ><span class="icon flaticon-list-1"></span></nuxt-link></li>
                     </ul>
 
                     <!-- Type Form -->
@@ -43,9 +43,9 @@
 
                         <!-- Form Group -->
                         <div class="form-group">
-                          <select class="custom-select-box">
-                            <option class="ui-menu-item-wrapper">Newest</option>
-                            <option class="ui-menu-item-wrapper">Old</option>
+                          <select class="custom-select-box" v-model="sort" @change="sortTutorials">
+                            <option class="ui-menu-item-wrapper"  value="?sort=-created_at">Newest</option>
+                            <option class="ui-menu-item-wrapper" value="?sort=created_at">Old</option>
                           </select>
                         </div>
 
@@ -57,15 +57,19 @@
               </div>
 
               <div class="row clearfix">
-
+                <v-skeleton-loader v-show="loading"
+                  v-bind="attrs"
+                  type="card-avatar, article, actions"
+                  :class ="grid ? 'col-lg-4 col-md-6 col-sm-12' :  'w-100'"
+                ></v-skeleton-loader>
                 <!-- Cource Block Two -->
-                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12" v-for="(tuto,k) in tutorials" :key="k">
+                <div v-show="!loading" :class="grid ? 'cource-block  col-lg-4 col-md-6 col-sm-12' : 'cource-block-three w-100' " v-for="(tuto,k) in tutorials.data" :key="k">
                   <div class="inner-box">
                     <div class="image">
                       <nuxt-link :to="'/tutorials/'+tuto.slug"><img src="https://via.placeholder.com/270x150" :alt="tuto.title_en" /></nuxt-link>
                     </div>
                     <div class="lower-content">
-                      <h5><nuxt-link :to="'/tutorials/'+tuto.slug">{{ tuto.title_en }}</nuxt-link></h5>
+                      <h5><nuxt-link :to="'/tutorials/'+tuto.slug" >{{ tuto.title_en }}</nuxt-link></h5>
                       <div class="text">{{ tuto.description_en.slice(0,60) }}</div>
                       <div class="clearfix">
                         <div class="pull-left">
@@ -78,6 +82,9 @@
                     </div>
                   </div>
                 </div>
+                <v-alert dense  type="info" class="w-100 ml-3 mr-2  "  v-show="!tutorials.data.length && !loading">
+                  We are sorry No result found!
+                </v-alert>
 
               </div>
 
@@ -98,55 +105,37 @@
 
                     <!-- Skills Form -->
                     <div class="skills-form">
-                      <form method="post" action="index.html">
+                      <form method="post" action="">
                         <span> Categories</span>
 
                         <!-- Radio Box -->
-                        <div class="radio-box">
-                          <input type="radio" name="remember-password" checked id="type-1">
-                          <label for="type-1">Beginner</label>
+                        <div class="radio-box" v-for="(c,k) in categories.slice(0,8)" :key="k">
+                          <input type="radio" :id="`cat-${k}`" v-model="checkedCategory" :value="'cat-'+k" :checked="checkedCategory"
+                                 @click.prevent="fetchTutorialsByCategory(c.slug,$event) "  >
+                          <label :for="`cat-${k}`">{{ c.name_en }}</label>
                         </div>
-
-                        <!-- Radio Box -->
-                        <div class="radio-box">
-                          <input type="radio" name="remember-password" id="type-2">
-                          <label for="type-2">Intermediate</label>
-                        </div>
-
-                        <!-- Radio Box -->
-                        <div class="radio-box">
-                          <input type="radio" name="remember-password" id="type-3">
-                          <label for="type-3">Expert</label>
-                        </div>
-
                       </form>
                     </div>
 
                   </div>
-
-                  <div class="skills-box-two skills-box">
+                  <div class="skills-box">
 
                     <!-- Skills Form -->
-                    <div class="skills-form-two">
-                      <form method="post" action="index.html">
-                        <span>Tags</span>
+                    <div class="skills-form">
+                      <form method="post" action="">
+                        <span> Tags</span>
 
                         <!-- Radio Box -->
-                        <div class="radio-box">
-                          <input type="radio" name="remember-password" checked id="type-4">
-                          <label for="type-4">Free (14)</label>
+                        <div class="radio-box" v-for="(t,k) in tags.slice(0,8)" :key="k">
+                          <input type="radio" :id="`tag-${k}`" v-model="checkedTag" :value="'tag-'+k" :checked="checkedTag == 'tag-'+k"
+                                 @click.prevent="fetchTutorialsByTag(t.id)">
+                          <label :for="`tag-${k}`">{{ t.title_en }}</label>
                         </div>
-
-                        <!-- Radio Box -->
-                        <div class="radio-box">
-                          <input type="radio" name="remember-password" id="type-5">
-                          <label for="type-5">Paid</label>
-                        </div>
-
                       </form>
                     </div>
 
                   </div>
+
 
 
                 </div>
@@ -157,8 +146,10 @@
 
         </div>
 
+
         <!-- Post Share Options -->
         <div class="styled-pagination">
+          <pagination :data="tutorials" @pagination-change-page="getTutorials"></pagination>
           <ul class="clearfix">
             <li class="prev"><a href="#"><span class="fa fa-angle-left"></span> </a></li>
             <li><a href="#">1</a></li>
@@ -174,7 +165,7 @@
     </div>
 
     <!-- Popular Courses -->
-    <section class="popular-courses-section">
+<!--    <section class="popular-courses-section">
       <div class="auto-container">
         <div class="sec-title">
           <h2>Most Popular Courses</h2>
@@ -182,7 +173,7 @@
 
         <div class="row clearfix">
 
-          <!-- Cource Block Two -->
+          &lt;!&ndash; Cource Block Two &ndash;&gt;
           <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
             <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
               <div class="image">
@@ -203,7 +194,7 @@
             </div>
           </div>
 
-          <!-- Cource Block Two -->
+          &lt;!&ndash; Cource Block Two &ndash;&gt;
           <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
             <div class="inner-box wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
               <div class="image">
@@ -224,7 +215,7 @@
             </div>
           </div>
 
-          <!-- Cource Block Two -->
+          &lt;!&ndash; Cource Block Two &ndash;&gt;
           <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
             <div class="inner-box wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
               <div class="image">
@@ -248,39 +239,100 @@
         </div>
 
       </div>
-    </section>
+    </section>-->
   </div>
 </template>
 
 <script>
 import backgroundUrl from '~/assets/images/main-slider/3.png';
-import SearchBox from "../../components/Globals/SearchBox";
+import SearchBox from "@/components/Globals/SearchBox";
 export default {
   components: {SearchBox},
   data(){
     return {
-      backgroundUrl
+      backgroundUrl,
+      routeName:'/tutorials',
+      url_prefix :'api/tutorials',
+      sort:'?sort=-created_at',
+      grid:true,
+      checkedCategory:'cat-0',
+      checkedTag:'tag-0',
+      url_category_prefix:'api/categories',
+      url_tag_prefix:'api/tags',
+      attrs: {
+        boilerplate: false,
+        elevation: 23,
+        maxHeight:"386px",
+
+      },
+      loading:true
     }
   },
+  async asyncData(context){
+    const [tutorials, categories,tags] = await Promise.all([
+      context.$axios.$get('api/tutorials'),
+      context.$axios.$get('api/categories'),
+      context.$axios.$get('api/tags'),
+    ])
+
+    return {tutorials,categories,tags,loading:false}
+
+    //fetch tags
+  },
   computed:{
-    tutorials(){
-      return this.$store.getters["tuto/tutorials"];
+  },
+  methods:{
+    async sortTutorials(){
+      this.loading = true
+      let sortName = this.sort =='?sort=-created_at' ? "newest" : "oldest"
+      let tutorials = await this.$axios.$get(this.url_prefix+this.sort)
+      this.$router.push(`${this.routeName}?sort=${sortName}`)
+      this.updateTutorials(tutorials)
+    },
+    async fetchTutorialsByCategory(slug,event){
+       this.loading = true
+        this.checkedCategory = event.target.value
+        var paginator = this.tutorials;
+        let tutorials = await this.$axios.$get(`${this.url_category_prefix}/${slug}/tutorials`)
+        this.updateTutorials({data:tutorials})
+    },
+    async fetchTutorialsByTag(id){
+      this.loading = true
+        var paginator = this.tutorials;
+        let tutorials = await this.$axios.$get(`${this.url_tag_prefix}/${id}/tutorials`)
+        this.updateTutorials({data:tutorials})
+    },
+    updateTutorials(data){
+      Object.assign(this.tutorials,data)
+      this.$store.commit('tuto/setTuTorials',data)
+      this.loading = false
+    },
+    async getTutorials(page){
+      let tutorials = await this.$axios.$get(this.url_prefix+page)
+      this.$router.push(`${this.routeName}?page=${page}`)
+      this.updateTutorials(tutorials)
     }
   }
 }
 </script>
-
-<style scoped>
+<style>
 .page-title{
   background-color: #fff;
 }
-.page-title .search-box .form-group button,
+
+</style>
+<style scoped>
+.page-title .search-box .form-group button{
+  background: #ff5773;
+}
 .options-view .type-form .ui-selectmenu-button.ui-button, .options-view .type-form .form-group input, .options-view .type-form .form-group select, .options-view .type-form .form-group textarea,
 .options-view .list-view li.active a, .options-view .list-view li:hover a{
   background: #ff5773;
 }
+
 .ui-menu-item-wrapper:hover,
-.styled-pagination li.active a, .styled-pagination li:hover a{
+.styled-pagination li.active a, .styled-pagination li:hover a
+{
   background: #ff5773;color:#fff;
 }
 

@@ -119,7 +119,7 @@ import backgroundUrl from '~/assets/images/main-slider/1.png';
 
 import pattern2 from '~/assets/images/background/pattern-2.png';
 export default {
-  name: "footer",
+  name: "footer2",
   data(){
     return {
       pattern2

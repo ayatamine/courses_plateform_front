@@ -1,3 +1,5 @@
+import webpack from "webpack";
+
 export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
@@ -24,7 +26,7 @@ export default {
             { src: '/js/jquery.scrollTo.js', type: 'text/javascript' },
             { src: '/js/bootstrap.min.js', type: 'text/javascript' },
             { src: '/js/jquery.mCustomScrollbar.concat.min.js', type: 'text/javascript' },
-            { src: '/js/jquery.fancybox.js', type: 'text/javascript' },
+            // { src: '/js/jquery.fancybox.js', type: 'text/javascript' },
             { src: '/js/appear.js', type: 'text/javascript' },
             { src: '/js/swiper.min.js', type: 'text/javascript' },
             { src: '/js/element-in-view.js', type: 'text/javascript' },
@@ -33,7 +35,7 @@ export default {
             { src: '/js/tilt.jquery.min.js', type: 'text/javascript' },
             { src: '/js/jquery.easing.min.js', type: 'text/javascript' },
             // { src: '/js/owl.js', type: 'text/javascript' },
-            { src: '/js/wow.js', type: 'text/javascript' },
+            // { src: '/js/wow.js', type: 'text/javascript' },
             { src: '/js/jquery-ui.js', type: 'text/javascript' },
             { src: '/js/script.js', type: 'text/javascript' }
 
@@ -51,7 +53,11 @@ export default {
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
       {src:'~/plugins/carousel.js',mode:'client'},
-      {src:'~/plugins/wow.js',mode:'client'}
+      {src:'~/plugins/wow.js',mode:'client'},
+      {src:'~/plugins/pagination.js',mode:'client'},
+      {src:'~/plugins/video_player.js',mode:'client'},
+      {src:'~/plugins/bootstrap.js'},
+      '~/plugins/jquery.fancybox',
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
@@ -60,8 +66,7 @@ export default {
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [
         '@nuxtjs/dotenv',
-        // '@nuxtjs/vuetify',
-
+        '@nuxtjs/vuetify',
 
     ],
 
@@ -78,6 +83,17 @@ export default {
         // extractCss: {
         //     ignoreOrder: false
         // }
+      vendor: ['jquery', 'bootstrap'],
+      plugins: [
+        // set shortcuts as global for bootstrap
+        new webpack.ProvidePlugin({
+          $: 'jquery',
+          jQuery: 'jquery',
+          'window.jQuery': 'jquery',
+
+
+        })
+      ]
     },
     axios: {
         baseURL: process.env.APP_URL,
