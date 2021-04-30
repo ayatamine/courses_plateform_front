@@ -331,9 +331,13 @@ export default {
 }
 
 .ui-menu-item-wrapper:hover,
+.styled-pagination li a{
+  line-height: 39px;
+}
 .styled-pagination li.active a, .styled-pagination li:hover a
 {
   background: #ff5773;color:#fff;
+
 }
 
 .ui-menu-item-wrapper{

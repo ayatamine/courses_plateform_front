@@ -19,7 +19,7 @@
                 <li v-for="tag in post.tags.slice(0,2)"><a href="course-detail.html" >{{ tag.title_en }} </a></li>
               </ul>
             </div>
-            <h4><a href="course-detail.html">{{ post.title_en}}</a></h4>
+            <h4><nuxt-link :to="`${post.slug}`">{{ post.title_en}}</nuxt-link></h4>
             <div class="text">{{ post.content_en.substring(0,70)}}</div>
           </div>
         </div>

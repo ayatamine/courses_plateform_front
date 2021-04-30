@@ -19,6 +19,13 @@ export default {
 
 <style>
 .page-title .search-box .form-group button{
-  background: #ff5773
+
+}
+.page-title .search-box .form-group input[type="text"]:focus, .page-title .search-box .form-group input[type="search"]:focus
+{
+  border-color: #ff5773
+}
+.page-title .search-box .form-group button{
+  background:#ff5773;
 }
 </style>

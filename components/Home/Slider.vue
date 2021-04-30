@@ -106,5 +106,7 @@ export default {
 </script>
 
 <style>
-
+.slider-section {
+  padding-bottom: 228px;
+}
 </style>

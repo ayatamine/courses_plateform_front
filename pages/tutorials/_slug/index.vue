@@ -20,7 +20,7 @@
          <div class="row clearfix">
 
            <!-- Content Column -->
-           <div class="content-column col-lg-6 col-md-8 col-sm-12">
+           <div class="content-column col-lg-8 col-md-8 col-sm-12">
              <div class="inner-column">
 
                <!-- Intro Info Tabs-->
@@ -124,9 +124,20 @@
            </div>
 
            <!-- Video Column -->
-           <div class="video-column col-lg-6 col-md-4 col-sm-12">
-             <div >
-               <img src="https://demo.auburnforest.com/html/bootcamp/bootcamp/images/resource/video-image-1.jpg" class="w-100 h-100" :alt="tutorial.title_en">
+           <div class="video-column col-lg-4 col-md-4 col-sm-12">
+             <div class="inner-column sticky-top">
+
+               <!-- Video Box -->
+               <div class="intro-video" :style="`background-image: url(${preview_image})`">
+                 <a href="https://www.youtube.com/watch?v=PlBkXZUTL-U" class="lightbox-image intro-video-box"><span class="fa fa-play"><i class="ripple"></i></span></a>
+                 <h4>Preview this course</h4>
+               </div>
+               <!-- End Video Box -->
+<!--               <div class="price">${{course.price}}</div>-->
+               <!--               <div class="time-left">23 hours left at this price!</div>-->
+
+               <!--               <a href="#" class="theme-btn btn-style-three"><span class="txt">Add To Cart <i class="fa fa-angle-right"></i></span></a>-->
+               <a href="#" class="theme-btn btn-style-four mt-4"><span class="txt">Learn Now <i class="fa fa-angle-right"></i></span></a>
              </div>
            </div>
 
@@ -142,13 +153,15 @@
 import backgroundUrl from '~/assets/images/main-slider/3.png';
 import icon1 from '~/assets/images/icons/icon-1.png';
 import icon2 from '~/assets/images/icons/icon-2.png';
+import preview_image from '~/assets/images/background/video-image.jpg';
+
 export default {
   name: "index",
   components:{
   },
   data() {
     return {
-      backgroundUrl,icon1,icon2,tutorial:{},tabActive:'prod-overview'
+      backgroundUrl,preview_image,icon1,icon2,tutorial:{},tabActive:'prod-overview'
     }
   },
    async asyncData(context){
@@ -166,21 +179,16 @@ export default {
     min-height:400px
   }
 }
-.video-column >div{
-  background: #fff;
-  padding:3px;
-  box-shadow: 2px 4px 0 0px #ececec;
-  border-radius: 4px;
-}
-.video-column >div>img:hover{
-  background: #ff5773;
-  padding: 3px;
-}
+
 .intro-section .intro-tabs .tab-btns .tab-btn:hover, .intro-section .intro-tabs .tab-btns .tab-btn.active-btn{
   background: #ff5773;
 }
 .link-colored{color:#7a7879}
-.accordion-box .block .play-icon .fa,.intro-section .intro-tabs .tabs-content .minutes,.link-colored:hover{
+.accordion-box .block .play-icon .fa,.intro-section .intro-tabs .tabs-content .minutes,.link-colored:hover,
+.intro-section .video-column .intro-video .intro-video-box{
   color: #ff5773;
+}
+.intro-section .patern-layer-one {
+  top: 20px;
 }
 </style>

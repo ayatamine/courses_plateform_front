@@ -7,7 +7,7 @@
         <div class="clearfix">
 
           <div class="pull-left logo-box">
-            <div class="logo"><nuxt-link to="index.html"><img src="https://via.placeholder.com/230x60" alt="" title="ayat academey"></nuxt-link></div>
+            <div class="logo"><nuxt-link to="/"><img src="~assets/images/ayatacademy.svg" alt="" title="ayat academey"></nuxt-link></div>
           </div>
 
           <div class="nav-outer clearfix">
@@ -28,11 +28,9 @@
                   <li><nuxt-link to="/">Home</nuxt-link></li>
                   <li><nuxt-link to="/courses">Courses</nuxt-link></li>
                   <li><nuxt-link to="/tutorials">Tutorials</nuxt-link></li>
-                  <li class="dropdown"><nuxt-link to="#">Blog</nuxt-link>
+                  <li class="dropdown"><nuxt-link to="/blog">Blog</nuxt-link>
                     <ul>
-                      <li><nuxt-link to="blog.html">Blog</nuxt-link></li>
-                      <li><nuxt-link to="blog-detail.html">Blog Detail</nuxt-link></li>
-                      <li><nuxt-link to="error.html">Not Found / 404</nuxt-link></li>
+                      <li><nuxt-link to="/blog">Blog</nuxt-link></li>
                     </ul>
                   </li>
                   <li><nuxt-link to="contact.html">Contact Us</nuxt-link></li>
