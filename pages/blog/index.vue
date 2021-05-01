@@ -109,11 +109,11 @@
                   </div>
 
                   <div class="widget-content">
-                    <article class="post" v-if="posts.data.length > 2"  v-for="i in 2" :key="i">
+                    <article class="post" v-if="recent_posts.data.length"  v-for="(post,i) in recent_posts.data" :key="i">
                       <div class="post-inner">
-                        <figure class="post-thumb"><nuxt-link :to="`${posts.data[i].slug}`"><img :src="`${posts.data[i].thumbnail}`" :alt="posts.data[i].title_en"></nuxt-link></figure>
-                        <div class="text"><nuxt-link :to="`${posts.data[i].slug}`">{{ posts.data[i].title_en }}</nuxt-link></div>
-                        <div class="post-info">By {{ posts.data[i].author }}</div>
+                        <figure class="post-thumb"><nuxt-link :to="`${post.slug}`"><img :src="`${post.thumbnail}`" :alt="post.title_en"></nuxt-link></figure>
+                        <div class="text"><nuxt-link :to="`${post.slug}`">{{ post.title_en }}</nuxt-link></div>
+                        <div class="post-info">By {{ post.author }}</div>
                       </div>
                     </article>
                   </div>
@@ -237,7 +237,6 @@ export default {
       sort:'?sort=-created_at',
       grid:true,
       checkedCategory:'cat-0',
-      checkedTag:'tag-0',
       url_category_prefix:'api/categories',
       url_tag_prefix:'api/tags',
       attrs: {
@@ -250,46 +249,44 @@ export default {
     }
   },
   async asyncData(context){
-    const [posts, categories,tags] = await Promise.all([
+    const [posts, categories,tags,recent_posts] = await Promise.all([
       context.$axios.$get('api/posts'),
       context.$axios.$get('api/categories'),
       context.$axios.$get('api/tags'),
+      context.$axios.$get('api/posts?limit=3'),
     ])
 
-    return {posts,categories,tags,loading:false}
+    return {posts,categories,tags,recent_posts,loading:false}
 
   },
   methods:{
     async sortPosts(){
-
-      this.loading = true
+      this.load();
       let sortName = this.sort =='?sort=-created_at' ? "newest" : "oldest"
       let posts = await this.$axios.$get(this.url_prefix+this.sort)
       this.$router.push(`${this.$route.path}?sort=${sortName}`)
       this.updatePosts(posts)
     },
-    async fetchPostsByCategory(slug,event){
-      this.loading = true
-      this.checkedCategory = event.target.value
-      var paginator = this.posts;
-      let posts = await this.$axios.$get(`${this.url_category_prefix}/${slug}/posts`)
-      this.updatePosts({data:posts})
-    },
     async fetchPostsByTag(id){
-      this.loading = true
-      let res = await this.$axios.$get(`${this.url_tag_prefix}/${id}/posts`)
-      Object.assign(this.posts, {data:res.posts})
-      this.loading = false
+      this.load()
+      let posts = await this.$axios.$get(`${this.url_tag_prefix}/${id}/posts`)
+      this.updatePosts(posts)
+    },
+    async getPosts(page){
+      this.load();
+      console.log(this.url_prefix)
+      this.$router.push(`${this.$route.path}?page=${page}`)
+      let posts = await this.$axios.$get(`${this.url_prefix}?page=${page}`)
+
+      this.updatePosts(posts)
     },
     updatePosts(data){
       Object.assign(this.posts,data)
       // this.$store.commit('course/setPosts',data)
       this.loading = false
     },
-    async getPosts(page){
-      let posts = await this.$axios.$get(`${this.url_prefix}?page=${page}`)
-      this.$router.push(`${this.$route.path}?page=${page}`)
-      this.updatePosts(posts)
+    load(){
+      this.loading = true
     }
   }
 }

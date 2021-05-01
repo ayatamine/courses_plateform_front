@@ -39,7 +39,7 @@
 
                     <!-- Type Form -->
                     <div class="type-form">
-                      <form method="post" action="index.html">
+                      <form method="post" action="#">
 
                         <!-- Form Group -->
                         <div class="form-group">
@@ -66,7 +66,7 @@
                 <div v-show="!loading" :class="grid ? 'cource-block  col-lg-4 col-md-6 col-sm-12' : 'cource-block-three w-100' " v-for="(course,k) in courses.data" :key="k">
                   <div class="inner-box">
                     <div class="image">
-                      <nuxt-link :to="'/courses/'+course.slug"><img src="https://via.placeholder.com/270x150" :alt="course.title_en" /></nuxt-link>
+                      <nuxt-link :to="'/courses/'+course.slug"><img :src="course.thumbnail" :alt="course.title_en" /></nuxt-link>
                     </div>
                     <div class="lower-content">
                       <h5><nuxt-link :to="'/courses/'+course.slug" >{{ course.title_en }}</nuxt-link></h5>
@@ -126,10 +126,12 @@
                         <span> Tags</span>
 
                         <!-- Radio Box -->
-                        <div class="radio-box" v-for="(t,k) in tags.slice(0,8)" :key="k">
-                          <input type="radio" :id="`tag-${k}`" v-model="checkedTag" :value="'tag-'+k" :checked="checkedTag == 'tag-'+k"
-                                 @click.prevent="fetchCoursesByTag(t.id)">
-                          <label :for="`tag-${k}`">{{ t.title_en }}</label>
+                        <hr>
+                        <div class="widget-content">
+                          <nuxt-link to="" @click.prevent="getCourses(1)">#All</nuxt-link>
+                          <nuxt-link to=""  v-for="(t,k) in tags.slice(0,10)" :key="k"
+                                     @click.prevent="fetchCoursesByTag(t.id)"
+                          >#{{ t.title_en }}</nuxt-link>
                         </div>
                       </form>
                     </div>
@@ -281,12 +283,15 @@ export default {
        this.loading = true
         this.checkedCategory = event.target.value
         var paginator = this.courses;
+        this.$router.push(`${this.$route.path}`)
         let courses = await this.$axios.$get(`${this.url_category_prefix}/${slug}/courses`)
         this.updateCourses({data:courses})
+
     },
     async fetchCoursesByTag(id){
       this.loading = true
         var paginator = this.courses;
+        this.$router.push(`${this.$route.path}`)
         let courses = await this.$axios.$get(`${this.url_tag_prefix}/${id}/courses`)
         this.updateCourses({data:courses})
     },
@@ -351,5 +356,28 @@ export default {
 .cource-block-two .inner-box .lower-content h5 a:hover,
 .cource-block-two .inner-box .lower-content .hours{
   color: #ff5773;
+}
+.widget-content {
+  padding: 0px 25px 40px;
+}
+.widget-content a {
+  position: relative;
+  display: inline-block;
+  line-height: 24px;
+  padding: 8px 10px 8px;
+  margin: 0px 5px 15px 0px;
+  color: #03382e;
+  text-align: center;
+  font-size: 13px;
+  background: none;
+  font-weight: 500;
+  border-radius: 5px;
+  text-transform: capitalize;
+  transition: all 300ms ease;
+  -webkit-transition: all 300ms ease;
+  -ms-transition: all 300ms ease;
+  -o-transition: all 300ms ease;
+  -moz-transition: all 300ms ease;
+  box-shadow: 0px 0px 15px rgb(0 0 0 / 15%);
 }
 </style>

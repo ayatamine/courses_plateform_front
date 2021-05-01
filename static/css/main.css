@@ -10658,3 +10658,6 @@ img{
 	position:relative;
 	margin-bottom:50px;
 }
+.sidebar .popular-posts .post .post-thumb img {
+  min-height: 3.5rem;
+}

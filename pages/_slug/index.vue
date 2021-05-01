@@ -4,24 +4,24 @@
     <div class="auto-container row m-auto">
           <!-- <h3 class="post-detail-heading">Snippet in detail</h3> -->
           <div class="col-md-9">
-            <h3 class="blog-post-title post-detail-title">Bootstrap 4 Header Section With Background Banner Design</h3>
+            <h3 class="blog-post-title post-detail-title">{{ post.title_en }}</h3>
             <ul class="blog-post-info list-inline post-detail-info d-flex">
               <li>
                 <div>
                   <i class="fa fa-clock-o"></i>
-                  <span class="font-lato">Apr 05, 2018</span>
+                  <span class="font-lato">{{post.posted_at}}</span>
                 </div>
               </li>
               <li>
                 <div>
                   <i class="fa fa-user"></i>
-                  <span class="font-lato">NiceSnippets</span>
+                  <span class="font-lato">{{ post.author }}</span>
                 </div>
               </li>
               <li>
                 <div>
                   <i class="fa fa-eye"></i>
-                  <span class="font-lato">6644</span>
+                  <span class="font-lato">25</span>
                 </div>
               </li>
             </ul>
@@ -108,7 +108,7 @@
                 <li>{{post.comments_count}} comments</li>
               </ul>
               <div class="image">
-                <img src="https://via.placeholder.com/790x350" alt="" />
+                <img :src="post.thumbnail" alt="" />
               </div>
               <h4>{{ post.title_en }}</h4>
               <p>
@@ -128,16 +128,27 @@
             <div class="comments-area">
               <div class="group-title d-flex " style=" justify-content: space-between;">
                 <h4>Recent Comments</h4>
-                <nuxt-link to="" class="pull-right load-comments" v-show="comments.length  ==0"  @click.prevent.stop="loadComments" > Load Comments</nuxt-link>
+                <button class="pull-right load-comments" v-show="post.comments_count > 0 && comments.length ==0"  @click.prevent="loadComments" > Load Comments</button>
               </div>
 
-
-              <div class="comment-box reply-comment">
-                <div class="comment" v-for="(comment,i) in comments" :key="i">
-                  <div class="author-thumb"><img :src="comment.user.photo" alt=""></div>
-                  <div class="comment-info clearfix"><strong>{{ `${comment.user.first_name} ${comment.user.last_name}`  }} </strong><div class="comment-time">July 01, 2019</div></div>
-                  <div class="text">{{comment.content_en}}</div>
-                  <a class="theme-btn reply-btn" href="#"> Reply</a>
+              <div class="alert alert-info w-100" v-if="!comments.length" >No comment yet .</div>
+              <div v-for="(comment,i) in comments" :key="i">
+                <div class="comment-box " >
+                  <div class="comment" >
+                    <div class="author-thumb"><img :src="comment.user.photo" alt=""></div>
+                    <div class="comment-info clearfix"><strong>{{ `${comment.user.first_name} ${comment.user.last_name}`  }} </strong><div class="comment-time">
+                      {{ comment.created_at }}</div></div>
+                    <div class="text">{{comment.content}}</div>
+                    <a class="theme-btn reply-btn" href="#"> Reply</a>
+                  </div>
+                </div>
+                <div class="comment-box reply-comment"  v-if="comment.children" v-for="(c,k) in comment.children" :key="k">
+                  <div class="comment" >
+                    <div class="author-thumb"><img :src="comment.user.photo" alt=""></div>
+                    <div class="comment-info clearfix"><strong>{{ `${c.user.first_name} ${c.user.last_name}`  }} </strong><div class="comment-time">
+                      {{ c.created_at }}</div></div>
+                    <div class="text">{{c.content}}</div>
+                  </div>
                 </div>
               </div>
 
@@ -148,23 +159,23 @@
               <div class="group-title"><h4>Leave Comment</h4></div>
 
               <!--Comment Form-->
-              <form method="post" action="blog.html">
+              <form method="post" action="#">
                 <div class="row clearfix">
 
-                  <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                    <input type="text" name="username" placeholder="Full Name*" required>
-                  </div>
+<!--                  <div class="col-lg-6 col-md-6 col-sm-12 form-group">-->
+<!--                    <input type="text" name="username" placeholder="Full Name*" required>-->
+<!--                  </div>-->
 
-                  <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                    <input type="email" name="email" placeholder="Email Address*" required>
+<!--                  <div class="col-lg-6 col-md-6 col-sm-12 form-group">-->
+<!--                    <input type="email" name="email" placeholder="Email Address*" required>-->
+<!--                  </div>-->
+
+                  <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                    <textarea class="" v-model="comment.content" name="message" placeholder="Write your comment..."></textarea>
                   </div>
 
                   <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                    <textarea class="" name="message" placeholder="Write your comment..."></textarea>
-                  </div>
-
-                  <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                    <button class="theme-btn btn-style-three" type="submit" name="submit-form"><span class="txt">Submit Your Comment <i class="fa fa-angle-right"></i></span></button>
+                    <button class="btn btn-success text-white" type="submit" name="submit-form" @click.prevent="addComment()"><span class="txt">Submit Your Comment <i class="fa fa-angle-right"></i></span></button>
                   </div>
 
                 </div>
@@ -192,6 +203,9 @@ export default {
     return {
               comments:[],
               loading:true,
+              comment:{
+                content:''
+              }
     }
   },
   async asyncData(context){
@@ -213,15 +227,18 @@ export default {
   },
   methods:{
     async loadComments(){
+
       try{
-        const comments =  await context.$axios.$get(`api/posts/${context.params.slug}/comments`)
-        return {comments:comments}
+        this.comments=  await this.$axios.$get(`api/posts/${this.$route.params.slug}/comments`)
 
       }
       catch (e) {
         throw e;
       }
     },
+    addComment(){
+      console.log(this.comment)
+    }
 
   }
 }

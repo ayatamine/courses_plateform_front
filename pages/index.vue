@@ -48,7 +48,9 @@ export default {
 
 }
 </script>
-<style >
-
+<style scoped>
+.main-header{
+  background:none !important;
+}
 </style>
 
