@@ -378,6 +378,6 @@ export default {
   -ms-transition: all 300ms ease;
   -o-transition: all 300ms ease;
   -moz-transition: all 300ms ease;
-  box-shadow: 0px 0px 15px rgb(0 0 0 / 15%);
+  box-shadow: 0px 0px 15px rgb(0 0 0 / 0.15);
 }
 </style>

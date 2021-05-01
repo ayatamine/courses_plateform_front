@@ -33,7 +33,7 @@
                       <li><nuxt-link to="/blog">Blog</nuxt-link></li>
                     </ul>
                   </li>
-                  <li><nuxt-link to="contact.html">Contact Us</nuxt-link></li>
+                  <li><nuxt-link to="/contact">Contact Us</nuxt-link></li>
                 </ul>
               </div>
 
