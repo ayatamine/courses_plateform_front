@@ -292,9 +292,7 @@ export default {
 }
 </script>
 <style>
-.page-title{
-  background-color: #fff;
-}
+
 .styled-pagination li a {
   line-height: 22px;
 }

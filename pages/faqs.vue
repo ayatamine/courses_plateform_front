@@ -1,6 +1,5 @@
 <template>
   <!-- Contact Page Section -->
-  <div>
   <v-app>
   <section class="contact-page-section">
 
@@ -73,7 +72,7 @@
       <div class="contact-info-section">
         <div class="title-box">
           <h2>Contact Information</h2>
-          <div class="text">If you have any seggestion, any comment or any inspiration just feel free to contact us here .</div>
+          <div class="text">Lorem Ipsum is simply dummy text of the printing <br> and typesetting industry.</div>
         </div>
 
         <div class="row clearfix">
@@ -84,8 +83,8 @@
               <div class="icon fa fa-phone"></div>
               <strong>Phone</strong>
               <ul>
-                <li><a href="tel:+1-123-456-7890">{{ site_settings.phone_number }}</a></li>
-<!--                <li><a href="tel:+1-123-456-7890">+1 (123) 456-7890</a></li>-->
+                <li><a href="tel:+1-123-456-7890">+1 (123) 456-7890</a></li>
+                <li><a href="tel:+1-123-456-7890">+1 (123) 456-7890</a></li>
               </ul>
             </div>
           </div>
@@ -96,8 +95,8 @@
               <div class="icon fa fa-envelope-o"></div>
               <strong>Email</strong>
               <ul>
-                <li><a href="mailto:info@yourcompany.com">{{ site_settings.contact_email }}</a></li>
-                <li><a href="mailto:infobootcamp@gmail.com">{{ site_settings.contact_email }}</a></li>
+                <li><a href="mailto:info@yourcompany.com">info@yourcompany.com</a></li>
+                <li><a href="mailto:infobootcamp@gmail.com">infobootcamp@gmail.com</a></li>
               </ul>
             </div>
           </div>
@@ -108,7 +107,7 @@
               <div class="icon fa fa-map-marker"></div>
               <strong>Address</strong>
               <ul>
-                <li>{{ site_settings.address }}</li>
+                <li>Portfolio Technology 07, Capetown 12 Road, Chicago, 2436, USA</li>
               </ul>
             </div>
           </div>
@@ -132,16 +131,12 @@
     </div>
   </section>
   </v-app>
-  <footer2/>
-  </div>
 
 </template>
 
 <script>
-import Footer2 from "../components/Footer2";
 export default {
-  name: "contact us",
-  components: {Footer2},
+  name: "faq",
   data(){
     return {
       first_name:'',
@@ -183,9 +178,6 @@ export default {
     isValidForm(){
       return this.first_name.length > 4   && this.last_name.length > 4 && this.message.length > 60
         this.phone.length > 10 && (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email))
-    },
-    site_settings(){
-      return this.$store.getters.site_settings.settings;
     }
   }
 }

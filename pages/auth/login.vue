@@ -1,34 +1,37 @@
 ﻿<template>
     <div>
-        <section class="page-title">
-            <div class="auto-container">
-                    <h1>Login</h1>
+      <section class="page-title" :style="`background-image:url(${backgroundUrl})`">
+        <div class="auto-container">
+          <h1>Welcome Again ...</h1>
 
-                    <!-- Search Boxed -->
-                    <search-box/>
-            </div>
-        </section>
-        <section class="login-section">
+        </div>
+      </section>
+        <section class="login-section  pt-5">
                 <div class="auto-container">
                     <div class="login-box">
 
                         <!-- Title Box -->
                         <div class="title-box">
                             <h2>Login</h2>
-                            <div class="text"><span class="theme_color">Welcome!</span> Please confirm that you are visiting</div>
+                            <div class="text text-capitalize font-weight-bold"><span class="theme_color ">Welcome!</span> Please confirm that you are visiting</div>
                         </div>
 
                         <!-- Login Form -->
                         <div class="styled-form">
                             <form method="post" action="index.html">
                                 <div class="form-group">
-                                    <label>User Name</label>
-                                    <input type="text" name="username" value="" placeholder="User Name" required>
+                                    <input type="text" name="Email"  v-model="userData.email" placeholder="Email" >
+                                  <div v-show="emailError" class="text-danger">
+                                    ... the email doesn't respect the format
+                                  </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Password</label>
+
                                     <span class="eye-icon flaticon-eye"></span>
-                                    <input type="password" name="password" value="" placeholder="Password" required>
+                                    <input type="password" name="password"  v-model="userData.password" placeholder="Password" >
+                                  <div v-show="passwordError" class="text-danger">
+                                    ... the password is too short
+                                  </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="clearfix">
@@ -44,10 +47,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group text-center">
-                                    <button type="button" class="theme-btn btn-style-three"><span class="txt">Login <i class="fa fa-angle-right"></i></span></button>
+                                    <button type="button" class="theme-btn btn-style-three modified" @click.prevent="login"  :disabled="!isValidForm"
+                                    ><span class="txt">Login <i class="fa fa-angle-right"></i></span></button>
                                 </div>
                                 <div class="form-group">
-                                    <div class="users">New User? <a href="register.html">Sign Up</a></div>
+                                    <div class="users">New User? <nuxt-link to="/auth/register">Sign Up</nuxt-link></div>
                                 </div>
                             </form>
                         </div>
@@ -59,13 +63,64 @@
 </template>
 
 <script>
-import SearchBox from '../../components/Globals/SearchBox.vue'
+import backgroundUrl from '~/assets/images/main-slider/3.png';
+import axios from "axios";
 export default {
-  components: { SearchBox },
+  middleware:'guest',
+  data(){
+      return {
+        backgroundUrl,
+        userData:{
+          email:'',
+          password:''
+        }
 
+      }
+  },
+  methods:{
+    login(){
+
+      axios.post(process.env.APP_URL+'/api/students/login',this.userData)
+      .then(da => {
+        this.$auth.setUserToken(da.token);
+        this.$store.getters.loggedIn = true
+      }).catch(err => console.log(err))
+      this.$router.push('/')
+    }
+  },
+  computed: {
+    passwordError() {
+      return this.userData.password.length > 0 && this.userData.password.length < 8
+    },
+    emailError() {
+      return !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.userData.email)) && this.userData.email.length > 0
+    },
+    isValidForm() {
+      return this.userData.password.length > 7  && (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.userData.email))
+    },
+  }
 }
 </script>
 
-<style>
-
+<style scoped>
+.title-box .theme_color{
+  color: #ff5773;
+}
+.styled-form .form-group .eye-icon {
+  top: 15px;
+}
+.styled-form .form-group .users a {
+  color: #ff5773;
+}
+.styled-form .form-group .check-box label:before,
+.styled-form .form-group .radio-box label:before{
+  border: 1px solid #ff5773;
+}
+.styled-form .form-group .check-box input[type="checkbox"]:checked + label:before ,
+.styled-form .form-group .radio-box input[type="radio"]:checked + label:before{
+  border: 5px solid #ff5773;
+}
+.styled-form .form-group .check-box label a{
+  color: #ff5773;
+}
 </style>

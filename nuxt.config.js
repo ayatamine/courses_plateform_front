@@ -58,6 +58,9 @@ export default {
       {src:'~/plugins/video_player.js',mode:'client'},
       {src:'~/plugins/bootstrap.js'},
       '~/plugins/jquery.fancybox',
+      '~/plugins/mixins/user',
+      '~/plugins/axios'
+
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
@@ -75,6 +78,7 @@ export default {
         '@nuxtjs/axios',
         '@nuxtjs/auth-next',
         '@nuxtjs/dotenv',
+        '@nuxtjs/proxy',
     ],
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -95,22 +99,48 @@ export default {
         })
       ]
     },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        pathRewrite: {'^/api/': ''}
+      }
+    },
     axios: {
         baseURL: process.env.APP_URL,
         credentials: false,
     },
-
     auth: {
         strategies: {
             local: {
                 endpoints: {
-                    login: { url: 'login', method: 'post', propertyName: 'data.token' },
-                    user: { url: 'me', method: 'get', propertyName: 'data' },
+                    login: { url: 'api/students/login', method: 'post', propertyName: 'data.token' },
+                    user: { url: 'api/students/details', method: 'get', propertyName: 'data.token' },
                     logout: false
                 },
-                tokenRequired: false,
-                tokenType: false,
-            }
+                // tokenRequired: false,
+                // tokenType: false,
+              token: {
+                property: 'token',
+                global: true,
+                // required: true,
+                // type: 'Bearer'
+              },
+            },
+          'laravelPassport': {
+            provider: 'laravel/passport',
+            endpoints: {
+              register: { url: 'api/students/register', method: 'post', propertyName: 'data.token' },
+              login: { url: 'api/students/login', method: 'post', propertyName: 'data.access_token' },
+              authorization: process.env.APP_URL + '/oauth/authorize',
+              token: process.env.APP_URL + '/oauth/token',
+              userInfo: process.env.APP_URL + '/api/clients/details',
+              logout: false
+            },
+            url: process.env.APP_URL,
+            clientId: 4,
+            clientSecret: '14p6dTQxfhS6Es7fxDC2yFnWBcL30yACf3uXCmpN',
+            "grant_type":"client_credentials"
+          },
         }
     }
 }

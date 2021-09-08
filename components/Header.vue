@@ -43,8 +43,8 @@
 
               <!-- Login Nav -->
               <ul class="login-nav">
-                <li><nuxt-link to="auth/login">Log In</nuxt-link></li>
-                <li><nuxt-link to="auth/register">Register</nuxt-link></li>
+                <li><nuxt-link to="/auth/login">Log In</nuxt-link></li>
+                <li><nuxt-link to="/auth/register">Register</nuxt-link></li>
               </ul>
 
             </div>
@@ -79,6 +79,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+ div.nav-outer.clearfix > div.outer-box > ul > li:nth-child(1) > a{
+  color: #222222;
+}
+ .main-header{
+   background:none !important;
+ }
 </style>

@@ -22,6 +22,7 @@ import Slider from "../components/Home/Slider";
 import Footer2 from "../components/Footer2";
 import Tutorials from "../components/Home/Tutorials";
 export default {
+  name: "Home",
     data(){
       return {
         Bg,

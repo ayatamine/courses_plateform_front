@@ -10661,4 +10661,16 @@ img{
 .sidebar .popular-posts .post .post-thumb img {
   min-height: 3.5rem;
 }
+.page-title{
+  background-color: #fff;
+}
+.page-title h1 {
+  line-height: 2.3;
+}
+.btn-style-three.modified:before {
+  background-color: #000000;
+}
+.btn-style-three.modified {
+  background-color: #ff5773;color: #fff;
+}
 

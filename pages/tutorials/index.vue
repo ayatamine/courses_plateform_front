@@ -66,7 +66,7 @@
                 <div v-show="!loading" :class="grid ? 'cource-block  col-lg-4 col-md-6 col-sm-12' : 'cource-block-three w-100' " v-for="(tuto,k) in tutorials.data" :key="k">
                   <div class="inner-box">
                     <div class="image">
-                      <nuxt-link :to="'/tutorials/'+tuto.slug"><img src="https://via.placeholder.com/270x150" :alt="tuto.title_en" /></nuxt-link>
+                      <nuxt-link :to="'/tutorials/'+tuto.slug"><img :src="tuto.thumbnail" :alt="tuto.title_en" /></nuxt-link>
                     </div>
                     <div class="lower-content">
                       <h5><nuxt-link :to="'/tutorials/'+tuto.slug" >{{ tuto.title_en }}</nuxt-link></h5>

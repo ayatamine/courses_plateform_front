@@ -38,13 +38,14 @@
                   <div class="logo">
                     <a href="index.html"><img src="https://via.placeholder.com/230x60" alt="" /></a>
                   </div>
-                  <div class="text">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater.</div>
+                  <div class="text">Every developer need a real road to success in his carear, because of that we are here to provide the
+                    best and the clean way to move from beginner to middle to advanced developer.
+                  </div>
                   <div class="social-box">
-                    <a href="#" class="fa fa-facebook"></a>
-                    <a href="#" class="fa fa-instagram"></a>
-                    <a href="#" class="fa fa-twitter"></a>
-                    <a href="#" class="fa fa-google"></a>
-                    <a href="#" class="fa fa-pinterest-p"></a>
+                    <a :href="site_settings.facebook_link" target="_blank" rel="noopener" class="fa fa-facebook"></a>
+                    <a :href="site_settings.linkedin_link"  target="_blank" rel="noopener" class="fa fa-linkedin"></a>
+                    <a :href="site_settings.twitter_link"  target="_blank" rel="noopener" class="fa fa-twitter"></a>
+                    <a :href="site_settings.telegram_link"  target="_blank" rel="noopener" class="fa fa-paper-plane-o"></a>
                   </div>
 
                 </div>
@@ -55,11 +56,10 @@
                 <div class="footer-widget links-widget">
                   <h4>About Us</h4>
                   <ul class="links-widget">
-                    <li><a href="#">Afficiates</a></li>
-                    <li><a href="#">Partners</a></li>
-                    <li><a href="#">Reviews</a></li>
-                    <li><a href="#">Blogs</a></li>
-                    <li><a href="#">Newsletter</a></li>
+                    <li><nuxt-link to="/about">About US</nuxt-link></li>
+                    <li><nuxt-link to="#">Partners</nuxt-link></li>
+                    <li><nuxt-link to="/blog">Blogs</nuxt-link></li>
+                    <li><nuxt-link to="/faqs" href="#">FAQs</nuxt-link></li>
                   </ul>
                 </div>
               </div>
@@ -76,10 +76,9 @@
                 <div class="footer-widget links-widget">
                   <h4>Resource</h4>
                   <ul class="links-widget">
-                    <li><a href="#">Privacy Policy</a></li>
+                    <li><nuxt-link to="/privacy">Privacy Policy</nuxt-link></li>
                     <li><a href="#">Support Area</a></li>
                     <li><a href="#">Documentations</a></li>
-                    <li><a href="#">How it works</a></li>
                     <li><a href="#">Terms of Policy</a></li>
                   </ul>
                 </div>
@@ -90,11 +89,9 @@
                 <div class="footer-widget links-widget">
                   <h4>Quick Links</h4>
                   <ul class="links-widget">
-                    <li><a href="#">home</a></li>
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Features</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><nuxt-link to="/">home</nuxt-link></li>
+                    <li><nuxt-link to="/about">About us</nuxt-link></li>
+                    <li><nuxt-link to="/contact">Contact</nuxt-link></li>
                   </ul>
                 </div>
               </div>
@@ -107,7 +104,7 @@
 
       <!-- Footer Bottom -->
       <div class="footer-bottom text-center">
-        <div class="copyright">Copyright &copy; 2020 AuburnForest</div>
+        <div class="copyright">Copyright &copy; {{new Date().getFullYear()}} {{ site_settings.site_name }}</div>
       </div>
 
     </div>
@@ -124,6 +121,11 @@ export default {
     return {
       pattern2
     }
+  },
+  computed:{
+    site_settings(){
+      return this.$store.getters["site_settings"].settings;
+    },
   }
 }
 </script>

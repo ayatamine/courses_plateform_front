@@ -1,12 +1,18 @@
 
 export const state = () => ({
+    site_settings :{},
 
 })
 export const getters = {
+  site_settings(state) {
+    return state.site_settings
+  },
 
 }
 export const mutations = {
-
+   setSiteSettings(state, payload) {
+     state.site_settings = payload
+   },
 }
 
 export const actions = {
@@ -33,17 +39,19 @@ export const actions = {
     //   .then(res =>{
     //     ctx.commit("tags/setTags",res)
     //   })
-    const [posts,tutorials, categories,tags] = await Promise.all([
+    const [posts,tutorials, categories,tags,site_settings] = await Promise.all([
       context.$axios.$get('api/posts?limit=3'),
       context.$axios.$get('api/tutorials'),
       context.$axios.$get('api/categories'),
       context.$axios.$get('api/tags'),
+      context.$axios.$get('api/site_settings'),
     ])
     ctx.commit("posts/setHomePosts",posts.data)
     ctx.commit("tutorial/setTuTorials",tutorials)
     ctx.commit("categories/setCategories",categories)
     ctx.commit("tags/setTags",tags)
-    return {tutorials,categories,tags,loading:false}
+    ctx.commit("setSiteSettings",site_settings)
+    return {tutorials,categories,tags,site_settings,loading:false}
   }
 }
 
