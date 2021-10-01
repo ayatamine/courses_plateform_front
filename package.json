@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@fancyapps/fancybox": "^3.5.7",
-    "@nuxtjs/auth-next": "5.0.0-1616003482.75c20e6",
+    "@nuxtjs/auth-next": "5.0.0-1607693598.34d83ea",
     "@nuxtjs/axios": "^5.13.1",
     "@nuxtjs/proxy": "^2.1.0",
     "bootstrap": "^4.6.0",
@@ -21,7 +21,8 @@
     "popper.js": "^1.16.1",
     "v-video-embed": "^1.0.8",
     "vue-owl-carousel": "^2.0.3",
-    "vue-wow": "^1.2.0"
+    "vue-wow": "^1.2.0",
+    "vue2-editor": "^2.10.3"
   },
   "devDependencies": {
     "@mdi/font": "^5.9.55",

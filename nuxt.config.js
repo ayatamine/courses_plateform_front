@@ -59,7 +59,9 @@ export default {
       {src:'~/plugins/bootstrap.js'},
       '~/plugins/jquery.fancybox',
       '~/plugins/mixins/user',
-      '~/plugins/axios'
+      '~/plugins/axios',
+      { src: '~/plugins/vue_editor', mode: 'client' }
+
 
     ],
 
@@ -79,6 +81,7 @@ export default {
         '@nuxtjs/auth-next',
         '@nuxtjs/dotenv',
         '@nuxtjs/proxy',
+      ["vue2-editor/nuxt"]
     ],
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -97,7 +100,9 @@ export default {
 
 
         })
-      ]
+      ],
+      transpile: ['vuetify/lib', 'tiptap-vuetify']
+
     },
     proxy: {
       '/api': {
@@ -137,9 +142,11 @@ export default {
               logout: false
             },
             url: process.env.APP_URL,
-            clientId: 4,
+            // clientId: 4,
+            // clientSecret: '14p6dTQxfhS6Es7fxDC2yFnWBcL30yACf3uXCmpN',
+            // grantType:"client_credentials"
+            clientId: "3",
             clientSecret: '14p6dTQxfhS6Es7fxDC2yFnWBcL30yACf3uXCmpN',
-            "grant_type":"client_credentials"
           },
         }
     }
