@@ -69,15 +69,18 @@
 // import backgroundUrl from '~/assets/images/main-slider/1.png';
 
 export default {
-name: "Achivement",
+name: "Achivements",
   data(){
     return{
       // backgroundUrl
-      achivements:[]
+      achivements:{
+        total_courses :0,total_students :0, total_posts:0
+      }
     }
   },
   async fetch() {
-    this.achivements = await this.$axios.$get('/api/achivements')
+   this.$axios.setBaseURL(process.env.APP_URL);
+   this.achivements = await this.$axios.$get('/api/achivements')
   }
 }
 

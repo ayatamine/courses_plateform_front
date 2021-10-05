@@ -59,6 +59,7 @@ export default {
       {src:'~/plugins/bootstrap.js'},
       '~/plugins/jquery.fancybox',
       '~/plugins/mixins/user',
+      '~/plugins/mixins/form_validation',
       '~/plugins/axios',
       { src: '~/plugins/vue_editor', mode: 'client' }
 
@@ -112,9 +113,11 @@ export default {
     },
     axios: {
         baseURL: process.env.APP_URL,
-        credentials: false,
+        proxy:true,
+        // credentials: true,
     },
     auth: {
+
         strategies: {
             local: {
                 endpoints: {
@@ -149,5 +152,8 @@ export default {
             clientSecret: '14p6dTQxfhS6Es7fxDC2yFnWBcL30yACf3uXCmpN',
           },
         }
-    }
+    },
+  router: {
+    middleware: 'refresh_token',
+  },
 }

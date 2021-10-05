@@ -156,9 +156,11 @@ export default {
   methods:{
     contact(){
      this.loading = true;
+
      let {first_name,last_name,message,phone,email}= this;
       this.$axios.$post('api/contact_us',{first_name,last_name,message,phone,email})
       .then(res =>{
+        console.log(res)
            this.loading = false;
            this.responseMessage = res.message
       })

@@ -111,9 +111,7 @@
                 <img :src="post.thumbnail" alt="" />
               </div>
               <h4>{{ post.title_en }}</h4>
-              <p>
-                {{post.content_en}}
-              </p>
+              <p v-html="post.content_en"> </p>
               <div class="social-box">
                 <span>Share this article on </span>
                 <a href="#" class="fa fa-facebook-square"></a>
@@ -128,10 +126,10 @@
             <div class="comments-area">
               <div class="group-title d-flex " style=" justify-content: space-between;">
                 <h4>Recent Comments</h4>
-                <button class="pull-right load-comments" v-show="post.comments_count > 0 && comments.length ==0"  @click.prevent="loadComments" > Load Comments</button>
+                <button class="pull-right load-comments" v-show="loggedIn && post.comments_count > 0 && comments.length ==0"  @click.prevent="loadComments" > Load Comments</button>
               </div>
 
-              <div class="alert alert-info w-100" v-if="!comments.length" >No comment yet .</div>
+              <div class="alert alert-info w-100" v-if="!comments.length" >No comment yet, Please sign in to see the discussion .</div>
               <div v-for="(comment,i) in comments" :key="i">
                 <div class="comment-box " >
                   <div class="comment" >
@@ -140,6 +138,26 @@
                       {{ comment.created_at }}</div></div>
                     <div class="text">{{comment.content}}</div>
                     <a class="theme-btn reply-btn" href="#"> Reply</a>
+                  </div>
+                  <div class="comment-form reply-comment pt-3 pl-2" ref="reply-comment" >
+                    <div class="alert alert-info w-100" v-if="!loggedIn" >Please log in to reply to {{comment.user.first_name}} .</div>
+                    <!--Comment Form-->
+                    <form method="post" v-else action="#" >
+                      <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group m-0">
+                        <textarea class="" v-model="new_comment.content" @keyup="replySizeError = false"
+                              name="message" placeholder="Write your reply..."></textarea>
+                          <br>
+                          <form-input-error v-show="replySizeError" message="the reply content is too short ..." />
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group m-0">
+                          <button class="btn btn-success text-white" type="submit" name="submit-form" @click.prevent="addComment(comment.id)"><span class="txt">Submit Your reply <i class="fa fa-angle-right"></i></span></button>
+                        </div>
+
+                      </div>
+                    </form>
+
                   </div>
                 </div>
                 <div class="comment-box reply-comment"  v-if="comment.children" v-for="(c,k) in comment.children" :key="k">
@@ -157,9 +175,9 @@
             <!-- Comment Form -->
             <div class="comment-form">
               <div class="group-title"><h4>Leave Comment</h4></div>
-
+              <div class="alert alert-info w-100" v-if="!loggedIn" >Please log in to leave a comment .</div>
               <!--Comment Form-->
-              <form method="post" action="#">
+              <form method="post" v-else action="#">
                 <div class="row clearfix">
 
 <!--                  <div class="col-lg-6 col-md-6 col-sm-12 form-group">-->
@@ -171,11 +189,14 @@
 <!--                  </div>-->
 
                   <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                    <textarea class="" v-model="comment.content" name="message" placeholder="Write your comment..."></textarea>
+                    <textarea class="" v-model="new_comment.content" @keyup="commentSizeError = false"
+                              name="message" placeholder="Write your comment..."></textarea>
+                    <br>
+                    <form-input-error v-show="commentSizeError" message="the comment content is too short ..." />
                   </div>
 
                   <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                    <button class="btn btn-success text-white" type="submit" name="submit-form" @click.prevent="addComment()"><span class="txt">Submit Your Comment <i class="fa fa-angle-right"></i></span></button>
+                    <button class="btn btn-success text-white" type="submit" name="submit-form" @click.prevent="addComment(null)"><span class="txt">Submit Your Comment <i class="fa fa-angle-right"></i></span></button>
                   </div>
 
                 </div>
@@ -197,15 +218,22 @@
 </template>
 
 <script>
+import FormInputError from "../../components/Globals/formInputError";
 export default {
   name: "index",
+  components: {FormInputError},
   data(){
     return {
               comments:[],
               loading:true,
-              comment:{
-                content:''
-              }
+              new_comment:{
+                content:'',
+                commentable_type:'App\\Models\\Post',
+                commentable_slug:this.$route.params.slug,
+                parent_id:null,
+                user_type:'user'
+              },
+              commentSizeError:false,replySizeError:false
     }
   },
   async asyncData(context){
@@ -236,10 +264,33 @@ export default {
         throw e;
       }
     },
-    addComment(){
-      console.log(this.comment)
+    async addComment(parent_id){
+      if(this.new_comment.content.length < 4){
+        if(parent_id == null)
+            {this.commentSizeError =  true;}
+        else
+            {this.replySizeError = true}
+
+        return ;
+      }
+
+      this.comment.parent_id = parent_id;
+
+      let token = this.$store.state['usersAuth'].token;
+      alert('the comment will open soon ..')
+      // this.$axios.setHeader('Authorization','bearer '+token);
+      // this.$axios.setHeader('Content-Type','application/x-www-form-urlencoded')
+      // await this.$axios.$post(`/api/posts/${this.$route.params.slug}/comments/new`,this.comment)
+      //       .then(res => console.log(res))
+      //       .catch(err => console.log(err));
+
     }
 
+  },
+  computed:{
+    loggedIn(){
+      return this.$store.state['usersAuth'].token
+    }
   }
 }
 </script>
@@ -280,5 +331,12 @@ export default {
 }
 .sidebar .popular-posts .post-info {
   font-size: 14px;
+}
+.sidebar-page-container .comments-area .comment-box .theme-btn,
+.sidebar-page-container .comments-area .comment-info .comment-time:before{
+  color: #ff5773;
+}
+.sidebar-page-container .comments-area .comment-box .theme-btn:hover{
+  color: #3d415b;
 }
 </style>

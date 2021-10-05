@@ -70,8 +70,8 @@
                       <nuxt-link :to="`/${post.slug}`"><img :src="post.thumbnail" :alt="post.title" /></nuxt-link>
                     </div>
                     <div class="lower-content">
-                      <h5><nuxt-link :to="`/${post.slug}`">{{ post.title_en }}</nuxt-link></h5>
-                      <div class="text">{{ post.content_en.slice(0,50) }}</div>
+                      <h5><nuxt-link :to="`/${post.slug}`">{{ post.title_en.slice(0,20) }}</nuxt-link></h5>
+                      <div class="text" v-html="post.content_en.slice(0,50)"></div>
                       <div class="clearfix">
                         <div class="pull-left">
                           <div class="students">By <span class="text-muted" style="    font-size: 14px; font-weight: 600;">{{ post.author }}</span></div>
@@ -112,7 +112,7 @@
                     <article class="post" v-if="recent_posts.data.length"  v-for="(post,i) in recent_posts.data" :key="i">
                       <div class="post-inner">
                         <figure class="post-thumb"><nuxt-link :to="`${post.slug}`"><img :src="`${post.thumbnail}`" :alt="post.title_en"></nuxt-link></figure>
-                        <div class="text"><nuxt-link :to="`${post.slug}`">{{ post.title_en }}</nuxt-link></div>
+                        <div class="text"><nuxt-link :to="`${post.slug}`">{{ post.title_en.slice(0,20) }} ...</nuxt-link></div>
                         <div class="post-info">By {{ post.author }}</div>
                       </div>
                     </article>
@@ -274,7 +274,6 @@ export default {
     },
     async getPosts(page){
       this.load();
-      console.log(this.url_prefix)
       this.$router.push(`${this.$route.path}?page=${page}`)
       let posts = await this.$axios.$get(`${this.url_prefix}?page=${page}`)
 
@@ -339,4 +338,6 @@ export default {
 .cource-block-two .inner-box .lower-content .hours{
   color: #ff5773;
 }
+.cource-block-two .inner-box .image a {display: inline-block}
+.cource-block-two .inner-box .image img{min-height: 190px}
 </style>

@@ -27,8 +27,10 @@
                                 </div>
                                 <div class="form-group">
 
-                                    <span class="eye-icon flaticon-eye"></span>
-                                    <input type="password" name="password"  v-model="userData.password" placeholder="Password" >
+                                    <span class="eye-icon fa " :class="passwordVisible ? 'fa-eye-slash' : 'fa-eye'"
+                                          @click="passwordVisible = !passwordVisible">
+                                    </span>
+                                    <input :type="passwordVisible ? 'text' : 'password' " name="password"  v-model="userData.password" placeholder="Password" >
                                   <div v-show="passwordError" class="text-danger">
                                     ... the password is too short
                                   </div>
@@ -47,7 +49,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group text-center">
-                                    <button type="button" class="theme-btn btn-style-three modified" @click.prevent="login"  :disabled="!isValidForm"
+                                    <button type="button" class="theme-btn btn-style-three modified" @click.enter.prevent="login"  :disabled="!isValidForm"
                                     ><span class="txt">Login <i class="fa fa-angle-right"></i></span></button>
                                 </div>
                                 <div class="form-group">
@@ -73,20 +75,24 @@ export default {
         userData:{
           email:'',
           password:''
-        }
+        },
+        passwordVisible:false,
 
       }
   },
   methods:{
-    login(){
+    async login(){
 
-      axios.post(process.env.APP_URL+'/api/students/login',this.userData)
-      .then(da => {
-        this.$auth.setUserToken(da.token);
-        this.$store.getters.loggedIn = true
-      }).catch(err => console.log(err))
-      this.$router.push('/')
-    }
+      await this.$axios.$post('/api/students/login', this.userData)
+        .then(({token,expiresIn}) => {
+          this.$store.dispatch('usersAuth/setToken', {token, expiresIn});
+          this.$router.push('/');
+        })
+        .catch(errors => {
+          console.log(errors);
+        });
+    },
+
   },
   computed: {
     passwordError() {
@@ -108,6 +114,7 @@ export default {
 }
 .styled-form .form-group .eye-icon {
   top: 15px;
+  cursor: pointer;
 }
 .styled-form .form-group .users a {
   color: #ff5773;

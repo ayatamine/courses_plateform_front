@@ -1,4 +1,4 @@
-
+const cookieparser = process.server ? require('cookieparser') : undefined
 export const state = () => ({
     site_settings :{},
 
@@ -19,6 +19,10 @@ export const actions = {
 
   async nuxtServerInit(ctx,context)
   {
+    //manage the auth access token when the page load
+    const token = cookieparser.parse(context.req.headers.cookie)['x-access-token']
+    await ctx.commit('usersAuth/SET_TOKEN', token);
+
     //   context.$axios.$get('/api/posts?limit=3')
     //   .then(res =>{
     //     ctx.commit("posts/setHomePosts",res.data)
@@ -51,7 +55,11 @@ export const actions = {
     ctx.commit("categories/setCategories",categories)
     ctx.commit("tags/setTags",tags)
     ctx.commit("setSiteSettings",site_settings)
+
+
+
     return {tutorials,categories,tags,site_settings,loading:false}
-  }
+  },
+
 }
 

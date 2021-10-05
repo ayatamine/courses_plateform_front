@@ -4,7 +4,8 @@
 
 <script>
 export default {
-  layout:'admin'
+  layout:'admin',
+  middleware:'auth_client'
 }
 </script>
 

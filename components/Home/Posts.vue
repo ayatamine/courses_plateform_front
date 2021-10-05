@@ -13,14 +13,14 @@
           <div class="inner-box">
             <div class="clearfix">
               <!-- Event Date -->
-              <div class="event-date clearfix"><span class="date">{{ post.posted_at.charAt(0) }}</span>{{ post.posted_at.slice(1) }}</div>
+              <div class="event-date clearfix"><span class="date">{{ post.posted_at.substr(0,2) }}</span>{{ post.posted_at.slice(2) }}</div>
               <!-- Event List -->
               <ul class="event-list">
-                <li v-for="tag in post.tags.slice(0,2)"><a href="course-detail.html" >{{ tag.title_en }} </a></li>
+                <li v-for="tag in post.tags.slice(0,2)"><nuxt-link to="/" @click.prevent>{{ tag.title_en }} </nuxt-link></li>
               </ul>
             </div>
             <h4><nuxt-link :to="`${post.slug}`">{{ post.title_en}}</nuxt-link></h4>
-            <div class="text">{{ post.content_en.substring(0,70)}}</div>
+            <div class="text" v-html="post.content_en.substring(0,70)">{</div>
           </div>
         </div>
 

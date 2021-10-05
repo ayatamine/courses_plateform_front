@@ -8,11 +8,13 @@
 
         <!-- Subscribe Form -->
         <div class="subscribe-form">
-          <form method="post" action="contact.html">
+          <form method="post" action="">
             <div class="form-group clearfix">
               <span class="icon flaticon-mail"></span>
-              <input type="email" name="email" value="" placeholder="Please Enter Your Email" required>
-              <button type="submit" class="theme-btn btn-style-four"><span class="txt">Subscribe Now</span></button>
+              <input type="email" name="email" v-model="email" placeholder="Please Enter Your Email" >
+              <br>
+              <form-input-error v-show="emailError" message="Please enter a valid email"/>
+              <button type="submit" class="theme-btn btn-style-four" @click.prevent="subscribe"><span class="txt">Subscribe Now</span></button>
             </div>
           </form>
         </div>
@@ -115,21 +117,39 @@
 import backgroundUrl from '~/assets/images/main-slider/1.png';
 
 import pattern2 from '~/assets/images/background/pattern-2.png';
+import FormInputError from "./Globals/formInputError";
 export default {
   name: "footer2",
+  components: {FormInputError},
   data(){
     return {
-      pattern2
+      pattern2:pattern2,
+      email:'',
     }
   },
   computed:{
     site_settings(){
       return this.$store.getters["site_settings"].settings;
     },
+    emailError() {
+      return !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) && this.email.length > 0
+    },
+  },
+  methods:{
+    async subscribe(){
+      await  this.$axios.$post('/api/subscribe_to_newslist',{email:this.email})
+             .then(response => console.log(response))
+             .catch(err => console.log(err))
+    }
   }
 }
 </script>
 
 <style scoped>
-
+.subscribe-form .form-group .theme-btn{
+  color: #fff;
+}
+.subscribe-form .form-group .theme-btn:hover{
+  color: #ff5773;
+}
 </style>

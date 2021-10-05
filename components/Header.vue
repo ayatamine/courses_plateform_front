@@ -34,6 +34,7 @@
                     </ul>
                   </li>
                   <li><nuxt-link to="/contact">Contact Us</nuxt-link></li>
+
                 </ul>
               </div>
 
@@ -42,9 +43,13 @@
             <div class="outer-box">
 
               <!-- Login Nav -->
-              <ul class="login-nav">
-                <li><nuxt-link to="/auth/login">Log In</nuxt-link></li>
-                <li><nuxt-link to="/auth/register">Register</nuxt-link></li>
+              <ul class="login-nav" v-if="!isLoggedIn">
+                <li><nuxt-link to="/auth/login" >Log In</nuxt-link></li>
+                <li><nuxt-link to="/auth/register" >Register</nuxt-link></li>
+              </ul>
+              <ul class="login-nav" v-else>
+                <li class="dropdown"><nuxt-link to="/admin">Admin</nuxt-link></li>
+                <li ><nuxt-link to="#" @click.native="logout">logout</nuxt-link></li>
               </ul>
 
             </div>
@@ -75,7 +80,24 @@
 
 <script>
 export default {
-
+ computed:{
+  isLoggedIn() {
+    return this.$store.state['usersAuth'].token;
+  }
+ },
+  methods: {
+    async logout() {
+      console.log('logout')
+      await this.$axios.$post('/api/students/logout')
+        .then(resp => {
+          this.$store.dispatch('usersAuth/logout');
+          this.$router.push('/');
+        })
+        .catch(errors => {
+          console.dir(errors);
+        });
+    }
+  }
 }
 </script>
 
