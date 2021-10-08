@@ -2,7 +2,7 @@
        <v-card class="pa-5">
 
          <v-card-title>
-           List of Tags
+           Categories List
            <v-spacer/>
            <template>
              <v-dialog
@@ -17,7 +17,8 @@
                    v-bind="attrs"
                    v-on="on"
                  >
-                   New Tag
+                   <v-icon left>mdi-plus-circle-outline</v-icon>
+                   New
                  </v-btn>
                </template>
                <v-card>
@@ -34,8 +35,8 @@
                          md="6"
                        >
                          <v-text-field
-                           v-model="editedItem.title"
-                           label="Title (Ar)"
+                           v-model="editedItem.name"
+                           label="Name (Ar)"
                          ></v-text-field>
                        </v-col>
                        <v-col
@@ -44,8 +45,8 @@
                          md="6"
                        >
                          <v-text-field
-                           v-model="editedItem.title_en"
-                           label="Title (EN)"
+                           v-model="editedItem.name_en"
+                           label="Name (EN)"
                          ></v-text-field>
                        </v-col>
 
@@ -74,7 +75,7 @@
              </v-dialog>
              <v-dialog v-model="dialogDelete" max-width="500px">
                <v-card>
-                 <v-card-title class="text-h5">Are you sure you want to delete this Tag?</v-card-title>
+                 <v-card-title class="text-h6">Are you sure you want to delete this Category?</v-card-title>
                  <v-card-actions>
                    <v-spacer></v-spacer>
                    <v-btn color="red" dark   @click="deleteItemConfirm"><v-icon right>mdi-checkbox-marked-circle</v-icon> Confirm</v-btn>
@@ -88,7 +89,7 @@
          <v-data-table
            v-model="selected"
            :headers="headers"
-           :items="tags ? tags.data : []"
+           :items="categories ? categories.data : []"
            :single-select="singleSelect"
            item-key="slug"
            show-select
@@ -129,23 +130,23 @@
 import axios from 'axios'
 export default {
   layout:'admin',
-  name: "tags",
+  name: "categories",
   data(){
     return {
-      tags:{},
+      categories:{},
       singleSelect: false,
       selected: [],
       headers: [
         {
-          text: 'Title(AR)',
+          text: 'Name(AR)',
           align: 'start',
           sortable: true,
-          value: 'title',
+          value: 'name',
         },{
-          text: 'Title (EN)',
+          text: 'Name (EN)',
           align: 'start',
           sortable: true,
-          value: 'title_en',
+          value: 'name_en',
         },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
@@ -153,26 +154,26 @@ export default {
       dialogDelete: false,
       editedIndex: -1,
       editedItem: {
-        title:'',title_en:''
+        title:'',name_en:''
       },
       defaultItem: {
-        title:'',title_en:''
+        title:'',name_en:''
       },
 
     }
   },
   async fetch() {
-    await axios.get(`${process.env.APP_URL}/api/admin-cpx/tags`,
+    await axios.get(`${process.env.APP_URL}/api/admin-cpx/categories`,
       {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
       .then(res => {
-        this.tags = res.data
+        this.categories = res.data
       })
       .catch(err => console.log(err) )
 
   },
   computed: {
     formTitle () {
-      return this.editedIndex === -1 ? 'New Tag' : 'Edit Tag'
+      return this.editedIndex === -1 ? 'New Category' : 'Edit Category'
     },
   },
 
@@ -186,22 +187,22 @@ export default {
   },
   methods:{
     editItem (item) {
-      this.editedIndex = this.tags.data.indexOf(item)
+      this.editedIndex = this.categories.data.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
     deleteItem (item) {
-      this.editedIndex = this.tags.data.indexOf(item)
+      this.editedIndex = this.categories.data.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
 
     async deleteItemConfirm () {
-      await axios.delete(`${process.env.APP_URL}/api/admin-cpx/tags/${this.editedItem.id}`,
+      await axios.delete(`${process.env.APP_URL}/api/admin-cpx/categories/${this.editedItem.slug}`,
         {headers:{Authorization:"Bearer "+"process.env.APP_TOKEN", contentType:"multipart/form-data"}})
         .then(res => {
-          this.tags.data.splice(this.editedIndex, 1)
+          this.categories.data.splice(this.editedIndex, 1)
         })
         .catch(err => console.log(err) )
 
@@ -227,18 +228,18 @@ export default {
     async save () {
       if (this.editedIndex > -1) {
        //update item
-        await axios.put(`${process.env.APP_URL}/api/admin-cpx/tags/${this.editedItem.id}`,this.editedItem,
+        await axios.put(`${process.env.APP_URL}/api/admin-cpx/categories/${this.editedItem.slug}`,this.editedItem,
           {headers:{Authorization:"Bearer "+"process.env.APP_TOKEN", contentType:"multipart/form-data"}})
           .then(res => {
-            Object.assign(this.tags.data[this.editedIndex],res.data)
+            Object.assign(this.categories.data[this.editedIndex],res.data)
           })
           .catch(err => console.log(err) )
       } else {
         //create new item
-        await axios.post(`${process.env.APP_URL}/api/admin-cpx/tags`,this.editedItem,
+        await axios.post(`${process.env.APP_URL}/api/admin-cpx/categories`,this.editedItem,
           {headers:{Authorization:"Bearer "+"process.env.APP_TOKEN", contentType:"multipart/form-data"}})
           .then(res => {
-              this.tags.data.push(res.data)
+              this.categories.data.push(res.data)
           })
           .catch(err => console.log(err) )
       }

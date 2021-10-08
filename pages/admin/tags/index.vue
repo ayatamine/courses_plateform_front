@@ -2,7 +2,7 @@
        <v-card class="pa-5">
 
          <v-card-title>
-           List of Tags
+           Tags List
            <v-spacer/>
            <template>
              <v-dialog
@@ -74,7 +74,7 @@
              </v-dialog>
              <v-dialog v-model="dialogDelete" max-width="500px">
                <v-card>
-                 <v-card-title class="text-h5">Are you sure you want to delete this Tag?</v-card-title>
+                 <v-card-title class="text-h6">Are you sure you want to delete this Tag?</v-card-title>
                  <v-card-actions>
                    <v-spacer></v-spacer>
                    <v-btn color="red" dark   @click="deleteItemConfirm"><v-icon right>mdi-checkbox-marked-circle</v-icon> Confirm</v-btn>
