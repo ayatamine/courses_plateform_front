@@ -1,6 +1,6 @@
 <template>
   <v-card class="pa-5">
-    <v-card-title>Add New Post</v-card-title>
+    <v-card-title>Edit Post</v-card-title>
     <v-form class="ma-4">
       <v-row>
         <v-col     cols="12"    md="3" >
@@ -42,11 +42,21 @@
           <label >thumbnail</label>
         </v-col>
         <v-col  cols="12"    md="9">
-          <v-file-input      v-model="post.thumbnail"      outlined dense
-            hide-details
-          ></v-file-input>
+           <v-row>
+             <v-file-input class="mr-2" cols="8"    md="8"     v-model="post.thumbnail"      outlined dense
+                                hide-details
+             ></v-file-input>
+             <v-icon cols="4"    md="4" style="cursor: pointer" @click="ThumbnailDialog = !ThumbnailDialog">mdi-eye</v-icon>
+           </v-row>
         </v-col>
-
+        <v-dialog
+          v-model="ThumbnailDialog"
+          max-width="600px"
+        >
+          <v-card>
+            <img :src="post.thumbnail" style="min-height:300px;"/>
+          </v-card>
+        </v-dialog>
         <v-col     cols="12"    md="3" >
           <label >Category</label>
         </v-col>
@@ -77,15 +87,27 @@
           offset-md="3"
           cols="12"
         >
-          <v-btn color="primary" @click.prevent="addPost" :disabled="!isValidForm">
-            Submit
+          <v-btn color="primary" @click.prevent="updatePost" :disabled="!isValidForm">
+            Update
+            <v-icon
+              dark
+              right
+            >
+              mdi-checkbox-marked-circle
+            </v-icon>
           </v-btn>
           <v-btn
-            type="reset"
-            class="mx-2"
-            outlined
+            color="red"
+            class="mx-2" dark
+            @click="$router.push('/admin/blogs')"
           >
-            Reset
+            Cancel
+            <v-icon
+              dark
+              right
+            >
+              mdi-minus-circle
+            </v-icon>
           </v-btn>
         </v-col>
       </v-row>
@@ -99,33 +121,28 @@ import {mapGetters} from "vuex";
 
 export default {
   layout:'admin',
-  name: "create-new-post",
+  name: "edit-post",
   data(){
     return {
-      post:{
-        title:'',
-        title_en:'',
-        content:'',
-        content_en:'',
-        thumbnail:'',
-        tags:[],
-        category_id:'',
-        postable_type:'App\\Models\\Admin',
-        postable_id:1,
-      },
-
+      post:{},
+      ThumbnailDialog:false
 
     }
   },
+  async fetch(){
+
+     // await this.$axios.$get(`/api/admin-cpx/posts/${this.$route.params.slug}`)
+    await axios.get(`${process.env.APP_URL}/api/admin-cpx/posts/${this.$route.params.slug}`,
+      {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
+    .then(res => {
+      this.post = res.data
+    })
+    .catch(err => console.log(err) )
+
+  },
   methods:{
 
-    addPost(){
-
-      if(!this.post.thumbnail){
-        alert('no thumbnail selected !')
-        return
-      }
-
+    updatePost(){
 
       const fdata = new FormData();
       for (const key in this.post) {
@@ -137,18 +154,24 @@ export default {
       // for(var i=0;i< this.post.tags.length ; i++){
       //   fdata.append('tags[]',this.post.tags[i])
       // }
-      fdata.set('thumbnail',this.post.thumbnail,this.post.thumbnail.name);
+      if(!typeof (this.post.thumbnail) == 'string'){
+        fdata.set('thumbnail',this.post.thumbnail,this.post.thumbnail.name);
+      }
+      else{
+        fdata.delete('thumbnail')
+      }
 
 
-      axios.post(process.env.APP_URL+'/api/admin-cpx/posts',fdata,
-        {headers:{Authorization:"Bearer "+process.env.APP_TOKEN}})
+      let slug =this.$route.params.slug
+      axios.post(`${process.env.APP_URL}/api/admin-cpx/posts/${slug}`,fdata,
+        {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
       .then(res =>{
-        console.log(res.data)
-        this.post ={postable_type:'App\\Models\\Admin'}
+        this.$router.push(`/admin/blogs`)
+
       }).catch(err =>{
         console.log(err)
       })
-    }
+    },
   },
   computed:{
     ...mapGetters({

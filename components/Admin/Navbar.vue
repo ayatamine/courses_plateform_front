@@ -58,7 +58,7 @@ import Popup from './Popup.vue'
 export default {
 
   data: () => ({
-    drawer: false,
+    drawer: true,
     links :[
       {icon: 'mdi-home', text:'Dashboard', route: '/'},
       {icon: 'mdi-file-document-edit', text:'Blogs', route: '/admin/blogs'},
