@@ -62,7 +62,7 @@ export default {
     links :[
       {icon: 'mdi-home', text:'Dashboard', route: '/'},
       {icon: 'mdi-file-document-edit', text:'Blogs', route: '/admin/blogs'},
-      {icon: 'mdi-account', text:'Team', route: '/team'}
+      {icon: 'mdi-tag', text:'Tags', route: '/admin/tags'}
     ]
 
   }),
