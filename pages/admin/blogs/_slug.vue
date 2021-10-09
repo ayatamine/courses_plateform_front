@@ -166,8 +166,8 @@ export default {
       axios.post(`${process.env.APP_URL}/api/admin-cpx/posts/${slug}`,fdata,
         {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
       .then(res =>{
-        this.$router.push(`/admin/blogs`)
-
+        this.$router.push(`/admin/blogs/${res.data.slug}`)
+        alert('updated')
       }).catch(err =>{
         console.log(err)
       })

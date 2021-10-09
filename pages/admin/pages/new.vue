@@ -42,7 +42,7 @@
           offset-md="3"
           cols="12"
         >
-          <v-btn color="primary" @click.prevent="addpage" :disabled="!isValidForm">
+          <v-btn color="primary" @click.prevent="addPage" :disabled="!isValidForm">
             Submit
           </v-btn>
           <v-btn
@@ -79,7 +79,7 @@ export default {
   },
   methods:{
 
-    async addpage(){
+    async addPage(){
 
       await axios.post(process.env.APP_URL+'/api/admin-cpx/pages',this.page,
         {headers:{Authorization:"Bearer "+process.env.APP_TOKEN}})
