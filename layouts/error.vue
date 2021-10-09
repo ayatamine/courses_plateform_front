@@ -1,6 +1,7 @@
 <template>
   <div>
     error accured
+    <button @click="$router.app.refresh()">Click to refresh</button>
   </div>
 </template>
 
