@@ -66,6 +66,8 @@ export default {
       {icon: 'mdi-sitemap', text:'Categories', route: '/admin/categories'},
       {icon: 'mdi-window-restore', text:'Pages', route: '/admin/pages'},
       {icon: 'mdi-account-star', text:'Skills', route: '/admin/skills'},
+      {icon: 'mdi-comment-question-outline', text:'Faqs', route: '/admin/faqs'},
+      {icon: 'mdi-cogs', text:'Settings', route: '/admin/settings'},
     ]
 
   }),
