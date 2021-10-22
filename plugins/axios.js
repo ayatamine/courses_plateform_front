@@ -7,6 +7,7 @@ export default function({ $axios, redirect}) {
     $axios.setBaseURL(process.env.APP_URL)
     // $axios.setHeader('Content-Type', 'application/x-www-form-urlencoded')
     // $axios.setHeader('Authorization',"Bearer "+process.env.APP_TOKEN)
+    config.baseURL = process.env.APP_URL
     return config;
   });
 }

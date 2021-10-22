@@ -234,6 +234,7 @@ export default {
           name: 'description',
           content: this.post.content_description
         },
+        {hid:"keywords",property:"keywords", content: this.post.keywords},
         {hid:"og-title",property:"og:title", content: process.env.APP_NAME+ ' | '+this.post.title_en,}
       ],
     }

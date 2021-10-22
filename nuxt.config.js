@@ -13,7 +13,7 @@ export default {
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' },
             { hid: 'description', name: 'description', content: process.env.META_DESCRIPTION },
-            {  name: 'keywords', content: process.env.META_DESCRIPTION },
+            { hid:'keywords', name: 'keywords', content: process.env.META_DESCRIPTION },
             { hid:'og-title',  property:"og:title", content: process.env.APP_NAME },
             {  property:"og:image", content: process.env.META_IMAGE },
             {  hid:'og-description' ,property:"og:description", content: process.env.META_OG_DESCRIPTIN },
@@ -86,10 +86,11 @@ export default {
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
+        '@nuxtjs/proxy',
         '@nuxtjs/axios',
         '@nuxtjs/auth-next',
         '@nuxtjs/dotenv',
-        '@nuxtjs/proxy',
+
       ["vue2-editor/nuxt"]
     ],
 

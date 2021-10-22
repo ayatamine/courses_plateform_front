@@ -71,7 +71,12 @@
             dense
           ></v-combobox>
         </v-col>
-
+        <v-col     cols="12"    md="3" >
+          <label >Keywords <span class="text-danger">Please make space between each keyword</span></label>
+        </v-col>
+        <v-col  cols="12"    md="9">
+          <v-textarea v-model="post.keywords" placeholder="post keywords" outlined dense></v-textarea>
+        </v-col>
 
         <v-col
           offset-md="3"
@@ -112,6 +117,7 @@ export default {
         category_id:'',
         postable_type:'App\\Models\\Admin',
         postable_id:1,
+        keywords:''
       },
 
 
@@ -145,6 +151,8 @@ export default {
       .then(res =>{
         console.log(res.data)
         this.post ={postable_type:'App\\Models\\Admin'}
+        this.$router.push('/admin-cpxx/pages')
+        alert('added successfuly')
       }).catch(err =>{
         console.log(err)
       })
