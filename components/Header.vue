@@ -48,7 +48,7 @@
                 <li><nuxt-link to="/auth/register" >Register</nuxt-link></li>
               </ul>
               <ul class="login-nav" v-else>
-                <li class="dropdown"><nuxt-link to="/admin-cpxx">Admin</nuxt-link></li>
+                <li class="dropdown"><nuxt-link to="/profile">Profile</nuxt-link></li>
                 <li ><nuxt-link to="#" @click.native="logout">logout</nuxt-link></li>
               </ul>
 

@@ -1,10 +1,10 @@
 import webpack from "webpack";
-
+require('dotenv').config()
 export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
         titleTemplate(titleChunk) {
-          return titleChunk ? `${process.env.app_name} | ${titleChunk}` : process.env.APP_NAME
+          return titleChunk ? `${process.env.APP_NAME} | ${titleChunk}` : process.env.APP_NAME
         },
         htmlAttrs: {
             lang: 'en'
@@ -121,7 +121,7 @@ export default {
       }
     },
     axios: {
-        baseURL: process.env.APP_URL,
+        baseURL: process.env.APP_URL || 'http://localhost:8000',
         proxy:true,
         // credentials: true,
     },

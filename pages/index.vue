@@ -7,7 +7,7 @@
     <achivement2/>
     <video-intro2/>
     <posts :posts="posts"/>
-    <footer2 :logo="logo" />
+
 
   </div>
 </template>
@@ -19,7 +19,6 @@ import WhyCooseUs from "~/components/Home/WhyUs";
 import Posts from "~/components/Home/Posts";
 import VideoIntro2 from "../components/Home/VideoIntro2";
 import Slider from "../components/Home/Slider";
-import Footer2 from "../components/Footer2";
 import Tutorials from "../components/Home/Tutorials";
 export default {
   name: "Home",
@@ -42,7 +41,6 @@ export default {
     },
      components:{
        Tutorials,
-       Footer2,
        Slider,
        VideoIntro2,
        WhyCooseUs,
@@ -57,9 +55,7 @@ export default {
       posts(){
            return this.$store.getters["posts/homeposts"];
       },
-      logo(){
-        return this.$store.getters['site_settings'].logo;
-      },
+
     }
 
 }
