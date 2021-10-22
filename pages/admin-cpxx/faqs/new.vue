@@ -84,7 +84,7 @@ export default {
       await axios.post(process.env.APP_URL+'/api/admin-cpx/faqs',this.faq,
         {headers:{Authorization:"Bearer "+process.env.APP_TOKEN}})
       .then(res =>{
-        this.$router.push('/admin/faqs')
+        this.$router.push('/admin-cpxx/faqs')
       }).catch(err =>{
         console.log(err)
       })

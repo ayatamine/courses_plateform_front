@@ -99,7 +99,7 @@
           <v-btn
             color="red"
             class="mx-2" dark
-            @click="$router.push('/admin/blogs')"
+            @click="$router.push('/admin-cpxx/blogs')"
           >
             Cancel
             <v-icon
@@ -166,7 +166,7 @@ export default {
       axios.post(`${process.env.APP_URL}/api/admin-cpx/posts/${slug}`,fdata,
         {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
       .then(res =>{
-        this.$router.push(`/admin/blogs/${res.data.slug}`)
+        this.$router.push(`/admin-cpxx/blogs/${res.data.slug}`)
         alert('updated')
       }).catch(err =>{
         console.log(err)

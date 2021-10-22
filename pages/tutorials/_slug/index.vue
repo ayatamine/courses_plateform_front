@@ -157,6 +157,29 @@ import preview_image from '~/assets/images/background/video-image.jpg';
 
 export default {
   name: "index",
+  head(){
+    return{
+      title:  `tutorials | ${this.tutorial.title_en}`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.tutorial.description_en
+        },
+        {
+          hid: 'og-description',
+          name: 'description',
+          content: this.tutorial.description_en
+        },
+        {
+          hid: 'og-title',
+          name: 'og:title',
+          content: this.tutorial.title_en,
+        },
+      ],
+    }
+
+  },
   components:{
   },
   data() {

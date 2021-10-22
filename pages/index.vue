@@ -7,7 +7,7 @@
     <achivement2/>
     <video-intro2/>
     <posts :posts="posts"/>
-    <footer2 />
+    <footer2 :logo="logo" />
 
   </div>
 </template>
@@ -23,6 +23,18 @@ import Footer2 from "../components/Footer2";
 import Tutorials from "../components/Home/Tutorials";
 export default {
   name: "Home",
+  head(){
+    return{
+      title:  'Home',
+      meta: [
+        {
+          hid: 'og-title',
+          name: 'og-title',
+          content: process.env.APP_NAME +' Home Page '
+        },
+      ],
+    }
+  },
     data(){
       return {
         Bg,
@@ -44,7 +56,10 @@ export default {
       },
       posts(){
            return this.$store.getters["posts/homeposts"];
-      }
+      },
+      logo(){
+        return this.$store.getters['site_settings'].logo;
+      },
     }
 
 }

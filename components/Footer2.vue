@@ -38,7 +38,7 @@
               <div class="footer-column col-lg-7 col-md-6 col-sm-12">
                 <div class="footer-widget logo-widget">
                   <div class="logo">
-                    <a href="index.html"><img src="https://via.placeholder.com/230x60" alt="" /></a>
+                    <nuxt-link to="/"><img :src="logo" style="max-width: 70%;" alt="logo image" /></nuxt-link>
                   </div>
                   <div class="text">Every developer need a real road to success in his carear, because of that we are here to provide the
                     best and the clean way to move from beginner to middle to advanced developer.
@@ -121,6 +121,11 @@ import FormInputError from "./Globals/formInputError";
 export default {
   name: "footer2",
   components: {FormInputError},
+  props: {
+    logo:{
+      required:true,type:String
+    }
+  },
   data(){
     return {
       pattern2:pattern2,

@@ -137,6 +137,18 @@
 <script>
 export default {
   name: "faq",
+  head(){
+    return{
+      title:  'About us',
+      meta: [
+        {
+          hid: 'og-title',
+          name: 'og-title',
+          content: process.env.APP_NAME +' FAQ Page '
+        },
+      ],
+    }
+  },
   data(){
     return {
       first_name:'',

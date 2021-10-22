@@ -1,10 +1,11 @@
+<script src="../../../nuxt.config.js"></script>
 <template>
        <v-card class="pa-5">
 
          <v-card-title>
            List of Posts
            <v-spacer/>
-           <v-btn color="primary" link @click="$router.push('/admin/blogs/new')">new Post</v-btn>
+           <v-btn color="primary" link @click="$router.push('/admin-cpxx/blogs/new')">new Post</v-btn>
          </v-card-title>
          <v-data-table
            v-model="selected"
@@ -29,7 +30,7 @@
                small
                class="mr-2"
                color="primary"
-               @click="$router.push(`/admin/blogs/${item.slug}`)"
+               @click="$router.push(`/admin-cpxx/blogs/${item.slug}`)"
              >
                mdi-pencil
              </v-icon>

@@ -220,6 +220,25 @@
 <script>
 import FormInputError from "../../components/Globals/formInputError";
 export default {
+  head(){
+    return{
+      title:  this.post.title_en,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.post.content_description
+        },
+        {
+          hid: 'og-description',
+          name: 'description',
+          content: this.post.content_description
+        },
+        {hid:"og-title",property:"og:title", content: process.env.APP_NAME+ ' | '+this.post.title_en,}
+      ],
+    }
+
+  },
   name: "index",
   components: {FormInputError},
   data(){

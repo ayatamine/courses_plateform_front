@@ -70,6 +70,18 @@ import backgroundUrl from '~/assets/images/main-slider/3.png';
 import Footer2 from "../components/Footer2";
 export default {
   name: "privacy policy",
+  head(){
+    return{
+      title:  'Privacy Policy',
+      meta: [
+        {
+          hid: 'og-title',
+          name: 'og-title',
+          content: process.env.APP_NAME +' privacy policy '
+        },
+      ],
+    }
+  },
   components: {Footer2},
   data(){
     return {

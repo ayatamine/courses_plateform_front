@@ -52,9 +52,6 @@
                                     <button type="button" class="theme-btn btn-style-three modified" @click.enter.prevent="login"  :disabled="!isValidForm"
                                     ><span class="txt">Login <i class="fa fa-angle-right"></i></span></button>
                                 </div>
-                                <div class="form-group">
-                                    <div class="users">New User? <nuxt-link to="/auth/register">Sign Up</nuxt-link></div>
-                                </div>
                             </form>
                         </div>
 
@@ -69,12 +66,6 @@ import backgroundUrl from '~/assets/images/main-slider/3.png';
 import axios from "axios";
 export default {
   middleware:'guest',
-  head(){
-    return{
-      title:  ' | Login',
-    }
-
-  },
   data(){
       return {
         backgroundUrl,
@@ -89,10 +80,10 @@ export default {
   methods:{
     async login(){
 
-      await this.$axios.$post('/api/students/login', this.userData)
+      await this.$axios.$post('/api/admin-cpx/login', this.userData)
         .then(({token,expiresIn}) => {
-          this.$store.dispatch('usersAuth/setToken', {token, expiresIn});
-          this.$router.push('/');
+          this.$store.dispatch('adminAuth/setToken', {token, expiresIn});
+          this.$router.push('/admin-cpxx');
         })
         .catch(errors => {
           console.log(errors);

@@ -25,6 +25,18 @@ import backgroundUrl from '~/assets/images/main-slider/3.png';
 import Footer2 from "../components/Footer2";
 export default {
   name: "About us",
+  head(){
+    return{
+      title:  'About us',
+      meta: [
+        {
+          hid: 'og-title',
+          name: 'og-title',
+          content: 'About '+process.env.APP_NAME
+        },
+      ],
+    }
+  },
   components: {Footer2},
   data(){
     return {

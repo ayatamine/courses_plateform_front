@@ -2,15 +2,15 @@
        <v-card class="pa-5">
 
          <v-card-title>
-           FAQ List
+           Pages List
            <v-spacer/>
-           <v-btn color="primary" link @click="$router.push('/admin/faqs/new')">
+           <v-btn color="primary" link @click="$router.push('/admin-cpxx/pages/new')">
              <v-icon left>mdi-plus-circle-outline</v-icon> New</v-btn>
          </v-card-title>
          <v-data-table
            v-model="selected"
            :headers="headers"
-           :items="faqs"
+           :items="pages"
            :single-select="singleSelect"
            item-key="slug"
            show-select
@@ -25,15 +25,12 @@
                class="pa-3"
              ></v-switch>
            </template>
-           <template v-slot:item.question_en="{ item }">
-             {{ item.question_en.slice(0,50) }}
-           </template>
-           <template v-slot:item.answer_en="{ item }">
+           <template v-slot:item.slug="{ item }">
              <v-chip
                color="green lighten-1"
                dark small
              >
-               {{ item.answer_en.slice(0,50) }}
+               {{ item.slug }}
              </v-chip>
            </template>
            <template v-slot:item.actions="{ item }">
@@ -41,7 +38,7 @@
                small
                class="mr-2"
                color="primary"
-               @click="$router.push(`/admin/faqs/${item.slug}`)"
+               @click="$router.push(`/admin-cpxx/pages/${item.slug}`)"
              >
                mdi-pencil
              </v-icon>
@@ -77,20 +74,25 @@ export default {
   name: "blog",
   data(){
     return {
-      faqs:[],
+      pages:[],
       singleSelect: false,
       selected: [],
       headers: [
         {
-          text: 'Question(En)',
+          text: 'Title(AR)',
           align: 'start',
           sortable: true,
-          value: 'question_en',
+          value: 'name',
         },{
-          text: 'Answer (En)',
+          text: 'Title (EN)',
           align: 'start',
           sortable: true,
-          value: 'answer_en',
+          value: 'name_en',
+        },{
+          text: 'Slug',
+          align: 'start',
+          sortable: true,
+          value: 'slug',
         },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
@@ -106,10 +108,10 @@ export default {
     }
   },
   async fetch() {
-    await axios.get(`${process.env.APP_URL}/api/admin-cpx/faqs`,
+    await axios.get(`${process.env.APP_URL}/api/admin-cpx/pages`,
       {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
       .then(res => {
-        this.faqs = res.data
+        this.pages = res.data
       })
       .catch(err => console.log(err) )
 
@@ -118,16 +120,17 @@ export default {
 
     deleteItem(item) {
       console.log("del")
-      this.editedIndex = this.faqs.indexOf(item)
+      this.editedIndex = this.pages.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
 
     async deleteItemConfirm () {
-      await axios.delete(`${process.env.APP_URL}/api/admin-cpx/faqs/${this.editedItem.slug}`,
+      await axios.delete(`${process.env.APP_URL}/api/admin-cpx/pages/${this.editedItem.slug}`,
         {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
         .then(res => {
-          this.faqs.splice(this.editedIndex, 1)
+
+          this.pages.splice(this.editedIndex, 1)
           alert(res.data)
         })
         .catch(err => console.log(err) )

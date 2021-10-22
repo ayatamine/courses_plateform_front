@@ -241,6 +241,29 @@ import backgroundUrl from '~/assets/images/main-slider/3.png';
 import SearchBox from "@/components/Globals/SearchBox";
 export default {
   components: {SearchBox},
+  head(){
+    return{
+      title:  `courses`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `list of programing and software courses of ${process.env.APP_NAME} ,all for arabic developers`
+        },
+        {
+          hid: 'og-description',
+          name: 'description',
+          content: `list of programing and software courses of ${process.env.APP_NAME} ,all for arabic developers`
+        },
+        {
+          hid: 'og-title',
+          name: 'og:title',
+          content: process.env.APP_NAME+' courses',
+        },
+      ],
+    }
+
+  },
   data(){
     return {
       backgroundUrl,

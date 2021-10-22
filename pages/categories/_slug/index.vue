@@ -53,6 +53,24 @@
 import backgroundUrl from '~/assets/images/main-slider/3.png';
 export default {
   name: "courses",
+  head(){
+    return{
+      title:  ' brows programing courses by category',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `result of programing and software courses of ${process.env.APP_NAME} belongs to ${this.$route.params.slug}, all for arabic developers`
+        },
+        {
+          hid: 'og-description',
+          name: 'description',
+          content: `result of programing and software courses of ${process.env.APP_NAME} belongs to ${this.$route.params.slug}, all for arabic developers`
+        },
+      ],
+    }
+
+  },
   data(){
     return {
       backgroundUrl,

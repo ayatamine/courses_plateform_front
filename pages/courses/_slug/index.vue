@@ -192,6 +192,29 @@ import icon2 from '~/assets/images/icons/icon-2.png';
 
 export default {
   name: "index",
+  head(){
+    return{
+      title:  `courses | ${this.course.title_en}`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.course.description_en
+        },
+        {
+          hid: 'og-description',
+          name: 'description',
+          content: this.course.description_en
+        },
+        {
+          hid: 'og-title',
+          name: 'og:title',
+          content: this.course.title_en,
+        },
+      ],
+    }
+
+  },
   components:{
   },
   data() {

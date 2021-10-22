@@ -47,7 +47,7 @@
           </v-btn>
           <v-btn
             class="mx-2" color="red"
-            outlined small @click="$router.push('/admin/faqs')"
+            outlined small @click="$router.push('/admin-cpxx/faqs')"
           >
             <v-icon left>mdi-arrow-left</v-icon>
             Back
@@ -95,7 +95,7 @@ export default {
       await axios.put(`${process.env.APP_URL}/api/admin-cpx/faqs/${this.$route.params.slug}`,this.faq,
         {headers:{Authorization:"Bearer "+process.env.APP_TOKEN}})
         .then(res =>{
-           this.$router.push(`/admin/faqs/${res.data.slug}`)
+           this.$router.push(`/admin-cpxx/faqs/${res.data.slug}`)
           alert('updated')
         }).catch(err =>{
           console.log(err)

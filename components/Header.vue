@@ -7,7 +7,7 @@
         <div class="clearfix">
 
           <div class="pull-left logo-box">
-            <div class="logo"><nuxt-link to="/"><img src="~assets/images/ayatacademy.svg" alt="" title="ayat academey"></nuxt-link></div>
+            <div class="logo"><nuxt-link to="/"><img :src="logo" alt="logo" title="ayat academey"></nuxt-link></div>
           </div>
 
           <div class="nav-outer clearfix">
@@ -48,7 +48,7 @@
                 <li><nuxt-link to="/auth/register" >Register</nuxt-link></li>
               </ul>
               <ul class="login-nav" v-else>
-                <li class="dropdown"><nuxt-link to="/admin">Admin</nuxt-link></li>
+                <li class="dropdown"><nuxt-link to="/admin-cpxx">Admin</nuxt-link></li>
                 <li ><nuxt-link to="#" @click.native="logout">logout</nuxt-link></li>
               </ul>
 
@@ -83,7 +83,10 @@ export default {
  computed:{
   isLoggedIn() {
     return this.$store.state['usersAuth'].token;
-  }
+  },
+   logo(){
+     return this.$store.getters['site_settings'].logo;
+   },
  },
   methods: {
     async logout() {

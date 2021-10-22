@@ -3,14 +3,22 @@ import webpack from "webpack";
 export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
-        title: 'ayat academy',
+        titleTemplate(titleChunk) {
+          return titleChunk ? `${process.env.app_name} | ${titleChunk}` : process.env.APP_NAME
+        },
         htmlAttrs: {
             lang: 'en'
         },
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' },
-            { hid: 'description', name: 'description', content: '' },
+            { hid: 'description', name: 'description', content: process.env.META_DESCRIPTION },
+            {  name: 'keywords', content: process.env.META_DESCRIPTION },
+            { hid:'og-title',  property:"og:title", content: process.env.APP_NAME },
+            {  property:"og:image", content: process.env.META_IMAGE },
+            {  hid:'og-description' ,property:"og:description", content: process.env.META_OG_DESCRIPTIN },
+            {  property:"facebook-domain-verification", content: process.env.FACEBOOK_DOMAIN_VERFICATION },
+            {  rel :'icon',type:"image/png",sizes:"192x192", href: `~assets/images/${process.env.FAVICON_192}` },
             { name: 'X-UA-Compatible', content: 'IE=edge' }
         ],
         link: [

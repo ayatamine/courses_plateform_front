@@ -53,6 +53,24 @@
 import backgroundUrl from '~/assets/images/main-slider/3.png';
 export default {
   name: "tutorials",
+  head(){
+    return{
+      title:  ' brows programing tutorials by tags',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `result of programing and software courses of ${process.env.APP_NAME} belongs to ${this.tag.title_en}, all for arabic developers`
+        },
+        {
+          hid: 'og-description',
+          name: 'description',
+          content: `result of programing and software courses of ${process.env.APP_NAME} belongs to ${this.tag.title_en}, all for arabic developers`
+        },
+      ],
+    }
+
+  },
   data(){
     return {
       backgroundUrl,

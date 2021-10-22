@@ -228,7 +228,30 @@
 <script>
 import backgroundUrl from '~/assets/images/main-slider/3.png';
 import SearchBox from "@/components/Globals/SearchBox";
+
 export default {
+  head(){
+    return{
+      title:  'Blog',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: process.env.BLOG_META_DESCRIPTION
+        },
+        {
+          hid: 'og-description',
+          name: 'description',
+          content: process.env.APP_NAME+' '+ process.env.BLOG_META_DESCRIPTION
+        },
+        {
+          hid: 'og-title',
+          name: 'og-title',
+          content: process.env.APP_NAME+'blog '
+        },
+      ],
+  }
+  },
   components: {SearchBox},
   data(){
     return {

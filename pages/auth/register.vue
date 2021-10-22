@@ -119,6 +119,12 @@ import axios from 'axios';
 import FormInputError from '~/components/Globals/formInputError'
 export default {
   middleware:'guest',
+  head(){
+    return{
+      title:  ' | Login',
+    }
+
+  },
   components:{FormInputError},
   data(){
     return {

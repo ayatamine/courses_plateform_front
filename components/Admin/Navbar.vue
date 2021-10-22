@@ -60,14 +60,14 @@ export default {
   data: () => ({
     drawer: true,
     links :[
-      {icon: 'mdi-home', text:'Dashboard', route: '/'},
-      {icon: 'mdi-file-document-edit', text:'Blogs', route: '/admin/blogs'},
-      {icon: 'mdi-tag', text:'Tags', route: '/admin/tags'},
-      {icon: 'mdi-sitemap', text:'Categories', route: '/admin/categories'},
-      {icon: 'mdi-window-restore', text:'Pages', route: '/admin/pages'},
-      {icon: 'mdi-account-star', text:'Skills', route: '/admin/skills'},
-      {icon: 'mdi-comment-question-outline', text:'Faqs', route: '/admin/faqs'},
-      {icon: 'mdi-cogs', text:'Settings', route: '/admin/settings'},
+      {icon: 'mdi-home', text:'Dashboard', route: '/admin-cpxx'},
+      {icon: 'mdi-file-document-edit', text:'Blogs', route: '/admin-cpxx/blogs'},
+      {icon: 'mdi-tag', text:'Tags', route: '/admin-cpxx/tags'},
+      {icon: 'mdi-sitemap', text:'Categories', route: '/admin-cpxx/categories'},
+      {icon: 'mdi-window-restore', text:'Pages', route: '/admin-cpxx/pages'},
+      {icon: 'mdi-account-star', text:'Skills', route: '/admin-cpxx/skills'},
+      {icon: 'mdi-comment-question-outline', text:'Faqs', route: '/admin-cpxx/faqs'},
+      {icon: 'mdi-cogs', text:'Settings', route: '/admin-cpxx/settings'},
     ]
 
   }),

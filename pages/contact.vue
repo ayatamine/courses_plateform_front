@@ -141,6 +141,18 @@
 import Footer2 from "../components/Footer2";
 export default {
   name: "contact us",
+  head(){
+    return{
+      title:  'Contact us',
+      meta: [
+        {
+          hid: 'og-title',
+          name: 'og-title',
+          content: 'Contact '+process.env.APP_NAME
+        },
+      ],
+    }
+  },
   components: {Footer2},
   data(){
     return {

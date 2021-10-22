@@ -1,6 +1,6 @@
 <template>
   <v-card class="pa-5">
-    <v-card-title>Add New Page</v-card-title>
+    <v-card-title>Edit Page</v-card-title>
     <v-form class="ma-4">
       <v-row>
         <v-col     cols="12"    md="3" >
@@ -8,7 +8,7 @@
         </v-col>
         <v-col  cols="12"    md="9">
           <v-text-field    id="title"   v-model="page.name"     outlined dense  placeholder="arabic title"
-            hide-details
+                           hide-details
           ></v-text-field>
         </v-col>
 
@@ -17,7 +17,7 @@
         </v-col>
         <v-col  cols="12"    md="9">
           <v-text-field    id="title_en"   v-model="page.name_en"     outlined dense  placeholder="english title"
-            hide-details
+                           hide-details
           ></v-text-field>
         </v-col>
 
@@ -25,9 +25,9 @@
           <label >Content(ar)</label>
         </v-col>
         <v-col  cols="12"    md="9">
-<!--          <v-textarea        v-model="page.content"     outlined dense  placeholder="content"-->
-<!--            hide-details-->
-<!--          ></v-textarea>-->
+          <!--          <v-textarea        v-model="page.content"     outlined dense  placeholder="content"-->
+          <!--            hide-details-->
+          <!--          ></v-textarea>-->
           <client-only><vueEditor v-model="page.content"></vueEditor></client-only>
         </v-col>
 
@@ -42,15 +42,15 @@
           offset-md="3"
           cols="12"
         >
-          <v-btn color="primary" @click.prevent="addPage" :disabled="!isValidForm">
-            Submit
+          <v-btn color="primary"  small @click.prevent="updatePage" :disabled="!isValidForm">
+            <v-icon left>mdi-check</v-icon> Update
           </v-btn>
           <v-btn
-            type="reset"
-            class="mx-2"
-            outlined
+            class="mx-2" color="red"
+            outlined small @click="$router.push('/admin-cpxx/pages')"
           >
-            Reset
+            <v-icon left>mdi-arrow-left</v-icon>
+            Back
           </v-btn>
         </v-col>
       </v-row>
@@ -64,7 +64,7 @@ import {mapGetters} from "vuex";
 
 export default {
   layout:'admin',
-  name: "create-new-page",
+  name: "update-page",
   data(){
     return {
       page:{
@@ -77,17 +77,29 @@ export default {
 
     }
   },
+  async fetch(){
+
+    // await this.$axios.$get(`/api/admin-cpx/posts/${this.$route.params.slug}`)
+    await axios.get(`${process.env.APP_URL}/api/admin-cpx/pages/${this.$route.params.slug}`,
+      {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
+      .then(res => {
+        this.page = res.data
+      })
+      .catch(err => console.log(err) )
+
+  },
   methods:{
 
-    async addPage(){
+    async updatePage(){
 
-      await axios.post(process.env.APP_URL+'/api/admin-cpx/pages',this.page,
+      await axios.put(`${process.env.APP_URL}/api/admin-cpx/pages/${this.$route.params.slug}`,this.page,
         {headers:{Authorization:"Bearer "+process.env.APP_TOKEN}})
-      .then(res =>{
-        this.$router.push('/admin/pages')
-      }).catch(err =>{
-        console.log(err)
-      })
+        .then(res =>{
+           this.$router.push(`/admin-cpxx/pages/${res.data.slug}`)
+          alert('updated')
+        }).catch(err =>{
+          console.log(err)
+        })
     }
   },
   computed:{
