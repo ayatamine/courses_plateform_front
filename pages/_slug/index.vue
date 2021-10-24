@@ -71,7 +71,7 @@
                   <article class="post" v-if="recent_posts.data.length"  v-for="(post,i) in recent_posts.data" :key="i">
                     <div class="post-inner">
                       <figure class="post-thumb"><nuxt-link :to="`${post.slug}`"><img :src="`${post.thumbnail}`" :alt="post.title_en"></nuxt-link></figure>
-                      <div class="text"><nuxt-link :to="`${post.slug}`">{{ post.title_en }}</nuxt-link></div>
+                      <div class="text"><nuxt-link :to="`${post.slug}`">{{ post.title_en.slice(0,25)}}</nuxt-link></div>
                       <div class="post-info">By {{ post.author }}</div>
                     </div>
                   </article>
@@ -108,16 +108,57 @@
                 <li>{{post.comments_count}} comments</li>
               </ul>
               <div class="image">
-                <img :src="post.thumbnail" alt="" />
+                <img :src="post.cover_image" alt="" />
               </div>
               <h4>{{ post.title_en }}</h4>
-              <p v-html="post.content_en"> </p>
+              <p v-html="post.content_en" > </p>
               <div class="social-box">
                 <span>Share this article on </span>
-                <a href="#" class="fa fa-facebook-square"></a>
-                <a href="#" class="fa fa-twitter-square"></a>
-                <a href="#" class="fa fa-linkedin-square"></a>
-                <a href="#" class="fa fa-github"></a>
+
+                <ShareNetwork
+                  network="facebook"
+                  :url="$route.fullPath"
+                  :title="post.title_en"
+                  :description="`in this post we gonna talk about ${post.title_en} and we will go in deep with every single hidden information`"
+                  quote="Learning made easy  with us"
+                  :hashtags="post.keywords"
+                  :media="post.cover_image"
+                >
+                  <a href="javascript:void()" class="fa fa-facebook-square"></a>
+                </ShareNetwork>
+                <ShareNetwork
+                  network="twitter"
+                  :url="$route.fullPath"
+                  :title="post.title_en"
+                  :description="`in this post we gonna talk about ${post.title_en} and we will go in deep with every single hidden information`"
+                  quote="Learning made easy  with us"
+                  :hashtags="post.keywords"
+                  :media="post.cover_image"
+                >
+                  <a href="javascript:void()"  class="fa fa-facebook-official"></a>
+                </ShareNetwork>
+                <ShareNetwork
+                  network="messenger"
+                  :url="$route.fullPath"
+                  :title="post.title_en"
+                  :description="`in this post we gonna talk about ${post.title_en} and we will go in deep with every single hidden information`"
+                  quote="Learning made easy  with us"
+                  :hashtags="post.keywords"
+                  :media="post.cover_image"
+                >
+                  <a href="javascript:void()"  class="fa fa-twitter-square"></a>
+                </ShareNetwork>
+                <ShareNetwork
+                  network="linkedin"
+                  :url="$route.fullPath"
+                  :title="post.title_en"
+                  :description="`in this post we gonna talk about ${post.title_en} and we will go in deep with every single hidden information`"
+                  quote="Learning made easy  with us"
+                  :hashtags="post.keywords"
+                  :media="post.cover_image"
+                >
+                  <a href="javascript:void()"  class="fa fa-linkedin-square"></a>
+                </ShareNetwork>
               </div>
             </div>
 
@@ -222,7 +263,7 @@ import FormInputError from "../../components/Globals/formInputError";
 export default {
   head(){
     return{
-      title:  this.post.title_en,
+      title:  this.post ? this.post.title_en : '',
       meta: [
         {
           hid: 'description',
@@ -242,6 +283,7 @@ export default {
   },
   name: "index",
   components: {FormInputError},
+
   data(){
     return {
               comments:[],
@@ -255,6 +297,12 @@ export default {
               },
               commentSizeError:false,replySizeError:false
     }
+  },
+  mounted() {
+    document.querySelectorAll('.ql-syntax').forEach(syn =>syn.classList.add('hljs'));
+    this.$root.$on('share_network_close', function (network, url) {
+      alert('thanks for sharing')
+    });
   },
   async asyncData(context){
 
@@ -353,7 +401,8 @@ export default {
   font-size: 14px;
 }
 .sidebar-page-container .comments-area .comment-box .theme-btn,
-.sidebar-page-container .comments-area .comment-info .comment-time:before{
+.sidebar-page-container .comments-area .comment-info .comment-time:before,
+.blog-detail .inner-box .social-box a:hover{
   color: #ff5773;
 }
 .sidebar-page-container .comments-area .comment-box .theme-btn:hover{

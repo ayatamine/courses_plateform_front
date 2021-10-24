@@ -5,7 +5,7 @@
     <!-- <div class="preloader"></div> -->
      <Header2 />
 	   <nuxt />
-    <footer2 :logo="logo" />
+     <footer2 :logo="logo"  />
   </div>
 
 </template>

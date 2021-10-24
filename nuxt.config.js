@@ -69,7 +69,7 @@ export default {
       '~/plugins/mixins/user',
       '~/plugins/mixins/form_validation',
       '~/plugins/axios',
-      { src: '~/plugins/vue_editor', mode: 'client' }
+      { src: '~/plugins/vue_editor', mode: 'client' },
 
 
     ],
@@ -91,7 +91,9 @@ export default {
         '@nuxtjs/auth-next',
         '@nuxtjs/dotenv',
 
-      ["vue2-editor/nuxt"]
+      ["vue2-editor/nuxt"],
+      'nuxt-highlightjs',
+      'vue-social-sharing/nuxt'
     ],
 
     // Build Configuration: https://go.nuxtjs.dev/config-build

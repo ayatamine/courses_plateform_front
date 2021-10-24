@@ -151,7 +151,7 @@ export default {
       .then(res =>{
         console.log(res.data)
         this.post ={postable_type:'App\\Models\\Admin'}
-        this.$router.push('/admin-cpxx/pages')
+        this.$router.push('/admin-cpxx/blogs')
         alert('added successfuly')
       }).catch(err =>{
         console.log(err)

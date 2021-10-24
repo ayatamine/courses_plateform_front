@@ -111,4 +111,7 @@ export default {
  .main-header{
    background:none !important;
  }
+a.nuxt-link-exact-active{
+   color:#ff5773 !important;font-weight: 500 !important;
+ }
 </style>
