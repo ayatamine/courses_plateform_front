@@ -118,12 +118,15 @@ export default {
     },
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',
+        target: process.env.IS_TEST_MODE ? process.env.APP_URL  || 'http://localhost:8001'
+          : process.env.APP_URL_S  || 'https://arabicdevs.com/course_plateform/public',
         pathRewrite: {'^/api/': ''}
       }
     },
     axios: {
-        baseURL: process.env.APP_URL || 'http://localhost:8000',
+        baseURL: process.env.IS_TEST_MODE ? process.env.APP_URL  || 'http://localhost:8001'
+                                          : process.env.APP_URL_S  || 'https://arabicdevs.com/course_plateform/public'
+                                  ,
         proxy:true,
         // credentials: true,
     },

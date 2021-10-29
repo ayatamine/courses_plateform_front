@@ -81,7 +81,7 @@
                     <li><nuxt-link to="/privacy">Privacy Policy</nuxt-link></li>
                     <li><a href="#">Support Area</a></li>
                     <li><a href="#">Documentations</a></li>
-                    <li><a href="#">Terms of Policy</a></li>
+                    <li><a href="/conditions">Terms & conditions</a></li>
                   </ul>
                 </div>
               </div>

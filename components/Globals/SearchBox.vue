@@ -1,10 +1,16 @@
 ﻿<template>
                     <div class="search-boxed">
                         <div class="search-box">
-                            <form method="post" action="contact.html">
+                            <p class="alert alert-danger alert-dismissable fade show" role="alert" v-show="notAddedYet">
+                              <strong >this feature is not added yet</strong>
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </p>
+                            <form method="post" @keydown.prevent="notAddedYet = true">
                                 <div class="form-group">
                                     <input type="search" name="search-field" value="" placeholder="What do you want to learn?" required>
-                                    <button type="submit"><span class="icon fa fa-search"></span></button>
+                                    <button type="submit" @click.prevent><span class="icon fa fa-search"></span></button>
                                 </div>
                             </form>
                         </div>
@@ -13,7 +19,11 @@
 
 <script>
 export default {
-
+  data(){
+    return {
+      notAddedYet:false
+    }
+  }
 }
 </script>
 

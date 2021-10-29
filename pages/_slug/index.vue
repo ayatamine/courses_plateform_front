@@ -135,7 +135,7 @@
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
-                  <a href="javascript:void()"  class="fa fa-facebook-official"></a>
+                  <v-icon style="font-size: 26px;top: -3px;margin-right: 1px;">mdi-facebook-messenger</v-icon>
                 </ShareNetwork>
                 <ShareNetwork
                   network="messenger"
@@ -402,8 +402,12 @@ export default {
 }
 .sidebar-page-container .comments-area .comment-box .theme-btn,
 .sidebar-page-container .comments-area .comment-info .comment-time:before,
-.blog-detail .inner-box .social-box a:hover{
+.blog-detail .inner-box .social-box a:hover,
+.blog-detail .inner-box .social-box i:hover{
   color: #ff5773;
+}
+.blog-detail .inner-box .social-box a{
+  margin-right: 2px;
 }
 .sidebar-page-container .comments-area .comment-box .theme-btn:hover{
   color: #3d415b;

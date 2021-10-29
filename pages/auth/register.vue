@@ -157,7 +157,7 @@ export default {
          this.termsError = true;
          return;
        }
-        await this.$axios.$post(process.env.APP_URL+'/api/students/register', this.userData)
+        await this.$axios.$post('/api/students/register', this.userData)
          .then(({token,expiresIn} )=>{
            this.$store.dispatch('usersAuth/setToken', {token, expiresIn});
            this.$router.push('/');
