@@ -11,6 +11,8 @@
 
 <script>
 import FormInputError from "../../components/Globals/formInputError";
+import backgroundUrl from '~/assets/images/main-slider/3.png';
+import cookies from "js-cookie";
 export default {
   head(){
     return{
@@ -18,12 +20,29 @@ export default {
     }
 
   },
-  name: "my profile",
+  name: "my-profile",
   components: {FormInputError},
   data(){
     return {
-
+         profileInfos:{},
+        backgroundUrl
     }
+  },
+  async fetch(){
+    const token = cookies.get('x-access-token');
+    this.$auth.setStrategy('laravelPassport');
+    this.$auth.setUserToken(token);
+    console.log(this.$auth);
+    // this.$axios.setHeader('content-type', 'application/json')
+    // this.$axios.setToken(token, 'Bearer')
+    // console.log(this.$axios.defaults.headers)
+    // try {
+    //   let data = await this.$axios.$get('/api/students/details')
+    //   console.log(data)
+    // } catch (err) {
+    //    console.log(err)
+    // }
+
   },
   methods:{
 

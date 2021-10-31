@@ -151,17 +151,17 @@ export default {
           'laravelPassport': {
             provider: 'laravel/passport',
             endpoints: {
-              register: { url: 'api/students/register', method: 'post', propertyName: 'data.token' },
-              login: { url: 'api/students/login', method: 'post', propertyName: 'data.access_token' },
-              authorization: process.env.APP_URL + '/oauth/authorize',
-              token: process.env.APP_URL + '/oauth/token',
-              userInfo: process.env.APP_URL + '/api/clients/details',
+              register: { url: '/api/students/register', method: 'post', propertyName: 'data.token' },
+              login: { url: '/api/students/login', method: 'post', propertyName: 'data.token' },
+              authorization: '/oauth/authorize',
+              token:  '/oauth/token',
+              userInfo:  '/api/students/details',
               logout: false
             },
             url: process.env.APP_URL,
             // clientId: 4,
             // clientSecret: '14p6dTQxfhS6Es7fxDC2yFnWBcL30yACf3uXCmpN',
-            // grantType:"client_credentials"
+            grantType:"client_credentials",
             clientId: "3",
             clientSecret: '14p6dTQxfhS6Es7fxDC2yFnWBcL30yACf3uXCmpN',
           },

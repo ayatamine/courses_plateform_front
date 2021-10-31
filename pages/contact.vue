@@ -140,7 +140,7 @@
 <script>
 import Footer2 from "../components/Footer2";
 export default {
-  name: "contact us",
+  name: "contact-us",
   head(){
     return{
       title:  'Contact us',

@@ -12,6 +12,7 @@
     "@fancyapps/fancybox": "^3.5.7",
     "@nuxtjs/auth-next": "5.0.0-1607693598.34d83ea",
     "@nuxtjs/axios": "^5.13.1",
+    "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/proxy": "^2.1.0",
     "bootstrap": "^4.6.0",
     "cookie-parser": "^1.4.5",
@@ -31,7 +32,6 @@
   },
   "devDependencies": {
     "@mdi/font": "^5.9.55",
-    "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/vuetify": "^1.11.3"
   }
 }
