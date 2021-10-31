@@ -20,7 +20,11 @@ export const actions = {
   async nuxtServerInit(ctx,context)
   {
     //manage the auth access token when the page load
-    const token = cookieparser.parse(context.req.headers.cookie)['x-access-token']
+    let headerCookie = context.req.headers.cookie;
+    if (typeof headerCookie !== 'string') {
+      headerCookie = '';
+    }
+    const token = cookieparser.parse(headerCookie)['x-access-token']
     await ctx.commit('usersAuth/SET_TOKEN', token);
 
     //   context.$axios.$get('/api/posts?limit=3')
