@@ -46,7 +46,7 @@ export default {
             // { src: '/js/owl.js', type: 'text/javascript' },
             // { src: '/js/wow.js', type: 'text/javascript' },
             { src: '/js/jquery-ui.js', type: 'text/javascript' },
-            { src: '/js/script.js', type: 'text/javascript' }
+            { src: '/js/script.js', type: 'text/javascript' },
 
         ]
     },
