@@ -1,11 +1,6 @@
 ﻿<template>
     <div>
-      <section class="page-title" :style="`background-image:url(${backgroundUrl})`">
-        <div class="auto-container">
-          <h1>Welcome Developer...</h1>
-
-        </div>
-      </section>
+      <page-title title-content="Get Access Now" />
         <section class="register-section">
 		 <div class="auto-container">
 			<div class="register-box">
@@ -114,8 +109,6 @@
 </template>
 
 <script>
-import backgroundUrl from '~/assets/images/main-slider/3.png';
-import axios from 'axios';
 import FormInputError from '~/components/Globals/formInputError'
 export default {
   middleware:'guest',
@@ -137,7 +130,6 @@ export default {
         sex:'',
         terms:''
       },
-      backgroundUrl:backgroundUrl,
       passwordVisible:false,
       termsError:false
     }

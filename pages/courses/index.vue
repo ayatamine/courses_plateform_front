@@ -1,14 +1,9 @@
 <template>
   <div>
     <!-- Page Title -->
-    <section class="page-title" :style="`background-image:url(${backgroundUrl})`">
-      <div class="auto-container">
-        <h1>Courses</h1>
-
-        <search-box />
-
-      </div>
-    </section>
+    <page-title title-content="Courses"  >
+      <search-box/>
+    </page-title>
     <!--End Page Title-->
 
     <!--Sidebar Page Container-->
@@ -237,7 +232,7 @@
 </template>
 
 <script>
-import backgroundUrl from '~/assets/images/main-slider/3.png';
+import backgroundUrl from '~/assets/images/main-slider/1.png';
 import SearchBox from "@/components/Globals/SearchBox";
 export default {
   components: {SearchBox},

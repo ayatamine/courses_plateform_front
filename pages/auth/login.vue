@@ -1,11 +1,7 @@
 ﻿<template>
     <div>
-      <section class="page-title" :style="`background-image:url(${backgroundUrl})`">
-        <div class="auto-container">
-          <h1>Welcome Again ...</h1>
 
-        </div>
-      </section>
+        <page-title title-content="Welcome Again" />
         <section class="login-section  pt-5">
                 <div class="auto-container">
                     <div class="login-box">
@@ -65,9 +61,9 @@
 </template>
 
 <script>
-import backgroundUrl from '~/assets/images/main-slider/3.png';
-import axios from "axios";
+import PageTitle from "~/components/PageTitle";
 export default {
+  components: {PageTitle},
   middleware:'guest',
   head(){
     return{
@@ -77,7 +73,6 @@ export default {
   },
   data(){
       return {
-        backgroundUrl,
         userData:{
           email:'',
           password:''

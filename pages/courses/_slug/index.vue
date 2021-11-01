@@ -1,10 +1,7 @@
 <template>
  <div>
-   <section class="page-title" :style="`background-image:url(${backgroundUrl})`">
-     <div class="auto-container">
-       <h1>{{$route.path}}</h1>
-     </div>
-   </section>
+
+   <page-title :title-content="`courses > ${course.title_en}`" />
    <section class="intro-section">
      <div class="patern-layer-one paroller" data-paroller-factor="0.40" data-paroller-factor-lg="0.20" data-paroller-type="foreground"
           data-paroller-direction="vertical" :style="`background-image: url(${icon1})`"></div>
@@ -184,7 +181,6 @@
 </template>
 
 <script>
-import backgroundUrl from '~/assets/images/main-slider/3.png';
 import preview_image from '~/assets/images/background/video-image.jpg';
 import icon1 from '~/assets/images/icons/icon-1.png';
 import icon2 from '~/assets/images/icons/icon-2.png';
@@ -219,7 +215,7 @@ export default {
   },
   data() {
     return {
-      backgroundUrl,preview_image,icon1,icon2,course:{},tabActive:'prod-overview',
+      preview_image,icon1,icon2,course:{},tabActive:'prod-overview',
       accActiveBtn:null
     }
   },

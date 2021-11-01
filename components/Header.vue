@@ -139,6 +139,10 @@ export default {
     $('.mobile-menu .menu-backdrop,.mobile-menu .close-btn').on('click', function() {
       $('body').removeClass('mobile-menu-visible');
     });
+    //close
+    $('.mobile-menu .menu-backdrop,.mobile-menu a').on('click', function() {
+      $('body').removeClass('mobile-menu-visible');
+    });
   },
   methods: {
     async logout() {
@@ -184,5 +188,25 @@ a.nuxt-link-exact-active{
  .mobile-menu .navigation li{
    border-bottom: 0;
  }
+header > div.header-upper > div > div > div.nav-outer.clearfix > nav > div.navbar-collapse.collapse.clearfix{
+ padding:11px 0;
+ }
+header > div.header-upper > div > div > div.pull-left.logo-box > div > a > img{
+  max-width: 80%;
+}
+@media (max-width: 767px){
+  header > div.header-upper > div > div > div.pull-left.logo-box > div > a > img{
+    max-width: 60%;
+  }
+}
+ @media (min-width: 751px) and (max-width: 1106px) {
+  .logo-box{
+    float: none;text-align: center;
+  }
+   .header-style-two .main-menu, .header-style-three .main-menu{
+     float: none;
+   }
+
+}
 
 </style>

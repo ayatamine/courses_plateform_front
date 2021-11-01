@@ -12,8 +12,7 @@
   </div>
 </template>
 <script>
-import HomeBanner from "~/components/Home/HomeBanner.vue";
-import Bg from "~/assets/images/background/1.png";
+
 import Achivement2 from "~/components/Home/Achivement2";
 import WhyCooseUs from "~/components/Home/WhyUs";
 import Posts from "~/components/Home/Posts";
@@ -36,7 +35,6 @@ export default {
   },
     data(){
       return {
-        Bg,
       }
     },
      components:{
@@ -45,7 +43,6 @@ export default {
        VideoIntro2,
        WhyCooseUs,
        Achivement2,
-      HomeBanner,
        Posts
     },
     computed:{

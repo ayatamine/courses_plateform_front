@@ -1,14 +1,10 @@
 <template>
   <div>
     <!-- Page Title -->
-    <section class="page-title" :style="`background-image:url(${backgroundUrl})`">
-      <div class="auto-container">
-        <h1>Tutorials</h1>
+    <page-title title-content="Tutorials"  >
+      <search-box/>
+    </page-title>
 
-        <search-box />
-
-      </div>
-    </section>
     <!--End Page Title-->
 
     <!--Sidebar Page Container-->
@@ -244,7 +240,6 @@
 </template>
 
 <script>
-import backgroundUrl from '~/assets/images/main-slider/3.png';
 import SearchBox from "@/components/Globals/SearchBox";
 export default {
   components: {SearchBox},
@@ -273,7 +268,6 @@ export default {
   },
   data(){
     return {
-      backgroundUrl,
       routeName:'/tutorials',
       url_prefix :'api/tutorials',
       sort:'?sort=-created_at',

@@ -1,11 +1,6 @@
 <template>
   <div>
-    <section class="page-title" :style="`background-image:url(${backgroundUrl})`">
-      <div class="auto-container">
-        <h3>Result Related To The Categrory :  <span style="color: #ff5773">{{$route.params.slug}}</span> </h3>
-
-      </div>
-    </section>
+    <page-title :title-content="`Result Related to ${$route.params.slug}`" />
     <div class="content-side   col-sm-10 m-auto pt-5">
       <div class="our-courses">
         <div class="row clearfix" v-show="$fetchState.pending">
@@ -50,7 +45,6 @@
 </template>
 
 <script>
-import backgroundUrl from '~/assets/images/main-slider/3.png';
 export default {
   name: "tutorials",
   head(){
@@ -73,7 +67,6 @@ export default {
   },
   data(){
     return {
-      backgroundUrl,
       tutorials:[],
       attrs: {
         boilerplate: false,
