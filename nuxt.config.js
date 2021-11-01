@@ -4,7 +4,8 @@ export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
         titleTemplate(titleChunk) {
-          return titleChunk ? `${process.env.APP_NAME} | ${titleChunk}` : process.env.APP_NAME
+          let app_name  = process.env.APP_NAME || '4arabdevelopers من أجل المطورين العرب';
+          return titleChunk ? `${app_name}  | ${titleChunk}` : app_name
         },
         htmlAttrs: {
             lang: 'en'
