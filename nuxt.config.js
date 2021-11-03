@@ -34,15 +34,15 @@ export default {
             { src: '/js/popper.min.js', type: 'text/javascript' },
             { src: '/js/jquery.scrollTo.js', type: 'text/javascript' },
             { src: '/js/bootstrap.min.js', type: 'text/javascript' },
-            { src: '/js/jquery.mCustomScrollbar.concat.min.js', type: 'text/javascript' },
+            // { src: '/js/jquery.mCustomScrollbar.concat.min.js', type: 'text/javascript' },
             // { src: '/js/jquery.fancybox.js', type: 'text/javascript' },
-            { src: '/js/appear.js', type: 'text/javascript' },
-            { src: '/js/swiper.min.js', type: 'text/javascript' },
-            { src: '/js/element-in-view.js', type: 'text/javascript' },
-            { src: '/js/jquery.paroller.min.js', type: 'text/javascript' },
-            { src: '/js/parallax.min.js', type: 'text/javascript' },
-            { src: '/js/tilt.jquery.min.js', type: 'text/javascript' },
-            { src: '/js/jquery.easing.min.js', type: 'text/javascript' },
+            { src: '/js/appear.js', type: 'text/javascript' ,defer:true},
+            // { src: '/js/swiper.min.js', type: 'text/javascript' },
+            // { src: '/js/element-in-view.js', type: 'text/javascript' },
+            // { src: '/js/jquery.paroller.min.js', type: 'text/javascript' },
+            { src: '/js/parallax.min.js', type: 'text/javascript',defer:true },
+            // { src: '/js/tilt.jquery.min.js', type: 'text/javascript',defer:true },
+            { src: '/js/jquery.easing.min.js', type: 'text/javascript',defer:true },
             // { src: '/js/owl.js', type: 'text/javascript' },
             // { src: '/js/wow.js', type: 'text/javascript' },
             { src: '/js/jquery-ui.js', type: 'text/javascript' },
@@ -99,7 +99,7 @@ export default {
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {
-        // extractCss: false,
+        extractCss: true,
         // extractCss: {
         //     ignoreOrder: false
         // }

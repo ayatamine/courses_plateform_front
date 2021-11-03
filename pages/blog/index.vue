@@ -34,7 +34,7 @@
 
                     <!-- Type Form -->
                     <div class="type-form">
-                      <form method="post" action="index.html">
+                      <form method="post" action="">
 
                         <!-- Form Group -->
                         <div class="form-group">
