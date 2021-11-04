@@ -353,6 +353,6 @@ export default {
 .cource-block-two .inner-box .lower-content .hours{
   color: #ff5773;
 }
-.cource-block-two .inner-box .image a {display: inline-block}
+/*.cource-block-two .inner-box .image a {display: inline-block}*/
 .cource-block-two .inner-box .image img{min-height: 190px}
 </style>

@@ -25,9 +25,9 @@ export default {
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
             { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Titillium+Web:wght@300;400;600;700;900&display=swap' },
-            { rel: 'stylesheet', href: '/css/bootstrap.css' },
-            { rel: 'stylesheet', href: '/css/main.css' },
-            { rel: 'stylesheet', href: '/css/responsive.css' },
+            // { rel: 'stylesheet', href: '/css/bootstrap.css' },
+            // { rel: 'stylesheet', href: '/css/main.css' },
+            // { rel: 'stylesheet', href: '/css/responsive.css' },
         ],
         script: [
             { src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', type: 'text/javascript' },
@@ -54,9 +54,12 @@ export default {
 
     // Global CSS: https://go.nuxtjs.dev/config-css
     css: [
-        // '~/assets/css/bootstrap.css',
-        // '~/assets/css/main.css',
-        // '~/assets/css/responsive.css',
+
+      'vuetify/dist/vuetify.min.css',
+      '@mdi/font/css/materialdesignicons.css',
+      '~/assets/css/bootstrap.css',
+      '~/assets/css/main.css',
+      '~/assets/css/responsive.css',
     ],
 
 
@@ -72,6 +75,7 @@ export default {
       '~/plugins/mixins/form_validation',
       '~/plugins/axios',
       { src: '~/plugins/vue_editor', mode: 'client' },
+      { src: '~/plugins/vuetify'},
 
 
     ],
@@ -82,7 +86,7 @@ export default {
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [
         '@nuxtjs/dotenv',
-        '@nuxtjs/vuetify',
+        // '@nuxtjs/vuetify',
 
     ],
 
@@ -100,7 +104,7 @@ export default {
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {
-        extractCss: true,
+        extractCss: false,
         // extractCss: {
         //     ignoreOrder: false
         // }
