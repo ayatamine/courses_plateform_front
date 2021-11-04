@@ -23,7 +23,7 @@
             <div class="image-column col-lg-6 col-md-12 col-sm-12">
               <div class="inner-column">
                 <div class="image">
-                  <img :src="require('~/assets/images/main-slider/developer.svg')" alt="developer image" />
+                  <img :src="require('~/assets/images/main-slider/developer.svg')" alt="developer image" width="100%" height="auto" />
                 </div>
               </div>
             </div>
@@ -51,7 +51,7 @@
             <div class="image-column col-lg-6 col-md-12 col-sm-12">
               <div class="inner-column">
                 <div class="image">
-                  <img :src="require('~/assets/images/main-slider/youtube_video.svg')" alt="video image" />
+                  <img :src="require('~/assets/images/main-slider/youtube_video.svg')" alt="video image"  width="100%" height="auto"/>
                 </div>
               </div>
             </div>
@@ -79,7 +79,7 @@
             <div class="image-column col-lg-6 col-md-12 col-sm-12">
               <div class="inner-column">
                 <div class="image">
-                  <img :src="require('~/assets/images/main-slider/read_post.svg')" alt="read post" />
+                  <img :src="require('~/assets/images/main-slider/read_post.svg')" alt="read post"  width="100%" height="auto"/>
                 </div>
               </div>
             </div>
