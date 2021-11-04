@@ -46,7 +46,7 @@ export default {
             { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js', type: 'text/javascript',defer:true },
             // { src: '/js/owl.js', type: 'text/javascript' },
             // { src: '/js/wow.js', type: 'text/javascript' },
-            { src: 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', type: 'text/javascript' },
+            // { src: 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', type: 'text/javascript' },
             { src: '/js/script.js', type: 'text/javascript' },
 
         ]
