@@ -86,7 +86,6 @@ export default {
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [
         '@nuxtjs/dotenv',
-        // '@nuxtjs/vuetify',
 
     ],
 
@@ -108,7 +107,7 @@ export default {
         // extractCss: {
         //     ignoreOrder: false
         // }
-      vendor: ['jquery', 'bootstrap'],
+      vendor: ['jquery', 'bootstrap','vuetify'],
       plugins: [
         // set shortcuts as global for bootstrap
         new webpack.ProvidePlugin({
