@@ -80,11 +80,8 @@ export default {
   async fetch(){
 
     // await this.$axios.$get(`/api/admin-cpx/posts/${this.$route.params.slug}`)
-    await axios.get(`${process.env.APP_URL}/api/admin-cpx/faqs/${this.$route.params.slug}`,
+     this.faq = await this.$axios.$get(`/api/admin-cpx/faqs/${this.$route.params.slug}`,
       {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
-      .then(res => {
-        this.faq = res.data
-      })
       .catch(err => console.log(err) )
 
   },

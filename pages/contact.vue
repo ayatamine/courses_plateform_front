@@ -127,18 +127,15 @@
     <div class="map-boxed">
       <!--Map Outer-->
       <div class="map-outer">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d805184.6331292129!2d144.49266890254142!3d-37.97123689954809!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad646b5d2ba4df7%3A0x4045675218ccd90!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2s!4v1574408946759!5m2!1sen!2s" allowfullscreen=""></iframe>
-      </div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14106.58972041952!2d-0.2834729296144766!3d27.882098844471894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdf59f9d6c0eeb23%3A0x89f61e7931951feb!2sAlgerie%20poste!5e0!3m2!1sar!2sdz!4v1636108990765!5m2!1sar!2sdz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>    </div>
     </div>
   </section>
   </v-app>
-  <footer2/>
   </div>
 
 </template>
 
 <script>
-import Footer2 from "../components/Footer2";
 export default {
   name: "contact-us",
   head(){
@@ -153,7 +150,6 @@ export default {
       ],
     }
   },
-  components: {Footer2},
   data(){
     return {
       first_name:'',

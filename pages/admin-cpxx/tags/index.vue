@@ -126,7 +126,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   layout:'admin',
   name: "tags",
@@ -162,11 +161,8 @@ export default {
     }
   },
   async fetch() {
-    await axios.get(`${process.env.APP_URL}/api/admin-cpx/tags`,
+       this.tags = await this.$axios.$get(`/api/admin-cpx/tags`,
       {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
-      .then(res => {
-        this.tags = res.data
-      })
       .catch(err => console.log(err) )
 
   },
@@ -198,7 +194,7 @@ export default {
     },
 
     async deleteItemConfirm () {
-      await axios.delete(`${process.env.APP_URL}/api/admin-cpx/tags/${this.editedItem.id}`,
+      await this.$axios.$delete(`/api/admin-cpx/tags/${this.editedItem.id}`,
         {headers:{Authorization:"Bearer "+"process.env.APP_TOKEN", contentType:"multipart/form-data"}})
         .then(res => {
           this.tags.data.splice(this.editedIndex, 1)
@@ -227,18 +223,18 @@ export default {
     async save () {
       if (this.editedIndex > -1) {
        //update item
-        await axios.put(`${process.env.APP_URL}/api/admin-cpx/tags/${this.editedItem.id}`,this.editedItem,
+        await this.$axios.$put(`/api/admin-cpx/tags/${this.editedItem.id}`,this.editedItem,
           {headers:{Authorization:"Bearer "+"process.env.APP_TOKEN", contentType:"multipart/form-data"}})
           .then(res => {
-            Object.assign(this.tags.data[this.editedIndex],res.data)
+            Object.assign(this.tags.data[this.editedIndex],res)
           })
           .catch(err => console.log(err) )
       } else {
         //create new item
-        await axios.post(`${process.env.APP_URL}/api/admin-cpx/tags`,this.editedItem,
+        await this.$axios.$post(`/api/admin-cpx/tags`,this.editedItem,
           {headers:{Authorization:"Bearer "+"process.env.APP_TOKEN", contentType:"multipart/form-data"}})
           .then(res => {
-              this.tags.data.push(res.data)
+              this.tags.data.push(res)
           })
           .catch(err => console.log(err) )
       }

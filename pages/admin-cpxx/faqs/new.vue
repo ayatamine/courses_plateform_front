@@ -7,7 +7,7 @@
           <label >Question(ar)</label>
         </v-col>
         <v-col  cols="12"    md="9">
-          <v-text-field    id="title"   v-model="faq.name"     outlined dense  placeholder=" question in arabic"
+          <v-text-field    id="title"   v-model="faq.question"     outlined dense  placeholder=" question in arabic"
             hide-details
           ></v-text-field>
         </v-col>
@@ -68,7 +68,7 @@ export default {
   data(){
     return {
       faq:{
-        name:'',
+        question:'',
         question_en:'',
         answer:'',
         answer_en:''
@@ -81,7 +81,7 @@ export default {
 
     async addFaq(){
 
-      await axios.post(process.env.APP_URL+'/api/admin-cpx/faqs',this.faq,
+      await this.$axios.$post('/api/admin-cpx/faqs',this.faq,
         {headers:{Authorization:"Bearer "+process.env.APP_TOKEN}})
       .then(res =>{
         this.$router.push('/admin-cpxx/faqs')

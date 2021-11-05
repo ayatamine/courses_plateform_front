@@ -115,7 +115,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   layout:'admin',
   name: "skills",
@@ -151,10 +150,10 @@ export default {
     }
   },
   async fetch() {
-    await axios.get(`${process.env.APP_URL}/api/admin-cpx/skills`,
+    await this.$axios.$get(`/api/admin-cpx/skills`,
       {headers:{Authorization:"Bearer "+process.env.APP_TOKEN}})
       .then(res => {
-        this.skills = res.data.data;
+        this.skills = res.data;
       })
       .catch(err => console.log(err) )
 
@@ -187,7 +186,7 @@ export default {
     },
 
     async deleteItemConfirm () {
-      await axios.delete(`${process.env.APP_URL}/api/admin-cpx/skills/${this.editedItem.slug}`,
+      await this.$axios.$delete(`/api/admin-cpx/skills/${this.editedItem.slug}`,
         {headers:{Authorization:"Bearer "+"process.env.APP_TOKEN", contentType:"multipart/form-data"}})
         .then(res => {
           this.skills.splice(this.editedIndex, 1)
@@ -216,18 +215,18 @@ export default {
     async save () {
       if (this.editedIndex > -1) {
        //update item
-        await axios.put(`${process.env.APP_URL}/api/admin-cpx/skills/${this.editedItem.slug}`,this.editedItem,
+        await this.$axios.$put(`/api/admin-cpx/skills/${this.editedItem.slug}`,this.editedItem,
           {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
           .then(res => {
-            Object.assign(this.skills[this.editedIndex],res.data)
+            Object.assign(this.skills[this.editedIndex],res)
           })
           .catch(err => console.log(err) )
       } else {
         //create new item
-        await axios.post(`${process.env.APP_URL}/api/admin-cpx/skills`,this.editedItem,
+        await this.$axios.$post(`/api/admin-cpx/skills`,this.editedItem,
           {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
           .then(res => {
-              this.skills.push(res.data)
+              this.skills.push(res)
           })
           .catch(err => console.log(err) )
       }
