@@ -168,7 +168,7 @@ export default {
   },
   computed: {
     formTitle () {
-      return this.editedIndex === -1 ? 'New Tag' : 'Edit Tag'
+      return this.editedIndex === -1 ? 'New Tag ' : 'Edit Tag'
     },
   },
 
