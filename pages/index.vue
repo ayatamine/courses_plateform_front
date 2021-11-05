@@ -1,60 +1,65 @@
 <template>
-  <div class="container">
-         <v-app>
-           <div>this is amine</div>
-           <v-checkbox label="label" v-model="name" value="value"></v-checkbox>
-         </v-app>
+  <div>
+
+     <slider/>
+    <why-coose-us/>
+     <tutorials :tutorials="tutorials"/>
+    <achivement2/>
+    <video-intro2/>
+    <posts :posts="posts"/>
+
 
   </div>
 </template>
-
 <script>
+
+import Achivement2 from "~/components/Home/Achivement2";
+import WhyCooseUs from "~/components/Home/WhyUs";
+import Posts from "~/components/Home/Posts";
+import VideoIntro2 from "../components/Home/VideoIntro2";
+import Slider from "../components/Home/Slider";
+import Tutorials from "../components/Home/Tutorials";
 export default {
-  data(){
-    return {
-      name :false
+  name: "Home",
+  head(){
+    return{
+      title:  'Home',
+      meta: [
+        {
+          hid: 'og-title',
+          name: 'og-title',
+          content: process.env.APP_NAME +' Home Page '
+        },
+      ],
     }
-  }
+  },
+    data(){
+      return {
+      }
+    },
+     components:{
+       Tutorials,
+       Slider,
+       VideoIntro2,
+       WhyCooseUs,
+       Achivement2,
+       Posts
+    },
+    computed:{
+      tutorials(){
+           return this.$store.getters["tutorial/tutorials"];
+      },
+      posts(){
+           return this.$store.getters["posts/homeposts"];
+      },
+
+    }
+
 }
 </script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+<style scoped>
+.main-header{
+  background:none !important;
 }
 </style>
+

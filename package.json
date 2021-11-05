@@ -9,15 +9,30 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/auth-next": "5.0.0-1616003482.75c20e6",
+    "@fancyapps/fancybox": "^3.5.7",
+    "@nuxtjs/auth-next": "5.0.0-1607693598.34d83ea",
     "@nuxtjs/axios": "^5.13.1",
-    "ant-design-vue": "^1.7.2",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/proxy": "^2.1.0",
+    "bootstrap": "^4.6.0",
+    "cookie-parser": "^1.4.5",
+    "cookieparser": "^0.1.0",
     "core-js": "^3.8.3",
-    "nuxt": "^2.14.12"
+    "jquery": "^3.6.0",
+    "js-cookie": "^3.0.1",
+    "laravel-vue-pagination": "^2.3.1",
+    "nuxt": "^2.14.12",
+    "nuxt-highlightjs": "^1.0.1",
+    "popper.js": "^1.16.1",
+    "v-video-embed": "^1.0.8",
+    "vue-owl-carousel": "^2.0.3",
+    "vue-social-sharing": "^3.0.8",
+    "vue-wow": "^1.2.0",
+    "vue2-editor": "^2.10.3",
+    "vuetify": "^2.5.11"
   },
   "devDependencies": {
     "@mdi/font": "^5.9.55",
-    "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/vuetify": "^1.11.3"
   }
 }
