@@ -235,6 +235,7 @@
 import backgroundUrl from '~/assets/images/main-slider/1.png';
 import SearchBox from "@/components/Globals/SearchBox";
 export default {
+  name:"courses",
   components: {SearchBox},
   head(){
     return{

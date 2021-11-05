@@ -59,8 +59,6 @@
 </template>
 
 <script>
-import axios from "axios";
-import {mapGetters} from "vuex";
 
 export default {
   layout:'admin',
@@ -81,7 +79,7 @@ export default {
 
     async addPage(){
 
-      await axios.post(process.env.APP_URL+'/api/admin-cpx/pages',this.page,
+      await this.$axios.$post('/api/admin-cpx/pages',this.page,
         {headers:{Authorization:"Bearer "+process.env.APP_TOKEN}})
       .then(res =>{
         this.$router.push('/admin-cpxx/pages')

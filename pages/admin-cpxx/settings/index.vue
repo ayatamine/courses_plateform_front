@@ -76,11 +76,11 @@ export default {
     }
   },
   async fetch() {
-    await axios.get(`${process.env.APP_URL}/api/admin-cpx/site_settings`,
+    await this.$axios.$get(`/api/admin-cpx/site_settings`,
       {headers:{Authorization:"Bearer "+process.env.APP_TOKEN}})
       .then(res => {
-        this.settings = res.data.settings
-        this.settings.logo = res.data.logo
+        this.settings = res.settings
+        this.settings.logo = res.logo
       })
       .catch(err => console.log(err) )
 

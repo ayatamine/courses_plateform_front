@@ -125,7 +125,7 @@ export default {
   },
   methods:{
 
-    addPost(){
+    async addPost(){
 
       if(!this.post.thumbnail){
         alert('no thumbnail selected !')
@@ -146,7 +146,7 @@ export default {
       fdata.set('thumbnail',this.post.thumbnail,this.post.thumbnail.name);
 
 
-      axios.post(process.env.APP_URL+'/api/admin-cpx/posts',fdata,
+      await this.$axios.$post('/api/admin-cpx/posts',fdata,
         {headers:{Authorization:"Bearer "+process.env.APP_TOKEN}})
       .then(res =>{
         console.log(res.data)

@@ -122,6 +122,7 @@ import {mapGetters} from "vuex";
 export default {
   layout:'admin',
   name: "edit-post",
+  middleware:'auth_admin',
   data(){
     return {
       post:{},
@@ -131,18 +132,14 @@ export default {
   },
   async fetch(){
 
-     // await this.$axios.$get(`/api/admin-cpx/posts/${this.$route.params.slug}`)
-    await axios.get(`${process.env.APP_URL}/api/admin-cpx/posts/${this.$route.params.slug}`,
+    this.post = await this.$axios.$get(`/api/admin-cpx/posts/${this.$route.params.slug}`,
       {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
-    .then(res => {
-      this.post = res.data
-    })
     .catch(err => console.log(err) )
 
   },
   methods:{
 
-    updatePost(){
+    async updatePost(){
 
       const fdata = new FormData();
       for (const key in this.post) {
@@ -162,11 +159,11 @@ export default {
       }
 
 
-      let slug =this.$route.params.slug
-      axios.post(`${process.env.APP_URL}/api/admin-cpx/posts/${slug}`,fdata,
+      let slug =this.$route.params.slug;
+       await this.$axios.$post(`/api/admin-cpx/posts/${slug}`,fdata,
         {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
       .then(res =>{
-        this.$router.push(`/admin-cpxx/blogs/${res.data.slug}`)
+        this.$router.push(`/admin-cpxx/blogs/${res.slug}`)
         alert('updated')
       }).catch(err =>{
         console.log(err)

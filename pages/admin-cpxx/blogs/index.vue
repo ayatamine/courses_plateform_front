@@ -49,7 +49,7 @@
 import axios from 'axios'
 export default {
   layout:'admin',
-  name: "blog",
+  name: "posts",
   data(){
     return {
       posts:{},
@@ -76,11 +76,8 @@ export default {
     }
   },
   async fetch() {
-    await axios.get(`${process.env.APP_URL}/api/admin-cpx/posts`,
-      {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
-      .then(res => {
-        this.posts = res.data
-      })
+    console.log('yes')
+    this.posts = await this.$axios.$get(`/api/admin-cpx/posts`)
       .catch(err => console.log(err) )
 
   },

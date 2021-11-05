@@ -106,11 +106,8 @@ export default {
     }
   },
   async fetch() {
-    await axios.get(`${process.env.APP_URL}/api/admin-cpx/faqs`,
+      this.faqs = await  this.$axios.$get(`/api/admin-cpx/faqs`,
       {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
-      .then(res => {
-        this.faqs = res.data
-      })
       .catch(err => console.log(err) )
 
   },

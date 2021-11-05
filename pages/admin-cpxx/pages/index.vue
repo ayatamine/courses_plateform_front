@@ -68,7 +68,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   layout:'admin',
   name: "blog",
@@ -108,11 +107,8 @@ export default {
     }
   },
   async fetch() {
-    await axios.get(`${process.env.APP_URL}/api/admin-cpx/pages`,
+    this.pages = await this.$axios.$get(`/api/admin-cpx/pages`,
       {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
-      .then(res => {
-        this.pages = res.data
-      })
       .catch(err => console.log(err) )
 
   },
@@ -126,7 +122,7 @@ export default {
     },
 
     async deleteItemConfirm () {
-      await axios.delete(`${process.env.APP_URL}/api/admin-cpx/pages/${this.editedItem.slug}`,
+      await this.$axios.$delete(`/api/admin-cpx/pages/${this.editedItem.slug}`,
         {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
         .then(res => {
 

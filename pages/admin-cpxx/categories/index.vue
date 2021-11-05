@@ -163,10 +163,10 @@ export default {
     }
   },
   async fetch() {
-    await axios.get(`${process.env.APP_URL}/api/admin-cpx/categories`,
+      await this.$axios.$get(`/api/admin-cpx/categories`,
       {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
       .then(res => {
-        this.categories = res.data
+        this.categories = res
       })
       .catch(err => console.log(err) )
 

@@ -12,7 +12,8 @@
 import Footer from "../components/Admin/Footer";
 import Navbar from "../components/Admin/Navbar";
 export default {
-  components: {Navbar, Footer}
+  components: {Navbar, Footer},
+  middleware:'auth_admin',
 }
 </script>
 

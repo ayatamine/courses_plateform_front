@@ -59,8 +59,6 @@
 </template>
 
 <script>
-import axios from "axios";
-import {mapGetters} from "vuex";
 
 export default {
   layout:'admin',
@@ -79,12 +77,8 @@ export default {
   },
   async fetch(){
 
-    // await this.$axios.$get(`/api/admin-cpx/posts/${this.$route.params.slug}`)
-    await axios.get(`${process.env.APP_URL}/api/admin-cpx/pages/${this.$route.params.slug}`,
+       this.page = await this.$axios.$get(`/api/admin-cpx/pages/${this.$route.params.slug}`,
       {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
-      .then(res => {
-        this.page = res.data
-      })
       .catch(err => console.log(err) )
 
   },
@@ -92,7 +86,7 @@ export default {
 
     async updatePage(){
 
-      await axios.put(`${process.env.APP_URL}/api/admin-cpx/pages/${this.$route.params.slug}`,this.page,
+      await this.$axios.$put(`/api/admin-cpx/pages/${this.$route.params.slug}`,this.page,
         {headers:{Authorization:"Bearer "+process.env.APP_TOKEN}})
         .then(res =>{
            this.$router.push(`/admin-cpxx/pages/${res.data.slug}`)
