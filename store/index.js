@@ -19,13 +19,7 @@ export const actions = {
 
   async nuxtServerInit(ctx,context)
   {
-    //manage the auth access token when the page load
-    let headerCookie = context.req.headers.cookie;
-    if (typeof headerCookie !== 'string') {
-      headerCookie = '';
-    }
-    const token = cookieparser.parse(headerCookie)['x-access-token']
-    await ctx.commit('usersAuth/SET_TOKEN', token);
+
 
     //   context.$axios.$get('/api/posts?limit=3')
     //   .then(res =>{
@@ -61,9 +55,24 @@ export const actions = {
     ctx.commit("setSiteSettings",site_settings)
 
 
-
+    refreshTokens(ctx,context);
     return {tutorials,categories,tags,site_settings,loading:false}
   },
+
+
+}
+async function refreshTokens(ctx,context){
+  //manage the auth access token when the page load
+  let headerCookie = context.req.headers.cookie;
+  if (typeof headerCookie !== 'string') {
+    headerCookie = '';
+  }
+  const token = cookieparser.parse(headerCookie)['x-access-token'];
+
+  const access_type = cookieparser.parse(headerCookie)['x-ac-tp']
+
+    await ctx.commit('usersAuth/SET_TOKEN', token);
+    await ctx.commit('adminAuth/SET_TOKEN', token);
 
 }
 

@@ -7,7 +7,7 @@
         <div class="clearfix">
 
           <div class="pull-left logo-box">
-            <div class="logo"><nuxt-link to="/"><img :src="logo" alt="logo" title="ayat academey"></nuxt-link></div>
+            <div class="logo"><nuxt-link to="/"><img :src="logo" alt="logo" title="site logo"></nuxt-link></div>
           </div>
 
           <div class="nav-outer clearfix">
