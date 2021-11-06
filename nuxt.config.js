@@ -98,7 +98,9 @@ export default {
 
       ["vue2-editor/nuxt"],
       'nuxt-highlightjs',
-      'vue-social-sharing/nuxt'
+      'vue-social-sharing/nuxt',
+      '@nuxtjs/robots',
+      '@nuxtjs/sitemap',
     ],
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -175,4 +177,30 @@ export default {
   router: {
     middleware: 'refresh_token',
   },
+  robots: [
+    {
+      UserAgent: '*',
+      Disallow: ['/profile', '/admin-cpxx/','/* .env$'],
+      Sitemap: process.env.APP_URL+'sitemap.xml'
+    }
+
+  ],
+  sitemap: {
+    hostname: process.env.APP_URL,
+    gzip: true,
+    exclude: [
+      '/profile',
+      '/admin-cpxx/**'
+    ],
+    routes: [
+      '/tags/1',
+      '/tags/2',
+      {
+        url: '/tags/3',
+        changefreq: 'daily',
+        priority: 1,
+        lastmod: '2021-11-1T13:30:00.000Z'
+      }
+    ]
+  }
 }
