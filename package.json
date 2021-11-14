@@ -18,6 +18,7 @@
     "@nuxtjs/sitemap": "^2.4.0",
     "bootstrap": "^4.6.0",
     "cookie-parser": "^1.4.5",
+    "cookie-universal-nuxt": "^2.1.5",
     "cookieparser": "^0.1.0",
     "core-js": "^3.8.3",
     "jquery": "^3.6.0",

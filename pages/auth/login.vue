@@ -17,9 +17,7 @@
                             <form method="post" action="index.html">
                                 <div class="form-group">
                                     <input type="text" name="Email"  v-model="userData.email" placeholder="Email" >
-                                  <div v-show="emailError" class="text-danger">
-                                    ... the email doesn't respect the format
-                                  </div>
+                                  <form-input-error message="... the email doesn't respect the format" v-show="emailError"/>
                                 </div>
                                 <div class="form-group">
 
@@ -27,11 +25,10 @@
                                           @click="passwordVisible = !passwordVisible">
                                     </span>
                                     <input :type="passwordVisible ? 'text' : 'password' " name="password"  v-model="userData.password" placeholder="Password" >
-                                  <div v-show="passwordError" class="text-danger">
-                                    ... the password is too short
-                                  </div>
+                                    <form-input-error message="... the password is too short" v-show="passwordError"/>
                                 </div>
                                 <div class="form-group">
+                                    <form-input-error class="font-weight-bold" message="Email Or Password doesn't match" v-show="authError"/>
                                     <div class="clearfix">
                                         <div class="pull-left">
                                             <div class="check-box">
@@ -62,8 +59,9 @@
 
 <script>
 import PageTitle from "~/components/PageTitle";
+import FormInputError from "../../components/Globals/formInputError";
 export default {
-  components: {PageTitle},
+  components: {FormInputError, PageTitle},
   middleware:'guest',
   head(){
     return{
@@ -78,19 +76,20 @@ export default {
           password:''
         },
         passwordVisible:false,
+        authError:false,
 
       }
   },
   methods:{
     async login(){
-
+       this.authError = false;
       await this.$axios.$post('/api/students/login', this.userData)
         .then(({token,expiresIn}) => {
           this.$store.dispatch('usersAuth/setToken', {token, expiresIn});
           this.$router.push('/');
         })
-        .catch(errors => {
-          console.log(errors);
+        .catch(error => {
+          if(error.response?.status == "401")   this.authError = true;
         });
     },
 

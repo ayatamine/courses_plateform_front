@@ -101,6 +101,7 @@ export default {
       'vue-social-sharing/nuxt',
       '@nuxtjs/robots',
       '@nuxtjs/sitemap',
+      ['cookie-universal-nuxt', { alias: 'cookies' }],
     ],
 
     // Build Configuration: https://go.nuxtjs.dev/config-build

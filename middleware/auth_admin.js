@@ -1,8 +1,8 @@
 import cookies from 'js-cookie'
 export default function ({ store, redirect }) {
   let access_type =cookies.get('x-ac-tp')
-  console.log(typeof (access_type))
-  if (! store.state['adminAuth'].token ) {
+
+  if ((! store.state['adminAuth'].token) || (access_type.toString() != "a*/d)m")) {
     return redirect('/admin-cpxx/login');
   }
 }
