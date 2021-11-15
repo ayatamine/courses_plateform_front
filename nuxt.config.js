@@ -1,5 +1,6 @@
 import webpack from "webpack";
 require('dotenv').config()
+import i18 from './config/i18'
 export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
@@ -76,6 +77,7 @@ export default {
       '~/plugins/axios',
       { src: '~/plugins/vue_editor', mode: 'client' },
       { src: '~/plugins/vuetify'},
+      { src: '~/plugins/lang-direction-control'},
 
 
     ],
@@ -102,6 +104,7 @@ export default {
       '@nuxtjs/robots',
       '@nuxtjs/sitemap',
       ['cookie-universal-nuxt', { alias: 'cookies' }],
+      '@nuxtjs/i18n',
     ],
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -203,5 +206,24 @@ export default {
         lastmod: '2021-11-1T13:30:00.000Z'
       }
     ]
+  },
+  i18n: {
+    seo: true,
+    locales: [
+      {
+        code: 'en',
+        name: 'English',
+        dir: 'ltr',
+        iso: 'en-US'
+      },
+      {
+        code: 'ar',
+        name: 'Arabic',
+        dir: 'rtl',
+        iso: 'ar-DZ'
+      }
+    ],
+    defaultLocale: 'ar',
+    vueI18n: i18
   }
 }

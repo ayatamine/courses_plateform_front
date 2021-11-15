@@ -25,15 +25,22 @@
 
               <div class="navbar-collapse collapse clearfix" id="">
                 <ul class="navigation clearfix">
-                  <li><nuxt-link to="/">Home</nuxt-link></li>
-                  <li><nuxt-link to="/courses">Courses</nuxt-link></li>
-                  <li><nuxt-link to="/tutorials">Tutorials</nuxt-link></li>
-                  <li class="dropdown"><nuxt-link to="/blog">Blog</nuxt-link>
+                  <li><nuxt-link :to="localePath('/')">{{ $t('home') }}</nuxt-link></li>
+                  <li><nuxt-link :to="localePath('courses')">{{ $tc('course',2) }}</nuxt-link></li>
+                  <li><nuxt-link :to="localePath('tutorials')">{{$tc('tutorial',2)}}</nuxt-link></li>
+                  <li class="dropdown"><nuxt-link :to="localePath('blog')">{{$t('blog')}}</nuxt-link>
                     <ul>
-                      <li><nuxt-link to="/blog">Blog</nuxt-link></li>
+                      <li><nuxt-link :to="localePath('blog')">{{$t('blog')}}</nuxt-link></li>
                     </ul>
                   </li>
-                  <li><nuxt-link to="/contact">Contact Us</nuxt-link></li>
+                  <li class="dropdown"><nuxt-link to="/" @click.prevent>{{$t('lang')}}</nuxt-link>
+                    <ul>
+                      <li><nuxt-link :to="switchLocalePath('en')">{{$t('english')}}</nuxt-link></li>
+                      <li><nuxt-link :to="switchLocalePath('ar')">{{$t('arabic')}}</nuxt-link></li>
+                    </ul>
+                  </li>
+                  <li>
+                  <nuxt-link :to="localePath('contact')">{{ $t('contact') }}</nuxt-link></li>
 
                 </ul>
               </div>
@@ -44,12 +51,12 @@
 
               <!-- Login Nav -->
               <ul class="login-nav" v-if="!isLoggedIn">
-                <li><nuxt-link to="/auth/login" >Log In</nuxt-link></li>
-                <li><nuxt-link to="/auth/register" >Register</nuxt-link></li>
+                <li><nuxt-link :to="localePath('/auth/login')" >{{$t('login')}}</nuxt-link></li>
+                <li><nuxt-link :to="localePath('/auth/register')" >{{$t('register')}}</nuxt-link></li>
               </ul>
               <ul class="login-nav" v-else>
-                <li class="dropdown"><nuxt-link to="/profile">Profile</nuxt-link></li>
-                <li ><nuxt-link to="#" @click.native="logout">logout</nuxt-link></li>
+                <li class="dropdown"><nuxt-link :to="localePath('profile')">{{$t('profile')}}</nuxt-link></li>
+                <li ><nuxt-link to="#" @click.native="logout">{{$t('logout')}}</nuxt-link></li>
               </ul>
 
             </div>
@@ -81,23 +88,20 @@
 
           <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
             <ul class="navigation clearfix">
-              <li><nuxt-link to="/">Home</nuxt-link></li>
-              <li><nuxt-link to="/courses">Courses</nuxt-link></li>
-              <li><nuxt-link to="/tutorials">Tutorials</nuxt-link></li>
-              <li class="dropdown"><nuxt-link to="/blog">Blog</nuxt-link>
-                <ul>
-                  <li><nuxt-link to="/blog">Blog</nuxt-link></li>
-                </ul>
-              </li>
-              <li><nuxt-link to="/contact">Contact Us</nuxt-link></li>
+              <li><nuxt-link :to="localePath('/')">{{$t('home')}}</nuxt-link></li>
+              <li><nuxt-link :to="localePath('courses')">{{$tc('course',2)}}</nuxt-link></li>
+              <li><nuxt-link :to="localePath('tutorials')">{{ $tc('tutorial',2) }}</nuxt-link></li>
+              <li><nuxt-link :to="localePath('blog')">{{$t('blog')}}</nuxt-link> </li>
+              <li><nuxt-link :to="localePath('blog')">{{$t('lang')}}</nuxt-link> </li>
+              <li><nuxt-link :to="localePath('contact')">{{$t('contact')}}</nuxt-link></li>
             </ul>
             <ul class="login-nav navigation clearfix d-flex flex-row pt-2 justify-content-around" v-if="!isLoggedIn">
-              <li class="btn btn-sm login-btn "><nuxt-link to="/auth/login" >Log In</nuxt-link></li>
-              <li class="btn btn-sm" ><nuxt-link to="/auth/register" >Register</nuxt-link></li>
+              <li class="btn btn-sm login-btn "><nuxt-link :to="localePath('/auth/login')" >{{$t('login')}}</nuxt-link></li>
+              <li class="btn btn-sm" ><nuxt-link :to="localePath('/auth/register')" >{{ $t('register') }}</nuxt-link></li>
             </ul>
             <ul class="login-nav navigation clearfix" v-else>
-              <li class="dropdown"><nuxt-link  to="/profile">Profile</nuxt-link></li>
-              <li class="mt-2 pl-3" ><nuxt-link to="#" class="btn btn-sm w-75"  @click.native="logout">logout</nuxt-link></li>
+              <li class="dropdown"><nuxt-link  :to="localePath('profile')">{{$t('profile')}}</nuxt-link></li>
+              <li class="mt-2 pl-3" ><nuxt-link to="#" class="btn btn-sm w-75"  @click.native="logout">{{ $t('logout') }}</nuxt-link></li>
             </ul>
           </div>
 
