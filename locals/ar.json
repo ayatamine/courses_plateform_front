@@ -68,6 +68,15 @@
   "filter_by": "تصفية النتائج",
   "Categories": "الأصناف",
   "Tags": "العلامات",
-  "Browse": "تصفح "
-
+  "Browse": "تصفح ",
+  "Rating": "تقييم ",
+  "Reviews": "تعليقات",
+  "Curriculum": "المنهاج",
+  "Overview": "نظرة عامة",
+  "Instructor": "المدرب | المدربين",
+  "Minute": "دقيقة | دقائق",
+  "Category": "الصنف",
+  "preview_course": "تفحص الكورس",
+  "no_review": "لايوجد تعليقات بعد",
+  "Learn Now": "ادرس الان"
 }

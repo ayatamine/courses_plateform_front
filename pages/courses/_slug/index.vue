@@ -1,7 +1,7 @@
 <template>
  <div>
 
-   <page-title :title-content="`courses > ${course.title_en}`" />
+   <page-title :title-content="`${$tc('course',2)} >  ${($i18n.locale == 'en' ) ? course.title_en : course.title}`" />
    <section class="intro-section">
      <div class="patern-layer-one paroller" data-paroller-factor="0.40" data-paroller-factor-lg="0.20" data-paroller-type="foreground"
           data-paroller-direction="vertical" :style="`background-image: url(${icon1})`"></div>
@@ -10,7 +10,7 @@
      <div class="circle-one"></div>
      <div class="auto-container">
        <div class="sec-title">
-         <h2>{{ course.title_en}}</h2>
+         <h2>{{ ($i18n.locale == 'en' ) ? course.title_en : course.title  }}</h2>
        </div>
 
        <div class="inner-container">
@@ -27,9 +27,9 @@
 
                    <!--Tab Btns-->
                    <ul class="tab-btns tab-buttons clearfix">
-                     <li data-tab="#prod-overview" class="tab-btn" :class="(tabActive == 'prod-overview')  ? 'active-btn' : '' "  @click="tabActive='prod-overview'">Overview</li>
-                     <li data-tab="#prod-curriculum" class="tab-btn" :class="(tabActive == 'prod-curriculum')  ? 'active-btn' : '' "  @click="tabActive='prod-curriculum'">Curriculum</li>
-                     <li data-tab="#prod-curriculum" class="tab-btn" :class="(tabActive == 'prod-reviews')  ? 'active-btn' : '' "  @click="tabActive='prod-reviews'">Reviews</li>
+                     <li data-tab="#prod-overview" class="tab-btn" :class="(tabActive == 'prod-overview')  ? 'active-btn' : '' "  @click="tabActive='prod-overview'">{{$t('Overview')}}</li>
+                     <li data-tab="#prod-curriculum" class="tab-btn" :class="(tabActive == 'prod-curriculum')  ? 'active-btn' : '' "  @click="tabActive='prod-curriculum'">{{$t('Curriculum')}}</li>
+                     <li data-tab="#prod-curriculum" class="tab-btn" :class="(tabActive == 'prod-reviews')  ? 'active-btn' : '' "  @click="tabActive='prod-reviews'">{{$t('Reviews')}}</li>
                    </ul>
 
                    <!--Tabs Container-->
@@ -42,15 +42,15 @@
                          <!-- Cource Overview -->
                          <div class="course-overview">
                            <div class="inner-box">
-                             <p>{{course.description_en}}</p>
+                             <p>{{($i18n.locale == 'en' ) ? course.description_en : course.description}}</p>
                              <ul class="student-list">
-                               <li>{{ course.total_students }} Total Students</li>
-                               <li><span class="theme_color">{{ course.total_rating }}</span> <span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span> ({{ course.total_reviews }} Rating)</li>
-                               <li>256 Reviews</li>
+                               <li>{{ course.total_students }} {{ $t('total') }} {{ $t('Students') }}</li>
+                               <li><span class="theme_color">{{ course.total_rating }}</span> <span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span> ({{ course.total_reviews }} {{$t('Rating')}})</li>
+                               <li>15 {{ $t('Reviews') }}</li>
                              </ul>
                              <hr/>
                              <p v-if="course.categories.length" ><strong>Category : </strong>
-                               <nuxt-link :to="`/categories/${course.categories[0].slug}/courses`" class="link-colored">{{course.categories[0].name_en}}</nuxt-link>
+                               <nuxt-link :to="localePath(`/categories/${course.categories[0].slug}/courses`)" class="link-colored">{{($i18n.locale == 'en' ) ? course.categories[0].name_en : course.categories[0].name}}</nuxt-link>
                              </p>
                              <hr/>
                              <p v-if="course.tags.length"><strong>Tags :</strong> </p>
@@ -59,19 +59,19 @@
                                  class=" mr-2 ml-1"
                                  label
                                  outlined
-                                 @click="$router.push({ path: `/tags/${t.id}/courses`, payload:{tag_name:t.title_en}})"
+                                 @click="$router.push({ path: localePath(`/tags/${t.id}/courses`), payload:{tag_name:t.title_en}})"
                                >
-                                 {{ t.title_en }}
+                                 {{ ($i18n.locale == 'en' ) ? t.title_en : t.title}}
                                </v-chip>
                              </div>
-                             <p><strong>Instructor :</strong> </p>
+                             <p><strong>{{ $tc('Instructor',1) }} :</strong> </p>
                              <div class="row clearfix">
 
                                <!-- Student Block -->
                                <div class="student-block col-lg-6 col-md-6 col-sm-12">
                                  <div class="block-inner">
                                    <div class="image">
-                                     <img :src="course.instructor.photo" alt="">
+                                     <img :src="course.instructor.photo" width="" height=""  alt="">
                                    </div>
                                    <h2>{{ course.instructor.name }}</h2>
                                    <div class="text">{{ course.instructor.bio.slice(0,40) }}</div>
@@ -105,16 +105,16 @@
                            <li class="accordion block" v-for="(section,k) in course.sections" :key="k">
                              <div class="acc-btn " @click.prevent="(accActiveBtn ='accb'+k) " :class="(accActiveBtn == 'accb'+k) ? 'active' : ''">
                                <div class="icon-outer"><span class="icon icon-plus flaticon-angle-arrow-down"></span></div>
-                               {{ section.title_en }}
+                               {{($i18n.locale == 'en' ) ? section.title_en : section.title}}
                              </div>
                                <div class="acc-content" :class="(accActiveBtn == 'accb'+k)  ? 'current' : ''">
                                <div class="content" v-for="(video,k) in section.videos" :key="k">
                                  <div class="clearfix">
                                    <div class="pull-left">
-                                     <a href="" @click.prevent class="lightbox-image play-icon"><span class="fa fa-play"></span>{{video.title_en}}</a>
+                                     <a href="" @click.prevent class="lightbox-image play-icon"><span class="fa fa-play"></span>{{($i18n.locale == 'en' ) ? video.title_en : video.title}}</a>
                                    </div>
                                    <div class="pull-right">
-                                     <div class="minutes">{{ video.duration }} Minutes</div>
+                                     <div class="minutes">{{ video.duration }} {{$tc('Minute',2)}}</div>
                                    </div>
                                  </div>
                                </div>
@@ -128,7 +128,7 @@
                      <div class="tab" :class="(tabActive == 'prod-reviews') ? 'active-tab' : ''" id="prod-reviews">
                        <div class="content">
                          <div class="cource-review-box" v-if="!course.reviews.length">
-                           no review found !
+                           {{$t('no_review')}}
                          </div>
                          <div class="cource-review-box" v-for="(review,k) in course.reviews" :key="k" >
                            <h4>{{ review.user }}</h4>
@@ -161,14 +161,14 @@
                <!-- Video Box -->
                <div class="intro-video" :style="`background-image: url(${preview_image})`">
                  <a href="https://www.youtube.com/watch?v=PlBkXZUTL-U" class="lightbox-image intro-video-box"><span class="fa fa-play"><i class="ripple"></i></span></a>
-                 <h4>Preview this course</h4>
+                 <h4>{{$t('preview_course')}}</h4>
                </div>
                <!-- End Video Box -->
                <div class="price">${{course.price}}</div>
 <!--               <div class="time-left">23 hours left at this price!</div>-->
 
 <!--               <a href="#" class="theme-btn btn-style-three"><span class="txt">Add To Cart <i class="fa fa-angle-right"></i></span></a>-->
-               <a href="#" class="theme-btn btn-style-four mt-4"><span class="txt">Learn Now <i class="fa fa-angle-right"></i></span></a>
+               <a href="#" class="theme-btn btn-style-four mt-4"><span class="txt">{{$t('Learn Now')}} <i class="fa fa-angle-right"></i></span></a>
              </div>
            </div>
 

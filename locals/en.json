@@ -44,7 +44,10 @@
   "get_started": "Get Started ",
   "no_result_founded": "We are sorry No result found! ",
   "filter_by": "Filter By",
-  "browse_dev": "Browse Dev"
+  "browse_dev": "Browse Dev",
 
-
+  "Instructor": "Instructor | Instructors",
+  "Minute": "Minute | Minutes",
+  "preview_course": "Preview this course",
+  "no_review": "no review found !"
 }
