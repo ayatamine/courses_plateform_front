@@ -62,5 +62,12 @@
   "get_started": "ابدأ الان ",
   "total": " مجموع ",
   "Students": " المتعلمين  ",
+  "Newest": "الأحدث",
+  "Oldest": "الأقدم",
+  "no_result_founded": "للاسف لايوجد أي نتيجة  للبحث ",
+  "filter_by": "تصفية النتائج",
+  "Categories": "الأصناف",
+  "Tags": "العلامات",
+  "Browse": "تصفح "
 
 }

@@ -2,7 +2,7 @@
   "home": "Home",
   "about": "About Us",
   "privacy": "Privacy",
-  "essential_links": "الروابط الرئيسية",
+  "essential_links": "Essential Links",
   "support_area": "Support Area",
   "quik_links": "Quick Links",
   "resource": "resource | resources",
@@ -41,7 +41,10 @@
   "all":"All",
   "article":"article | articles | {} articles",
   "learn_more": "Learn More",
-  "get_started": "Get Started "
+  "get_started": "Get Started ",
+  "no_result_founded": "We are sorry No result found! ",
+  "filter_by": "Filter By",
+  "browse_dev": "Browse Dev"
 
 
 }

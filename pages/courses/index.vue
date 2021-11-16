@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Page Title -->
-    <page-title title-content="Courses"  >
+    <page-title :title-content="$tc('course',2)"  >
       <search-box/>
     </page-title>
     <!--End Page Title-->
@@ -23,13 +23,13 @@
               <div class="options-view">
                 <div class="clearfix">
                   <div class="pull-left">
-                    <h3>Browse Dev Courses</h3>
+                    <h3>{{$t('Browse')}} {{ $tc('course',2) }}</h3>
                   </div>
                   <div class="pull-right clearfix">
                     <!-- List View -->
                     <ul class="list-view">
-                      <li @click.prevent="grid=true"  :class="grid &&'active'"><nuxt-link to="/courses" ><span class="icon flaticon-grid"></span></nuxt-link></li>
-                      <li @click.prevent="grid=false" :class="!grid && 'active'"><nuxt-link to="/courses"  ><span class="icon flaticon-list-1"></span></nuxt-link></li>
+                      <li @click.prevent="grid=true"  :class="grid &&'active'"><nuxt-link :to="localePath('courses')" ><span class="icon flaticon-grid"></span></nuxt-link></li>
+                      <li @click.prevent="grid=false" :class="!grid && 'active'"><nuxt-link :to="localePath('courses')" ><span class="icon flaticon-list-1"></span></nuxt-link></li>
                     </ul>
 
                     <!-- Type Form -->
@@ -39,8 +39,8 @@
                         <!-- Form Group -->
                         <div class="form-group">
                           <select class="custom-select-box" v-model="sort" @change="sortCourses">
-                            <option class="ui-menu-item-wrapper"  value="?sort=-created_at">Newest</option>
-                            <option class="ui-menu-item-wrapper" value="?sort=created_at">Old</option>
+                            <option class="ui-menu-item-wrapper"  value="?sort=-created_at">{{ $t('Newest') }}</option>
+                            <option class="ui-menu-item-wrapper" value="?sort=created_at">{{ $t('Oldest') }}</option>
                           </select>
                         </div>
 
@@ -61,24 +61,24 @@
                 <div v-show="!loading" :class="grid ? 'cource-block  col-lg-4 col-md-6 col-sm-12' : 'cource-block-three w-100' " v-for="(course,k) in courses.data" :key="k">
                   <div class="inner-box">
                     <div class="image">
-                      <nuxt-link :to="'/courses/'+course.slug"><img :src="course.thumbnail" :alt="course.title_en" /></nuxt-link>
+                      <nuxt-link :to="localePath('/courses/'+course.slug)"><img :src="course.thumbnail" :alt="course.title_en" /></nuxt-link>
                     </div>
                     <div class="lower-content">
-                      <h5><nuxt-link :to="'/courses/'+course.slug" >{{ course.title_en }}</nuxt-link></h5>
-                      <div class="text">{{ course.description_en.slice(0,60) }}</div>
+                      <h5><nuxt-link :to="localePath('/courses/'+course.slug)" >{{($i18n.locale == 'en' ) ? course.title_en : course.title }}</nuxt-link></h5>
+                      <div class="text">{{($i18n.locale == 'en' ) ? course.description_en.slice(0,60) : course.description.slice(0,60) }}</div>
                       <div class="clearfix">
                         <div class="pull-left">
                           <div class="students" style="    font-size: 15px;">{{ course.date }}</div>
                         </div>
                         <div class="pull-right" v-if="course.main_category">
-                          <div class="hours">{{course.main_category.name_en}}</div>
+                          <div class="hours">{{ ($i18n.locale == 'en' ) ? course.main_category.name_en  : course.main_category.name}}</div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <v-alert dense  type="info" class="w-100 ml-3 mr-2  "  v-show="!courses.data.length && !loading">
-                  We are sorry No result found!
+                  {{$t('"no_result_founded": "We are sorry No result found! "')}}
                 </v-alert>
 
               </div>
@@ -94,20 +94,20 @@
 
                 <!-- Filter Widget -->
                 <div class="filter-widget">
-                  <h5>Filter By</h5>
+                  <h5>{{$t('filter_by')}}</h5>
 
                   <div class="skills-box">
 
                     <!-- Skills Form -->
                     <div class="skills-form">
                       <form method="post" action="">
-                        <span> Categories</span>
+                        <span> {{$t('Categories')}} </span>
 
                         <!-- Radio Box -->
                         <div class="radio-box" v-for="(c,k) in categories.slice(0,8)" :key="k">
                           <input type="radio" :id="`cat-${k}`" v-model="checkedCategory" :value="'cat-'+k" :checked="checkedCategory"
                                  @click.prevent="fetchCoursesByCategory(c.slug,$event) "  >
-                          <label :for="`cat-${k}`">{{ c.name_en }}</label>
+                          <label :for="`cat-${k}`">{{ ($i18n.locale == 'en') ? c.name_en : c.name }}</label>
                         </div>
                       </form>
                     </div>
@@ -118,15 +118,15 @@
                     <!-- Skills Form -->
                     <div class="skills-form">
                       <form method="post" action="">
-                        <span> Tags</span>
+                        <span> {{$t('Tags')}}</span>
 
                         <!-- Radio Box -->
                         <hr>
                         <div class="widget-content">
-                          <nuxt-link to="" @click.prevent="getCourses(1)">#All</nuxt-link>
+                          <nuxt-link to="" @click.prevent="getCourses(1)">#{{ $t('all') }}</nuxt-link>
                           <nuxt-link to=""  v-for="(t,k) in tags.slice(0,10)" :key="k"
                                      @click.prevent="fetchCoursesByTag(t.id)"
-                          >#{{ t.title_en }}</nuxt-link>
+                          >#{{($i18n.locale == 'en') ? t.title_en : t.title }}</nuxt-link>
                         </div>
                       </form>
                     </div>

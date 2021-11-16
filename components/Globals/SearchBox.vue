@@ -1,4 +1,14 @@
-﻿<template>
+﻿<i18n>
+{
+  "en": {
+    "what_want_to_learn": "What do you want to learn?"
+  },
+  "ar": {
+    "what_want_to_learn": "ماذا تريد ان تتعلم اليوم ؟"
+  }
+}
+</i18n>
+<template>
                     <div class="search-boxed">
                         <div class="search-box">
                             <p class="alert alert-danger alert-dismissable fade show" role="alert" v-show="notAddedYet">
@@ -9,7 +19,7 @@
                             </p>
                             <form method="post" @keydown.prevent="notAddedYet = true">
                                 <div class="form-group">
-                                    <input type="search" name="search-field" value="" placeholder="What do you want to learn?" required>
+                                    <input type="search" name="search-field" value="" :placeholder="$t('what_want_to_learn')" required>
                                     <button type="submit" @click.prevent><span class="icon fa fa-search"></span></button>
                                 </div>
                             </form>
