@@ -1,14 +1,30 @@
-﻿<template>
+﻿<i18n>
+{
+  "en": {
+    "get_access_now": "Get Access Now",
+    "to_your_comunity": "To Your Community",
+    "user_agreement": "I agree the user agreement and",
+    "already_registered": "Already have an account ?"
+  },
+  "ar": {
+    "get_access_now": " احصل على الوصول الان",
+    "to_your_comunity": " في مجتمعك",
+    "user_agreement": "أوافق على سياسة الاستخدام",
+    "already_registered": "مسجل من قبل ؟"
+  }
+}
+</i18n>
+<template>
     <div>
-      <page-title title-content="Get Access Now" />
+      <page-title :title-content="$t('get_access_now')" />
         <section class="register-section">
 		 <div class="auto-container">
 			<div class="register-box">
 
 				<!-- Title Box -->
 				<div class="title-box">
-					<h2>Register</h2>
-					<div class="text text-capitalize font-weight-bold"><span class="theme_color" >Welcome!</span> To Your community</div>
+					<h2>{{ $t('register') }}</h2>
+					<div class="text text-capitalize font-weight-bold"><span class="theme_color" >{{$t('welcome')}}!</span> {{$t('to_your_comunity')}}</div>
 				</div>
 
 				<!-- Login Form -->
@@ -19,28 +35,28 @@
 
 							<!-- Form Group -->
 							<div class="form-group col-lg-6 col-md-12 col-sm-12">
-								<input type="text" name="username" v-model="userData.first_name" placeholder="First Name" >
-                <form-input-error v-show="firstnameError" message="... the first name is too short"  />
+								<input type="text" name="username" v-model="userData.first_name" :placeholder="$t('first_name')" >
+                <form-input-error v-show="firstnameError" :message="$t('fname_length_err')"  />
 							</div>
 
 							<!-- Form Group -->
 							<div class="form-group col-lg-6 col-md-12 col-sm-12">
-								<input type="text" name="username" v-model="userData.last_name" placeholder="Last Name" >
-                <form-input-error v-show="lastnameError" message="... the last name is too short"  />
+								<input type="text" name="username" v-model="userData.last_name" :placeholder="$t('last_name')" >
+                <form-input-error v-show="lastnameError" :message="$t('lname_length_err')"  />
 							</div>
 
 							<!-- Form Group -->
 							<div class="form-group col-lg-6 col-md-12 col-sm-12">
 								<input type="email" name="email" v-model="userData.email" placeholder="abcd@gmail.com" >
-                <form-input-error v-show="emailError" message="... the email format is wrong"  />
+                <form-input-error v-show="emailError" :message="$t('email_format_error')"  />
 							</div>
 
 							<div class="form-group col-lg-6 col-md-12 col-sm-12">
 								<span class="eye-icon fa" :class="passwordVisible ? 'fa-eye-slash' : 'fa-eye'"
                       @click="passwordVisible = !passwordVisible"></span>
-								<input type="password" name="password" v-model="userData.password" placeholder="Password"
+								<input type="password" name="password" v-model="userData.password" :placeholder="$t('password')"
                        :type="passwordVisible ? 'text' : 'password'">
-                <form-input-error v-show="passwordError" message="... the password must greater then 7"  />
+                <form-input-error v-show="passwordError" :message="$t('password_length_err')"  />
 							</div>
 
 							<!-- Form Group -->
@@ -48,9 +64,9 @@
 								<span class="eye-icon fa" :class="passwordVisible ? 'fa-eye-slash' : 'fa-eye'"
                       @click="passwordVisible = !passwordVisible"></span>
 								<input type="password" name="password_confirmation"
-                       v-model="userData.password_confirmation" placeholder="Password Confirmation"
+                       v-model="userData.password_confirmation" :placeholder="$t('password_confirmation')"
                        :type="passwordVisible ? 'text' : 'password'" >
-                <form-input-error v-show="passwordConfirmationError" message="... the password confirmation doesn't match"  />
+                <form-input-error v-show="passwordConfirmationError" :message="$t('password_confirm_err')"  />
 							</div>
 
 							<div class="form-group col-lg-12 col-md-12 col-sm-12">
@@ -59,28 +75,28 @@
 									<div class="column col-lg-3 col-md-4 col-sm-12">
 										<div class="radio-box">
 											<input type="radio" name="remember-password" id="type-1" v-model="userData.sex" value="male">
-											<label for="type-1">Male</label>
+											<label for="type-1">{{ $t('male') }}</label>
 										</div>
 									</div>
 									<!-- Column -->
 									<div class="column col-lg-3 col-md-4 col-sm-12">
 										<div class="radio-box">
 											<input type="radio" name="remember-password" id="type-2" v-model="userData.sex" value="female">
-											<label for="type-2">Female</label>
+											<label for="type-2">{{ $t('female') }}</label>
 										</div>
 									</div>
                   <div class="column col-lg-4 col-md-4 col-sm-12" v-show="sexError">
 										<div class="radio-box">
-                      <form-input-error  message="... please choose a valid sex type"  />
+                      <form-input-error  :message="$t('sex_required_err')"  />
 										</div>
 									</div>
 									<!-- Column -->
 									<div class="column col-lg-12 col-md-12 col-sm-12">
 										<div class="check-box">
 											<input type="checkbox" name="remember-password" id="type-4" v-model="userData.terms">
-											<label for="type-4">I agree the user agreement and <nuxt-link to="/privacy">Terms & Conditions</nuxt-link></label>
+											<label for="type-4">{{$t('user_agreement')}} <nuxt-link :to="localePath('privacy')">{{$t('conditions')}}</nuxt-link></label>
                       <br>
-                      <form-input-error v-show="termsError" message="Please agree the terms to continue!"  />
+                      <form-input-error v-show="termsError" :message="$t('terms_required_err')"  />
 										</div>
 									</div>
 								</div>
@@ -89,12 +105,12 @@
 							<div class="form-group col-lg-12 col-md-12 col-sm-12 text-center">
 								<button type="button" class="theme-btn btn-style-three modified"
                         @click.prevent="registerStudent" :disabled="!isValidForm">
-                        <span class="txt">Sign Up <i class="fa fa-angle-right"></i></span>
+                        <span class="txt">{{ $t('sign_up')}}<i class="fa fa-angle-right"></i></span>
                 </button>
 							</div>
 
 							<div class="form-group col-lg-12 col-md-12 col-sm-12">
-                <div class="users">Already have an account? <nuxt-link to="/auth/login">Sign In</nuxt-link></div>
+                <div class="users">{{ $t('already_registered') }} <nuxt-link :to="localePath('/auth/login')">{{ $t('login') }}</nuxt-link></div>
 							</div>
 
 						</div>

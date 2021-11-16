@@ -22,11 +22,45 @@
 
   "tutorial": "درس | الدروس",
   "course": "الكورس | الكورسات",
-  "logout": "الكورس | الكورسات",
+  "logout": "تسجيل الخروج",
   "register": "تسجيل حساب",
-  "login": "تسجيل دخول",
+  "login": "تسجيل الدخول",
   "profile": "صفحتي الشخصية",
   "lang": "اللغة",
   "arabic": "العربية",
-  "english": "الانجليزية"
+  "english": "الانجليزية",
+
+  "welcome": "مرحبا بك",
+
+
+  "name": "الاسم",
+  "password": "كلمة السر",
+  "password_confirmation": " تأكيد كلمة السر ",
+  "email": "البريد الالكتروني",
+  "address": "العنوان",
+  "phone_number": "رقم الهاتف",
+  "sign_up": " انشئ حساب جديد",
+  "email_or_password_doesnt_match": "خطأ بالبريد الالكتروني أو كلمة السر",
+  "email_format_error": " ... ادخل بريد الكتروني صحيح",
+  "fname_length_err": " ... الاسم الاول قصير جدا",
+  "lname_length_err": " ... الاسم الاخير قصير جدا",
+  "password_length_err": "... ادخل كلمة سر أكبر من 7 أحرف ",
+  "password_confirm_err": "... تأكيد كلمة السر غير صحيح",
+  "sex_required_err": "...  خانة الجنس إجبارية",
+  "terms_required_err": "يرجى الموافقة على الشروط للمواصلة",
+
+  "first_name": "الاسم الاول",
+  "last_name": " الاسم الاخير ",
+  "phone_number": "رقم الهاتف",
+  "male": "ذكر ",
+  "female": "انثى ",
+
+  "terms": "الشروط",
+  "all":"كل ",
+  "article":"موضوع | المواضيع | {} المواضيع",
+  "learn_more": "اعرف أكثر",
+  "get_started": "ابدأ الان ",
+  "total": " مجموع ",
+  "Students": " المتعلمين  ",
+
 }

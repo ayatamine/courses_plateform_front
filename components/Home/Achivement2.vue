@@ -1,3 +1,17 @@
+<i18n>
+{
+  "en": {
+    "achievement_header": "Our Achievements ",
+    "achievement_subheader1": "In recognition of our commitment to business excellence ",
+    "achievement_subheader2": "and because of your effective support. "
+  },
+  "ar": {
+    "achievement_header": "انجازاتنا ",
+    "achievement_subheader1": "تقديراً لالتزامنا بتميز الأعمال",
+    "achievement_subheader2": "وبسبب دعمكم الفعال"
+  }
+}
+</i18n>
 <template>
   <section class="achievements-section-two">
     <!-- Pattern Layer -->
@@ -5,8 +19,8 @@
     <div class="auto-container">
       <!-- Sec Title -->
       <div class="sec-title style-two light centered">
-        <h2>Our achievements</h2>
-        <div class="text">In recognition of our commitment to business excellence  <br> and because of your effective support.</div>
+        <h2>{{ $t('achievement_header') }}</h2>
+        <div class="text"> {{ $t('achievement_subheader1') }} <br> {{ $t('achievement_subheader2') }} </div>
       </div>
 
       <!-- Fact Counter -->
@@ -20,7 +34,7 @@
                 <div class="icon-box">
                   <span class="icon flaticon-course"></span>
                 </div>
-                <h4 class="counter-title">Total Courses</h4>
+                <h4 class="counter-title">{{$t('total')}} {{$tc('course',2)}}</h4>
                 <div class="count-outer count-box">
                   <span class="count-text" data-speed="2000" data-stop="50">{{achivements.total_courses}}</span>+
                 </div>
@@ -35,7 +49,7 @@
                 <div class="icon-box">
                   <span class="icon flaticon-course-1"></span>
                 </div>
-                <h4 class="counter-title">Total Student</h4>
+                <h4 class="counter-title">{{$t('total')}}  {{$t('Students')}}</h4>
                 <div class="count-outer count-box alternate">
                   <span class="count-text" data-speed="3000" data-stop="45">{{achivements.total_students}}</span>
                 </div>
@@ -50,7 +64,7 @@
                 <div class="icon-box">
                   <span class="icon flaticon-code"></span>
                 </div>
-                <h4 class="counter-title">Total Posts</h4>
+                <h4 class="counter-title">{{$t('total')}}  {{$tc('article',2)}}</h4>
                 <div class="count-outer count-box">
                   <span class="count-text" data-speed="4000" data-stop="115">{{achivements.total_posts}}</span>
                 </div>

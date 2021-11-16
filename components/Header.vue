@@ -172,7 +172,7 @@ export default {
  .main-header{
    background:none !important;
  }
-a.nuxt-link-exact-active{
+a.nuxt-link-exact-active:not(.login-nav li:nth-child(2) a){
    color:#ff5773 !important;font-weight: 500 !important;
  }
 

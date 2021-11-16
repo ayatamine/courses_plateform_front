@@ -224,6 +224,7 @@ export default {
       }
     ],
     defaultLocale: 'ar',
-    vueI18n: i18
+    vueI18n: i18,
+    vueI18nLoader: true
   }
 }
