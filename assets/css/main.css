@@ -6893,7 +6893,7 @@ img{
 .options-view .list-view li.active a,
 .options-view .list-view li:hover a{
 	color:#ffffff;
-	background-color:#00aa15;
+	background-color:#ff5773;
 }
 
 .options-view .type-form{
@@ -7112,7 +7112,7 @@ img{
 .styled-pagination li.active a,
 .styled-pagination li:hover a{
 	color:#ffffff;
-	background-color:#00aa15;
+	background-color:#ff5773;
 }
 
 .styled-pagination li.prev a,
@@ -8199,7 +8199,7 @@ img{
 	width:60px;
 	height: 60px;
 	z-index:99;
-	color: #00aa15;
+	color: #ff5773;
 	font-weight:400;
 	font-size:24px;
 	text-align: center;
@@ -8568,19 +8568,19 @@ img{
 }
 
 .cource-review-box .like-option li span:hover{
-	color:#00ab15;
+	color: #f5526c;
 }
 
 .cource-review-box .like-option .report{
 	position:relative;
-	color:#00aa15;
+	color:#ff5773;
 	font-size:14px;
 	font-weight:500;
 }
 
 .cource-review-box .more{
 	position:relative;
-	color:#00aa15;
+	color:#ff5773;
 	font-size:14px;
 	font-weight:500;
 	margin-top:30px;
@@ -10035,7 +10035,7 @@ img{
 .sidebar .popular-posts .post .text{
 	position:relative;
 	top:-4px;
-	font-size:14px;
+	font-size:15px;
 	margin:0px 0px 0px;
 	font-weight:600;
 	color:#03382e;
@@ -10054,15 +10054,14 @@ img{
 }
 
 .sidebar .popular-posts .post a:hover{
-	color:#00aa15;
+	color:#ff5773;
 }
 
 .sidebar .popular-posts .post-info{
-	font-size:16px;
+	font-size:14px;
 	color:#626262;
 	font-weight:400;
 }
-
 .sidebar .popular-tags .widget-content{
 	padding:0px 25px 40px;
 }
@@ -10387,14 +10386,14 @@ img{
 	content: "\f133";
 	left:0px;
 	top:0px;
-	color:#00aa15;
+	color:#ff5773;
 	font-family: 'FontAwesome';
 }
 
 .sidebar-page-container .comments-area .comment-box .theme-btn{
 	position:relative;
 	font-size:16px;
-	color:#00aa15;
+	color:#ff5773;
 	font-weight:600;
 	text-transform:capitalize;
 }

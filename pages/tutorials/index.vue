@@ -73,7 +73,7 @@
                   :class ="grid ? 'col-lg-4 col-md-6 col-sm-12' :  'w-100'"
                 ></v-skeleton-loader>
                 <!-- Cource Block Two -->
-                <div v-show="!loading" :class="grid ? 'cource-block  col-lg-4 col-md-6 col-sm-12' : 'cource-block-three w-100' " v-for="(tuto,k) in tutorials.data" :key="k">
+                <div v-show="!loading" :class="grid ? 'cource-block-two  col-lg-4 col-md-6 col-sm-12' : 'cource-block-three w-100' " v-for="(tuto,k) in tutorials.data" :key="k">
                   <div class="inner-box">
                     <div class="image">
                       <nuxt-link :to="localePath('/tutorials/'+tuto.slug)"><img :src="tuto.thumbnail" :alt="tuto.title_en" /></nuxt-link>

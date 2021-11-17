@@ -92,7 +92,7 @@
               <li><nuxt-link :to="localePath('courses')">{{$tc('course',2)}}</nuxt-link></li>
               <li><nuxt-link :to="localePath('tutorials')">{{ $tc('tutorial',2) }}</nuxt-link></li>
               <li><nuxt-link :to="localePath('blog')">{{$t('blog')}}</nuxt-link> </li>
-              <li><nuxt-link :to="localePath('blog')">{{$t('lang')}}</nuxt-link> </li>
+              <li><nuxt-link :to="$i18n.locale=='en' ? switchLocalePath('ar') : switchLocalePath('en')">{{$t('Change')}} {{$t('lang')}}</nuxt-link></li>
               <li><nuxt-link :to="localePath('contact')">{{$t('contact')}}</nuxt-link></li>
             </ul>
             <ul class="login-nav navigation clearfix d-flex flex-row pt-2 justify-content-around" v-if="!isLoggedIn">

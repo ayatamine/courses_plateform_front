@@ -8,9 +8,6 @@ export default {
           let app_name  = process.env.APP_NAME || '4arabdevelopers من أجل المطورين العرب';
           return titleChunk ? `${app_name}  | ${titleChunk}` : app_name
         },
-        htmlAttrs: {
-            lang: 'en'
-        },
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' },
@@ -58,7 +55,7 @@ export default {
 
       'vuetify/dist/vuetify.min.css',
       '@mdi/font/css/materialdesignicons.css',
-      '~/assets/css/bootstrap.css',
+
       '~/assets/css/main.css',
       '~/assets/css/responsive.css',
     ],
@@ -78,6 +75,7 @@ export default {
       { src: '~/plugins/vue_editor', mode: 'client' },
       { src: '~/plugins/vuetify'},
       { src: '~/plugins/lang-direction-control'},
+      { src: '~/plugins/i18n'}
 
 
     ],
@@ -223,8 +221,13 @@ export default {
         iso: 'ar-DZ'
       }
     ],
-    defaultLocale: 'ar',
+    defaultLocale: 'en',
     vueI18n: i18,
-    vueI18nLoader: true
+    vueI18nLoader: true,
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',  // recommended
+    }
   }
 }
