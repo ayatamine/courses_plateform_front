@@ -81,7 +81,7 @@
 
               <div class="col-lg-12 col-md-12 col-sm-12 form-group text-right">
                 <button class="theme-btn btn-style-three modified" type="submit" @click.prevent="contact"  :disabled="!isValidForm"
-                        name="submit-form"><span class="txt">{{$t('send_message')}} <i class="fa fa-angle-right"></i></span></button>
+                        name="submit-form"><span class="txt">{{$t('send_message')}} <i class="fa " :class="$dir()=='ltr' ? 'fa-angle-right' : 'fa-angle-left'"></i></span></button>
               </div>
 
             </div>

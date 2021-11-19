@@ -22,10 +22,10 @@
               <!-- Options View -->
               <div class="options-view">
                 <div class="clearfix">
-                  <div class="pull-left">
+                  <div :class="($dir() == 'ltr' ) ? 'pull-left' : 'pull-right'" >
                     <h3>{{$t('featured_posts')}}</h3>
                   </div>
-                  <div class="pull-right clearfix">
+                  <div class="clearfix" :class="($dir() == 'ltr' ) ? 'pull-right' : 'pull-left'">
                     <!-- List View -->
                     <ul class="list-view">
                       <li @click.prevent="grid=true"  :class="grid &&'active'"><nuxt-link @click.prevent to="" ><span class="icon flaticon-grid"></span></nuxt-link></li>
@@ -68,10 +68,10 @@
                       <h5><nuxt-link :to="`/${post.slug}`">{{ ($i18n.locale == 'en') ? post.title_en.slice(0,20) : post.title.slice(0,20) }}</nuxt-link></h5>
                       <div class="text" v-html="($i18n.locale == 'en') ? post.content_en.slice(0,50) :  post.content.slice(0,50)"></div>
                       <div class="clearfix">
-                        <div class="pull-left">
-                          <div class="students">{{ $t('By') }} <span class="text-muted" style="    font-size: 14px; font-weight: 600;">{{ post.author }}</span></div>
+                        <div :class="($dir() == 'ltr' ) ? 'pull-left' : 'pull-right'">
+                          <div class="students">{{ $t('By') }} <span class="text-muted" >{{ post.author }}</span></div>
                         </div>
-                        <div class="pull-right">
+                        <div :class="($dir() == 'ltr' ) ? 'pull-right' : 'pull-left'" dir="ltr">
                           <div class="hours">{{ post.posted_at }}</div>
                         </div>
                       </div>
@@ -123,8 +123,9 @@
                   </div>
 
                   <div class="widget-content">
-                    <a  @click.prevent="getPosts(1)">#{{ $t('All') }}</a>
-                    <a  v-for="(t,k) in tags.slice(0,10)" :key="k" @click.prevent="fetchPostsByTag(t.id)">#{{($i18n.locale == 'en') ? t.title_en : t.title }}</a>
+                    <a  @click.prevent="getPosts(1,$event)" >#{{ $t('All') }}</a>
+                    <a  v-for="(t,k) in tags.slice(0,10)"
+                        :key="k" @click.prevent="fetchPostsByTag(t.id,$event)">#{{($i18n.locale == 'en') ? t.title_en : t.title }}</a>
                   </div>
                 </div>
 
@@ -206,16 +207,21 @@ export default {
       this.$router.push(`${this.$route.path}?sort=${sortName}`)
       this.updatePosts(posts)
     },
-    async fetchPostsByTag(id){
+    async fetchPostsByTag(id,event){
       this.load()
       let posts = await this.$axios.$get(`${this.url_tag_prefix}/${id}/posts`)
+
+      document.querySelectorAll('.popular-tags a').forEach(s=>s.classList.remove('active'))
+      event.target.classList.add('active')
       this.updatePosts(posts)
     },
-    async getPosts(page){
+    async getPosts(page,event){
       this.load();
       this.$router.push(`${this.$route.path}?page=${page}`)
       let posts = await this.$axios.$get(`${this.url_prefix}?page=${page}`)
 
+      document.querySelectorAll('.popular-tags a').forEach(s=>s.classList.remove('active'))
+      event.target.classList.add('active')
       this.updatePosts(posts)
     },
     updatePosts(data){
@@ -229,54 +235,12 @@ export default {
   }
 }
 </script>
-<style>
 
-.styled-pagination li a {
-  line-height: 22px;
-}
-.page-item.active .page-link {
-  z-index: 1;
-  color: #fff;
-  background-color: #ff5773;
-  border-color: #ff5773;
-}
-.styled-pagination li.active a, .styled-pagination li:hover a {
-  color: #ffffff;
-  background-color: #ff5773;
-}
-.page-link:focus {
-  z-index: 2;
-  outline: 0;
-  box-shadow: 0 0 0 0.1rem rgba(255, 0, 54, 0.41);
-}
-</style>
 <style scoped>
-.page-title .search-box .form-group button{
-  background: #ff5773;
+.cource-block-two .inner-box .lower-content .students {
+  font-size: 15px;
 }
-.options-view .type-form .ui-selectmenu-button.ui-button, .options-view .type-form .form-group input, .options-view .type-form .form-group select, .options-view .type-form .form-group textarea,
-.options-view .list-view li.active a, .options-view .list-view li:hover a,
-.sidebar .popular-tags a:hover{
-  background: #ff5773;
+.cource-block-two .inner-box .lower-content .students span{
+  font-size: 12px; font-weight: 600;
 }
-
-.ui-menu-item-wrapper:hover,
-.styled-pagination li.active a, .styled-pagination li:hover a
-{
-  background: #ff5773;color:#fff;
-}
-
-.ui-menu-item-wrapper{
-  background: #fff;color: #000;
-}
-.skills-box .radio-box input[type="radio"]:checked + label:before {
-  border: 5px solid #ff5773;
-  background: red;
-}
-.cource-block-two .inner-box .lower-content h5 a:hover,
-.cource-block-two .inner-box .lower-content .hours{
-  color: #ff5773;
-}
-/*.cource-block-two .inner-box .image a {display: inline-block}*/
-.cource-block-two .inner-box .image img{min-height: 190px}
 </style>

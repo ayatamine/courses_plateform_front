@@ -22,10 +22,10 @@
               <!-- Options View -->
               <div class="options-view">
                 <div class="clearfix">
-                  <div class="pull-left">
+                  <div :class="($dir() == 'ltr' ) ? 'pull-left' : 'pull-right'">
                     <h3>{{$t('Browse')}} {{ $tc('course',2) }}</h3>
                   </div>
-                  <div class="pull-right clearfix">
+                  <div class=" clearfix" :class="($dir() == 'ltr') ? 'pull-right' : 'pull-left'">
                     <!-- List View -->
                     <ul class="list-view">
                       <li @click.prevent="grid=true"  :class="grid &&'active'"><nuxt-link :to="localePath('courses')" ><span class="icon flaticon-grid"></span></nuxt-link></li>
@@ -67,10 +67,10 @@
                       <h5><nuxt-link :to="localePath('/courses/'+course.slug)" >{{($i18n.locale == 'en' ) ? course.title_en : course.title }}</nuxt-link></h5>
                       <div class="text">{{($i18n.locale == 'en' ) ? course.description_en.slice(0,60) : course.description.slice(0,60) }}</div>
                       <div class="clearfix">
-                        <div class="pull-left">
+                        <div  :class="($dir() == 'ltr' ) ? 'pull-left' : 'pull-right'" dir="ltr">
                           <div class="students" style="    font-size: 15px;">{{ course.date }}</div>
                         </div>
-                        <div class="pull-right" v-if="course.main_category">
+                        <div :class="($dir() == 'ltr' ) ? 'pull-right' : 'pull-left'" v-if="course.main_category">
                           <div class="hours">{{ ($i18n.locale == 'en' ) ? course.main_category.name_en  : course.main_category.name}}</div>
                         </div>
                       </div>
@@ -225,6 +225,8 @@ export default {
     async fetchCoursesByCategory(slug,event){
        this.loading = true
         this.checkedCategory = event.target.value
+        document.querySelectorAll('.skills-box .skills-form .radio-box input').forEach(i => i.classList.remove('active'))
+        event.target.classList.add('active')
         var paginator = this.courses;
         this.$router.push(`${this.$route.path}`)
         let courses = await this.$axios.$get(`${this.url_category_prefix}/${slug}/courses`)
@@ -251,55 +253,8 @@ export default {
   }
 }
 </script>
-<style>
-.page-title{
-  background-color: #fff;
-}
-.styled-pagination li a {
-  line-height: 22px;
-}
-.page-item.active .page-link {
-  z-index: 1;
-  color: #fff;
-  background-color: #ff5773;
-  border-color: #ff5773;
-}
-.styled-pagination li.active a, .styled-pagination li:hover a {
-  color: #ffffff;
-  background-color: #ff5773;
-}
-.page-link:focus {
-  z-index: 2;
-  outline: 0;
-  box-shadow: 0 0 0 0.1rem rgba(255, 0, 54, 0.41);
-}
-</style>
 <style scoped>
-.page-title .search-box .form-group button{
-  background: #ff5773;
-}
-.options-view .type-form .ui-selectmenu-button.ui-button, .options-view .type-form .form-group input, .options-view .type-form .form-group select, .options-view .type-form .form-group textarea,
-.options-view .list-view li.active a, .options-view .list-view li:hover a{
-  background: #ff5773;
-}
 
-.ui-menu-item-wrapper:hover,
-.styled-pagination li.active a, .styled-pagination li:hover a
-{
-  background: #ff5773;color:#fff;
-}
-
-.ui-menu-item-wrapper{
-  background: #fff;color: #000;
-}
-.skills-box .radio-box input[type="radio"]:checked + label:before {
-  border: 5px solid #ff5773;
-  background: red;
-}
-.cource-block-two .inner-box .lower-content h5 a:hover,
-.cource-block-two .inner-box .lower-content .hours{
-  color: #ff5773;
-}
 .widget-content {
   padding: 0px 25px 40px;
 }

@@ -6,7 +6,7 @@
       <div class="auto-container">
         <div class="clearfix">
 
-          <div class="pull-left logo-box">
+          <div class="logo-box" :class="($dir() != 'rtl') ?  'pull-left' : 'pull-right' ">
             <div class="logo"><nuxt-link to="/"><img :src="logo" alt="logo" title="site logo"></nuxt-link></div>
           </div>
 
@@ -193,9 +193,9 @@ a.nuxt-link-exact-active:not(.login-nav li:nth-child(2) a){
  .mobile-menu .navigation li{
    border-bottom: 0;
  }
-header > div.header-upper > div > div > div.nav-outer.clearfix > nav > div.navbar-collapse.collapse.clearfix{
- padding:11px 0;
- }
+/*header > div.header-upper > div > div > div.nav-outer.clearfix > nav > div.navbar-collapse.collapse.clearfix{*/
+/* padding:11px 0;*/
+/* }*/
 header > div.header-upper > div > div > div.pull-left.logo-box > div > a > img{
   max-width: 80%;
 }

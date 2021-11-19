@@ -37,10 +37,10 @@
               <!-- Options View -->
               <div class="options-view">
                 <div class="clearfix">
-                  <div class="pull-left">
+                  <div :class="($dir() == 'ltr' ) ? 'pull-left' : 'pull-right'">
                     <h3>{{$t('Browse')}} {{ $tc('tutorial',2) }}</h3>
                   </div>
-                  <div class="pull-right clearfix">
+                  <div class="clearfix">
                     <!-- List View -->
                     <ul class="list-view">
                       <li @click.prevent="grid=true"  :class="grid &&'active'"><nuxt-link :to="localePath('tutorials')" ><span class="icon flaticon-grid"></span></nuxt-link></li>
@@ -82,10 +82,10 @@
                       <h5><nuxt-link :to="localePath('/tutorials/'+tuto.slug)" >{{ ($i18n.locale == 'en' ) ? tuto.title_en : tuto.title }}</nuxt-link></h5>
                       <div class="text">{{ ($i18n.locale == 'en' ) ? tuto.description_en.slice(0,60)  : tuto.description.slice(0,60)}}</div>
                       <div class="clearfix">
-                        <div class="pull-left">
+                        <div :class="($dir() == 'ltr' ) ? 'pull-left' : 'pull-right'" dir="ltr">
                           <div class="students" style="    font-size: 15px;">{{ tuto.date }}</div>
                         </div>
-                        <div class="pull-right">
+                        <div :class="($dir() == 'ltr' ) ? 'pull-right' : 'pull-left'">
                           <div class="hours">{{ ($i18n.locale == 'en' ) ? tuto.main_category.name_en : tuto.main_category.name}}</div>
                         </div>
                       </div>
@@ -262,40 +262,10 @@ export default {
   }
 }
 </script>
-<style>
-.page-title{
-  background-color: #fff;
-}
 
-</style>
 <style scoped>
-.page-title .search-box .form-group button{
-  background: #ff5773;
-}
-.options-view .type-form .ui-selectmenu-button.ui-button, .options-view .type-form .form-group input, .options-view .type-form .form-group select, .options-view .type-form .form-group textarea,
-.options-view .list-view li.active a, .options-view .list-view li:hover a{
-  background: #ff5773;
-}
 
-.ui-menu-item-wrapper:hover,
-.styled-pagination li a{
-  line-height: 39px;
-}
-.styled-pagination li.active a, .styled-pagination li:hover a
-{
-  background: #ff5773;color:#fff;
 
-}
 
-.ui-menu-item-wrapper{
-  background: #fff;color: #000;
-}
-.skills-box .radio-box input[type="radio"]:checked + label:before {
-  border: 5px solid #ff5773;
-  background: red;
-}
-.cource-block-two .inner-box .lower-content h5 a:hover,
-.cource-block-two .inner-box .lower-content .hours{
-  color: #ff5773;
-}
+
 </style>
