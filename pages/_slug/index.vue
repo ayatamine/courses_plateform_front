@@ -342,13 +342,13 @@ export default {
         return ;
       }
 
-      this.comment.parent_id = parent_id;
+      this.new_comment.parent_id = parent_id;
 
       let token = this.$store.state['usersAuth'].token;
       alert('the comment will open soon ..')
       // this.$axios.setHeader('Authorization','bearer '+token);
       // this.$axios.setHeader('Content-Type','application/x-www-form-urlencoded')
-      // await this.$axios.$post(`/api/posts/${this.$route.params.slug}/comments/new`,this.comment)
+      // await this.$axios.$post(`/api/posts/${this.$route.params.slug}/comments/new`,this.new_comment)
       //       .then(res => console.log(res))
       //       .catch(err => console.log(err));
 

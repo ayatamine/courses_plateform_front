@@ -6,8 +6,8 @@
       <div class="auto-container">
         <div class="clearfix">
 
-          <div class="pull-left logo-box">
-            <div class="logo"><nuxt-link to="/"><img :src="logo" alt="logo" title="ayat academey"></nuxt-link></div>
+          <div class="logo-box " :class="($dir() != 'rtl') ?  'pull-left' : 'pull-right' ">
+            <div class="logo"><nuxt-link :to="localePath('/')"><img :src="logo" alt="logo" title="site logo"></nuxt-link></div>
           </div>
 
           <div class="nav-outer clearfix">
@@ -25,15 +25,22 @@
 
               <div class="navbar-collapse collapse clearfix" id="">
                 <ul class="navigation clearfix">
-                  <li><nuxt-link to="/">Home</nuxt-link></li>
-                  <li><nuxt-link to="/courses">Courses</nuxt-link></li>
-                  <li><nuxt-link to="/tutorials">Tutorials</nuxt-link></li>
-                  <li class="dropdown"><nuxt-link to="/blog">Blog</nuxt-link>
+                  <li><nuxt-link :to="localePath('/')">{{ $t('home') }}</nuxt-link></li>
+                  <li><nuxt-link :to="localePath('courses')">{{ $tc('course',2) }}</nuxt-link></li>
+                  <li><nuxt-link :to="localePath('tutorials')">{{$tc('tutorial',2)}}</nuxt-link></li>
+                  <li class="dropdown"><nuxt-link :to="localePath('blog')">{{$t('blog')}}</nuxt-link>
                     <ul>
-                      <li><nuxt-link to="/blog">Blog</nuxt-link></li>
+                      <li><nuxt-link :to="localePath('blog')">{{$t('blog')}}</nuxt-link></li>
                     </ul>
                   </li>
-                  <li><nuxt-link to="/contact">Contact Us</nuxt-link></li>
+                  <li class="dropdown"><nuxt-link to="/" @click.prevent>{{$t('lang')}}</nuxt-link>
+                    <ul>
+                      <li><nuxt-link :to="switchLocalePath('en')">{{$t('english')}}</nuxt-link></li>
+                      <li><nuxt-link :to="switchLocalePath('ar')">{{$t('arabic')}}</nuxt-link></li>
+                    </ul>
+                  </li>
+                  <li>
+                  <nuxt-link :to="localePath('contact')">{{ $t('contact') }}</nuxt-link></li>
 
                 </ul>
               </div>
@@ -44,12 +51,12 @@
 
               <!-- Login Nav -->
               <ul class="login-nav" v-if="!isLoggedIn">
-                <li><nuxt-link to="/auth/login" >Log In</nuxt-link></li>
-                <li><nuxt-link to="/auth/register" >Register</nuxt-link></li>
+                <li><nuxt-link :to="localePath('/auth/login')" >{{$t('login')}}</nuxt-link></li>
+                <li><nuxt-link :to="localePath('/auth/register')" >{{$t('register')}}</nuxt-link></li>
               </ul>
               <ul class="login-nav" v-else>
-                <li class="dropdown"><nuxt-link to="/profile">Profile</nuxt-link></li>
-                <li ><nuxt-link to="#" @click.native="logout">logout</nuxt-link></li>
+                <li class="dropdown"><nuxt-link :to="localePath('profile')">{{$t('profile')}}</nuxt-link></li>
+                <li ><nuxt-link to="#" @click.native="logout">{{$t('logout')}}</nuxt-link></li>
               </ul>
 
             </div>
@@ -81,23 +88,20 @@
 
           <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
             <ul class="navigation clearfix">
-              <li><nuxt-link to="/">Home</nuxt-link></li>
-              <li><nuxt-link to="/courses">Courses</nuxt-link></li>
-              <li><nuxt-link to="/tutorials">Tutorials</nuxt-link></li>
-              <li class="dropdown"><nuxt-link to="/blog">Blog</nuxt-link>
-                <ul>
-                  <li><nuxt-link to="/blog">Blog</nuxt-link></li>
-                </ul>
-              </li>
-              <li><nuxt-link to="/contact">Contact Us</nuxt-link></li>
+              <li><nuxt-link :to="localePath('/')">{{$t('home')}}</nuxt-link></li>
+              <li><nuxt-link :to="localePath('courses')">{{$tc('course',2)}}</nuxt-link></li>
+              <li><nuxt-link :to="localePath('tutorials')">{{ $tc('tutorial',2) }}</nuxt-link></li>
+              <li><nuxt-link :to="localePath('blog')">{{$t('blog')}}</nuxt-link> </li>
+              <li><nuxt-link :to="$i18n.locale=='en' ? switchLocalePath('ar') : switchLocalePath('en')">{{$t('Change')}} {{$t('lang')}}</nuxt-link></li>
+              <li><nuxt-link :to="localePath('contact')">{{$t('contact')}}</nuxt-link></li>
             </ul>
             <ul class="login-nav navigation clearfix d-flex flex-row pt-2 justify-content-around" v-if="!isLoggedIn">
-              <li class="btn btn-sm login-btn "><nuxt-link to="/auth/login" >Log In</nuxt-link></li>
-              <li class="btn btn-sm" ><nuxt-link to="/auth/register" >Register</nuxt-link></li>
+              <li class="btn btn-sm login-btn "><nuxt-link :to="localePath('/auth/login')" >{{$t('login')}}</nuxt-link></li>
+              <li class="btn btn-sm" ><nuxt-link :to="localePath('/auth/register')" >{{ $t('register') }}</nuxt-link></li>
             </ul>
             <ul class="login-nav navigation clearfix" v-else>
-              <li class="dropdown"><nuxt-link  to="/profile">Profile</nuxt-link></li>
-              <li class="mt-2 pl-3" ><nuxt-link to="#" class="btn btn-sm w-75"  @click.native="logout">logout</nuxt-link></li>
+              <li class="dropdown"><nuxt-link  :to="localePath('profile')">{{$t('profile')}}</nuxt-link></li>
+              <li class="mt-2 pl-3" ><nuxt-link to="#" class="btn btn-sm w-75"  @click.native="logout">{{ $t('logout') }}</nuxt-link></li>
             </ul>
           </div>
 
@@ -168,7 +172,7 @@ export default {
  .main-header{
    background:none !important;
  }
-a.nuxt-link-exact-active{
+a.nuxt-link-exact-active:not(.login-nav li:nth-child(2) a){
    color:#ff5773 !important;font-weight: 500 !important;
  }
 
@@ -189,16 +193,26 @@ a.nuxt-link-exact-active{
  .mobile-menu .navigation li{
    border-bottom: 0;
  }
-header > div.header-upper > div > div > div.nav-outer.clearfix > nav > div.navbar-collapse.collapse.clearfix{
- padding:11px 0;
+ .fixed-header .nav-outer .mobile-nav-toggler {
+   padding: 27px 0 0 !important;
  }
-header > div.header-upper > div > div > div.pull-left.logo-box > div > a > img{
+/*header > div.header-upper > div > div > div.nav-outer.clearfix > nav > div.navbar-collapse.collapse.clearfix{*/
+/* padding:11px 0;*/
+/* }*/
+header > div.header-upper > div > div > div.logo-box > div > a > img{
   max-width: 80%;
 }
 @media (max-width: 767px){
-  header > div.header-upper > div > div > div.pull-left.logo-box > div > a > img{
-    max-width: 60%;
+  header > div.header-upper > div > div > div.logo-box > div > a > img{
+    max-width: 60% !important;
   }
+  .main-header .header-upper .logo-box {
+    float: left !important;
+  }
+  .main-header .header-upper .logo-box .logo{text-align: left !important}
+  /*div[dir="rtl"] .nav-outer .mobile-nav-toggler {*/
+  /*  padding: 12px 0 !important;*/
+  /*}*/
 }
  @media (min-width: 751px) and (max-width: 1106px) {
   .logo-box{

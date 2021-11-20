@@ -1,6 +1,6 @@
 <template>
  <div>
-   <page-title :title-content="`tutorials > ${tutorial.title_en}`" />
+   <page-title :title-content="`${($i18n.locale == 'en' ) ? tutorial.title_en : tutorial.title}`" />
    <section class="intro-section">
      <div class="patern-layer-one paroller" data-paroller-factor="0.40" data-paroller-factor-lg="0.20" data-paroller-type="foreground"
           data-paroller-direction="vertical" :style="`background-image: url(${icon1})`"></div>
@@ -9,7 +9,7 @@
      <div class="circle-one"></div>
      <div class="auto-container">
        <div class="sec-title">
-         <h2>{{ tutorial.title_en}}</h2>
+         <h2>{{ ($i18n.locale == 'en' ) ? tutorial.title_en : tutorial.title}}</h2>
        </div>
 
        <div class="inner-container">
@@ -26,8 +26,8 @@
 
                    <!--Tab Btns-->
                    <ul class="tab-btns tab-buttons clearfix">
-                     <li data-tab="#prod-overview" class="tab-btn" :class="(tabActive == 'prod-overview')  ? 'active-btn' : '' "  @click="tabActive='prod-overview'">Overview</li>
-                     <li data-tab="#prod-curriculum" class="tab-btn" :class="(tabActive == 'prod-curriculum')  ? 'active-btn' : '' "  @click="tabActive='prod-curriculum'">Curriculum</li>
+                     <li data-tab="#prod-overview" class="tab-btn" :class="(tabActive == 'prod-overview')  ? 'active-btn' : '' "  @click="tabActive='prod-overview'">{{$t('Overview')}}</li>
+                     <li data-tab="#prod-curriculum" class="tab-btn" :class="(tabActive == 'prod-curriculum')  ? 'active-btn' : '' "  @click="tabActive='prod-curriculum'">{{$t('Curriculum')}}</li>
                    </ul>
 
                    <!--Tabs Container-->
@@ -40,19 +40,19 @@
                          <!-- Cource Overview -->
                          <div class="course-overview">
                            <div class="inner-box">
-                             <p>{{tutorial.description_en}}</p>
+                             <p>{{ ($i18n.locale == 'en') ? tutorial.description_en : tutorial.description}}</p>
                              <hr/>
-                             <p><strong>Category : </strong>   <nuxt-link :to="`/categories/${tutorial.main_category.slug}/tutorials`" class="link-colored">{{tutorial.main_category.name_en}}</nuxt-link></p>
+                             <p><strong>{{$t('Category')}} : </strong>   <nuxt-link :to="localePath(`/categories/${tutorial.main_category.slug}/tutorials`)" class="link-colored">{{ ($i18n.locale == 'en' ) ? tutorial.main_category.name_en : tutorial.main_category.name}}</nuxt-link></p>
                              <hr/>
-                             <p><strong>Tags :</strong> </p>
+                             <p><strong>{{$t('Tags')}} :</strong> </p>
                              <div>
                                <v-chip v-for="(t,i) in tutorial.tags" :key="i"
                                  class=" mr-2 ml-1"
                                  label
                                  outlined
-                                 @click="$router.push({ path: `/tags/${t.id}/tutorials`, payload:{tag_name:t.title_en}})"
+                                 @click="$router.push({ path: localePath(`/tags/${t.id}/tutorials`), payload:{tag_name:t.title_en,tag_id:t.id}})"
                                >
-                                 {{ t.title_en }}
+                                 {{ ($i18n.locale == 'en') ? t.title_en : t.title }}
                                </v-chip>
                              </div>
 
@@ -126,7 +126,7 @@
                <!-- Video Box -->
                <div class="intro-video" :style="`background-image: url(${preview_image})`">
                  <a href="https://www.youtube.com/watch?v=PlBkXZUTL-U" class="lightbox-image intro-video-box"><span class="fa fa-play"><i class="ripple"></i></span></a>
-                 <h4>Preview this course</h4>
+                 <h4>{{ ('preview_course') }}</h4>
                </div>
                <!-- End Video Box -->
 <!--               <div class="price">${{course.price}}</div>-->

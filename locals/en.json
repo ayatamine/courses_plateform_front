@@ -1,0 +1,56 @@
+{
+  "home": "Home",
+  "about": "About Us",
+  "privacy": "Privacy",
+  "essential_links": "Essential Links",
+  "support_area": "Support Area",
+  "quik_links": "Quick Links",
+  "resource": "resource | resources",
+  "footer_quote": "Every developer need a real road to success in his career, because of that we are here to provide the\n                    best and the clean way to take you from beginner to middle to advanced developer.",
+  "subscribe_now": "Subscribe Now",
+  "subscribe_form_header": "Subscribe to know our ",
+  "subscribe_form_subheader": "every single updates ",
+  "enter_email": "Please Enter Your Email",
+  "enter_valid_email": "Please Enter a valid Email",
+  "course": "course | courses",
+  "tutorial": "tutorial | tutorials",
+  "login": "Log in",
+  "lang": "language",
+  "welcome": "Welcome",
+
+
+
+  "sign_up": "Sign Up",
+  "email_or_password_doesnt_match": "Email Or Password doesn't match",
+  "email_format_error": "... the email doesn't respect the format",
+  "fname_length_err": "... the first name is too short",
+  "lname_length_err": "... the last name is too short",
+  "password_length_err": "... the password must greater then 7 digits",
+  "password_confirm_err": "... the password confirmation doesn't match",
+  "sex_required_err": "... please choose a valid sex type",
+  "terms_required_err": "Please agree the terms to continue!",
+
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "email": "Email",
+  "address": "Address",
+  "phone_number": "Phone Number",
+  "password_confirmation": " Password Confirmation",
+
+  "terms": "Terms & Conditions",
+  "all":"All",
+  "article":"article | articles | {} articles",
+  "learn_more": "Learn More",
+  "get_started": "Get Started ",
+  "no_result_founded": "We are sorry No result found! ",
+  "filter_by": "Filter By",
+  "browse_dev": "Browse Dev",
+
+  "Instructor": "Instructor | Instructors",
+  "Minute": "Minute | Minutes",
+  "preview_course": "Preview this course",
+  "no_review": "no review found !",
+  "featured_posts": "Featured Posts ",
+  "for_help": "For Help "
+
+}

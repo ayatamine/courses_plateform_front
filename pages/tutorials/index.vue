@@ -1,7 +1,21 @@
+<i18n>
+{
+  "en": {
+    "no_review": "no review found !",
+    "preview_course": "Preview this course"
+
+  },
+  "ar": {
+    "no_review": "لايوجد تعليقات بعد",
+    "preview_course": "تفحص الكورس",
+    "Learn Now": "ادرس الان"
+  }
+}
+</i18n>
 <template>
   <div>
     <!-- Page Title -->
-    <page-title title-content="Tutorials"  >
+    <page-title :title-content="$tc('tutorial',2)"  >
       <search-box/>
     </page-title>
 
@@ -23,25 +37,25 @@
               <!-- Options View -->
               <div class="options-view">
                 <div class="clearfix">
-                  <div class="pull-left">
-                    <h3>Browse Dev Tutorials</h3>
+                  <div :class="($dir() == 'ltr' ) ? 'pull-left' : 'pull-right'">
+                    <h3>{{$t('Browse')}} {{ $tc('tutorial',2) }}</h3>
                   </div>
-                  <div class="pull-right clearfix">
+                  <div class="clearfix">
                     <!-- List View -->
                     <ul class="list-view">
-                      <li @click.prevent="grid=true"  :class="grid &&'active'"><nuxt-link to="/tutorials" ><span class="icon flaticon-grid"></span></nuxt-link></li>
-                      <li @click.prevent="grid=false" :class="!grid && 'active'"><nuxt-link to="/tutorials"  ><span class="icon flaticon-list-1"></span></nuxt-link></li>
+                      <li @click.prevent="grid=true"  :class="grid &&'active'"><nuxt-link :to="localePath('tutorials')" ><span class="icon flaticon-grid"></span></nuxt-link></li>
+                      <li @click.prevent="grid=false" :class="!grid && 'active'"><nuxt-link :to="localePath('tutorials')"  ><span class="icon flaticon-list-1"></span></nuxt-link></li>
                     </ul>
 
                     <!-- Type Form -->
                     <div class="type-form">
-                      <form method="post" action="index.html">
+                      <form method="post" action="">
 
                         <!-- Form Group -->
                         <div class="form-group">
                           <select class="custom-select-box" v-model="sort" @change="sortTutorials">
-                            <option class="ui-menu-item-wrapper"  value="?sort=-created_at">Newest</option>
-                            <option class="ui-menu-item-wrapper" value="?sort=created_at">Old</option>
+                            <option class="ui-menu-item-wrapper"  value="?sort=-created_at">{{$t('Newest')}}</option>
+                            <option class="ui-menu-item-wrapper" value="?sort=created_at">{{$t('Oldest')}}</option>
                           </select>
                         </div>
 
@@ -59,27 +73,27 @@
                   :class ="grid ? 'col-lg-4 col-md-6 col-sm-12' :  'w-100'"
                 ></v-skeleton-loader>
                 <!-- Cource Block Two -->
-                <div v-show="!loading" :class="grid ? 'cource-block  col-lg-4 col-md-6 col-sm-12' : 'cource-block-three w-100' " v-for="(tuto,k) in tutorials.data" :key="k">
+                <div v-show="!loading" :class="grid ? 'cource-block-two  col-lg-4 col-md-6 col-sm-12' : 'cource-block-three w-100' " v-for="(tuto,k) in tutorials.data" :key="k">
                   <div class="inner-box">
                     <div class="image">
-                      <nuxt-link :to="'/tutorials/'+tuto.slug"><img :src="tuto.thumbnail" :alt="tuto.title_en" /></nuxt-link>
+                      <nuxt-link :to="localePath('/tutorials/'+tuto.slug)"><img :src="tuto.thumbnail" :alt="tuto.title_en" /></nuxt-link>
                     </div>
                     <div class="lower-content">
-                      <h5><nuxt-link :to="'/tutorials/'+tuto.slug" >{{ tuto.title_en }}</nuxt-link></h5>
-                      <div class="text">{{ tuto.description_en.slice(0,60) }}</div>
+                      <h5><nuxt-link :to="localePath('/tutorials/'+tuto.slug)" >{{ ($i18n.locale == 'en' ) ? tuto.title_en : tuto.title }}</nuxt-link></h5>
+                      <div class="text">{{ ($i18n.locale == 'en' ) ? tuto.description_en.slice(0,60)  : tuto.description.slice(0,60)}}</div>
                       <div class="clearfix">
-                        <div class="pull-left">
+                        <div :class="($dir() == 'ltr' ) ? 'pull-left' : 'pull-right'" dir="ltr">
                           <div class="students" style="    font-size: 15px;">{{ tuto.date }}</div>
                         </div>
-                        <div class="pull-right">
-                          <div class="hours">{{tuto.main_category.name_en}}</div>
+                        <div :class="($dir() == 'ltr' ) ? 'pull-right' : 'pull-left'">
+                          <div class="hours">{{ ($i18n.locale == 'en' ) ? tuto.main_category.name_en : tuto.main_category.name}}</div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <v-alert dense  type="info" class="w-100 ml-3 mr-2  "  v-show="!tutorials.data.length && !loading">
-                  We are sorry No result found!
+                  {{ $t('no_result_founded') }}
                 </v-alert>
 
               </div>
@@ -95,20 +109,20 @@
 
                 <!-- Filter Widget -->
                 <div class="filter-widget">
-                  <h5>Filter By</h5>
+                  <h5>{{ $t('filter_by') }}</h5>
 
                   <div class="skills-box">
 
                     <!-- Skills Form -->
                     <div class="skills-form">
                       <form method="post" action="">
-                        <span> Categories</span>
+                        <span> {{ $t('Categories') }}</span>
 
                         <!-- Radio Box -->
                         <div class="radio-box" v-for="(c,k) in categories.slice(0,8)" :key="k">
                           <input type="radio" :id="`cat-${k}`" v-model="checkedCategory" :value="'cat-'+k" :checked="checkedCategory"
                                  @click.prevent="fetchTutorialsByCategory(c.slug,$event) "  >
-                          <label :for="`cat-${k}`">{{ c.name_en }}</label>
+                          <label :for="`cat-${k}`">{{ ($i18n.locale == 'en' ) ? c.name_en : c.name }}</label>
                         </div>
                       </form>
                     </div>
@@ -119,13 +133,13 @@
                     <!-- Skills Form -->
                     <div class="skills-form">
                       <form method="post" action="">
-                        <span> Tags</span>
+                        <span> {{ $t('Tags') }}</span>
 
                         <!-- Radio Box -->
                         <div class="radio-box" v-for="(t,k) in tags.slice(0,8)" :key="k">
                           <input type="radio" :id="`tag-${k}`" v-model="checkedTag" :value="'tag-'+k" :checked="checkedTag == 'tag-'+k"
                                  @click.prevent="fetchTutorialsByTag(t.id)">
-                          <label :for="`tag-${k}`">{{ t.title_en }}</label>
+                          <label :for="`tag-${k}`">{{ ($i18n.locale == 'en' ) ? t.title_en : t.title }}</label>
                         </div>
                       </form>
                     </div>
@@ -146,96 +160,12 @@
         <!-- Post Share Options -->
         <div class="styled-pagination">
           <pagination :data="tutorials" @pagination-change-page="getTutorials"></pagination>
-          <ul class="clearfix">
-            <li class="prev"><a href="#"><span class="fa fa-angle-left"></span> </a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li class="active"><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li class="next"><a href="#"><span class="fa fa-angle-right"></span> </a></li>
-          </ul>
+
         </div>
 
       </div>
     </div>
 
-    <!-- Popular Courses -->
-<!--    <section class="popular-courses-section">
-      <div class="auto-container">
-        <div class="sec-title">
-          <h2>Most Popular Courses</h2>
-        </div>
-
-        <div class="row clearfix">
-
-          &lt;!&ndash; Cource Block Two &ndash;&gt;
-          <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-            <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
-              <div class="image">
-                <a href="course-detail.html"><img src="https://via.placeholder.com/370x253" alt="" /></a>
-              </div>
-              <div class="lower-content">
-                <h5><a href="course-detail.html">Color Theory</a></h5>
-                <div class="text">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters.</div>
-                <div class="clearfix">
-                  <div class="pull-left">
-                    <div class="students">12 Lecturer</div>
-                  </div>
-                  <div class="pull-right">
-                    <div class="hours">54 Hours</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          &lt;!&ndash; Cource Block Two &ndash;&gt;
-          <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-            <div class="inner-box wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
-              <div class="image">
-                <a href="course-detail.html"><img src="https://via.placeholder.com/370x253" alt="" /></a>
-              </div>
-              <div class="lower-content">
-                <h5><a href="course-detail.html">Typography</a></h5>
-                <div class="text">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters.</div>
-                <div class="clearfix">
-                  <div class="pull-left">
-                    <div class="students">12 Lecturer</div>
-                  </div>
-                  <div class="pull-right">
-                    <div class="hours">54 Hours</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          &lt;!&ndash; Cource Block Two &ndash;&gt;
-          <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-            <div class="inner-box wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
-              <div class="image">
-                <a href="course-detail.html"><img src="https://via.placeholder.com/370x253" alt="" /></a>
-              </div>
-              <div class="lower-content">
-                <h5><a href="course-detail.html">Wireframe & Prototyping</a></h5>
-                <div class="text">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters.</div>
-                <div class="clearfix">
-                  <div class="pull-left">
-                    <div class="students">12 Lecturer</div>
-                  </div>
-                  <div class="pull-right">
-                    <div class="hours">54 Hours</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>-->
   </div>
 </template>
 
@@ -332,40 +262,10 @@ export default {
   }
 }
 </script>
-<style>
-.page-title{
-  background-color: #fff;
-}
 
-</style>
 <style scoped>
-.page-title .search-box .form-group button{
-  background: #ff5773;
-}
-.options-view .type-form .ui-selectmenu-button.ui-button, .options-view .type-form .form-group input, .options-view .type-form .form-group select, .options-view .type-form .form-group textarea,
-.options-view .list-view li.active a, .options-view .list-view li:hover a{
-  background: #ff5773;
-}
 
-.ui-menu-item-wrapper:hover,
-.styled-pagination li a{
-  line-height: 39px;
-}
-.styled-pagination li.active a, .styled-pagination li:hover a
-{
-  background: #ff5773;color:#fff;
 
-}
 
-.ui-menu-item-wrapper{
-  background: #fff;color: #000;
-}
-.skills-box .radio-box input[type="radio"]:checked + label:before {
-  border: 5px solid #ff5773;
-  background: red;
-}
-.cource-block-two .inner-box .lower-content h5 a:hover,
-.cource-block-two .inner-box .lower-content .hours{
-  color: #ff5773;
-}
+
 </style>

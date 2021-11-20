@@ -1,7 +1,22 @@
+<i18n>
+{
+  "en": {
+    "result_related": "Result Related To The Tag "
+  },
+  "ar": {
+    "result_related": "نتائج المتعلقة بالصنف"
+  }
+}
+</i18n>
 <template>
   <div>
-    <page-title :title-content="`Result Related to ${$route.params.slug}`" />
-    <div class="content-side   col-sm-10 m-auto pt-5">
+
+    <section class="page-title" :style="`background-image:url(${backgroundUrl})`">
+      <div class="auto-container">
+        <h3>{{$t('result_related')}}:  <span class="slugtitle"> {{$route.params.slug}}</span> </h3>
+
+      </div>
+    </section>    <div class="content-side   col-sm-10 m-auto pt-5">
       <div class="our-courses">
         <div class="row clearfix" v-show="$fetchState.pending">
           <v-skeleton-loader  v-for="i in 4" :key="i"
@@ -16,24 +31,24 @@
           <div  class="cource-block  col-lg-3 col-md-4 col-sm-6" v-for="(tuto,k) in tutorials" :key="k">
             <div class="inner-box">
               <div class="image">
-                <nuxt-link :to="'/tutorials/'+tuto.slug"><img src="https://via.placeholder.com/270x150" :alt="tuto.title_en" /></nuxt-link>
+                <nuxt-link :to="localePath('/tutorials/'+tuto.slug)"><img :src="tuto.thumbnail" :alt="tuto.title_en" /></nuxt-link>
               </div>
               <div class="lower-content">
-                <h5><nuxt-link :to="'/tutorials/'+tuto.slug" >{{ tuto.title_en }}</nuxt-link></h5>
-                <div class="text">{{ tuto.description_en.slice(0,60) }}</div>
+                <h5><nuxt-link :to="localePath('/tutorials/'+tuto.slug)" >{{($i18n.locale == 'en')  ? tuto.title_en : tuto.title}}</nuxt-link></h5>
+                <div class="text">{{($i18n.locale == 'en') ? tuto.description_en.slice(0,60)  : tuto.description.slice(0,60)}}</div>
                 <div class="clearfix">
                   <div class="pull-left">
                     <div class="students" style="    font-size: 15px;">{{ tuto.date }}</div>
                   </div>
                   <div class="pull-right">
-                    <div class="hours">{{tuto.main_category.name_en}}</div>
+                    <div class="hours">{{ ($i18n.locale == 'en') ? tuto.main_category.name_en : tuto.main_category.name}}</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <v-alert dense  type="info" class="w-100 ml-3 mr-2  "  v-show="!tutorials.length">
-            We are sorry No result found!
+            {{$t('no_result_founded') }}
           </v-alert>
 
         </div>
@@ -45,6 +60,7 @@
 </template>
 
 <script>
+import backgroundUrl from '~/assets/images/main-slider/3.png';
 export default {
   name: "tutorials",
   head(){
@@ -67,6 +83,7 @@ export default {
   },
   data(){
     return {
+      backgroundUrl,
       tutorials:[],
       attrs: {
         boilerplate: false,
@@ -78,7 +95,7 @@ export default {
   },
   async fetch(){
     try {
-      this.tutorials= await this.$axios.$get('api'+this.$route.fullPath)
+      this.tutorials= await this.$axios.$get(`api/categories/${this.$route.params.slug}/tutorials`)
     } catch (e) {
       console.log(e)
     }
@@ -103,5 +120,12 @@ export default {
 }
 .v-breadcrumbs li{
   color: #fff;
+}
+.slugtitle{
+  color: rgb(255, 87, 115);
+  background: #fff;
+  border-radius: 6px;
+  padding: 3px  10px;
+  font-size: 22px;
 }
 </style>

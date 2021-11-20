@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Page Title -->
-    <page-title title-content="Blog"  >
+    <page-title :title-content="$t('blog')"  >
       <search-box/>
     </page-title>
     <!--End Page Title-->
@@ -22,14 +22,14 @@
               <!-- Options View -->
               <div class="options-view">
                 <div class="clearfix">
-                  <div class="pull-left">
-                    <h3>Featured Posts</h3>
+                  <div :class="($dir() == 'ltr' ) ? 'pull-left' : 'pull-right'" >
+                    <h3>{{$t('featured_posts')}}</h3>
                   </div>
-                  <div class="pull-right clearfix">
+                  <div class="clearfix" :class="($dir() == 'ltr' ) ? 'pull-right' : 'pull-left'">
                     <!-- List View -->
                     <ul class="list-view">
-                      <li @click.prevent="grid=true"  :class="grid &&'active'"><nuxt-link to="/blog" ><span class="icon flaticon-grid"></span></nuxt-link></li>
-                      <li @click.prevent="grid=false" :class="!grid && 'active'"><nuxt-link to="/blog"  ><span class="icon flaticon-list-1"></span></nuxt-link></li>
+                      <li @click.prevent="grid=true"  :class="grid &&'active'"><nuxt-link @click.prevent to="" ><span class="icon flaticon-grid"></span></nuxt-link></li>
+                      <li @click.prevent="grid=false" :class="!grid && 'active'"><nuxt-link @click.prevent to=""  ><span class="icon flaticon-list-1"></span></nuxt-link></li>
                     </ul>
 
                     <!-- Type Form -->
@@ -39,8 +39,8 @@
                         <!-- Form Group -->
                         <div class="form-group">
                           <select class="custom-select-box" v-model="sort" @change="sortPosts">
-                            <option class="ui-menu-item-wrapper"  value="?sort=-created_at">Newest</option>
-                            <option class="ui-menu-item-wrapper" value="?sort=created_at">Old</option>
+                            <option class="ui-menu-item-wrapper"  value="?sort=-created_at">{{ $t('Newest') }}</option>
+                            <option class="ui-menu-item-wrapper" value="?sort=created_at">{{ $t('Oldest') }}</option>
                           </select>
                         </div>
 
@@ -65,13 +65,13 @@
                       <nuxt-link :to="`/${post.slug}`"><img :src="post.thumbnail" :alt="post.title" /></nuxt-link>
                     </div>
                     <div class="lower-content">
-                      <h5><nuxt-link :to="`/${post.slug}`">{{ post.title_en.slice(0,20) }}</nuxt-link></h5>
-                      <div class="text" v-html="post.content_en.slice(0,50)"></div>
+                      <h5><nuxt-link :to="`/${post.slug}`">{{ ($i18n.locale == 'en') ? post.title_en.slice(0,20) : post.title.slice(0,20) }}</nuxt-link></h5>
+                      <div class="text" v-html="($i18n.locale == 'en') ? post.content_en.slice(0,50) :  post.content.slice(0,50)"></div>
                       <div class="clearfix">
-                        <div class="pull-left">
-                          <div class="students">By <span class="text-muted" style="    font-size: 14px; font-weight: 600;">{{ post.author }}</span></div>
+                        <div :class="($dir() == 'ltr' ) ? 'pull-left' : 'pull-right'">
+                          <div class="students">{{ $t('By') }} <span class="text-muted" >{{ post.author }}</span></div>
                         </div>
-                        <div class="pull-right">
+                        <div :class="($dir() == 'ltr' ) ? 'pull-right' : 'pull-left'" dir="ltr">
                           <div class="hours">{{ post.posted_at }}</div>
                         </div>
                       </div>
@@ -79,7 +79,7 @@
                   </div>
                 </div>
                 <v-alert dense  type="info" class="w-100 ml-3 mr-2  "  v-show="!posts.data.length && !loading">
-                  We are sorry No result found!
+                  {{ $t('no_result_founded') }}
                 </v-alert>
 
               </div>
@@ -100,15 +100,15 @@
 
                   <!-- Sidebar Title -->
                   <div class="sidebar-title">
-                    <h5>Recent Posts</h5>
+                    <h5>{{ $t('Recent') }} {{ $tc('Post',2) }}</h5>
                   </div>
 
                   <div class="widget-content">
                     <article class="post" v-if="recent_posts.data.length"  v-for="(post,i) in recent_posts.data" :key="i">
                       <div class="post-inner">
                         <figure class="post-thumb"><nuxt-link :to="`${post.slug}`"><img :src="`${post.thumbnail}`" :alt="post.title_en"></nuxt-link></figure>
-                        <div class="text"><nuxt-link :to="`${post.slug}`">{{ post.title_en.slice(0,20) }} ...</nuxt-link></div>
-                        <div class="post-info">By {{ post.author }}</div>
+                        <div class="text"><nuxt-link :to="`${post.slug}`">{{($i18n.locale == 'en') ?  post.title_en.slice(0,20) : post.title.slice(0,20)}} ...</nuxt-link></div>
+                        <div class="post-info">{{ $t('By') }} <span>{{ post.author }}</span></div>
                       </div>
                     </article>
                   </div>
@@ -119,12 +119,13 @@
 
                   <!-- Sidebar Title -->
                   <div class="sidebar-title">
-                    <h5>Tags</h5>
+                    <h5>{{ $t('Tags') }}</h5>
                   </div>
 
                   <div class="widget-content">
-                    <a  @click.prevent="getPosts(1)">#All</a>
-                    <a  v-for="(t,k) in tags.slice(0,10)" :key="k" @click.prevent="fetchPostsByTag(t.id)">#{{ t.title_en }}</a>
+                    <a  @click.prevent="getPosts(1,$event)" >#{{ $t('All') }}</a>
+                    <a  v-for="(t,k) in tags.slice(0,10)"
+                        :key="k" @click.prevent="fetchPostsByTag(t.id,$event)">#{{($i18n.locale == 'en') ? t.title_en : t.title }}</a>
                   </div>
                 </div>
 
@@ -141,82 +142,6 @@
       </div>
     </div>
 
-    <!-- Popular posts -->
-    <!--    <section class="popular-posts-section">
-          <div class="auto-container">
-            <div class="sec-title">
-              <h2>Most Popular posts</h2>
-            </div>
-
-            <div class="row clearfix">
-
-              &lt;!&ndash; Cource Block Two &ndash;&gt;
-              <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-                <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
-                  <div class="image">
-                    <a href="course-detail.html"><img src="https://via.placeholder.com/370x253" alt="" /></a>
-                  </div>
-                  <div class="lower-content">
-                    <h5><a href="course-detail.html">Color Theory</a></h5>
-                    <div class="text">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters.</div>
-                    <div class="clearfix">
-                      <div class="pull-left">
-                        <div class="students">12 Lecturer</div>
-                      </div>
-                      <div class="pull-right">
-                        <div class="hours">54 Hours</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              &lt;!&ndash; Cource Block Two &ndash;&gt;
-              <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-                <div class="inner-box wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
-                  <div class="image">
-                    <a href="course-detail.html"><img src="https://via.placeholder.com/370x253" alt="" /></a>
-                  </div>
-                  <div class="lower-content">
-                    <h5><a href="course-detail.html">Typography</a></h5>
-                    <div class="text">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters.</div>
-                    <div class="clearfix">
-                      <div class="pull-left">
-                        <div class="students">12 Lecturer</div>
-                      </div>
-                      <div class="pull-right">
-                        <div class="hours">54 Hours</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              &lt;!&ndash; Cource Block Two &ndash;&gt;
-              <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-                <div class="inner-box wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
-                  <div class="image">
-                    <a href="course-detail.html"><img src="https://via.placeholder.com/370x253" alt="" /></a>
-                  </div>
-                  <div class="lower-content">
-                    <h5><a href="course-detail.html">Wireframe & Prototyping</a></h5>
-                    <div class="text">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters.</div>
-                    <div class="clearfix">
-                      <div class="pull-left">
-                        <div class="students">12 Lecturer</div>
-                      </div>
-                      <div class="pull-right">
-                        <div class="hours">54 Hours</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-        </section>-->
   </div>
 </template>
 
@@ -282,16 +207,21 @@ export default {
       this.$router.push(`${this.$route.path}?sort=${sortName}`)
       this.updatePosts(posts)
     },
-    async fetchPostsByTag(id){
+    async fetchPostsByTag(id,event){
       this.load()
       let posts = await this.$axios.$get(`${this.url_tag_prefix}/${id}/posts`)
+
+      document.querySelectorAll('.popular-tags a').forEach(s=>s.classList.remove('active'))
+      event.target.classList.add('active')
       this.updatePosts(posts)
     },
-    async getPosts(page){
+    async getPosts(page,event){
       this.load();
       this.$router.push(`${this.$route.path}?page=${page}`)
       let posts = await this.$axios.$get(`${this.url_prefix}?page=${page}`)
 
+      document.querySelectorAll('.popular-tags a').forEach(s=>s.classList.remove('active'))
+      event.target.classList.add('active')
       this.updatePosts(posts)
     },
     updatePosts(data){
@@ -305,54 +235,12 @@ export default {
   }
 }
 </script>
-<style>
 
-.styled-pagination li a {
-  line-height: 22px;
-}
-.page-item.active .page-link {
-  z-index: 1;
-  color: #fff;
-  background-color: #ff5773;
-  border-color: #ff5773;
-}
-.styled-pagination li.active a, .styled-pagination li:hover a {
-  color: #ffffff;
-  background-color: #ff5773;
-}
-.page-link:focus {
-  z-index: 2;
-  outline: 0;
-  box-shadow: 0 0 0 0.1rem rgba(255, 0, 54, 0.41);
-}
-</style>
 <style scoped>
-.page-title .search-box .form-group button{
-  background: #ff5773;
+.cource-block-two .inner-box .lower-content .students {
+  font-size: 15px;
 }
-.options-view .type-form .ui-selectmenu-button.ui-button, .options-view .type-form .form-group input, .options-view .type-form .form-group select, .options-view .type-form .form-group textarea,
-.options-view .list-view li.active a, .options-view .list-view li:hover a,
-.sidebar .popular-tags a:hover{
-  background: #ff5773;
+.cource-block-two .inner-box .lower-content .students span{
+  font-size: 12px; font-weight: 600;
 }
-
-.ui-menu-item-wrapper:hover,
-.styled-pagination li.active a, .styled-pagination li:hover a
-{
-  background: #ff5773;color:#fff;
-}
-
-.ui-menu-item-wrapper{
-  background: #fff;color: #000;
-}
-.skills-box .radio-box input[type="radio"]:checked + label:before {
-  border: 5px solid #ff5773;
-  background: red;
-}
-.cource-block-two .inner-box .lower-content h5 a:hover,
-.cource-block-two .inner-box .lower-content .hours{
-  color: #ff5773;
-}
-/*.cource-block-two .inner-box .image a {display: inline-block}*/
-.cource-block-two .inner-box .image img{min-height: 190px}
 </style>

@@ -107,4 +107,11 @@ export default {
 .v-breadcrumbs li{
   color: #fff;
 }
+.slugtitle{
+  color: rgb(255, 87, 115);
+  background: #fff;
+  border-radius: 6px;
+  padding: 3px  10px;
+  font-size: 22px;
+}
 </style>

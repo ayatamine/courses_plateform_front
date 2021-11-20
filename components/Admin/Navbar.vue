@@ -23,7 +23,7 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <v-btn text>
+      <v-btn text  @click.native="()=>logout">
         <span>Exit</span>
         <v-icon right>mdi-exit-to-app</v-icon>
       </v-btn>
@@ -74,7 +74,19 @@ export default {
   components: {
     Popup
   },
-
+  methods: {
+    async logout() {
+      console.log('logout')
+      await this.$axios.$post('/api/admin-cpx/logout')
+        .then(resp => {
+          this.$store.dispatch('adminAuth/logout');
+          this.$router.push('/');
+        })
+        .catch(errors => {
+          console.dir(errors);
+        });
+    }
+  }
 }
 </script>
 <style scoped>

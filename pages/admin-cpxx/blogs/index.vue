@@ -6,11 +6,24 @@
            List of Posts
            <v-spacer/>
            <v-btn color="primary" link @click="$router.push('/admin-cpxx/blogs/new')">new Post</v-btn>
+           <template>
+             <v-dialog v-model="dialogDelete" max-width="500px">
+               <v-card>
+                 <v-card-title class="text-h6">Are you sure you want to delete this post?</v-card-title>
+                 <v-card-actions>
+                   <v-spacer></v-spacer>
+                   <v-btn color="red" dark   @click="deleteItemConfirm"><v-icon right>mdi-checkbox-marked-circle</v-icon> Confirm</v-btn>
+                   <v-btn  dark  @click="closeDelete"><v-icon right>mdi-minus-circle</v-icon> Cancel</v-btn>
+                   <v-spacer></v-spacer>
+                 </v-card-actions>
+               </v-card>
+             </v-dialog>
+           </template>
          </v-card-title>
          <v-data-table
            v-model="selected"
            :headers="headers"
-           :items="posts ? posts.data : []"
+           :items="posts"
            :single-select="singleSelect"
            item-key="slug"
            show-select
@@ -37,22 +50,23 @@
              <v-icon
                small
                color="red"
+               @click="deleteItem(item)"
              >
                mdi-delete
              </v-icon>
            </template>
+
          </v-data-table>
        </v-card>
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   layout:'admin',
   name: "posts",
   data(){
     return {
-      posts:{},
+      posts:[],
       singleSelect: false,
       selected: [],
       headers: [
@@ -72,7 +86,14 @@ export default {
         { text: 'posted at', value: 'posted_at' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
-
+      dialogDelete: false,
+      editedIndex: -1,
+      editedItem: {
+        title:'',name_en:''
+      },
+      defaultItem: {
+        title:'',name_en:''
+      },
     }
   },
   async fetch() {
@@ -83,6 +104,39 @@ export default {
   },
   computed:{
 
+  },
+  watch: {
+    dialog (val) {
+      val || this.close()
+    },
+    dialogDelete (val) {
+      val || this.closeDelete()
+    },
+  },
+  methods:{
+    closeDelete () {
+      this.dialogDelete = false
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      })
+    },
+    deleteItem (item) {
+      this.editedIndex = this.posts.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.dialogDelete = true
+    },
+
+    async deleteItemConfirm () {
+      await this.$axios.$delete(`/api/admin-cpx/posts/${this.editedItem.slug}`,
+        {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
+        .then(res => {
+          this.posts.splice(this.editedIndex, 1)
+        })
+        .catch(err => console.log(err) )
+
+      this.closeDelete()
+    },
   }
 
 }

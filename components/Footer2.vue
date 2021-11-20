@@ -4,17 +4,17 @@
     <!-- Upper Box -->
     <div class="upper-box">
       <div class="auto-container">
-        <h2>Subscribe to know our <br> every single updates</h2>
+        <h2>{{$t('subscribe_form_header')}}<br> {{$t('subscribe_form_subheader')}}</h2>
 
         <!-- Subscribe Form -->
         <div class="subscribe-form">
           <form method="post" action="">
             <div class="form-group clearfix">
               <span class="icon flaticon-mail"></span>
-              <input type="email" name="email" v-model="email" placeholder="Please Enter Your Email" >
+              <input type="email" name="email" v-model="email" :placeholder="$t('enter_email')" >
               <br>
-              <form-input-error v-show="emailError" message="Please enter a valid email"/>
-              <button type="submit" class="theme-btn btn-style-four" @click.prevent="subscribe"><span class="txt">Subscribe Now</span></button>
+              <form-input-error v-show="emailError" :message="$t('enter_valid_email')"/>
+              <button type="submit" class="theme-btn btn-style-four" @click.prevent="subscribe"><span class="txt">{{$t('subscribe_now')}}</span></button>
             </div>
           </form>
         </div>
@@ -40,8 +40,7 @@
                   <div class="logo">
                     <nuxt-link to="/"><img :src="logo" style="max-width: 70%;" alt="logo image" /></nuxt-link>
                   </div>
-                  <div class="text">Every developer need a real road to success in his carear, because of that we are here to provide the
-                    best and the clean way to move from beginner to middle to advanced developer.
+                  <div class="text">{{$t('footer_quote')}}
                   </div>
                   <div class="social-box">
                     <a :href="site_settings.facebook_link" target="_blank" rel="noopener" class="fa fa-facebook"></a>
@@ -56,12 +55,12 @@
               <!--Footer Column-->
               <div class="footer-column col-lg-5 col-md-6 col-sm-12">
                 <div class="footer-widget links-widget">
-                  <h4>About Us</h4>
+                  <h4>{{ $t('essential_links') }}</h4>
                   <ul class="links-widget">
-                    <li><nuxt-link to="/about">About US</nuxt-link></li>
-                    <li><nuxt-link to="#">Partners</nuxt-link></li>
-                    <li><nuxt-link to="/blog">Blogs</nuxt-link></li>
-                    <li><nuxt-link to="/faqs" href="#">FAQs</nuxt-link></li>
+                    <li><nuxt-link to="/about">{{ $t('about') }}</nuxt-link></li>
+                    <li><nuxt-link to="#">{{ $t('partners') }}</nuxt-link></li>
+                    <li><nuxt-link to="/blog">{{ $t('blog') }}</nuxt-link></li>
+                    <li><nuxt-link to="/faqs" href="#">{{ $t('faqs') }}</nuxt-link></li>
                   </ul>
                 </div>
               </div>
@@ -76,12 +75,12 @@
               <!--Footer Column-->
               <div class="footer-column col-lg-6 col-md-6 col-sm-12">
                 <div class="footer-widget links-widget">
-                  <h4>Resource</h4>
+                  <h4>{{ $tc('resource',2) }}</h4>
                   <ul class="links-widget">
-                    <li><nuxt-link to="/privacy">Privacy Policy</nuxt-link></li>
-                    <li><a href="#">Support Area</a></li>
-                    <li><a href="#">Documentations</a></li>
-                    <li><a href="/conditions">Terms & conditions</a></li>
+                    <li><nuxt-link to="/privacy">{{$t('privacy')}}</nuxt-link></li>
+                    <li><nuxt-link to="/">{{ $t('support_area') }}</nuxt-link></li>
+                    <li><nuxt-link to="/">{{ $t('documentation') }}</nuxt-link></li>
+                    <li><nuxt-link to="/conditions">{{ $t('conditions') }}</nuxt-link></li>
                   </ul>
                 </div>
               </div>
@@ -89,11 +88,11 @@
               <!--Footer Column-->
               <div class="footer-column col-lg-6 col-md-6 col-sm-12">
                 <div class="footer-widget links-widget">
-                  <h4>Quick Links</h4>
+                  <h4>{{ $t('quik_links') }}</h4>
                   <ul class="links-widget">
-                    <li><nuxt-link to="/">home</nuxt-link></li>
-                    <li><nuxt-link to="/about">About us</nuxt-link></li>
-                    <li><nuxt-link to="/contact">Contact</nuxt-link></li>
+                    <li><nuxt-link to="/">{{$t('home')}}</nuxt-link></li>
+                    <li><nuxt-link to="/about">{{ $t('about') }}</nuxt-link></li>
+                    <li><nuxt-link to="/contact">{{ $t('contact') }}</nuxt-link></li>
                   </ul>
                 </div>
               </div>
@@ -106,7 +105,7 @@
 
       <!-- Footer Bottom -->
       <div class="footer-bottom text-center">
-        <div class="copyright">Copyright &copy; {{new Date().getFullYear()}} {{ site_settings.site_name }}</div>
+        <div class="copyright"><span> {{$t('copyright')}} &copy;  {{new Date().getFullYear()}} </span>  <strong class="">{{ site_settings.site_name }}</strong></div>
       </div>
 
     </div>
@@ -114,7 +113,6 @@
 </template>
 
 <script>
-import backgroundUrl from '~/assets/images/main-slider/1.png';
 
 import pattern2 from '~/assets/images/background/pattern-2.png';
 import FormInputError from "./Globals/formInputError";

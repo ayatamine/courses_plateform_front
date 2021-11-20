@@ -16,8 +16,8 @@ export const actions = {
   setToken({commit}, {token, expiresIn}) {
     this.$axios.setToken(token, 'Bearer');
     const expiryTime = new Date(new Date().getTime() + expiresIn * 1000);
-    cookies.set('x-access-token', token, {expires: expiryTime});
-    cookies.set('x-ac-tp','a*/d)m');
+    this.$cookies.set('x-access-token', token, {expires: expiryTime});
+    this.$cookies.set('x-ac-tp','a*/d)m');
     commit('SET_TOKEN', token);
   },
 
@@ -29,8 +29,8 @@ export const actions = {
 
   logout({commit}) {
     this.$axios.setToken(false);
-    cookies.remove('x-access-token');
-    Cookies.remove('x-ac-tp')
+    this.$cookies.remove('x-access-token');
+    this.$cookies.remove('x-ac-tp')
     commit('REMOVE_TOKEN');
   }
 }

@@ -1,14 +1,12 @@
 import webpack from "webpack";
 require('dotenv').config()
+import i18 from './config/i18'
 export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
         titleTemplate(titleChunk) {
           let app_name  = process.env.APP_NAME || '4arabdevelopers من أجل المطورين العرب';
           return titleChunk ? `${app_name}  | ${titleChunk}` : app_name
-        },
-        htmlAttrs: {
-            lang: 'en'
         },
         meta: [
             { charset: 'utf-8' },
@@ -57,7 +55,7 @@ export default {
 
       'vuetify/dist/vuetify.min.css',
       '@mdi/font/css/materialdesignicons.css',
-      '~/assets/css/bootstrap.css',
+
       '~/assets/css/main.css',
       '~/assets/css/responsive.css',
     ],
@@ -76,6 +74,8 @@ export default {
       '~/plugins/axios',
       { src: '~/plugins/vue_editor', mode: 'client' },
       { src: '~/plugins/vuetify'},
+      { src: '~/plugins/lang-direction-control'},
+      { src: '~/plugins/i18n'}
 
 
     ],
@@ -86,7 +86,7 @@ export default {
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [
         '@nuxtjs/dotenv',
-
+        '@/modules/generator'
     ],
 
     // Modules: https://go.nuxtjs.dev/config-modules
@@ -98,7 +98,11 @@ export default {
 
       ["vue2-editor/nuxt"],
       'nuxt-highlightjs',
-      'vue-social-sharing/nuxt'
+      'vue-social-sharing/nuxt',
+      '@nuxtjs/robots',
+      '@nuxtjs/sitemap',
+      ['cookie-universal-nuxt', { alias: 'cookies' }],
+      '@nuxtjs/i18n',
     ],
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -175,4 +179,50 @@ export default {
   router: {
     middleware: 'refresh_token',
   },
+  robots: [
+    {
+      UserAgent: '*',
+      Disallow: ['/profile', '/admin-cpxx/','/* .env$'],
+      Sitemap: process.env.APP_URL+'sitemap.xml'
+    }
+
+  ],
+  sitemap: {
+    hostname: process.env.APP_URL,
+    gzip: true,
+    exclude: [
+      '/profile',
+      '/admin-cpxx/**'
+    ],
+    defaults: {
+      changefreq: 'daily',
+      priority: 1,
+      lastmod: new Date()
+    }
+  },
+  i18n: {
+    seo: true,
+    locales: [
+      {
+        code: 'en',
+        name: 'English',
+        dir: 'ltr',
+        iso: 'en-US'
+      },
+      {
+        code: 'ar',
+        name: 'Arabic',
+        dir: 'rtl',
+        iso: 'ar-DZ'
+      }
+    ],
+    defaultLocale: 'en',
+    vueI18n: i18,
+    vueI18nLoader: true,
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',  // recommended
+    }
+  }
 }

@@ -1,11 +1,7 @@
 <template>
   <!-- Contact Page Section -->
  <div>
-   <section class="page-title" :style="`background-image:url(${backgroundUrl})`">
-     <div class="auto-container">
-       <h1>{{ pageInfo.name_en }}</h1>
-     </div>
-   </section>
+   <page-title :title-content="pageInfo.name_en" ></page-title>
    <section class="privacy-section" >
      <div class="auto-container">
        <!-- Privacy Content -->
@@ -19,8 +15,6 @@
 </template>
 
 <script>
-import backgroundUrl from '~/assets/images/main-slider/3.png';
-import Footer2 from "../components/Footer2";
 export default {
   name: "Terms and conditions",
   head(){
@@ -35,10 +29,8 @@ export default {
       ],
     }
   },
-  components: {Footer2},
   data(){
     return {
-      backgroundUrl,
       pageInfo:{}
     }
   },

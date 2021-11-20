@@ -1,3 +1,25 @@
+<i18n>
+{
+  "en": {
+    "get_in_touch": "Get In Touch",
+    "phone_number_length_err": "... the phone number must be greater then 10 digits",
+    "message_length_err": "The message is too short",
+    "send_message": "Send Message",
+    "message_content": "Message Content",
+    "contact_info_header": "Contact Informations",
+    "contact_info_sub_header": "If you have any seggestion, any comment or any inspiration just feel free to contact us here ."
+  },
+  "ar": {
+    "get_in_touch": "لنبقى على تواصل",
+    "phone_number_length_err": "رقم الهاتف اجباري أكبر من 10 أرقام",
+    "message_length_err": "الرسالة قصيرة جدا ",
+    "send_message": "ارسال الرسالة ",
+    "message_content": "نص الرسالة ",
+    "contact_info_header": "معلومات التواصل",
+    "contact_info_sub_header": "  إدا كان لديك أي اقتراح, استفسارات أو تعليقات سنكون سعداء بالتواصل معنا "
+  }
+}
+</i18n>
 <template>
   <!-- Contact Page Section -->
   <div>
@@ -8,7 +30,7 @@
       <div class="inner-container">
         <!-- Sec Title -->
         <div class="sec-title centered">
-          <h2>Get in touch</h2>
+          <h2>{{ $t('get_in_touch') }}</h2>
         </div>
 
         <!-- Contact Form -->
@@ -23,43 +45,43 @@
             <div class="row clearfix">
 
               <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                <input type="text" name="username" v-model="first_name" placeholder="First Name*" required="">
+                <input type="text" name="username" v-model="first_name" :placeholder="$t('first_name')+'*'" required="">
                 <div v-show="firstnameError" class="text-danger">
-                  ... the firstname is too short
+                  {{$t('fname_length_err')}}
                 </div>
               </div>
 
               <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                <input type="text" name="lastname" v-model="last_name" placeholder="Last Name*" required="">
+                <input type="text" name="lastname" v-model="last_name" :placeholder="$t('last_name')+'*'" required="">
                 <div v-show="lastnameError" class="text-danger">
-                  ... the lastname is too short
+                  {{$t('lname_length_err')}}
                 </div>
               </div>
 
               <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                <input type="email" name="email" v-model="email" placeholder="Email Address*" required="">
+                <input type="email" name="email" v-model="email" :placeholder="$t('email')+'*'" required="">
                 <div v-show="emailError" class="text-danger">
-                  ... the email is not valid
+                  {{ $t('email_format_error') }}
                 </div>
               </div>
 
               <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                <input type="text" name="phone" v-model="phone" placeholder="Phone Number*(ex=+2220664785932)" required="">
+                <input type="text" name="phone" v-model="phone" :placeholder="$t('phone_number')+'*(ex=+2220664785932)'" required="">
                 <div v-show="phoneError" class="text-danger">
-                  ... the phone number greater then 10 digits
+                  {{$t('phone_number_length_err')}}
                 </div>
               </div>
 
               <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                <textarea class="" name="message" v-model="message" placeholder="Send Message"></textarea>
+                <textarea class="" name="message" v-model="message" :placeholder="$t('message_content')"></textarea>
                 <div v-show="messageError" class="text-danger">
-                  ... the message is too short
+                  {{$t('message_length_err')}}
                 </div>
               </div>
 
               <div class="col-lg-12 col-md-12 col-sm-12 form-group text-right">
                 <button class="theme-btn btn-style-three modified" type="submit" @click.prevent="contact"  :disabled="!isValidForm"
-                        name="submit-form"><span class="txt">Send Message <i class="fa fa-angle-right"></i></span></button>
+                        name="submit-form"><span class="txt">{{$t('send_message')}} <i class="fa " :class="$dir()=='ltr' ? 'fa-angle-right' : 'fa-angle-left'"></i></span></button>
               </div>
 
             </div>
@@ -72,8 +94,8 @@
       <!-- Contact Info Section -->
       <div class="contact-info-section">
         <div class="title-box">
-          <h2>Contact Information</h2>
-          <div class="text">If you have any seggestion, any comment or any inspiration just feel free to contact us here .</div>
+          <h2>{{$t('contact_info_header')}}</h2>
+          <div class="text">{{$t('contact_info_sub_header')}}</div>
         </div>
 
         <div class="row clearfix">
@@ -82,7 +104,7 @@
           <div class="info-column col-lg-4 col-md-6 col-sm-12">
             <div class="info-inner">
               <div class="icon fa fa-phone"></div>
-              <strong>Phone</strong>
+              <strong>{{ $t('phone_number') }}</strong>
               <ul>
                 <li><a href="tel:+1-123-456-7890">{{ site_settings.phone_number }}</a></li>
 <!--                <li><a href="tel:+1-123-456-7890">+1 (123) 456-7890</a></li>-->
@@ -94,10 +116,10 @@
           <div class="info-column col-lg-4 col-md-6 col-sm-12">
             <div class="info-inner">
               <div class="icon fa fa-envelope-o"></div>
-              <strong>Email</strong>
+              <strong>{{$t('email')}}</strong>
               <ul>
-                <li><a href="mailto:info@yourcompany.com">{{ site_settings.contact_email }}</a></li>
-                <li><a href="mailto:infobootcamp@gmail.com">{{ site_settings.contact_email }}</a></li>
+                <li><a :href="`mailto:${site_settings.email}`">{{ site_settings.contact_email }}</a></li>
+                <li><a :href="`mailto:${site_settings.contact_email}`">{{ site_settings.contact_email }}</a></li>
               </ul>
             </div>
           </div>
@@ -106,7 +128,7 @@
           <div class="info-column col-lg-4 col-md-6 col-sm-12">
             <div class="info-inner">
               <div class="icon fa fa-map-marker"></div>
-              <strong>Address</strong>
+              <strong>{{ $t('address') }}</strong>
               <ul>
                 <li>{{ site_settings.address }}</li>
               </ul>

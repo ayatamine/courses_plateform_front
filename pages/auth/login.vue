@@ -1,55 +1,70 @@
-﻿<template>
+﻿<i18n>
+{
+  "en": {
+    "welcome_again": "Welcome Again",
+    "confirm_visiting": "Please Confirm That You Are Visiting\n",
+    "remember_password": "Remember Password",
+    "forgot_password": "Forgot Password",
+    "new_user": "New User"
+  },
+  "ar": {
+    "welcome_again": "مرحبا من جديد",
+    "confirm_visiting": "سجل دخولك الان",
+    "remember_password": "تذكرني",
+    "forgot_password": "نسيت كلمة السر ؟",
+    "new_user": "مستخدم جديد؟"
+  }
+}
+</i18n>
+<template>
     <div>
 
-        <page-title title-content="Welcome Again" />
+        <page-title :title-content="$t('welcome_again')" />
         <section class="login-section  pt-5">
                 <div class="auto-container">
                     <div class="login-box">
 
                         <!-- Title Box -->
                         <div class="title-box">
-                            <h2>Login</h2>
-                            <div class="text text-capitalize font-weight-bold"><span class="theme_color ">Welcome!</span> Please confirm that you are visiting</div>
+                            <h2>{{ $t('login') }}</h2>
+                            <div class="text text-capitalize font-weight-bold"><span class="theme_color pr-2">{{ $t('welcome') }}! </span>{{$t('confirm_visiting')}}</div>
                         </div>
 
                         <!-- Login Form -->
                         <div class="styled-form">
-                            <form method="post" action="index.html">
+                            <form method="post" action="">
                                 <div class="form-group">
-                                    <input type="text" name="Email"  v-model="userData.email" placeholder="Email" >
-                                  <div v-show="emailError" class="text-danger">
-                                    ... the email doesn't respect the format
-                                  </div>
+                                    <input type="text" name="Email"  v-model="userData.email" :placeholder="$t('email')" >
+                                  <form-input-error :message="$t('email_format_error')" v-show="emailError"/>
                                 </div>
                                 <div class="form-group">
 
                                     <span class="eye-icon fa " :class="passwordVisible ? 'fa-eye-slash' : 'fa-eye'"
                                           @click="passwordVisible = !passwordVisible">
                                     </span>
-                                    <input :type="passwordVisible ? 'text' : 'password' " name="password"  v-model="userData.password" placeholder="Password" >
-                                  <div v-show="passwordError" class="text-danger">
-                                    ... the password is too short
-                                  </div>
+                                    <input :type="passwordVisible ? 'text' : 'password' " name="password"  v-model="userData.password" :placeholder="$t('password')" >
+                                    <form-input-error :message="$t('password_length_err')" v-show="passwordError"/>
                                 </div>
                                 <div class="form-group">
+                                    <form-input-error class="font-weight-bold" :message="$t('email_or_password_doesnt_match')" v-show="authError"/>
                                     <div class="clearfix">
                                         <div class="pull-left">
                                             <div class="check-box">
                                                 <input type="checkbox" name="remember-password" id="type-1">
-                                                <label for="type-1">Remember Password</label>
+                                                <label for="type-1">{{ $t('remember_password') }}</label>
                                             </div>
                                         </div>
                                         <div class="pull-right">
-                                            <a href="#" class="forgot">Forget Password?</a>
+                                            <a href="#" class="forgot">{{$t('forgot_password')}}</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group text-center">
                                     <button type="button" class="theme-btn btn-style-three modified" @click.enter.prevent="login"  :disabled="!isValidForm"
-                                    ><span class="txt">Login <i class="fa fa-angle-right"></i></span></button>
+                                    ><span class="txt">{{$t('login')}} <i class="fa fa-angle-right"></i></span></button>
                                 </div>
                                 <div class="form-group">
-                                    <div class="users">New User? <nuxt-link to="/auth/register">Sign Up</nuxt-link></div>
+                                    <div class="users">{{ $t('new_user') }} <nuxt-link :to="localePath('/auth/register')">{{$t('sign_up')}}</nuxt-link></div>
                                 </div>
                             </form>
                         </div>
@@ -62,8 +77,9 @@
 
 <script>
 import PageTitle from "~/components/PageTitle";
+import FormInputError from "../../components/Globals/formInputError";
 export default {
-  components: {PageTitle},
+  components: {FormInputError, PageTitle},
   middleware:'guest',
   head(){
     return{
@@ -78,19 +94,20 @@ export default {
           password:''
         },
         passwordVisible:false,
+        authError:false,
 
       }
   },
   methods:{
     async login(){
-
+       this.authError = false;
       await this.$axios.$post('/api/students/login', this.userData)
         .then(({token,expiresIn}) => {
           this.$store.dispatch('usersAuth/setToken', {token, expiresIn});
           this.$router.push('/');
         })
-        .catch(errors => {
-          console.log(errors);
+        .catch(error => {
+          if(error.response?.status == "401")   this.authError = true;
         });
     },
 
