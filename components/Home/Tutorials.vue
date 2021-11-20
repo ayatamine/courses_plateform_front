@@ -12,7 +12,7 @@
   "ar": {
     "tuto_header": " آخر الدروس المنشورة",
     "tuto_body": "مع الوعد بضمان جودة المعلومات نقوم بعمل الدروس من أجلكم",
-    "visit_now": "الزيارة الآن",
+    "visit_now": "عرض التفاصيل",
     "call_action_header": "عش التجربة",
     "call_action_subheader": "تعلم بكل أريحية",
     "call_action_body": "خد كل وقت في التعلم والانتفاع قدر المستطاع بالشكل الدي يريحك وفي الوقت الدي يريحك",
@@ -35,7 +35,9 @@
                 <h2>{{$t('tuto_header')}}</h2>
                 <div class="text">{{$t('tuto_body')}}</div>
               </div>
-              <nuxt-link :to="localePath('tutorials')" class="theme-btn btn-style-four"><span class="txt">{{ $t('get_started') }} <i class="fa fa-angle-right"></i></span></nuxt-link>
+              <nuxt-link :to="localePath('tutorials')" class="theme-btn btn-style-four">
+                <span class="txt">{{ $t('get_started') }} <i class="fa " :class="$dir()=='ltr' ? 'fa-angle-right' : 'fa-angle-left'"></i></span>
+              </nuxt-link>
             </div>
           </div>
 
@@ -47,19 +49,16 @@
               </div>
               <div class="lower-content">
                 <div class="clearfix">
-                  <div class="pull-left">
-                    <h5><nuxt-link :to="localePath(`/tutorials/${tuto.slug}`)">{{ tuto.title_en }}</nuxt-link></h5>
+                  <div :class="($dir()=='ltr') ? 'pull-left' : 'pull-right'">
+                    <h5><nuxt-link :to="localePath(`/tutorials/${tuto.slug}`)">{{($i18n.locale =='en' ) ? tuto.title_en : tuto.title  }}</nuxt-link></h5>
                   </div>
-                  <div class="pull-right">
-                    <div class="price">{{ tuto.main_category.name_en }}</div>
+                  <div :class="($dir()=='ltr') ? 'pull-right' : 'pull-left'">
+                    <div class="price">{{($i18n.locale =='en' ) ? tuto.main_category.name_en : tuto.main_category.name }}</div>
                   </div>
                 </div>
-                <div class="text">{{tuto.description_en.substring(0,90)}}.</div>
+                <div class="text">{{ ($i18n.locale =='en' )? tuto.description_en.substring(0,90) : tuto.description.substring(0,90)}}.</div>
                 <div class="clearfix">
-<!--                  <div class="pull-left">-->
-<!--                    <div class="students">125 Student</div>-->
-<!--                  </div>-->
-                  <div class="pull-right">
+                  <div :class="($dir()=='ltr') ? 'pull-left' : 'pull-right'">
                     <nuxt-link :to="localePath(`/tutorials/${tuto.slug}`)" class="enroll">{{ $t('visit_now') }}</nuxt-link>
                   </div>
                 </div>

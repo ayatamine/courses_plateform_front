@@ -194,6 +194,11 @@ export default {
       '/profile',
       '/admin-cpxx/**'
     ],
+    defaults: {
+      changefreq: 'daily',
+      priority: 1,
+      lastmod: new Date()
+    },
     routes: [
       '/tags/1',
       '/tags/2',
@@ -201,7 +206,7 @@ export default {
         url: '/tags/3',
         changefreq: 'daily',
         priority: 1,
-        lastmod: '2021-11-1T13:30:00.000Z'
+        lastmod: new Date()
       }
     ]
   },

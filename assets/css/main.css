@@ -1718,10 +1718,21 @@ div[dir='rtl'] .contact-info-section .info-column .icon {
   right: 0px;left: auto;
 }
 div[dir='rtl'] .contact-info-section .info-column .info-inner {
-  padding-right: 35px
-;
+  padding-right: 35px;
 }
-/*added */
+div[dir='rtl'] .event-block-two .inner-box .event-date{
+  float: right;text-align: right;
+}
+div[dir='rtl'] .event-block-two .inner-box .event-list li:first-child{
+  padding:0 0 0  10px;
+  margin: 0 0 0 10px;border-left: 1px solid #626262;border-right:0;
+}
+div[dir='rtl'] .owl-carousel .owl-item{
+  float:right;
+}
+.navbar-header{    height: 10px;}
+div[dir='rtl'] .navbar-header{    height: 20px;}
+   /*added */
 .main-header.fixed-header .header-upper .outer-box .theme-btn{
 	border-color:#000000;
 	color:#000000;

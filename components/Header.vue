@@ -6,8 +6,8 @@
       <div class="auto-container">
         <div class="clearfix">
 
-          <div class="logo-box" :class="($dir() != 'rtl') ?  'pull-left' : 'pull-right' ">
-            <div class="logo"><nuxt-link to="/"><img :src="logo" alt="logo" title="site logo"></nuxt-link></div>
+          <div class="logo-box " :class="($dir() != 'rtl') ?  'pull-left' : 'pull-right' ">
+            <div class="logo"><nuxt-link :to="localePath('/')"><img :src="logo" alt="logo" title="site logo"></nuxt-link></div>
           </div>
 
           <div class="nav-outer clearfix">
@@ -193,16 +193,26 @@ a.nuxt-link-exact-active:not(.login-nav li:nth-child(2) a){
  .mobile-menu .navigation li{
    border-bottom: 0;
  }
+ .fixed-header .nav-outer .mobile-nav-toggler {
+   padding: 27px 0 0 !important;
+ }
 /*header > div.header-upper > div > div > div.nav-outer.clearfix > nav > div.navbar-collapse.collapse.clearfix{*/
 /* padding:11px 0;*/
 /* }*/
-header > div.header-upper > div > div > div.pull-left.logo-box > div > a > img{
+header > div.header-upper > div > div > div.logo-box > div > a > img{
   max-width: 80%;
 }
 @media (max-width: 767px){
-  header > div.header-upper > div > div > div.pull-left.logo-box > div > a > img{
-    max-width: 60%;
+  header > div.header-upper > div > div > div.logo-box > div > a > img{
+    max-width: 60% !important;
   }
+  .main-header .header-upper .logo-box {
+    float: left !important;
+  }
+  .main-header .header-upper .logo-box .logo{text-align: left !important}
+  /*div[dir="rtl"] .nav-outer .mobile-nav-toggler {*/
+  /*  padding: 12px 0 !important;*/
+  /*}*/
 }
  @media (min-width: 751px) and (max-width: 1106px) {
   .logo-box{

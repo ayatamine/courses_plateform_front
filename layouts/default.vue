@@ -25,7 +25,7 @@ export default {
       link: [
         this.$i18n.locale == 'en' ? {
              rel: "stylesheet",
-             href: `https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css`
+             href: `/css/bootstrap.css`
         } :
         {
             rel:"stylesheet" ,href:"/css/bootstrap-rtl.css" ,
