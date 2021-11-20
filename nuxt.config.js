@@ -86,7 +86,7 @@ export default {
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [
         '@nuxtjs/dotenv',
-
+        '@/modules/generator'
     ],
 
     // Modules: https://go.nuxtjs.dev/config-modules
@@ -198,17 +198,7 @@ export default {
       changefreq: 'daily',
       priority: 1,
       lastmod: new Date()
-    },
-    routes: [
-      '/tags/1',
-      '/tags/2',
-      {
-        url: '/tags/3',
-        changefreq: 'daily',
-        priority: 1,
-        lastmod: new Date()
-      }
-    ]
+    }
   },
   i18n: {
     seo: true,
