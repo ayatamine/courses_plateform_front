@@ -1,0 +1,11 @@
+*{
+  font-family: 'Cairo' !important;
+}
+body {
+  font-family: 'Cairo' !important;
+  font-size:14px;
+  line-height:1.7em;
+  font-weight:400;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+}

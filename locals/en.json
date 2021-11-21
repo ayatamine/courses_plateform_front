@@ -51,6 +51,17 @@
   "preview_course": "Preview this course",
   "no_review": "no review found !",
   "featured_posts": "Featured Posts ",
-  "for_help": "For Help "
-
+  "for_help": "For Help ",
+  "comment":"Comment | Comments | {0} Comment ",
+  "share_article": "Share this article on",
+  "no_comment_signin_to_see": "Please sign in to see the discussion .",
+  "login_to_reply": "Please log in to reply to ",
+  "write_your_reply": "Write your reply...",
+  "reply_is_short_error": "the reply content is too short ...",
+  "submit_your_reply": "Submit Your reply ",
+  "Leave": "Leave ",
+  "login_to_leave_comment": "Please log in to leave a comment . ",
+  "write_your_comment": "Write your Comment...",
+  "comment_is_short_error": "the Comment Content is too short ...",
+  "submit_your_comment": "Submit Your comment "
 }

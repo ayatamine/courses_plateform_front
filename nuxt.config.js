@@ -23,14 +23,15 @@ export default {
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
             { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Titillium+Web:wght@300;400;600;700;900&display=swap' },
+            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Roboto+Condensed:ital,wght@0,400;0,700;1,700&display=swap' },
             // { rel: 'stylesheet', href: '/css/bootstrap.css' },
             // { rel: 'stylesheet', href: '/css/main.css' },
             // { rel: 'stylesheet', href: '/css/responsive.css' },
         ],
         script: [
             { src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', type: 'text/javascript' },
-            { src: 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js', type: 'text/javascript' },
-            { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.3/jquery.scrollTo.min.js', type: 'text/javascript' },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js', type: 'text/javascript',defer:true },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.3/jquery.scrollTo.min.js', type: 'text/javascript' ,defer:true},
             { src: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' ,integrity : "sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" ,
               crossorigin :"anonymous", type: 'text/javascript' },
             // { src: '/js/jquery.mCustomScrollbar.concat.min.js', type: 'text/javascript' },
@@ -45,7 +46,7 @@ export default {
             // { src: '/js/owl.js', type: 'text/javascript' },
             // { src: '/js/wow.js', type: 'text/javascript' },
             // { src: 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', type: 'text/javascript' },
-            { src: '/js/script.js', type: 'text/javascript' },
+            { src: '/js/script.js', type: 'text/javascript',defer:true },
 
         ]
     },
