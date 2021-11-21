@@ -4,12 +4,12 @@
     <div class="auto-container row m-auto">
           <!-- <h3 class="post-detail-heading">Snippet in detail</h3> -->
           <div class="col-md-9">
-            <h3 class="blog-post-title post-detail-title">{{ post.title_en }}</h3>
+            <h3 class="blog-post-title post-detail-title " >{{($i18n.locale =='en' ) ? post.title_en : post.title}}</h3>
             <ul class="blog-post-info list-inline post-detail-info d-flex">
               <li>
                 <div>
                   <i class="fa fa-clock-o"></i>
-                  <span class="font-lato">{{post.posted_at}}</span>
+                  <span class="font-lato " dir="ltr">{{post.posted_at}}</span>
                 </div>
               </li>
               <li>
@@ -28,17 +28,17 @@
           </div>
           <div class="col-md-3 promotion-space">
             <v-card
-              color="#fff" tile
+                color="#fff" tile
             >
               <v-card-title class="text-h5">
-                Unlimited music now
+                Unlimited Posts now
               </v-card-title>
 
-              <v-card-subtitle>Listen to your favorite artists and albums whenever and wherever, online and offline.</v-card-subtitle>
+              <v-card-subtitle>Read your favorites articles whenever and wherever, online and offline.</v-card-subtitle>
 
               <v-card-actions>
                 <v-btn text>
-                  Listen Now
+                  Read Now
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -52,7 +52,7 @@
     <div class="circle-one"></div>
     <div class="circle-two"></div>
     <div class="auto-container">
-      <div class="row clearfix">
+      <div class="row clearfix" :class="$dir() == 'rtl' ? 'flex-row-reverse' : ''">
 
         <!-- Sidebar Side -->
         <div class="sidebar-side style-two blog-sidebar col-lg-3 col-md-12 col-sm-12">
@@ -64,15 +64,15 @@
 
                 <!-- Sidebar Title -->
                 <div class="sidebar-title">
-                  <h5>Recent Posts</h5>
+                  <h5>{{ $t('Recent') }} {{ $tc('Post',2) }}</h5>
                 </div>
 
                 <div class="widget-content">
                   <article class="post" v-if="recent_posts.data.length"  v-for="(post,i) in recent_posts.data" :key="i">
                     <div class="post-inner">
-                      <figure class="post-thumb"><nuxt-link :to="`${post.slug}`"><img :src="`${post.thumbnail}`" :alt="post.title_en"></nuxt-link></figure>
-                      <div class="text"><nuxt-link :to="`${post.slug}`">{{ post.title_en.slice(0,25)}}</nuxt-link></div>
-                      <div class="post-info">By {{ post.author }}</div>
+                      <figure class="post-thumb"><nuxt-link :to="localePath(`${post.slug}`)"><img :src="`${post.thumbnail}`" :alt="post.title_en"></nuxt-link></figure>
+                      <div class="text"><nuxt-link :to="`${post.slug}`">{{($i18n.locale =='en' ) ? post.title_en.slice(0,25) : post.title.slice(0,25)}}</nuxt-link></div>
+                      <div class="post-info">{{ $t('By') }} {{ post.author }}</div>
                     </div>
                   </article>
                 </div>
@@ -83,12 +83,12 @@
 
                 <!-- Sidebar Title -->
                 <div class="sidebar-title">
-                  <h5>Tags</h5>
+                  <h5>{{ $t('Tags') }}</h5>
                 </div>
 
                 <div class="widget-content">
-                  <nuxt-link to="/blog">#All</nuxt-link>
-                  <nuxt-link to="/blog" v-for="(t,k) in tags.slice(0,10)" :key="k"
+                  <nuxt-link :to="localePath('blog')">#All</nuxt-link>
+                  <nuxt-link :to="localePath('blog')" v-for="(t,k) in tags.slice(0,10)" :key="k"
                           >#{{ t.title_en }}</nuxt-link>
                 </div>
               </div>
@@ -101,36 +101,35 @@
         <div class="content-side blog-detail-column col-lg-9 col-md-12 col-sm-12">
           <div class="blog-detail">
             <div class="inner-box">
-              <h2>{{ post.title_en}}</h2>
+              <h2>{{($i18n.locale =='en' ) ? post.title_en : post.title}}</h2>
               <ul class="author-info">
-                <li>By {{ post.author }}</li>
-                <li><span class="theme_color">{{ post.posted_at }}</span></li>
-                <li>{{post.comments_count}} comments</li>
+<!--                <li>{{ $t('By') }} {{ post.author }}</li>-->
+<!--                <li><span class="theme_color">{{ post.posted_at }}</span></li>-->
+                <li> {{post.comments_count}} {{ $tc('comment',[2]) }}</li>
               </ul>
               <div class="image">
                 <img :src="post.cover_image" alt="" />
               </div>
-              <h4>{{ post.title_en }}</h4>
-              <p v-html="post.content_en" > </p>
-              <div class="social-box">
-                <span>Share this article on </span>
+              <p v-html="($i18n.locale =='en' ) ?  post.content_en : post.content" > </p>
+              <div class="social-box mt-5">
+                <span>{{$t('share_article')}} </span>
 
                 <ShareNetwork
                   network="facebook"
-                  :url="$route.fullPath"
-                  :title="post.title_en"
-                  :description="`in this post we gonna talk about ${post.title_en} and we will go in deep with every single hidden information`"
+                  :url="getLocalUrl"
+                  :title="($i18n.locale =='en' ) ? post.title_en : post.title"
+                  :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
                   quote="Learning made easy  with us"
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
-                  <a href="javascript:void()" class="fa fa-facebook-square"></a>
+                  <i class="fa fa-facebook-square"></i>
                 </ShareNetwork>
                 <ShareNetwork
-                  network="twitter"
-                  :url="$route.fullPath"
-                  :title="post.title_en"
-                  :description="`in this post we gonna talk about ${post.title_en} and we will go in deep with every single hidden information`"
+                  network="messenger"
+                  :url="getLocalUrl"
+                  :title="($i18n.locale =='en' ) ? post.title_en : post.title"
+                  :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
                   quote="Learning made easy  with us"
                   :hashtags="post.keywords"
                   :media="post.cover_image"
@@ -138,26 +137,26 @@
                   <v-icon style="font-size: 26px;top: -3px;margin-right: 1px;">mdi-facebook-messenger</v-icon>
                 </ShareNetwork>
                 <ShareNetwork
-                  network="messenger"
-                  :url="$route.fullPath"
-                  :title="post.title_en"
-                  :description="`in this post we gonna talk about ${post.title_en} and we will go in deep with every single hidden information`"
+                  network="twitter"
+                  :url="getLocalUrl"
+                  :title="($i18n.locale =='en' ) ? post.title_en : post.title"
+                  :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
                   quote="Learning made easy  with us"
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
-                  <a href="javascript:void()"  class="fa fa-twitter-square"></a>
+                  <i class="fa fa-twitter-square"></i>
                 </ShareNetwork>
                 <ShareNetwork
                   network="linkedin"
-                  :url="$route.fullPath"
-                  :title="post.title_en"
-                  :description="`in this post we gonna talk about ${post.title_en} and we will go in deep with every single hidden information`"
+                  :url="getLocalUrl"
+                  :title="($i18n.locale =='en' ) ? post.title_en : post.title"
+                  :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
                   quote="Learning made easy  with us"
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
-                  <a href="javascript:void()"  class="fa fa-linkedin-square"></a>
+                  <i  class="fa fa-linkedin-square"></i>
                 </ShareNetwork>
               </div>
             </div>
@@ -166,11 +165,11 @@
             <!-- Comments Area -->
             <div class="comments-area">
               <div class="group-title d-flex " style=" justify-content: space-between;">
-                <h4>Recent Comments</h4>
-                <button class="pull-right load-comments" v-show="loggedIn && post.comments_count > 0 && comments.length ==0"  @click.prevent="loadComments" > Load Comments</button>
+                <h4>{{ $t('Recent') }} {{ $tc('comment',[2]) }}</h4>
+                <button class="pull-right load-comments" v-show="loggedIn && post.comments_count > 0 && comments.length ==0"  @click.prevent="loadComments" > {{$t('Load')}} {{$tc('comment',2)}}</button>
               </div>
 
-              <div class="alert alert-info w-100" v-if="!comments.length" >No comment yet, Please sign in to see the discussion .</div>
+              <div class="alert alert-info w-100" v-if="!comments.length" >{{$t('no_comment_signin_to_see')}}</div>
               <div v-for="(comment,i) in comments" :key="i">
                 <div class="comment-box " >
                   <div class="comment" >
@@ -178,22 +177,22 @@
                     <div class="comment-info clearfix"><strong>{{ `${comment.user.first_name} ${comment.user.last_name}`  }} </strong><div class="comment-time">
                       {{ comment.created_at }}</div></div>
                     <div class="text">{{comment.content}}</div>
-                    <a class="theme-btn reply-btn" href="#"> Reply</a>
+                    <a class="theme-btn reply-btn" href="#"> {{ $t('Reply') }}</a>
                   </div>
                   <div class="comment-form reply-comment pt-3 pl-2" ref="reply-comment" >
-                    <div class="alert alert-info w-100" v-if="!loggedIn" >Please log in to reply to {{comment.user.first_name}} .</div>
+                    <div class="alert alert-info w-100" v-if="!loggedIn" >{{$t('login_to_reply')}}{{comment.user.first_name}} .</div>
                     <!--Comment Form-->
                     <form method="post" v-else action="#" >
                       <div class="row clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 form-group m-0">
                         <textarea class="" v-model="new_comment.content" @keyup="replySizeError = false"
-                              name="message" placeholder="Write your reply..."></textarea>
+                              name="message" :placeholder="$t('write_your_reply') "></textarea>
                           <br>
-                          <form-input-error v-show="replySizeError" message="the reply content is too short ..." />
+                          <form-input-error v-show="replySizeError" :message="$t('reply_is_short_error')" />
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12 form-group m-0">
-                          <button class="btn btn-success text-white" type="submit" name="submit-form" @click.prevent="addComment(comment.id)"><span class="txt">Submit Your reply <i class="fa fa-angle-right"></i></span></button>
+                          <button class="btn btn-success text-white" type="submit" name="submit-form" @click.prevent="addComment(comment.id)"><span class="txt">{{$t('submit_your_reply')}}<i class="fa " :class="$dir() == 'ltr' ? 'fa-angle-right' :'fa-angle-left ml-2'"></i></span></button>
                         </div>
 
                       </div>
@@ -215,8 +214,8 @@
 
             <!-- Comment Form -->
             <div class="comment-form">
-              <div class="group-title"><h4>Leave Comment</h4></div>
-              <div class="alert alert-info w-100" v-if="!loggedIn" >Please log in to leave a comment .</div>
+              <div class="group-title"><h4>{{$t('Leave') +' '+ $tc('comment',[])}}</h4></div>
+              <div class="alert alert-info w-100" v-if="!loggedIn" >{{$t('login_to_leave_comment')}}</div>
               <!--Comment Form-->
               <form method="post" v-else action="#">
                 <div class="row clearfix">
@@ -231,13 +230,13 @@
 
                   <div class="col-lg-12 col-md-12 col-sm-12 form-group">
                     <textarea class="" v-model="new_comment.content" @keyup="commentSizeError = false"
-                              name="message" placeholder="Write your comment..."></textarea>
+                              name="message" placeholder=""></textarea>
                     <br>
-                    <form-input-error v-show="commentSizeError" message="the comment content is too short ..." />
+                    <form-input-error v-show="commentSizeError" :message="$t('comment_is_short_error')" />
                   </div>
 
                   <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                    <button class="btn btn-success text-white" type="submit" name="submit-form" @click.prevent="addComment(null)"><span class="txt">Submit Your Comment <i class="fa fa-angle-right"></i></span></button>
+                    <button class="btn btn-success text-white" type="submit" name="submit-form" @click.prevent="addComment(null)"><span class="txt">{{$t('submit_your_comment')}} <i class="fa" :class="$dir() =='ltr' ? ' fa-angle-right' : ' fa-angle-left ml-1'"></i></span></button>
                   </div>
 
                 </div>
@@ -281,7 +280,7 @@ export default {
     }
 
   },
-  name: "index",
+  name: "blog-post",
   components: {FormInputError},
 
   data(){
@@ -295,14 +294,17 @@ export default {
                 parent_id:null,
                 user_type:'user'
               },
-              commentSizeError:false,replySizeError:false
+              commentSizeError:false,replySizeError:false,
+              localUrl:''
     }
   },
   mounted() {
     document.querySelectorAll('.ql-syntax').forEach(syn =>syn.classList.add('hljs'));
-    this.$root.$on('share_network_close', function (network, url) {
-      alert('thanks for sharing')
-    });
+    // this.$root.$on('share_network_close', function (network, url) {
+    //   alert('thanks for sharing')
+    // });
+
+    this.localUrl = location.href
   },
   async asyncData(context){
 
@@ -358,6 +360,9 @@ export default {
   computed:{
     loggedIn(){
       return this.$store.state['usersAuth'].token
+    },
+    getLocalUrl(){
+      return this.localUrl;
     }
   }
 }

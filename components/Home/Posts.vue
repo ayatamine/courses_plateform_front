@@ -29,7 +29,7 @@
               <!-- Event Date -->
               <div class="event-date clearfix"><span class="date">{{ post.posted_at.substr(0,2) }}</span>{{ post.posted_at.slice(2) }}</div>
               <!-- Event List -->
-              <ul class="event-list">
+              <ul class="event-list float-right">
                 <li v-for="tag in post.tags.slice(0,2)"><nuxt-link :to="localePath('blog')" @click.prevent>{{($i18n.locale =='en' ) ? tag.title_en :  tag.title }} </nuxt-link></li>
               </ul>
             </div>

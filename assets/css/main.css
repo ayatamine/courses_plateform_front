@@ -43,7 +43,7 @@
 
 **********************************************/
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Roboto+Condensed:400,700,700i&display=swap');
+/*@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Roboto+Condensed:400,700,700i&display=swap');*/
 
 /*
 	font-family: 'Titillium Web', sans-serif;
@@ -1732,6 +1732,15 @@ div[dir='rtl'] .owl-carousel .owl-item{
 }
 .navbar-header{    height: 10px;}
 div[dir='rtl'] .navbar-header{    height: 20px;}
+div[dir="rtl"] .blog-detail .inner-box .social-box span {
+  margin-left: 15px;margin-right: 0;
+}
+.event-block-two .inner-box .event-list {
+  padding-top: 10px;
+}
+div[dir="rtl"] .event-block-two .inner-box .event-list {
+  padding-top: 4px;
+}
    /*added */
 .main-header.fixed-header .header-upper .outer-box .theme-btn{
 	border-color:#000000;
