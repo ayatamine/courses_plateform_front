@@ -45,7 +45,10 @@
           <div class="cource-block col-lg-4 col-md-6 col-sm-12" v-for="tuto in tutorials.data">
             <div class="inner-box">
               <div class="image">
-                <nuxt-link :to="localePath(`/tutorials/${tuto.slug}`)"><img :src="tuto.thumbnail" alt="" /></nuxt-link>
+                <nuxt-link :to="localePath(`/tutorials/${tuto.slug}`)">
+<!--                  <img :src="tuto.thumbnail" alt="" />-->
+                  <nuxt-img :src="tuto.thumbnail" sizes="sm:70vw md:30vw lg:300px" format="png" quality="100"/>
+                </nuxt-link>
               </div>
               <div class="lower-content">
                 <div class="clearfix">

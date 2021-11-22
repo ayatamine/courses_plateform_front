@@ -93,7 +93,6 @@ name: "Achivements",
     }
   },
   async fetch() {
-   this.$axios.setBaseURL(process.env.APP_URL);
    this.achivements = await this.$axios.$get('/api/achivements')
   }
 }

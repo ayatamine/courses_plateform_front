@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "@mdi/font": "^5.9.55",
+    "@nuxt/image": "^0.6.0",
     "@nuxtjs/vuetify": "^1.11.3"
   }
 }

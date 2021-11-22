@@ -39,7 +39,10 @@
         <div class="image-column col-lg-6 col-md-12 col-sm-12">
           <div class="inner-column">
             <div class="image titlt" data-tilt data-tilt-max="4">
-              <nuxt-link to="/" data-fancybox="program" data-caption="" class=""><img :src="require('~/assets/images/background/app_development.png')" alt="computer" /></nuxt-link>
+              <nuxt-link to="/" data-fancybox="program" data-caption="" class="">
+                <nuxt-img src="/images/background/app_development.png" sizes="sm:100vw md:50vw lg:500px" format="svg" quality="150" alt="computer"/>
+<!--                <img :src="require('~/assets/images/background/app_development.png')" alt="computer" />-->
+              </nuxt-link>
             </div>
           </div>
         </div>

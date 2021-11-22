@@ -62,10 +62,13 @@
                 <div v-show="!loading" :class="grid ? 'cource-block-two col-lg-4 col-md-6 col-sm-12' : 'cource-block-three w-100' " v-for="(post,k) in posts.data" :key="k" >
                   <div class="inner-box">
                     <div class="image">
-                      <nuxt-link :to="`/${post.slug}`"><img :src="post.thumbnail" :alt="post.title" /></nuxt-link>
+                      <nuxt-link :to="localePath(`/${post.slug}`)">
+<!--                        <img :src="post.thumbnail" :alt="post.title" />-->
+                        <nuxt-img :src="post.thumbnail" sizes="sm:70vw md:30vw lg:300px" format="png" quality="100"/>
+                      </nuxt-link>
                     </div>
                     <div class="lower-content">
-                      <h5><nuxt-link :to="`/${post.slug}`">{{ ($i18n.locale == 'en') ? post.title_en.slice(0,20) : post.title.slice(0,20) }}</nuxt-link></h5>
+                      <h5><nuxt-link :to="localePath(`/${post.slug}`)">{{ ($i18n.locale == 'en') ? post.title_en.slice(0,20) : post.title.slice(0,20) }}</nuxt-link></h5>
                       <div class="text" v-html="($i18n.locale == 'en') ? post.content_en.slice(0,50) :  post.content.slice(0,50)"></div>
                       <div class="clearfix">
                         <div :class="($dir() == 'ltr' ) ? 'pull-left' : 'pull-right'">
@@ -106,7 +109,7 @@
                   <div class="widget-content">
                     <article class="post" v-if="recent_posts.data.length"  v-for="(post,i) in recent_posts.data" :key="i">
                       <div class="post-inner">
-                        <figure class="post-thumb"><nuxt-link :to="`${post.slug}`"><img :src="`${post.thumbnail}`" :alt="post.title_en"></nuxt-link></figure>
+                        <figure class="post-thumb"><nuxt-link :to="localePath(`${post.slug}`)"><img :src="`${post.thumbnail}`" :alt="post.title_en"></nuxt-link></figure>
                         <div class="text"><nuxt-link :to="`${post.slug}`">{{($i18n.locale == 'en') ?  post.title_en.slice(0,20) : post.title.slice(0,20)}} ...</nuxt-link></div>
                         <div class="post-info">{{ $t('By') }} <span>{{ post.author }}</span></div>
                       </div>

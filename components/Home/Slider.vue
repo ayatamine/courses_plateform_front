@@ -43,6 +43,7 @@
             <div class="image-column col-lg-6 col-md-12 col-sm-12">
               <div class="inner-column">
                 <div class="image">
+<!--                  <nuxt-img src="/images/main-slider/developer.svg" sizes="sm:100vw md:50vw lg:400px" format="svg" quality="150"/>-->
                   <img :src="require('~/assets/images/main-slider/developer.svg')" alt="developer image" width="100%" height="auto" />
                 </div>
               </div>
@@ -71,6 +72,7 @@
             <div class="image-column col-lg-6 col-md-12 col-sm-12">
               <div class="inner-column">
                 <div class="image">
+<!--                  <nuxt-img src="/images/main-slider/youtube_video.svg" sizes="sm:100vw md:50vw lg:400px" format="svg" quality="150"/>-->
                   <img :src="require('~/assets/images/main-slider/youtube_video.svg')" alt="video image"  width="100%" height="auto"/>
                 </div>
               </div>
@@ -99,6 +101,7 @@
             <div class="image-column col-lg-6 col-md-12 col-sm-12">
               <div class="inner-column">
                 <div class="image">
+<!--                  <nuxt-img src="/images/main-slider/read_post.svg" sizes="sm:100vw md:50vw lg:400px" format="svg" quality="150"/>-->
                   <img :src="require('~/assets/images/main-slider/read_post.svg')" alt="read post"  width="100%" height="auto"/>
                 </div>
               </div>
