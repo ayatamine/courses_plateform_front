@@ -17,13 +17,16 @@ export default {
             {  property:"og:image", content: process.env.META_IMAGE },
             {  hid:'og-description' ,property:"og:description", content: process.env.META_OG_DESCRIPTIN },
             {  property:"facebook-domain-verification", content: process.env.FACEBOOK_DOMAIN_VERFICATION },
-            {  rel :'icon',type:"image/png",sizes:"192x192", href: `~assets/images/${process.env.FAVICON_192}` },
+            {  rel :'icon',type:"image/png",sizes:"192x192", href: `/images/${process.env.FAVICON_192}` },
+            {  rel :'icon',type:"image/png",sizes:"96x96", href: `/images/${process.env.FAVICON_96}` },
+            {  rel :'icon',type:"image/png",sizes:"32x32", href: `/images/${process.env.FAVICON_32}` },
+            {  rel :'icon',type:"image/png",sizes:"16x16", href: `/images/${process.env.FAVICON_16}` },
             { name: 'X-UA-Compatible', content: 'IE=edge' }
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Titillium+Web:wght@300;400;600;700;900&display=swap' },
-            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Roboto+Condensed:ital,wght@0,400;0,700;1,700&display=swap' },
+            // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Titillium+Web:wght@300;400;600;700;900&display=swap' },
+            // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Roboto+Condensed:ital,wght@0,400;0,700;1,700&display=swap' },
             // { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css' },
             // { rel: 'stylesheet', href: '/css/bootstrap.css' },
             // { rel: 'stylesheet', href: '/css/main.css' },
@@ -88,7 +91,8 @@ export default {
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [
         '@nuxtjs/dotenv',
-        '@/modules/generator'
+        '@/modules/generator',
+        '@nuxtjs/google-fonts'
     ],
 
     // Modules: https://go.nuxtjs.dev/config-modules
@@ -127,6 +131,11 @@ export default {
       ],
       transpile: ['vuetify/lib', 'tiptap-vuetify']
 
+    },
+    publicRuntimeConfig: {
+      googleAnalytics: {
+        id: process.env.GOOGLE_ANALYTICS_ID
+      }
     },
     proxy: {
       '/api': {
@@ -230,5 +239,29 @@ export default {
   },
   image: {
     domains: [""+process.env.APP_URL+""]
+  },
+  googleFonts: {
+    display: 'swap',
+    prefetch: true,
+    useStylesheet: true,
+    families: {
+      Poppins: {
+        wght: [300, 400,500,600,700,800,900],
+        ital: [100]
+      },
+      'Titillium+Web': {
+        wght: [300, 400,600,700,800,900],
+
+      },
+      'Open+Sans': {
+        wght: [ 400,600,700,800],
+      },
+      'Roboto+Condensed': {
+        wght: [ 400,600,700,800],   ital: [100,200]
+      },
+      'Cairo': {
+        wght: [ 400,500,600,700,800,900],
+      },
+    }
   }
 }
