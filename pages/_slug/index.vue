@@ -134,7 +134,7 @@
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
-                  <v-icon style="font-size: 26px;top: -3px;margin-right: 1px;">mdi-facebook-messenger</v-icon>
+                  <v-icon style="">mdi-facebook-messenger</v-icon>
                 </ShareNetwork>
                 <ShareNetwork
                   network="twitter"
@@ -416,5 +416,22 @@ export default {
 }
 .sidebar-page-container .comments-area .comment-box .theme-btn:hover{
   color: #3d415b;
+}
+.v-icon.mdi{
+  font-size: 26px;top: -3px;margin-right: 1px;
+}
+@media(max-width:768px){
+  .blog-detail .inner-box p{
+    font-size: 14px;
+  }
+  .blog-detail .inner-box .social-box span{
+    font-size: 16px;
+  }
+  .blog-detail .inner-box .social-box a{
+    font-size: 19px;
+  }
+  .v-icon.mdi{
+    font-size: 21px !important;
+  }
 }
 </style>

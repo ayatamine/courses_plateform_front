@@ -99,30 +99,30 @@
 
 
 	//Mobile Nav Hide Show
-	if($('.mobile-menu').length){
-
-		$('.mobile-menu .menu-box').mCustomScrollbar();
-
-		var mobileMenuContent = $('.main-header .nav-outer .main-menu').html();
-		$('.mobile-menu .menu-box .menu-outer').append(mobileMenuContent);
-		$('.sticky-header .main-menu').append(mobileMenuContent);
-
-		//Dropdown Button
-		$('.mobile-menu li.dropdown .dropdown-btn').on('click', function() {
-			$(this).toggleClass('open');
-			$(this).prev('ul').slideToggle(500);
-		});
-		//Menu Toggle Btn
-		$('.mobile-nav-toggler').on('click', function() {
-			$('body').addClass('mobile-menu-visible');
-		});
-
-		//Menu Toggle Btn
-		$('.mobile-menu .menu-backdrop,.mobile-menu .close-btn').on('click', function() {
-			$('body').removeClass('mobile-menu-visible');
-		});
-
-	}
+	// if($('.mobile-menu').length){
+  //
+	// 	$('.mobile-menu .menu-box').mCustomScrollbar();
+  //
+	// 	var mobileMenuContent = $('.main-header .nav-outer .main-menu').html();
+	// 	$('.mobile-menu .menu-box .menu-outer').append(mobileMenuContent);
+	// 	$('.sticky-header .main-menu').append(mobileMenuContent);
+  //
+	// 	//Dropdown Button
+	// 	$('.mobile-menu li.dropdown .dropdown-btn').on('click', function() {
+	// 		$(this).toggleClass('open');
+	// 		$(this).prev('ul').slideToggle(500);
+	// 	});
+	// 	//Menu Toggle Btn
+	// 	$('.mobile-nav-toggler').on('click', function() {
+	// 		$('body').addClass('mobile-menu-visible');
+	// 	});
+  //
+	// 	//Menu Toggle Btn
+	// 	$('.mobile-menu .menu-backdrop,.mobile-menu .close-btn').on('click', function() {
+	// 		$('body').removeClass('mobile-menu-visible');
+	// 	});
+  //
+	// }
 
 
 	//Parallax Scene for Icons
@@ -142,33 +142,33 @@
 
 
 	//Fact Counter + Text Count
-	if($('.count-box').length){
-		$('.count-box').appear(function(){
-
-			var $t = $(this),
-				n = $t.find(".count-text").attr("data-stop"),
-				r = parseInt($t.find(".count-text").attr("data-speed"), 10);
-
-			if (!$t.hasClass("counted")) {
-				$t.addClass("counted");
-				$({
-					countNum: $t.find(".count-text").text()
-				}).animate({
-					countNum: n
-				}, {
-					duration: r,
-					easing: "linear",
-					step: function() {
-						$t.find(".count-text").text(Math.floor(this.countNum));
-					},
-					complete: function() {
-						$t.find(".count-text").text(this.countNum);
-					}
-				});
-			}
-
-		},{accY: 0});
-	}
+	// if($('.count-box').length){
+	// 	$('.count-box').appear(function(){
+  //
+	// 		var $t = $(this),
+	// 			n = $t.find(".count-text").attr("data-stop"),
+	// 			r = parseInt($t.find(".count-text").attr("data-speed"), 10);
+  //
+	// 		if (!$t.hasClass("counted")) {
+	// 			$t.addClass("counted");
+	// 			$({
+	// 				countNum: $t.find(".count-text").text()
+	// 			}).animate({
+	// 				countNum: n
+	// 			}, {
+	// 				duration: r,
+	// 				easing: "linear",
+	// 				step: function() {
+	// 					$t.find(".count-text").text(Math.floor(this.countNum));
+	// 				},
+	// 				complete: function() {
+	// 					$t.find(".count-text").text(this.countNum);
+	// 				}
+	// 			});
+	// 		}
+  //
+	// 	},{accY: 0});
+	// }
 
 
 
@@ -470,56 +470,6 @@
 	//Gallery Filters
 	if($('.filter-list').length){
 		$('.filter-list').mixItUp({});
-	}
-
-
-	//LightBox / Fancybox
-	// if($('.lightbox-image').length) {
-	// 	$('.lightbox-image').fancybox({
-	// 		openEffect  : 'fade',
-	// 		closeEffect : 'fade',
-	// 		helpers : {
-	// 			media : {}
-	// 		}
-	// 	});
-	// }
-
-
-	//Contact Form Validation
-	if($('#contact-form').length){
-		$('#contact-form').validate({
-			rules: {
-				username: {
-					required: true
-				},
-				lastname: {
-					required: true
-				},
-				email: {
-					required: true,
-					email: true
-				},
-				phone: {
-					required: true
-				},
-				message: {
-					required: true
-				}
-			}
-		});
-	}
-
-
-	// Scroll to a Specific Div
-	if($('.scroll-to-target').length){
-		$(".scroll-to-target").on('click', function() {
-			var target = $(this).attr('data-target');
-		   // animate
-		   $('html, body').animate({
-			   scrollTop: $(target).offset().top
-			 }, 1500);
-
-		});
 	}
 
 

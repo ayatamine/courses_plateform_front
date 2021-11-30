@@ -6,6 +6,7 @@
      <Header2 />
 	   <nuxt />
      <footer2 :logo="logo"  />
+    <div class="scroll-to-top scroll-to-target" data-target="html" style="display: block;"><span class="fa fa-arrow-circle-up"></span></div>
   </div>
 
 </template>
@@ -35,10 +36,6 @@ export default {
         },
         this.$i18n.locale == 'ar' ?
         {
-           type:"text/css", rel:"stylesheet" ,href:"https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap"
-        } : {},
-        this.$i18n.locale == 'ar' ?
-        {
            type:"text/css", rel:"stylesheet" ,href:"/css/main-ar.css"
         } : {},
         ...i18nHead.link
@@ -54,6 +51,17 @@ export default {
     logo(){
       return this.$store.getters['site_settings'].logo;
     },
+  },
+  mounted() {
+    // Scroll to a Specific Div
+      $(".scroll-to-target").on('click', function() {
+        var target = $(this).attr('data-target');
+        // animate
+        $('html, body').animate({
+          scrollTop: $(target).offset().top
+        }, 1500);
+
+      });
   }
- }
+}
 </script>

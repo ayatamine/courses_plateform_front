@@ -218,13 +218,11 @@ export default {
       event.target.classList.add('active')
       this.updatePosts(posts)
     },
-    async getPosts(page,event){
+    async getPosts(page){
+
       this.load();
       this.$router.push(`${this.$route.path}?page=${page}`)
       let posts = await this.$axios.$get(`${this.url_prefix}?page=${page}`)
-
-      document.querySelectorAll('.popular-tags a').forEach(s=>s.classList.remove('active'))
-      event.target.classList.add('active')
       this.updatePosts(posts)
     },
     updatePosts(data){
@@ -246,4 +244,5 @@ export default {
 .cource-block-two .inner-box .lower-content .students span{
   font-size: 12px; font-weight: 600;
 }
+
 </style>

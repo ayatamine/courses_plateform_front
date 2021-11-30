@@ -33,8 +33,8 @@
                 <h1>{{$t('slider1_header')}}</h1>
                 <div class="text">{{$t('slider1_description')}}</div>
                 <div class="btns-box">
-                  <nuxt-link :to="localePath('/auth/register')" class="theme-btn btn-style-four"><span class="txt">{{ $t('get_started') }} <i class="fa " :class="$dir()=='ltr' ? 'fa-angle-right' : 'fa-angle-left mr-2'"></i></span></nuxt-link>
-                  <nuxt-link :to="localePath('courses')" class="theme-btn btn-style-five"><span class="txt">{{$t('all')+' '+ $tc('course',2)}}<i class="fa" :class="$dir()=='ltr' ? 'fa-angle-right' : 'fa-angle-left mr-2'"></i></span></nuxt-link>
+                  <nuxt-link :to="localePath('/auth/register')" class="theme-btn btn-style-four"><span class="txt">{{ $t('get_started') }} <i class="fa " :class="$dir()=='ltr' ? 'fa-angle-right' : 'fa-angle-left ml-2'"></i></span></nuxt-link>
+                  <nuxt-link :to="localePath('courses')" class="theme-btn btn-style-five"><span class="txt">{{$t('all')+' '+ $tc('course',2)}}<i class="fa" :class="$dir()=='ltr' ? 'fa-angle-right' : 'fa-angle-left ml-2'"></i></span></nuxt-link>
                 </div>
               </div>
             </div>
@@ -62,8 +62,8 @@
                 <h1>{{$t('slider2_header')}}</h1>
                 <div class="text">{{$t('slider2_description')}} </div>
                 <div class="btns-box">
-                  <nuxt-link :to="localePath('/auth/register')" class="theme-btn btn-style-four"><span class="txt">{{ $t('get_started') }} <i class="fa" :class="$dir()=='ltr' ? 'fa-angle-right' : 'fa-angle-left mr-2'"></i></span></nuxt-link>
-                  <nuxt-link :to="localePath('tutorials')" class="theme-btn btn-style-five"><span class="txt">{{$t('all')+' '+ $tc('tutorial',2)}}<i class="fa" :class="$dir()=='ltr' ? 'fa-angle-right' : 'fa-angle-left mr-2'"></i></span></nuxt-link>
+                  <nuxt-link :to="localePath('/auth/register')" class="theme-btn btn-style-four"><span class="txt">{{ $t('get_started') }} <i class="fa" :class="$dir()=='ltr' ? 'fa-angle-right' : 'fa-angle-left ml-2'"></i></span></nuxt-link>
+                  <nuxt-link :to="localePath('tutorials')" class="theme-btn btn-style-five"><span class="txt">{{$t('all')+' '+ $tc('tutorial',2)}}<i class="fa" :class="$dir()=='ltr' ? 'fa-angle-right' : 'fa-angle-left ml-2'"></i></span></nuxt-link>
                 </div>
               </div>
             </div>
@@ -91,8 +91,8 @@
                 <h1>{{$t('slider3_header')}}</h1>
                 <div class="text">{{$t('slider3_description')}}</div>
                 <div class="btns-box">
-                  <nuxt-link :to="localePath('/auth/register')" class="theme-btn btn-style-four"><span class="txt">{{ $t('get_started')}}<i class="fa" :class="$dir()=='ltr' ? 'fa-angle-right' : 'fa-angle-left mr-2'"></i></span></nuxt-link>
-                  <nuxt-link :to="localePath('blog')" class="theme-btn btn-style-five"><span class="txt">{{$t('all')+' '+ $tc('article',2)}}<i class="fa" :class="$dir()=='ltr' ? 'fa-angle-right' : 'fa-angle-left mr-2'"></i></span></nuxt-link>
+                  <nuxt-link :to="localePath('/auth/register')" class="theme-btn btn-style-four"><span class="txt">{{ $t('get_started')}}<i class="fa" :class="$dir()=='ltr' ? 'fa-angle-right' : 'fa-angle-left ml-2'"></i></span></nuxt-link>
+                  <nuxt-link :to="localePath('blog')" class="theme-btn btn-style-five"><span class="txt">{{$t('all')+' '+ $tc('article',2)}}<i class="fa" :class="$dir()=='ltr' ? 'fa-angle-right' : 'fa-angle-left ml-2'"></i></span></nuxt-link>
                 </div>
               </div>
             </div>

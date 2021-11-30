@@ -35,12 +35,12 @@ export default {
         script: [
             { src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', type: 'text/javascript' },
             { src: 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js', type: 'text/javascript',defer:true },
-            { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.3/jquery.scrollTo.min.js', type: 'text/javascript' ,defer:true},
-            { src: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' ,integrity : "sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" ,
-              crossorigin :"anonymous", type: 'text/javascript',defer:true },
+            // { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.3/jquery.scrollTo.min.js', type: 'text/javascript' ,defer:true},
+            // { src: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' ,integrity : "sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" ,
+            //   crossorigin :"anonymous", type: 'text/javascript',defer:true },
             // { src: '/js/jquery.mCustomScrollbar.concat.min.js', type: 'text/javascript' },
             // { src: '/js/jquery.fancybox.js', type: 'text/javascript' },
-            { src: '/js/appear.js', type: 'text/javascript' ,defer:true},
+            // { src: '/js/appear.js', type: 'text/javascript' ,defer:true},
             // { src: '/js/swiper.min.js', type: 'text/javascript' },
             // { src: '/js/element-in-view.js', type: 'text/javascript' },
             // { src: '/js/jquery.paroller.min.js', type: 'text/javascript' },
@@ -60,7 +60,7 @@ export default {
 
       'vuetify/dist/vuetify.min.css',
       '@mdi/font/css/materialdesignicons.css',
-
+      // '~/node_modules/bootstrap/dist/css/bootstrap.css',
       '~/assets/css/main.css',
       '~/assets/css/responsive.css',
     ],
@@ -74,13 +74,13 @@ export default {
       {src:'~/plugins/video_player.js',mode:'client'},
       {src:'~/plugins/bootstrap.js'},
       '~/plugins/jquery.fancybox',
-      '~/plugins/mixins/user',
+      // '~/plugins/mixins/user', //manual login deprecated
       '~/plugins/mixins/form_validation',
       '~/plugins/axios',
       { src: '~/plugins/vue_editor', mode: 'client' },
       { src: '~/plugins/vuetify'},
       { src: '~/plugins/lang-direction-control'},
-      { src: '~/plugins/i18n'}
+      // { src: '~/plugins/i18n'}
 
 
     ],
@@ -151,6 +151,7 @@ export default {
         proxy:true,
         // credentials: true,
     },
+   //auth section
     auth: {
 
         strategies: {
@@ -188,59 +189,65 @@ export default {
           },
         }
     },
-  router: {
-    middleware: 'refresh_token',
-  },
-  robots: [
-    {
-      UserAgent: '*',
-      Disallow: ['/profile', '/admin-cpxx/','/* .env$'],
-      Sitemap: process.env.APP_URL+'sitemap.xml'
-    }
-
-  ],
-  sitemap: {
-    hostname: process.env.APP_URL,
-    gzip: true,
-    exclude: [
-      '/profile',
-      '/admin-cpxx/**'
-    ],
-    defaults: {
-      changefreq: 'daily',
-      priority: 1,
-      lastmod: new Date()
-    }
-  },
-  i18n: {
-    seo: true,
-    locales: [
+    //router middlewares
+    router: {
+      middleware: 'refresh_token',
+    },
+    //configuration of robots.txt properties
+    robots: [
       {
-        code: 'en',
-        name: 'English',
-        dir: 'ltr',
-        iso: 'en-US'
-      },
-      {
-        code: 'ar',
-        name: 'Arabic',
-        dir: 'rtl',
-        iso: 'ar-DZ'
+        UserAgent: '*',
+        Disallow: ['/profile', '/admin-cpxx/','/* .env$'],
+        Sitemap: process.env.APP_URL+'sitemap.xml'
       }
+
     ],
-    defaultLocale: 'en',
-    vueI18n: i18,
-    vueI18nLoader: true,
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'i18n_redirected',
-      redirectOn: 'root',  // recommended
-    }
-  },
-  image: {
-    domains: [""+process.env.APP_URL+""]
-  },
-  googleFonts: {
+    //sitemap and crowlers config
+    sitemap: {
+      hostname: process.env.APP_SITEMAP_URL,
+      gzip: true,
+      exclude: [
+        '/profile',
+        '/admin-cpxx/**'
+      ],
+      defaults: {
+        changefreq: 'daily',
+        priority: 1,
+        lastmod: new Date()
+      }
+    },
+    //localization features
+    i18n: {
+      seo: true,
+      locales: [
+        {
+          code: 'en',
+          name: 'English',
+          dir: 'ltr',
+          iso: 'en-US'
+        },
+        {
+          code: 'ar',
+          name: 'Arabic',
+          dir: 'rtl',
+          iso: 'ar-DZ'
+        }
+      ],
+      defaultLocale: 'en',
+      vueI18n: i18,
+      vueI18nLoader: true,
+      detectBrowserLanguage: {
+        useCookie: true,
+        cookieKey: 'i18n_redirected',
+        redirectOn: 'root',  // recommended
+      }
+    },
+    //optimize images options
+    image: {
+      domains: [""+process.env.APP_URL+""]
+    },
+    //google fonts manipulation
+    googleFonts: {
     display: 'swap',
     prefetch: true,
     useStylesheet: true,
