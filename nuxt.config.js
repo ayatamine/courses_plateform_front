@@ -92,7 +92,8 @@ export default {
     buildModules: [
         '@nuxtjs/dotenv',
         '@/modules/generator',
-        '@nuxtjs/google-fonts'
+        '@nuxtjs/google-fonts',
+      '@nuxtjs/google-analytics'
     ],
 
     // Modules: https://go.nuxtjs.dev/config-modules
@@ -270,5 +271,10 @@ export default {
         wght: [ 400,500,600,700,800,900],
       },
     }
-  }
+  },
+    googleAnalytics: {
+     debug: {
+       sendHitTask:process.env.IS_TEST_MODE != true
+     }
+    }
 }
