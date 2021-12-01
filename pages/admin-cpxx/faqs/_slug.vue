@@ -81,7 +81,7 @@ export default {
 
     // await this.$axios.$get(`/api/admin-cpx/posts/${this.$route.params.slug}`)
      this.faq = await this.$axios.$get(`/api/admin-cpx/faqs/${this.$route.params.slug}`,
-      {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
+      {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token}})
       .catch(err => console.log(err) )
 
   },
@@ -90,7 +90,7 @@ export default {
     async updateFaq(){
 
       await axios.put(`${process.env.APP_URL}/api/admin-cpx/faqs/${this.$route.params.slug}`,this.faq,
-        {headers:{Authorization:"Bearer "+process.env.APP_TOKEN}})
+        {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token, contentType:"multipart/form-data"}})
         .then(res =>{
            this.$router.push(`/admin-cpxx/faqs/${res.data.slug}`)
           alert('updated')
