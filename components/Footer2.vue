@@ -38,7 +38,7 @@
               <div class="footer-column col-lg-7 col-md-6 col-sm-12">
                 <div class="footer-widget logo-widget">
                   <div class="logo">
-                    <nuxt-link to="/"><img :src="logo" style="max-width: 70%;" alt="logo image" /></nuxt-link>
+                    <nuxt-link :to="localePath('/')"><img :src="logo" style="max-width: 70%;" alt="logo image" /></nuxt-link>
                   </div>
                   <div class="text">{{$t('footer_quote')}}
                   </div>
@@ -57,10 +57,10 @@
                 <div class="footer-widget links-widget">
                   <h4>{{ $t('essential_links') }}</h4>
                   <ul class="links-widget">
-                    <li><nuxt-link to="/about">{{ $t('about') }}</nuxt-link></li>
+                    <li><nuxt-link :to="localePath('about')">{{ $t('about') }}</nuxt-link></li>
                     <li><nuxt-link to="#">{{ $t('partners') }}</nuxt-link></li>
-                    <li><nuxt-link to="/blog">{{ $t('blog') }}</nuxt-link></li>
-                    <li><nuxt-link to="/faqs" href="#">{{ $t('faqs') }}</nuxt-link></li>
+                    <li><nuxt-link :to="localePath('blog')">{{ $t('blog') }}</nuxt-link></li>
+                    <li><nuxt-link :to="localePath('faqs')" href="#">{{ $t('faqs') }}</nuxt-link></li>
                   </ul>
                 </div>
               </div>
@@ -77,10 +77,10 @@
                 <div class="footer-widget links-widget">
                   <h4>{{ $tc('resource',2) }}</h4>
                   <ul class="links-widget">
-                    <li><nuxt-link to="/privacy">{{$t('privacy')}}</nuxt-link></li>
-                    <li><nuxt-link to="/">{{ $t('support_area') }}</nuxt-link></li>
-                    <li><nuxt-link to="/">{{ $t('documentation') }}</nuxt-link></li>
-                    <li><nuxt-link to="/conditions">{{ $t('conditions') }}</nuxt-link></li>
+                    <li><nuxt-link :to="localePath('privacy')">{{$t('privacy')}}</nuxt-link></li>
+                    <li><nuxt-link :to="localePath('/')">{{ $t('support_area') }}</nuxt-link></li>
+                    <li><nuxt-link :to="localePath('/')">{{ $t('documentation') }}</nuxt-link></li>
+                    <li><nuxt-link :to="localePath('conditions')">{{ $t('conditions') }}</nuxt-link></li>
                   </ul>
                 </div>
               </div>
@@ -90,9 +90,9 @@
                 <div class="footer-widget links-widget">
                   <h4>{{ $t('quik_links') }}</h4>
                   <ul class="links-widget">
-                    <li><nuxt-link to="/">{{$t('home')}}</nuxt-link></li>
-                    <li><nuxt-link to="/about">{{ $t('about') }}</nuxt-link></li>
-                    <li><nuxt-link to="/contact">{{ $t('contact') }}</nuxt-link></li>
+                    <li><nuxt-link :to="localePath('/')">{{$t('home')}}</nuxt-link></li>
+                    <li><nuxt-link :to="localePath('about')">{{ $t('about') }}</nuxt-link></li>
+                    <li><nuxt-link :to="localePath('contact')">{{ $t('contact') }}</nuxt-link></li>
                   </ul>
                 </div>
               </div>
