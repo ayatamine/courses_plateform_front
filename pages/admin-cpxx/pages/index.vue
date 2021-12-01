@@ -108,7 +108,7 @@ export default {
   },
   async fetch() {
     this.pages = await this.$axios.$get(`/api/admin-cpx/pages`,
-      {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
+      {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token}})
       .catch(err => console.log(err) )
 
   },

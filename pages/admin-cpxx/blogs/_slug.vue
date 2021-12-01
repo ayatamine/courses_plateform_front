@@ -161,7 +161,7 @@ export default {
 
       let slug =this.$route.params.slug;
        await this.$axios.$post(`/api/admin-cpx/posts/${slug}`,fdata,
-        {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
+        {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token, contentType:"multipart/form-data"}})
       .then(res =>{
         this.$router.push(`/admin-cpxx/blogs/${res.slug}`)
         alert('updated')

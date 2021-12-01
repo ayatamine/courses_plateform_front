@@ -80,7 +80,7 @@ export default {
     async addPage(){
 
       await this.$axios.$post('/api/admin-cpx/pages',this.page,
-        {headers:{Authorization:"Bearer "+process.env.APP_TOKEN}})
+        {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token, contentType:"multipart/form-data"}})
       .then(res =>{
         this.$router.push('/admin-cpxx/pages')
       }).catch(err =>{

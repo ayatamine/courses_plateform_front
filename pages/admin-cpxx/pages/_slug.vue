@@ -87,7 +87,7 @@ export default {
     async updatePage(){
 
       await this.$axios.$put(`/api/admin-cpx/pages/${this.$route.params.slug}`,this.page,
-        {headers:{Authorization:"Bearer "+process.env.APP_TOKEN}})
+        {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token, contentType:"multipart/form-data"}})
         .then(res =>{
            this.$router.push(`/admin-cpxx/pages/${res.data.slug}`)
           alert('updated')

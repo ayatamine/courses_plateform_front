@@ -147,7 +147,7 @@ export default {
 
 
       await this.$axios.$post('/api/admin-cpx/posts',fdata,
-        {headers:{Authorization:"Bearer "+process.env.APP_TOKEN}})
+        {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token, contentType:"multipart/form-data"}})
       .then(res =>{
         console.log(res.data)
         this.post ={postable_type:'App\\Models\\Admin'}
