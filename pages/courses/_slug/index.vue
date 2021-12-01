@@ -49,11 +49,11 @@
                                <li>15 {{ $t('Reviews') }}</li>
                              </ul>
                              <hr/>
-                             <p v-if="course.categories.length" ><strong>Category : </strong>
+                             <p v-if="course.categories.length" ><strong>{{ $t('Category') }} : </strong>
                                <nuxt-link :to="localePath(`/categories/${course.categories[0].slug}/courses`)" class="link-colored">{{($i18n.locale == 'en' ) ? course.categories[0].name_en : course.categories[0].name}}</nuxt-link>
                              </p>
                              <hr/>
-                             <p v-if="course.tags.length"><strong>Tags :</strong> </p>
+                             <p v-if="course.tags.length"><strong>{{ $t('Tags') }} :</strong> </p>
                              <div>
                                <v-chip v-for="(t,i) in course.tags" :key="i"
                                  class=" mr-2 ml-1"
@@ -110,10 +110,10 @@
                                <div class="acc-content" :class="(accActiveBtn == 'accb'+k)  ? 'current' : ''">
                                <div class="content" v-for="(video,k) in section.videos" :key="k">
                                  <div class="clearfix">
-                                   <div class="pull-left">
+                                   <div :class="$dir() == 'ltr' ? 'pull-left' : 'pull-right'">
                                      <a href="" @click.prevent class="lightbox-image play-icon"><span class="fa fa-play"></span>{{($i18n.locale == 'en' ) ? video.title_en : video.title}}</a>
                                    </div>
-                                   <div class="pull-right">
+                                   <div :class="$dir() == 'ltr' ? 'pull-right' : 'pull-left'">
                                      <div class="minutes">{{ video.duration }} {{$tc('Minute',2)}}</div>
                                    </div>
                                  </div>
@@ -160,6 +160,7 @@
 
                <!-- Video Box -->
                <div class="intro-video" :style="`background-image: url(${preview_image})`">
+
                  <a href="https://www.youtube.com/watch?v=PlBkXZUTL-U" class="lightbox-image intro-video-box"><span class="fa fa-play"><i class="ripple"></i></span></a>
                  <h4>{{$t('preview_course')}}</h4>
                </div>
@@ -168,7 +169,7 @@
 <!--               <div class="time-left">23 hours left at this price!</div>-->
 
 <!--               <a href="#" class="theme-btn btn-style-three"><span class="txt">Add To Cart <i class="fa fa-angle-right"></i></span></a>-->
-               <a href="#" class="theme-btn btn-style-four mt-4"><span class="txt">{{$t('Learn Now')}} <i class="fa fa-angle-right"></i></span></a>
+               <a href="#" class="theme-btn btn-style-four mt-4"><span class="txt">{{$t('Learn_Now')}} <i class="fa " :class="$dir()=='rtl' ? 'fa-angle-left ml-2' :'fa-angle-right mr-2'"></i></span></a>
              </div>
            </div>
 

@@ -75,30 +75,20 @@
                              <div class="acc-content current">
                                <div class="content">
                                  <div class="clearfix">
-                                   <div class="pull-left">
+                                   <div :class="$dir() == 'ltr' ? 'pull-left' : 'pull-right'">
                                      <a href="https://www.youtube.com/watch?v=kxPCFljwJws" class="lightbox-image play-icon"><span class="fa fa-play"></span>What is UI/ UX Design?</a>
                                    </div>
-                                   <div class="pull-right">
+                                   <div :class="$dir() == 'ltr' ? 'pull-right' : 'pull-left'">
                                      <div class="minutes">35 Minutes</div>
                                    </div>
                                  </div>
                                </div>
                                <div class="content">
                                  <div class="clearfix">
-                                   <div class="pull-left">
+                                   <div :class="$dir() == 'ltr' ? 'pull-left' : 'pull-right'">
                                      <a href="https://www.youtube.com/watch?v=kxPCFljwJws" class="lightbox-image play-icon"><span class="fa fa-play"><i class="ripple"></i></span>What is UI/ UX Design?</a>
                                    </div>
-                                   <div class="pull-right">
-                                     <div class="minutes">35 Minutes</div>
-                                   </div>
-                                 </div>
-                               </div>
-                               <div class="content">
-                                 <div class="clearfix">
-                                   <div class="pull-left">
-                                     <a href="https://www.youtube.com/watch?v=kxPCFljwJws" class="lightbox-image play-icon"><span class="fa fa-play"></span>What is UI/ UX Design?</a>
-                                   </div>
-                                   <div class="pull-right">
+                                   <div :class="$dir() == 'ltr' ? 'pull-right' : 'pull-left'">
                                      <div class="minutes">35 Minutes</div>
                                    </div>
                                  </div>
@@ -133,7 +123,7 @@
                <!--               <div class="time-left">23 hours left at this price!</div>-->
 
                <!--               <a href="#" class="theme-btn btn-style-three"><span class="txt">Add To Cart <i class="fa fa-angle-right"></i></span></a>-->
-               <a href="#" class="theme-btn btn-style-four mt-4"><span class="txt">Learn Now <i class="fa fa-angle-right"></i></span></a>
+               <a href="#" class="theme-btn btn-style-four mt-4"><span class="txt">{{ $t('Learn_Now')}} <i class="fa " :class="$dir()=='rtl' ? 'fa-angle-left ml-2' :'fa-angle-right mr-2'"></i></i></span></a>
              </div>
            </div>
 

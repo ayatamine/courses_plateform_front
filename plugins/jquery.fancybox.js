@@ -1,4 +1,4 @@
-if (process.client) {
+if (process.browser) {
   window.$ = require('jquery')
   window.jQuery = require('jquery')
   window.fancybox = require('@fancyapps/fancybox')

@@ -244,5 +244,10 @@ export default {
 .cource-block-two .inner-box .lower-content .students span{
   font-size: 12px; font-weight: 600;
 }
-
+@media only screen and (max-width: 599px) {
+  .options-view .pull-right {
+    width:auto;
+    margin-top: 0;
+  }
+}
 </style>

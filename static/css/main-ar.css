@@ -12,3 +12,6 @@ body {
 .fa {
   font-family: 'FontAwesome' !important;
 }
+div[dir="rtl"] .intro-section .intro-tabs .tab-btns .tab-btn{float: right}
+div[dir="rtl"] .accordion-box .block .play-icon .fa{padding-right: 4px;padding-left:0 ;
+  margin-left: 30px;margin-right: 0}

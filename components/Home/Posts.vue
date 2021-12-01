@@ -37,7 +37,11 @@
             <div class="text" v-html="($i18n.locale =='en' ) ? post.content_en.substring(0,70) : post.content.substring(0,70)">{</div>
           </div>
         </div>
-
+        <div class="event-block-two empty-block col-lg-6 col-md-12 col-sm-12">
+          <div class="inner-box">
+            <nuxt-link :to="localePath('blog')" class="theme-btn btn-style-six"><span class="txt">{{ $t('Browse') }} {{$t('All')}}</span></nuxt-link>
+          </div>
+        </div>
 
       </div>
 
