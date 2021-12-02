@@ -1,24 +1,16 @@
 <template>
   <!-- Contact Page Section -->
   <div>
-    <page-title :title-content="pageInfo.name_en" ></page-title>
-    <section class="privacy-section" >
-      <div class="auto-container">
-        <!-- Privacy Content -->
-        <div class="privacy-content" v-html="pageInfo.content_en">
-
-        </div>
-      </div>
-    </section>
+    <static-pages :page-info="pageInfo" />
   </div>
 
 </template>
 
 <script>
-import PageTitle from "../components/PageTitle";
+import StaticPages from "~/components/StaticPages";
 export default {
   name: "Questions-and-Answers",
-  components: {PageTitle},
+  components: {StaticPages},
   head(){
     return{
       title:  'Questions and Answers',

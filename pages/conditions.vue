@@ -1,22 +1,16 @@
 <template>
   <!-- Contact Page Section -->
  <div>
-   <page-title :title-content="pageInfo.name_en" ></page-title>
-   <section class="privacy-section" >
-     <div class="auto-container">
-       <!-- Privacy Content -->
-       <div class="privacy-content" v-html="pageInfo.content_en">
-
-       </div>
-     </div>
-   </section>
+   <static-pages :page-info="pageInfo" />
  </div>
 
 </template>
 
 <script>
+import StaticPages from "~/components/StaticPages";
 export default {
   name: "Terms and conditions",
+  components: {StaticPages},
   head(){
     return{
       title:  'Terms and Conditions',
