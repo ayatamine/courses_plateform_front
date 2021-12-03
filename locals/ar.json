@@ -98,5 +98,7 @@
   "login_to_leave_comment": "من فضلك قم بتسجيل الدخول للتعليق ",
   "write_your_comment": "اضافة محتوى التعليق",
   "comment_is_short_error": "محتوى التعليق قصير جدا ...",
-  "submit_your_comment": "نشر التعليق"
+  "submit_your_comment": "نشر التعليق",
+  "contact_us": "اتصل بنا ",
+  "cant_find_answers": "لم تجد الاجابة على سؤالك؟"
 }

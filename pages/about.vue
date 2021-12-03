@@ -2,6 +2,9 @@
   <!-- Contact Page Section -->
  <div>
    <static-pages :page-info="pageInfo" />
+   <div class="text-center p-2 pb-4" style="    background-color: #f0f5fb;">
+     <iframe width="560" height="314"  src="https://www.youtube.com/embed/PlBkXZUTL-U"   frameborder="0" allowfullscreen>></iframe>
+   </div>
  </div>
 
 </template>

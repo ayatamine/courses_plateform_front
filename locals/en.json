@@ -63,5 +63,7 @@
   "login_to_leave_comment": "Please log in to leave a comment . ",
   "write_your_comment": "Write your Comment...",
   "comment_is_short_error": "the Comment Content is too short ...",
-  "submit_your_comment": "Submit Your comment "
+  "submit_your_comment": "Submit Your comment ",
+  "contact_us": "Contact Us",
+  "cant_find_answers": "Can't find your answers?"
 }
