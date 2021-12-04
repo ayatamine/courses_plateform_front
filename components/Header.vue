@@ -121,7 +121,7 @@ export default {
     return this.$store.state['usersAuth'].token;
   },
    logo(){
-     return this.$store.getters['site_settings'].logo;
+     return (this.$i18n.locale == 'en') ?  this.$store.getters['site_settings'].logo : this.$store.getters['site_settings'].logo_ar ;
    },
  },
   mounted() {

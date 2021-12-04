@@ -1,7 +1,7 @@
 <template>
   <!-- Contact Page Section -->
   <div>
-    <page-title title-content="Frequently Asked Questions" ></page-title>
+    <page-title :title-content="$i18n.locale == 'en' ? 'FAQs' : 'الأسئلة الشائعة'" ></page-title>
     <section class="privacy-section" >
       <div class="auto-container">
         <!-- Privacy Content -->
@@ -138,7 +138,7 @@ body{margin-top:20px;}
   justify-content: space-between;
 }
 .faq-accordian .card .card-header h6 span {
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 .faq-accordian .card .card-header h6.collapsed {
   color: #070a57;
