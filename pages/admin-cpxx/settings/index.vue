@@ -29,6 +29,12 @@
                      ></v-file-input>
                      <v-icon cols="4"    md="4" style="cursor: pointer" @click="ThumbnailDialog = !ThumbnailDialog">mdi-eye</v-icon>
                    </v-row>
+                   <v-row>
+                     <v-file-input class="mr-2" cols="8"    md="8"     v-model="settings['logo_ar']" label="Logo_ar"     outlined dense
+                                   hide-details
+                     ></v-file-input>
+                     <v-icon cols="4"    md="4" style="cursor: pointer" @click="ThumbnailDialog = !ThumbnailDialog">mdi-eye</v-icon>
+                   </v-row>
                  </v-col>
                  <v-dialog
                    v-model="ThumbnailDialog"
@@ -36,6 +42,7 @@
                  >
                    <v-card>
                      <img :src="settings.logo" style="min-height:300px;"/>
+                     <img :src="settings.logo_ar" style="min-height:300px;"/>
                    </v-card>
                  </v-dialog>
 
@@ -98,9 +105,14 @@ export default {
       //spread the logo to get only the last part ex = logo.png
       let logoname = this.settings.logo.toString().split('/').pop()
       fdata.set('logo',logoname);
+      let logo_ar_name = this.settings.logo_ar.toString().split('/').pop()
+      fdata.set('logo_ar',logo_ar_name);
 
       if(typeof (this.settings.logo) !== 'string'){
         fdata.set('logo',this.settings.logo,this.settings.logo.name);
+      }
+      if(typeof (this.settings.logo_ar) !== 'string'){
+        fdata.set('logo_ar',this.settings.logo_ar,this.settings.logo_ar.name);
       }
       this.$nuxt.$loading.start();
         await axios.post(`${process.env.APP_URL}/api/admin-cpx/update_site_settings`,fdata,
