@@ -5,7 +5,7 @@ export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
         titleTemplate(titleChunk) {
-          let app_name  = process.env.APP_NAME || '4arabdevelopers من أجل المطورين العرب';
+          let app_name  = process.env.APP_NAME || ' كورسات برمجة coursatbarmaja';
           return titleChunk ? `${app_name}  | ${titleChunk}` : app_name
         },
         meta: [
@@ -17,14 +17,17 @@ export default {
             {  property:"og:image", content: process.env.META_IMAGE },
             {  hid:'og-description' ,property:"og:description", content: process.env.META_OG_DESCRIPTIN },
             {  property:"facebook-domain-verification", content: process.env.FACEBOOK_DOMAIN_VERFICATION },
-            {  rel :'icon',type:"image/png",sizes:"192x192", href: `/images/${process.env.FAVICON_192}` },
-            {  rel :'icon',type:"image/png",sizes:"96x96", href: `/images/${process.env.FAVICON_96}` },
-            {  rel :'icon',type:"image/png",sizes:"32x32", href: `/images/${process.env.FAVICON_32}` },
-            {  rel :'icon',type:"image/png",sizes:"16x16", href: `/images/${process.env.FAVICON_16}` },
+
             { name: 'X-UA-Compatible', content: 'IE=edge' }
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+            {  rel :'icon',type:"image/png",sizes:"192x192", href: `/images/${process.env.FAVICON_192}` },
+            {  rel :'icon',type:"image/png",sizes:"96x96", href: `/images/${process.env.FAVICON_96}` },
+            {  rel :'icon',type:"image/png",sizes:"32x32", href: `/images/${process.env.FAVICON_32}` },
+            {  rel :'icon',type:"image/png",sizes:"16x16", href: `/images/${process.env.FAVICON_16}` },
+            {  rel :'manifest',type:"image/png",sizes:"16x16", href: `/images/${process.env.WEB_MAINFEST}` },
+            {  rel :'apple-touch-icon',sizes:"180x180", href: `/images/${process.env.APPLE_TOUCH_ICON}` },
             // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Titillium+Web:wght@300;400;600;700;900&display=swap' },
             // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Roboto+Condensed:ital,wght@0,400;0,700;1,700&display=swap' },
             // { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css' },
