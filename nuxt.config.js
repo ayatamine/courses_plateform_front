@@ -76,7 +76,6 @@ export default {
       {src:'~/plugins/pagination.js',mode:'client'},
       {src:'~/plugins/video_player.js',mode:'client'},
       {src:'~/plugins/bootstrap.js'},
-      '~/plugins/jquery.fancybox',
       // '~/plugins/mixins/user', //manual login deprecated
       '~/plugins/mixins/form_validation',
       '~/plugins/axios',

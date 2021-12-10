@@ -161,7 +161,7 @@
                <!-- Video Box -->
                <div class="intro-video" :style="`background-image: url(${preview_image})`">
 
-                 <a href="https://www.youtube.com/watch?v=PlBkXZUTL-U" class="lightbox-image intro-video-box"><span class="fa fa-play"><i class="ripple"></i></span></a>
+                 <a @click.prevent="openPreview" href="https://www.youtube.com/watch?v=PlBkXZUTL-U" class="lightbox-image intro-video-box"><span class="fa fa-play"><i class="ripple"></i></span></a>
                  <h4>{{$t('preview_course')}}</h4>
                </div>
                <!-- End Video Box -->
@@ -185,6 +185,7 @@
 import preview_image from '~/assets/images/background/video-image.jpg';
 import icon1 from '~/assets/images/icons/icon-1.png';
 import icon2 from '~/assets/images/icons/icon-2.png';
+import BigPicture from 'bigpicture'
 
 
 export default {
@@ -226,10 +227,16 @@ export default {
      return {course : course.data}
 
   },
-  mounted() {
-    $('.lightbox-image').click(function(){
-      console.log('yes')
-    })
+  methods:{
+    openPreview(e){
+      BigPicture({
+        el:e.target ,
+        // image url
+        imgSrc: this.videoImage,
+        // youtube ID
+        ytSrc: 'PlBkXZUTL-U',
+      })
+    }
   }
 }
 

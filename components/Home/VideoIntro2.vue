@@ -2,8 +2,9 @@
   <section class="video-section-two">
     <div class="auto-container">
       <!--Video Box-->
+
       <div class="video-boxed" :style="`background-image: url(${videoImage})`">
-        <a href="https://www.youtube.com/watch?v=PlBkXZUTL-U" class="lightbox-image overlay-box"><span class="fa fa-play"><i class="ripple"></i></span></a>
+        <a @click.prevent="openPreview" href="https://www.youtube.com/watch?v=PlBkXZUTL-U" class="lightbox-image overlay-box"><span class="fa fa-play"><i class="ripple"></i></span></a>
         <h4>Watch Intro <br> Video</h4>
       </div>
     </div>
@@ -11,12 +12,25 @@
 </template>
 
 <script>
+import BigPicture from 'bigpicture'
+
 import videoImage from "~/assets/images/background/video-image.jpg";
 export default {
   name: "VideoIntro",
   data(){
     return {
       videoImage
+    }
+  },
+  methods:{
+    openPreview(e){
+      BigPicture({
+        el:e.target ,
+        // image url
+        imgSrc: this.videoImage,
+        // youtube ID
+        ytSrc: 'PlBkXZUTL-U',
+      })
     }
   }
 }
