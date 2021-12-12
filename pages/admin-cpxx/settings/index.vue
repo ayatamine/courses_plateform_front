@@ -84,7 +84,7 @@ export default {
   },
   async fetch() {
     await this.$axios.$get(`/api/admin-cpx/site_settings`,
-      {headers:{Authorization:"Bearer "+process.env.APP_TOKEN}})
+      {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token}})
       .then(res => {
         this.settings = res.settings
         this.settings.logo = res.logo

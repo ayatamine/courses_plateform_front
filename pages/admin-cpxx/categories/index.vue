@@ -199,8 +199,8 @@ export default {
     },
 
     async deleteItemConfirm () {
-      await axios.delete(`${process.env.APP_URL}/api/admin-cpx/categories/${this.editedItem.slug}`,
-        {headers:{Authorization:"Bearer "+"process.env.APP_TOKEN", contentType:"multipart/form-data"}})
+      await this.$axios.$delete(`/api/admin-cpx/categories/${this.editedItem.slug}`,
+        {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token, contentType:"application/json"}})
         .then(res => {
           this.categories.data.splice(this.editedIndex, 1)
         })
@@ -228,16 +228,16 @@ export default {
     async save () {
       if (this.editedIndex > -1) {
        //update item
-        await axios.put(`${process.env.APP_URL}/api/admin-cpx/categories/${this.editedItem.slug}`,this.editedItem,
-          {headers:{Authorization:"Bearer "+"process.env.APP_TOKEN", contentType:"multipart/form-data"}})
+        await this.$axios.$put(`/api/admin-cpx/categories/${this.editedItem.slug}`,this.editedItem,
+          {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token, contentType:"multipart/form-data"}})
           .then(res => {
             Object.assign(this.categories.data[this.editedIndex],res.data)
           })
           .catch(err => console.log(err) )
       } else {
         //create new item
-        await axios.post(`${process.env.APP_URL}/api/admin-cpx/categories`,this.editedItem,
-          {headers:{Authorization:"Bearer "+"process.env.APP_TOKEN", contentType:"multipart/form-data"}})
+        await this.$axios.$post(`/api/admin-cpx/categories`,this.editedItem,
+          {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token, contentType:"multipart/form-data"}})
           .then(res => {
               this.categories.data.push(res.data)
           })

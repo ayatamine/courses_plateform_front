@@ -133,7 +133,7 @@ export default {
   async fetch(){
 
     this.post = await this.$axios.$get(`/api/admin-cpx/posts/${this.$route.params.slug}`,
-      {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
+      {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token, contentType:"multipart/form-data"}})
     .catch(err => console.log(err) )
 
   },

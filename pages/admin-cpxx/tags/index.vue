@@ -162,7 +162,7 @@ export default {
   },
   async fetch() {
        this.tags = await this.$axios.$get(`/api/admin-cpx/tags`,
-      {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
+      {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token, contentType:"multipart/form-data"}})
       .catch(err => console.log(err) )
 
   },
@@ -195,7 +195,7 @@ export default {
 
     async deleteItemConfirm () {
       await this.$axios.$delete(`/api/admin-cpx/tags/${this.editedItem.id}`,
-        {headers:{Authorization:"Bearer "+"process.env.APP_TOKEN", contentType:"multipart/form-data"}})
+        {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token, contentType:"multipart/form-data"}})
         .then(res => {
           this.tags.data.splice(this.editedIndex, 1)
         })
@@ -224,7 +224,7 @@ export default {
       if (this.editedIndex > -1) {
        //update item
         await this.$axios.$put(`/api/admin-cpx/tags/${this.editedItem.id}`,this.editedItem,
-          {headers:{Authorization:"Bearer "+"process.env.APP_TOKEN", contentType:"multipart/form-data"}})
+          {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token, contentType:"multipart/form-data"}})
           .then(res => {
             Object.assign(this.tags.data[this.editedIndex],res)
           })
@@ -232,7 +232,7 @@ export default {
       } else {
         //create new item
         await this.$axios.$post(`/api/admin-cpx/tags`,this.editedItem,
-          {headers:{Authorization:"Bearer "+"process.env.APP_TOKEN", contentType:"multipart/form-data"}})
+          {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token, contentType:"multipart/form-data"}})
           .then(res => {
               this.tags.data.push(res)
           })
