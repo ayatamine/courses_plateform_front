@@ -200,8 +200,8 @@ export default {
           this.tags.data.splice(this.editedIndex, 1)
         })
         .catch(err => console.log(err) )
+        .finally(()=> this.closeDelete())
 
-      this.closeDelete()
     },
 
     close () {

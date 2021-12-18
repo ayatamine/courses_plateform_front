@@ -30,6 +30,7 @@
     "nuxt": "^2.14.12",
     "nuxt-highlightjs": "^1.0.1",
     "popper.js": "^1.16.1",
+    "sharp": "^0.29.3",
     "v-video-embed": "^1.0.8",
     "vue-owl-carousel": "^2.0.3",
     "vue-social-sharing": "^3.0.8",

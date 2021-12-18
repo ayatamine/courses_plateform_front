@@ -123,6 +123,19 @@ export default {
 
     }
   },
+  async fetch(){
+    console.log('fetch')
+    if(!this.categories.length) {
+
+      const [categories, tags] = await Promise.all([
+        this.$axios.$get('api/admin-cpx/categories'),
+        this.$axios.$get('/api/admin-cpx/tags'),
+      ])
+
+      this.$store.commit("categories/setCategories",categories.data)
+      this.$store.commit("tags/setTags",tags.data)
+    }
+  },
   methods:{
 
     async addPost(){
