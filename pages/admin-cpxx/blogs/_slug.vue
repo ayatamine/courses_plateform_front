@@ -82,7 +82,12 @@
           ></v-combobox>
         </v-col>
 
-
+        <v-col     cols="12"    md="3" >
+          <label >Keywords <span class="text-danger">Please make space between each keyword</span></label>
+        </v-col>
+        <v-col  cols="12"    md="9">
+          <v-textarea v-model="post.keywords" placeholder="post keywords" outlined dense></v-textarea>
+        </v-col>
         <v-col
           offset-md="3"
           cols="12"
@@ -133,8 +138,19 @@ export default {
   async fetch(){
 
     this.post = await this.$axios.$get(`/api/admin-cpx/posts/${this.$route.params.slug}`,
-      {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token, contentType:"multipart/form-data"}})
+      {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token, contentType:"application/json"}})
     .catch(err => console.log(err) )
+    //reset the categories and tags if not exitst
+    if(!this.categories.length) {
+
+      const [categories, tags] = await Promise.all([
+        this.$axios.$get('api/admin-cpx/categories'),
+        this.$axios.$get('/api/admin-cpx/tags'),
+      ])
+
+      this.$store.commit("categories/setCategories",categories.data)
+      this.$store.commit("tags/setTags",tags.data)
+    }
 
   },
   methods:{

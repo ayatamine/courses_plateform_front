@@ -124,7 +124,7 @@ export default {
     }
   },
   async fetch(){
-    console.log('fetch')
+
     if(!this.categories.length) {
 
       const [categories, tags] = await Promise.all([
