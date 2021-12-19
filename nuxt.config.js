@@ -190,12 +190,18 @@ export default {
             clientId: "3",
             clientSecret: '14p6dTQxfhS6Es7fxDC2yFnWBcL30yACf3uXCmpN',
           },
+        },
+        redirect: {
+          login: '/auth/login',
+          logout: '/',
+          callback: '/auth/login',
+          home: '/'
         }
     },
     //router middlewares
-    router: {
-      middleware: 'refresh_token',
-    },
+    // router: {
+    //   middleware: 'refresh_token',
+    // },
     //configuration of robots.txt properties
     robots: [
       {

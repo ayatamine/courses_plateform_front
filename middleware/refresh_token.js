@@ -1,12 +1,9 @@
-import cookies from 'js-cookie';
 
-export default function ({ store, redirect }) {
-  //const token = cookies.get('x-access-token');
-  if (!store.state['usersAuth'].token) {
-    store.dispatch('usersAuth/refreshToken')
-      .catch(errors => {
-        console.log(errors);
-        store.dispatch('usersAuth/logout');
-      });
+export default function ({ redirect ,app}) {
+  if(!app.$auth.loggedIn){
+    if(app.$i18n.locale == 'en') {
+      return redirect('/auth/login')
+    }
+    return redirect('/ar/auth/login')
   }
 }

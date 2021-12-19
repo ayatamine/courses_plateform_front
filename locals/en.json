@@ -54,7 +54,7 @@
   "for_help": "For Help ",
   "comment":"Comment | Comments | {0} Comment ",
   "share_article": "Share this article on",
-  "no_comment_signin_to_see": "Please sign in to see the discussion .",
+  "no_comment_signin_to_see": "No comment yet ,Be the first who discuss.",
   "login_to_reply": "Please log in to reply to ",
   "write_your_reply": "Write your reply...",
   "reply_is_short_error": "the reply content is too short ...",

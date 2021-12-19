@@ -111,7 +111,7 @@
                 <img :src="post.cover_image" alt="" />
               </div>
               <p v-html="($i18n.locale =='en' ) ?  post.content_en : post.content" > </p>
-              <div class="social-box mt-5">
+              <div class="social-box mt-5" v-if="post">
                 <span>{{$t('share_article')}} </span>
 
                 <ShareNetwork
@@ -119,7 +119,7 @@
                   :url="getLocalUrl"
                   :title="($i18n.locale =='en' ) ? post.title_en : post.title"
                   :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
-                  quote="Learning made easy  with us"
+                  quote="Learning made easy  with us in CoursatBarmaja"
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
@@ -130,7 +130,7 @@
                   :url="getLocalUrl"
                   :title="($i18n.locale =='en' ) ? post.title_en : post.title"
                   :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
-                  quote="Learning made easy  with us"
+                  quote="Learning made easy  with us in CoursatBarmaja"
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
@@ -141,7 +141,7 @@
                   :url="getLocalUrl"
                   :title="($i18n.locale =='en' ) ? post.title_en : post.title"
                   :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
-                  quote="Learning made easy  with us"
+                  quote="Learning made easy  with us in CoursatBarmaja"
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
@@ -152,7 +152,7 @@
                   :url="getLocalUrl"
                   :title="($i18n.locale =='en' ) ? post.title_en : post.title"
                   :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
-                  quote="Learning made easy  with us"
+                  quote="Learning made easy  with us in CoursatBarmaja"
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
@@ -346,7 +346,7 @@ export default {
 
       this.new_comment.parent_id = parent_id;
 
-      let token = this.$store.state['usersAuth'].token;
+      // let token = this.$store.state['usersAuth'].token;
       alert('the comment will open soon ..')
       // this.$axios.setHeader('Authorization','bearer '+token);
       // this.$axios.setHeader('Content-Type','application/x-www-form-urlencoded')
@@ -359,7 +359,8 @@ export default {
   },
   computed:{
     loggedIn(){
-      return this.$store.state['usersAuth'].token
+      // return this.$store.state['usersAuth'].token
+      return this.$auth.loggedIn
     },
     getLocalUrl(){
       return this.localUrl;

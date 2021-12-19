@@ -50,7 +50,7 @@
             <div class="outer-box">
 
               <!-- Login Nav -->
-              <ul class="login-nav" v-if="!isLoggedIn">
+              <ul class="login-nav" v-if="!$auth.loggedIn">
                 <li><nuxt-link :to="localePath('/auth/login')" >{{$t('login')}}</nuxt-link></li>
                 <li><nuxt-link :to="localePath('/auth/register')" >{{$t('register')}}</nuxt-link></li>
               </ul>
@@ -95,7 +95,7 @@
               <li><nuxt-link :to="$i18n.locale=='en' ? switchLocalePath('ar') : switchLocalePath('en')">{{$t('Change')}} {{$t('lang')}}</nuxt-link></li>
               <li><nuxt-link :to="localePath('contact')">{{$t('contact')}}</nuxt-link></li>
             </ul>
-            <ul class="login-nav navigation clearfix d-flex flex-row pt-2 justify-content-around" v-if="!isLoggedIn">
+            <ul class="login-nav navigation clearfix d-flex flex-row pt-2 justify-content-around" v-if="!$auth.loggedIn">
               <li class="btn btn-sm login-btn "><nuxt-link :to="localePath('/auth/login')" >{{$t('login')}}</nuxt-link></li>
               <li class="btn btn-sm" ><nuxt-link :to="localePath('/auth/register')" >{{ $t('register') }}</nuxt-link></li>
             </ul>
@@ -151,11 +151,12 @@ export default {
   },
   methods: {
     async logout() {
-      console.log('logout')
+      // console.log('logout')
       await this.$axios.$post('/api/students/logout')
         .then(resp => {
-          this.$store.dispatch('usersAuth/logout');
-          this.$router.push('/');
+          // this.$store.dispatch('usersAuth/logout');
+          this.$auth.logout()
+          this.$router.push(this.localePath('/'));
         })
         .catch(errors => {
           console.dir(errors);

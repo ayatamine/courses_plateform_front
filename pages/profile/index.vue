@@ -22,6 +22,7 @@ export default {
   },
   name: "my-profile",
   components: {FormInputError},
+  middleware:'refresh_token',
   data(){
     return {
          profileInfos:{},
@@ -29,10 +30,11 @@ export default {
     }
   },
   async fetch(){
-    const token = cookies.get('x-access-token');
-    this.$auth.setStrategy('laravelPassport');
-    this.$auth.setUserToken(token);
+    // const token = cookies.get('x-access-token');
+    // this.$auth.setStrategy('laravelPassport');
+    // this.$auth.setUserToken(token);
     console.log(this.$auth);
+
     // this.$axios.setHeader('content-type', 'application/json')
     // this.$axios.setToken(token, 'Bearer')
     // console.log(this.$axios.defaults.headers)

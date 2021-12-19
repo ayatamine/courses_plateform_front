@@ -103,7 +103,9 @@ export default {
        this.authError = false;
       await this.$axios.$post('/api/students/login', this.userData)
         .then(({token,expiresIn}) => {
-          this.$store.dispatch('usersAuth/setToken', {token, expiresIn});
+          this.$auth.setStrategy('laravelPassport');
+          this.$auth.setUserToken(token);
+          //this.$store.dispatch('usersAuth/setToken', {token, expiresIn});
           this.$router.push('/');
         })
         .catch(error => {
