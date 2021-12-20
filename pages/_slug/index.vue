@@ -267,15 +267,23 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: this.post.content_description
+          content: this.$i18n.locale == "en" ? 'in this article we will talk about '+this.post.title_en+ ' and give you a good explanation about it'
+                                             : ' في هذه المقالة سنتحدث عن '+this.post.title+' وسنقوم بالغوص عميقا في تفاصيله '
         },
         {
           hid: 'og-description',
           name: 'description',
-          content: this.post.content_description
+          content: this.$i18n.locale == "en" ? 'in this article we will talk about '+this.post.title_en + ' and give you a good explanation about it'
+            : ' في هذه المقالة سنتحدث عن '+this.post.title+' وسنقوم بالغوص عميقا في تفاصيله '
         },
         {hid:"keywords",property:"keywords", content: this.post.keywords},
-        {hid:"og-title",property:"og:title", content: process.env.APP_NAME+ ' | '+this.post.title_en,}
+        {hid:"og-image",property:"og:image", content: this.post.cover_image},
+        {hid:"og-site_name",property:"og:site_name", content: process.env.APP_NAME},
+        {hid:"og-twitter_title",property:"twitter:image", content: this.post.cover_image},
+        {hid:"og-twitter_card",property:"twitter:card", content: this.$i18n.locale == "en" ? 'in this article we will talk about '+this.post.title_en+ ' and give you a good explanation about it'
+            : ' في هذه المقالة سنتحدث عن '+this.post.title+' وسنقوم بالغوص عميقا في تفاصيله '},
+        {hid:"og-title",property:"og:title", content:this.$i18n.locale == "en" ? process.env.APP_NAME+ ' | '+this.post.title_en
+                                                                               :  process.env.APP_NAME+ ' | '+this.post.title,}
       ],
     }
 
