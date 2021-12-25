@@ -14,7 +14,7 @@ export default {
             { hid: 'description', name: 'description', content: process.env.META_DESCRIPTION },
             { hid:'keywords', name: 'keywords', content: process.env.META_DESCRIPTION },
             { hid:'og-title',  property:"og:title", content: process.env.APP_NAME },
-            {  property:"og:image", content: process.env.META_IMAGE },
+            {  hid:'og-image' ,property:"og:image", content: process.env.META_IMAGE },
             {  hid:'og-description' ,property:"og:description", content: process.env.META_OG_DESCRIPTIN },
             {  property:"facebook-domain-verification", content: process.env.FACEBOOK_DOMAIN_VERFICATION },
 

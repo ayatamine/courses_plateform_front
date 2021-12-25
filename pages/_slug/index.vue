@@ -119,7 +119,7 @@
                   :url="getLocalUrl"
                   :title="($i18n.locale =='en' ) ? post.title_en : post.title"
                   :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
-                  quote="Learning made easy  with us in CoursatBarmaja"
+                  :quote="($i18n.locale = 'en') ? 'Learning made easy  with us in CoursatBarmaja' : 'التعلم لن يكون مملا معنا في منصة كورسات برمجة' "
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
@@ -130,7 +130,7 @@
                   :url="getLocalUrl"
                   :title="($i18n.locale =='en' ) ? post.title_en : post.title"
                   :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
-                  quote="Learning made easy  with us in CoursatBarmaja"
+                  :quote="($i18n.locale = 'en') ? 'Learning made easy  with us in CoursatBarmaja' : 'التعلم لن يكون مملا معنا في منصة كورسات برمجة' "
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
@@ -141,7 +141,7 @@
                   :url="getLocalUrl"
                   :title="($i18n.locale =='en' ) ? post.title_en : post.title"
                   :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
-                  quote="Learning made easy  with us in CoursatBarmaja"
+                  :quote="($i18n.locale = 'en') ? 'Learning made easy  with us in CoursatBarmaja' : 'التعلم لن يكون مملا معنا في منصة كورسات برمجة' "
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
@@ -152,7 +152,7 @@
                   :url="getLocalUrl"
                   :title="($i18n.locale =='en' ) ? post.title_en : post.title"
                   :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
-                  quote="Learning made easy  with us in CoursatBarmaja"
+                  :quote="($i18n.locale = 'en') ? 'Learning made easy  with us in CoursatBarmaja' : 'التعلم لن يكون مملا معنا في منصة كورسات برمجة' "
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
@@ -258,7 +258,7 @@
 </template>
 
 <script>
-import FormInputError from "../../components/Globals/formInputError";
+import FormInputError from "~/components/Globals/formInputError";
 export default {
   head(){
     return{
@@ -306,25 +306,31 @@ export default {
               localUrl:''
     }
   },
-  mounted() {
+  async mounted() {
     document.querySelectorAll('.ql-syntax').forEach(syn =>syn.classList.add('hljs'));
     // this.$root.$on('share_network_close', function (network, url) {
     //   alert('thanks for sharing')
     // });
 
-    this.localUrl = location.href
+    this.localUrl = location.href;
+
+    try{
+      const [tags,rposts] = await Promise.all([
+        context.$axios.$get('api/tags'),
+        context.$axios.$get('api/posts?limit=3'),
+      ])
+      this.tags = tags;
+      this.recent_posts = rposts;
+    }
+    catch (e) {
+      throw e;
+    }
   },
   async asyncData(context){
 
     try{
-      const [post,tags,posts] = await Promise.all([
-        context.$axios.$get(`api/posts/${context.params.slug}`),
-        context.$axios.$get('api/tags'),
-        context.$axios.$get('api/posts?limit=3'),
-      ])
-
-      return {post:post.data,tags,recent_posts:posts,loading:false}
-
+      const post = await context.$axios.$get(`api/posts/${context.params.slug}`);
+      return post;
     }
     catch (e) {
       throw e;
