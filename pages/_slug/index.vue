@@ -57,7 +57,8 @@
         <!-- Sidebar Side -->
         <div class="sidebar-side style-two blog-sidebar col-lg-3 col-md-12 col-sm-12">
           <div class="sidebar-inner sticky-top">
-            <aside class="sidebar ">
+
+            <aside class="sidebar " >
 
               <!-- Popular Posts -->
               <div class="sidebar-widget popular-posts">
@@ -66,7 +67,10 @@
                 <div class="sidebar-title">
                   <h5>{{ $t('Recent') }} {{ $tc('Post',2) }}</h5>
                 </div>
-
+                <v-skeleton-loader v-show="loading"
+                                   v-bind="attrs"
+                                   type="article, actions" class="p-3"
+                ></v-skeleton-loader>
                 <div class="widget-content">
                   <article class="post" v-if="recent_posts.data.length"  v-for="(post,i) in recent_posts.data" :key="i">
                     <div class="post-inner">
@@ -85,7 +89,10 @@
                 <div class="sidebar-title">
                   <h5>{{ $t('Tags') }}</h5>
                 </div>
-
+                <v-skeleton-loader v-show="loading"
+                                   v-bind="attrs"
+                                   type="article, actions" class="p-3"
+                ></v-skeleton-loader>
                 <div class="widget-content">
                   <nuxt-link :to="localePath('blog')">#All</nuxt-link>
                   <nuxt-link :to="localePath('blog')" v-for="(t,k) in tags.slice(0,10)" :key="k"
@@ -303,7 +310,15 @@ export default {
                 user_type:'user'
               },
               commentSizeError:false,replySizeError:false,
-              localUrl:''
+              localUrl:'',
+              recent_posts:{},
+              tags:[],
+              attrs: {
+                boilerplate: false,
+                elevation: 23,
+                maxHeight:"386px",
+
+              },
     }
   },
   async mounted() {
@@ -316,11 +331,12 @@ export default {
 
     try{
       const [tags,rposts] = await Promise.all([
-        context.$axios.$get('api/tags'),
-        context.$axios.$get('api/posts?limit=3'),
+        this.$axios.$get('api/tags'),
+        this.$axios.$get('api/posts?limit=3'),
       ])
       this.tags = tags;
       this.recent_posts = rposts;
+      this.loading = false
     }
     catch (e) {
       throw e;
@@ -330,7 +346,7 @@ export default {
 
     try{
       const post = await context.$axios.$get(`api/posts/${context.params.slug}`);
-      return post;
+      return {post:post.data};
     }
     catch (e) {
       throw e;
