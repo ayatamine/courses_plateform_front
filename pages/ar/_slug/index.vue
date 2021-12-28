@@ -47,8 +47,6 @@
     </div>
   </section>
   <div class="sidebar-page-container">
-    <!--      <div class="patern-layer-one paroller" data-paroller-factor="0.40" data-paroller-factor-lg="0.20" data-paroller-type="foreground" data-paroller-direction="vertical" style="background-image: url(images/icons/icon-1.png)"></div>-->
-    <!--      <div class="patern-layer-two paroller" data-paroller-factor="0.40" data-paroller-factor-lg="-0.20" data-paroller-type="foreground" data-paroller-direction="vertical" style="background-image: url(images/icons/icon-2.png)"></div>-->
     <div class="circle-one"></div>
     <div class="circle-two"></div>
     <div class="auto-container">
@@ -72,7 +70,7 @@
                                    type="article, actions" class="p-3"
                 ></v-skeleton-loader>
                 <div class="widget-content">
-                  <article class="post" v-if="recent_posts.data.length"  v-for="(post,i) in recent_posts.data" :key="i">
+                  <article class="post" v-show="recent_posts.data.length"  v-for="(post,i) in recent_posts.data" :key="i">
                     <div class="post-inner">
                       <figure class="post-thumb"><nuxt-link :to="localePath(`ar/${post.slug}`)"><img :src="`${post.thumbnail}`" :alt="post.title"></nuxt-link></figure>
                       <div class="text"><nuxt-link :to="`ar/${post.slug}`">{{post.title.slice(0,25)}}</nuxt-link></div>
@@ -118,7 +116,7 @@
                 <img :src="post.cover_image" alt="" />
               </div>
               <p v-html="post.content" > </p>
-              <div class="social-box mt-5" v-if="post">
+              <div class="social-box mt-5" v-show="post">
                 <span>{{$t('share_article')}} </span>
 
                 <ShareNetwork
@@ -176,7 +174,7 @@
                 <button class="pull-right load-comments" v-show="loggedIn && post.comments_count > 0 && comments.length ==0"  @click.prevent="loadComments" > {{$t('Load')}} {{$tc('comment',2)}}</button>
               </div>
 
-              <div class="alert alert-info w-100" v-if="!comments.length" >{{$t('no_comment_signin_to_see')}}</div>
+              <div class="alert alert-info w-100" v-show="!comments.length" >{{$t('no_comment_signin_to_see')}}</div>
               <div v-for="(comment,i) in comments" :key="i">
                 <div class="comment-box " >
                   <div class="comment" >
@@ -187,9 +185,9 @@
                     <a class="theme-btn reply-btn" href="#"> {{ $t('Reply') }}</a>
                   </div>
                   <div class="comment-form reply-comment pt-3 pl-2" ref="reply-comment" >
-                    <div class="alert alert-info w-100" v-if="!loggedIn" >{{$t('login_to_reply')}}{{comment.user.first_name}} .</div>
+                    <div class="alert alert-info w-100" v-show="!loggedIn" >{{$t('login_to_reply')}}{{comment.user.first_name}} .</div>
                     <!--Comment Form-->
-                    <form method="post" v-else action="#" >
+                    <form method="post" v-show="loggedIn"action="#" >
                       <div class="row clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 form-group m-0">
                         <textarea class="" v-model="new_comment.content" @keyup="replySizeError = false"
@@ -199,7 +197,7 @@
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12 form-group m-0">
-                          <button class="btn btn-success text-white" type="submit" name="submit-form" @click.prevent="addComment(comment.id)"><span class="txt">{{$t('submit_your_reply')}}<i class="fa " :class="$dir() == 'ltr' ? 'fa-angle-right' :'fa-angle-left ml-2'"></i></span></button>
+                          <button class="btn btn-success text-white" type="submit" name="submit-form" @click.prevent="addComment(comment.id)"><span class="txt">{{$t('submit_your_reply')}}<i class="fa " :class="$dir() === 'ltr' ? 'fa-angle-right' :'fa-angle-left ml-2'"></i></span></button>
                         </div>
 
                       </div>
@@ -207,7 +205,7 @@
 
                   </div>
                 </div>
-                <div class="comment-box reply-comment"  v-if="comment.children" v-for="(c,k) in comment.children" :key="k">
+                <div class="comment-box reply-comment"  v-show="comment.children" v-for="(c,k) in comment.children" :key="k">
                   <div class="comment" >
                     <div class="author-thumb"><img :src="comment.user.photo" alt=""></div>
                     <div class="comment-info clearfix"><strong>{{ `${c.user.first_name} ${c.user.last_name}`  }} </strong><div class="comment-time">
@@ -222,9 +220,9 @@
             <!-- Comment Form -->
             <div class="comment-form">
               <div class="group-title"><h4>{{$t('Leave') +' '+ $tc('comment',[])}}</h4></div>
-              <div class="alert alert-info w-100" v-if="!loggedIn" >{{$t('login_to_leave_comment')}}</div>
+              <div class="alert alert-info w-100" v-show="!loggedIn" >{{$t('login_to_leave_comment')}}</div>
               <!--Comment Form-->
-              <form method="post" v-else action="#">
+              <form method="post" v-show="loggedIn" action="#">
                 <div class="row clearfix">
 
 <!--                  <div class="col-lg-6 col-md-6 col-sm-12 form-group">-->
@@ -243,7 +241,7 @@
                   </div>
 
                   <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                    <button class="btn btn-success text-white" type="submit" name="submit-form" @click.prevent="addComment(null)"><span class="txt">{{$t('submit_your_comment')}} <i class="fa" :class="$dir() =='ltr' ? ' fa-angle-right' : ' fa-angle-left ml-1'"></i></span></button>
+                    <button class="btn btn-success text-white" type="submit" name="submit-form" @click.prevent="addComment(null)"><span class="txt">{{$t('submit_your_comment')}} <i class="fa" :class="$dir() ==='ltr' ? ' fa-angle-right' : ' fa-angle-left ml-1'"></i></span></button>
                   </div>
 
                 </div>
