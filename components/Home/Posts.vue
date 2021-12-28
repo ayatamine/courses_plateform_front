@@ -33,7 +33,7 @@
                 <li v-for="tag in post.tags.slice(0,2)"><nuxt-link :to="localePath('blog')" @click.prevent>{{($i18n.locale =='en' ) ? tag.title_en :  tag.title }} </nuxt-link></li>
               </ul>
             </div>
-            <h4><nuxt-link :to="`${post.slug}`">{{ ($i18n.locale =='en' ) ? post.title_en : post.title }}</nuxt-link></h4>
+            <h4><nuxt-link :to="($i18n.locale == 'en') ? `${post.slug}` : `/ar/${post.slug}`">{{ ($i18n.locale =='en' ) ? post.title_en : post.title }}</nuxt-link></h4>
             <div class="text" v-html="($i18n.locale =='en' ) ? post.content_en.substring(0,70) : post.content.substring(0,70)">{</div>
           </div>
         </div>

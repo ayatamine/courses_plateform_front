@@ -249,7 +249,11 @@ export default {
         useCookie: true,
         cookieKey: 'i18n_redirected',
         redirectOn: 'root',  // recommended
-      }
+      },
+      ignoreRoutes: [
+        '/pages/ar',
+        'pages/:slug',
+      ],
     },
     //optimize images options
     image: {

@@ -4,7 +4,7 @@
     <div class="auto-container row m-auto">
           <!-- <h3 class="post-detail-heading">Snippet in detail</h3> -->
           <div class="col-md-9">
-            <h3 class="blog-post-title post-detail-title " >{{($i18n.locale =='en' ) ? post.title_en : post.title}}</h3>
+            <h3 class="blog-post-title post-detail-title " >{{post.title}}</h3>
             <ul class="blog-post-info list-inline post-detail-info d-flex">
               <li>
                 <div>
@@ -52,7 +52,7 @@
     <div class="circle-one"></div>
     <div class="circle-two"></div>
     <div class="auto-container">
-      <div class="row clearfix" :class="$dir() == 'rtl' ? 'flex-row-reverse' : ''">
+      <div class="row clearfix flex-row-reverse">
 
         <!-- Sidebar Side -->
         <div class="sidebar-side style-two blog-sidebar col-lg-3 col-md-12 col-sm-12">
@@ -74,8 +74,8 @@
                 <div class="widget-content">
                   <article class="post" v-if="recent_posts.data.length"  v-for="(post,i) in recent_posts.data" :key="i">
                     <div class="post-inner">
-                      <figure class="post-thumb"><nuxt-link :to="localePath(`${post.slug}`)"><img :src="`${post.thumbnail}`" :alt="post.title_en"></nuxt-link></figure>
-                      <div class="text"><nuxt-link :to="`${post.slug}`">{{($i18n.locale =='en' ) ? post.title_en.slice(0,25) : post.title.slice(0,25)}}</nuxt-link></div>
+                      <figure class="post-thumb"><nuxt-link :to="localePath(`ar/${post.slug}`)"><img :src="`${post.thumbnail}`" :alt="post.title"></nuxt-link></figure>
+                      <div class="text"><nuxt-link :to="`ar/${post.slug}`">{{post.title.slice(0,25)}}</nuxt-link></div>
                       <div class="post-info">{{ $t('By') }} {{ post.author }}</div>
                     </div>
                   </article>
@@ -96,7 +96,7 @@
                 <div class="widget-content">
                   <nuxt-link :to="localePath('blog')">#All</nuxt-link>
                   <nuxt-link :to="localePath('blog')" v-for="(t,k) in tags.slice(0,10)" :key="k"
-                          >#{{ t.title_en }}</nuxt-link>
+                          >#{{ t.title }}</nuxt-link>
                 </div>
               </div>
 
@@ -108,7 +108,7 @@
         <div class="content-side blog-detail-column col-lg-9 col-md-12 col-sm-12">
           <div class="blog-detail">
             <div class="inner-box">
-              <h2>{{($i18n.locale =='en' ) ? post.title_en : post.title}}</h2>
+              <h2>{{post.title}}</h2>
               <ul class="author-info">
 <!--                <li>{{ $t('By') }} {{ post.author }}</li>-->
 <!--                <li><span class="theme_color">{{ post.posted_at }}</span></li>-->
@@ -117,16 +117,16 @@
               <div class="image">
                 <img :src="post.cover_image" alt="" />
               </div>
-              <p v-html="($i18n.locale =='en' ) ?  post.content_en : post.content" > </p>
+              <p v-html="post.content" > </p>
               <div class="social-box mt-5" v-if="post">
                 <span>{{$t('share_article')}} </span>
 
                 <ShareNetwork
                   network="facebook"
                   :url="getLocalUrl"
-                  :title="($i18n.locale =='en' ) ? post.title_en : post.title"
-                  :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
-                  :quote="($i18n.locale = 'en') ? 'Learning made easy  with us in CoursatBarmaja' : 'التعلم لن يكون مملا معنا في منصة كورسات برمجة' "
+                  :title="post.title"
+                  :description="` في هذا المقال سنتكلم عن ${post.title} وسنقوم بالتفصيل في كل جوانبه `"
+                  :quote="'التعلم لن يكون مملا معنا في منصة كورسات برمجة' "
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
@@ -135,9 +135,9 @@
                 <ShareNetwork
                   network="messenger"
                   :url="getLocalUrl"
-                  :title="($i18n.locale =='en' ) ? post.title_en : post.title"
-                  :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
-                  :quote="($i18n.locale = 'en') ? 'Learning made easy  with us in CoursatBarmaja' : 'التعلم لن يكون مملا معنا في منصة كورسات برمجة' "
+                  :title="post.title"
+                  :description="` في هذا المقال سنتكلم عن ${post.title} وسنقوم بالتفصيل في كل جوانبه `"
+                  :quote="'التعلم لن يكون مملا معنا في منصة كورسات برمجة' "
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
@@ -146,9 +146,9 @@
                 <ShareNetwork
                   network="twitter"
                   :url="getLocalUrl"
-                  :title="($i18n.locale =='en' ) ? post.title_en : post.title"
-                  :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
-                  :quote="($i18n.locale = 'en') ? 'Learning made easy  with us in CoursatBarmaja' : 'التعلم لن يكون مملا معنا في منصة كورسات برمجة' "
+                  :title="post.title"
+                  :description="` في هذا المقال سنتكلم عن ${post.title} وسنقوم بالتفصيل في كل جوانبه `"
+                  :quote="'التعلم لن يكون مملا معنا في منصة كورسات برمجة' "
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
@@ -157,9 +157,9 @@
                 <ShareNetwork
                   network="linkedin"
                   :url="getLocalUrl"
-                  :title="($i18n.locale =='en' ) ? post.title_en : post.title"
-                  :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
-                  :quote="($i18n.locale = 'en') ? 'Learning made easy  with us in CoursatBarmaja' : 'التعلم لن يكون مملا معنا في منصة كورسات برمجة' "
+                  :title="post.title"
+                  :description="` في هذا المقال سنتكلم عن ${post.title} وسنقوم بالتفصيل في كل جوانبه `"
+                  :quote="'التعلم لن يكون مملا معنا في منصة كورسات برمجة' "
                   :hashtags="post.keywords"
                   :media="post.cover_image"
                 >
@@ -275,23 +275,19 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: this.$i18n.locale == "en" ? 'in this article we will talk about '+this.post.title_en+ ' and give you a good explanation about it'
-                                             : ' في هذه المقالة سنتحدث عن '+this.post.title+' وسنقوم بالغوص عميقا في تفاصيله '
+          content:  ' في هذه المقالة سنتحدث عن '+this.post.title+' وسنقوم بالغوص عميقا في تفاصيله '
         },
         {
           hid: 'og-description',
           name: 'description',
-          content: this.$i18n.locale == "en" ? 'in this article we will talk about '+this.post.title_en + ' and give you a good explanation about it'
-            : ' في هذه المقالة سنتحدث عن '+this.post.title+' وسنقوم بالغوص عميقا في تفاصيله '
+          content: ' في هذه المقالة سنتحدث عن '+this.post.title+' وسنقوم بالغوص عميقا في تفاصيله '
         },
         {hid:"keywords",property:"keywords", content: this.post.keywords},
         {hid:"og-image",property:"og:image", content: this.post.cover_image},
         {hid:"og-site_name",property:"og:site_name", content: process.env.APP_NAME},
         {hid:"og-twitter_title",property:"twitter:image", content: this.post.cover_image},
-        {hid:"og-twitter_card",property:"twitter:card", content: this.$i18n.locale == "en" ? 'in this article we will talk about '+this.post.title_en+ ' and give you a good explanation about it'
-            : ' في هذه المقالة سنتحدث عن '+this.post.title+' وسنقوم بالغوص عميقا في تفاصيله '},
-        {hid:"og-title",property:"og:title", content:this.$i18n.locale == "en" ? process.env.APP_NAME+ ' | '+this.post.title_en
-                                                                               :  process.env.APP_NAME+ ' | '+this.post.title,}
+        {hid:"og-twitter_card",property:"twitter:card", content:  ' في هذه المقالة سنتحدث عن '+this.post.title+' وسنقوم بالغوص عميقا في تفاصيله '},
+        {hid:"og-title",property:"og:title", content: process.env.APP_NAME+ ' | '+this.post.title,}
       ],
     }
 
@@ -322,14 +318,11 @@ export default {
               },
     }
   },
-  // created() {
-  //   if(this.$route.path.toString().includes('/ar')){
-  //      console.log('yes conta')
-  //     this.$i18n.setLocale('ar')
-  //   }
-  //
-  // },
+  created() {
+    this.$i18n.setLocale('ar')
+  },
   async mounted() {
+
     document.querySelectorAll('.ql-syntax').forEach(syn =>syn.classList.add('hljs'));
     // this.$root.$on('share_network_close', function (network, url) {
     //   alert('thanks for sharing')
