@@ -316,18 +316,8 @@ export default {
               },
     }
   },
-  created() {
+  async created() {
     this.$i18n.setLocale('ar')
-  },
-  async mounted() {
-
-    document.querySelectorAll('.ql-syntax').forEach(syn =>syn.classList.add('hljs'));
-    // this.$root.$on('share_network_close', function (network, url) {
-    //   alert('thanks for sharing')
-    // });
-
-    this.localUrl = location.href;
-
     try{
       const [tags,rposts] = await Promise.all([
         this.$axios.$get('api/tags'),
@@ -340,6 +330,17 @@ export default {
     catch (e) {
       throw e;
     }
+  },
+   mounted() {
+
+    document.querySelectorAll('.ql-syntax').forEach(syn =>syn.classList.add('hljs'));
+    // this.$root.$on('share_network_close', function (network, url) {
+    //   alert('thanks for sharing')
+    // });
+
+    this.localUrl = location.href;
+
+
   },
   async asyncData(context){
 
