@@ -68,8 +68,8 @@
                       </nuxt-link>
                     </div>
                     <div class="lower-content">
-                      <h5><nuxt-link :to="($i18n.locale == 'en') ? `${post.slug}` : `/ar/${post.slug}`">{{ ($i18n.locale == 'en') ? post.title_en.slice(0,20) : post.title.slice(0,20) }}</nuxt-link></h5>
-                      <div class="text" v-html="($i18n.locale == 'en') ? post.content_en.slice(0,50) :  post.content.slice(0,50)"></div>
+                      <h5><nuxt-link :to="($i18n.locale == 'en') ? `${post.slug}` : `/ar/${post.slug}`">{{ ($i18n.locale == 'en') ? post.title_en.slice(0,80) : post.title.slice(0,80) }}</nuxt-link></h5>
+<!--                      <div class="text" v-html="($i18n.locale == 'en') ? post.content_en.slice(0,50) :  post.content.slice(0,50)"></div>-->
                       <div class="clearfix">
                         <div :class="($dir() == 'ltr' ) ? 'pull-left' : 'pull-right'">
                           <div class="students">{{ $t('By') }} <span class="text-muted" >{{ post.author }}</span></div>
