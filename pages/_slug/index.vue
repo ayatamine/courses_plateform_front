@@ -117,7 +117,7 @@
               <div class="image">
                 <img :src="post.cover_image" alt="" />
               </div>
-              <p v-html="($i18n.locale =='en' ) ?  post.content_en : post.content" > </p>
+              <div v-html="($i18n.locale =='en' ) ?  post.content_en : post.content" > </div>
               <div class="social-box mt-5" v-if="post">
                 <span>{{$t('share_article')}} </span>
 

@@ -115,7 +115,7 @@
               <div class="image">
                 <img :src="post.cover_image" alt="" />
               </div>
-              <p v-html="post.content" > </p>
+              <div v-html="post.content" > </div>
               <div class="social-box mt-5" v-show="post">
                 <span>{{$t('share_article')}} </span>
 
@@ -316,8 +316,18 @@ export default {
               },
     }
   },
-  async created() {
+  created() {
     this.$i18n.setLocale('ar')
+  },
+  async mounted() {
+
+    document.querySelectorAll('.ql-syntax').forEach(syn =>syn.classList.add('hljs'));
+    // this.$root.$on('share_network_close', function (network, url) {
+    //   alert('thanks for sharing')
+    // });
+
+    this.localUrl = location.href;
+
     try{
       const [tags,rposts] = await Promise.all([
         this.$axios.$get('api/tags'),
@@ -330,17 +340,6 @@ export default {
     catch (e) {
       throw e;
     }
-  },
-   mounted() {
-
-    document.querySelectorAll('.ql-syntax').forEach(syn =>syn.classList.add('hljs'));
-    // this.$root.$on('share_network_close', function (network, url) {
-    //   alert('thanks for sharing')
-    // });
-
-    this.localUrl = location.href;
-
-
   },
   async asyncData(context){
 
