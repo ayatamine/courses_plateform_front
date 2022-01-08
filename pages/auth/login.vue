@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="form-group text-center">
                                     <button type="button" class="theme-btn btn-style-three modified" @click.enter.prevent="login"  :disabled="!isValidForm"
-                                    ><span class="txt">{{$t('login')}} <i class="fa fa-angle-right"></i></span></button>
+                                    ><span class="txt">{{$t('login')}} <i class="fa " :class="$dir() ==='en'? 'fa-angle-right' : 'fa-angle-left ml-2'"></i></span></button>
                                 </div>
                                 <div class="form-group">
                                     <div class="users">{{ $t('new_user') }} <nuxt-link :to="localePath('/auth/register')">{{$t('sign_up')}}</nuxt-link></div>
@@ -77,7 +77,7 @@
 
 <script>
 import PageTitle from "~/components/PageTitle";
-import FormInputError from "../../components/Globals/formInputError";
+import FormInputError from "~/components/Globals/formInputError";
 export default {
   components: {FormInputError, PageTitle},
   middleware:'guest',
@@ -106,7 +106,7 @@ export default {
           this.$auth.setStrategy('laravelPassport');
           this.$auth.setUserToken(token);
           //this.$store.dispatch('usersAuth/setToken', {token, expiresIn});
-          this.$router.push('/');
+          this.$router.push('/blog');
         })
         .catch(error => {
           if(error.response?.status == "401")   this.authError = true;
@@ -149,5 +149,8 @@ export default {
 }
 .styled-form .form-group .check-box label a{
   color: #ff5773;
+}
+div[dir="rtl"] .fa-eye{
+  left: 20px;right:auto !important;
 }
 </style>

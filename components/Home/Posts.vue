@@ -34,7 +34,7 @@
               </ul>
             </div>
             <h4><nuxt-link :to="($i18n.locale == 'en') ? `${post.slug}` : `/ar/${post.slug}`">{{ ($i18n.locale =='en' ) ? post.title_en : post.title }}</nuxt-link></h4>
-            <div class="text" v-html="($i18n.locale =='en' ) ? post.content_en.substring(0,70) : post.content.substring(0,70)">{</div>
+            <div class="text" v-html="($i18n.locale =='en' ) ? post.content_en.slice(0,80) : post.content.slice(0,80)">{</div>
           </div>
         </div>
         <div class="event-block-two empty-block col-lg-6 col-md-12 col-sm-12">
