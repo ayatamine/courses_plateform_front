@@ -117,7 +117,7 @@
               <div class="image">
                 <img :src="post.cover_image" alt="" />
               </div>
-              <p v-html="($i18n.locale =='en' ) ?  post.content_en : post.content" > </p>
+              <div v-html="($i18n.locale =='en' ) ?  post.content_en : post.content" > </div>
               <div class="social-box mt-5" v-if="post">
                 <span>{{$t('share_article')}} </span>
 
@@ -407,6 +407,46 @@ export default {
 }
 </script>
 <style>
+
+
+pre {
+  background: #0D0D0D;
+  color: #FFF;
+  font-family: 'JetBrainsMono', monospace;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+
+}
+blockquote {
+  padding-left: 1rem;
+  border-left: 3px solid #ff5773;
+  font-style: italic;
+  font-size: 1rem;
+  font-family: inherit !important;
+}
+div[dir="rtl"] blockquote {
+  padding-right: 1rem;
+  border-right: 3px solid #ff5773;
+}
+em{
+  color: black;
+  font-style: italic;
+  font-family: 'Roboto Condensed';
+}
+ul,
+ol {
+  padding: 0 1rem;
+}
+hr {
+  border: none;
+  border-top: 2px solid grey;
+  margin: 2rem 0;
+}
+.hljs {
+  padding: 1.5em;
+}
+</style>
+<style>
 .main-header{
   background-color:#fff;
 }
@@ -473,4 +513,5 @@ export default {
     font-size: 21px !important;
   }
 }
+
 </style>

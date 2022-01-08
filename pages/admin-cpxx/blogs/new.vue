@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// Advanced Use - Hook into Quill's API for Custom Functionality
 import {mapGetters} from "vuex";
 
 export default {

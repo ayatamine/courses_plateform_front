@@ -1,4 +1,3 @@
-<script src="../../../nuxt.config.js"></script>
 <template>
        <v-card class="pa-5">
 

@@ -115,7 +115,7 @@
               <div class="image">
                 <img :src="post.cover_image" alt="" />
               </div>
-              <p v-html="post.content" > </p>
+              <div v-html="post.content" > </div>
               <div class="social-box mt-5" v-show="post">
                 <span>{{$t('share_article')}} </span>
 

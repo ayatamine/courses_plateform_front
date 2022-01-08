@@ -79,7 +79,7 @@ export default {
       // '~/plugins/mixins/user', //manual login deprecated
       '~/plugins/mixins/form_validation',
       '~/plugins/axios',
-      { src: '~/plugins/vue_editor', mode: 'client' },
+      // { src: '~/plugins/vue_editor', mode: 'client' },
       { src: '~/plugins/vuetify'},
       { src: '~/plugins/lang-direction-control'},
       // { src: '~/plugins/i18n'}
