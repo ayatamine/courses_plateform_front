@@ -419,7 +419,7 @@ pre {
 }
 blockquote {
   padding-left: 1rem;
-  border-left: 3px solid #ff5773;
+  border-left: 4px solid #ff5773;
   font-style: italic;
   font-size: 1rem;
   font-family: inherit !important;
@@ -435,7 +435,7 @@ em{
 }
 ul,
 ol {
-  padding: 0 1rem;
+  padding: 0 3rem;
 }
 hr {
   border: none;
@@ -445,11 +445,15 @@ hr {
 .hljs {
   padding: 1.5em;
 }
+.ql-indent-1{
+  list-style: initial;
+  line-height: 2;
+}
 </style>
 <style>
-.main-header{
-  background-color:#fff;
-}
+/*.main-header{*/
+/*  background-color:#fff;*/
+/*}*/
 .page-title2 .auto-container{
   padding: 2rem 1rem;
   background-color: #115977;
@@ -508,6 +512,9 @@ hr {
   }
   .blog-detail .inner-box .social-box a{
     font-size: 19px;
+  }
+  .blog-detail .inner-box h3{
+    font-size: 1.2rem;
   }
   .v-icon.mdi{
     font-size: 21px !important;

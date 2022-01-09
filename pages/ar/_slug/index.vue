@@ -397,10 +397,11 @@ export default {
   }
 }
 </script>
+
 <style>
-.main-header{
-  background-color:#fff;
-}
+/*.main-header{*/
+/*  background-color:#fff;*/
+/*}*/
 .page-title2 .auto-container{
   padding: 2rem 1rem;
   background-color: #115977;
@@ -460,6 +461,9 @@ export default {
   }
   .blog-detail .inner-box .social-box a{
     font-size: 19px;
+  }
+  .blog-detail .inner-box h3{
+    font-size: 1.2rem;
   }
   .v-icon.mdi{
     font-size: 21px !important;
