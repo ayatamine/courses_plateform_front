@@ -10092,7 +10092,7 @@ div[dir='rtl'] .main-footer .footer-widget h4:before{
 	color:#666666;
 	padding:0px 0px;
 	min-height:105px;
-	padding:0px 25px;
+	padding:0px 15px;
 	margin-bottom:24px;
 	border-bottom:4px solid #f5f5f5;
 }
@@ -10103,7 +10103,7 @@ div[dir='rtl'] .main-footer .footer-widget h4:before{
 
 .sidebar .popular-posts .post .post-inner{
 	position:relative;
-	padding-left:94px;
+	padding-left:70px;
 	padding-top:8px;
 }
 
@@ -10115,7 +10115,7 @@ div[dir='rtl'] .main-footer .footer-widget h4:before{
 	 position:absolute;
 	 left:0px;
 	 top:0px;
-	 width:70px;
+	 width:60px;
 	 box-shadow:0px 0px 25px rgba(0,0,0,0.10);
 }
 
@@ -10131,14 +10131,14 @@ div[dir='rtl'] .main-footer .footer-widget h4:before{
 
 .sidebar .popular-posts .post .text{
 	position:relative;
-	top:-4px;
-	font-size:15px;
+  top: -7px;
+  font-size: 15px;
 	margin:0px 0px 0px;
 	font-weight:600;
-	color:#03382e;
+	color: #050908;
 	line-height:1.4em;
 	text-transform:capitalize;
-	font-family: 'Poppins', sans-serif;
+	font-family: "Roboto";
 }
 
 .sidebar .popular-posts .post .text a{
@@ -10259,10 +10259,9 @@ div[dir='rtl'] .main-footer .footer-widget h4:before{
 
 .blog-detail .inner-box p{
 	position:relative;
-	line-height:1.8em;
+	line-height:1.7em;
 	margin-bottom:15px;
-	color:#626262;
-	font-size:16px;
+  color: #333030;	font-size:1.3rem;
 }
 
 .blog-detail .inner-box .social-box{
@@ -10755,7 +10754,7 @@ div[dir='rtl'] .main-footer .footer-widget h4:before{
 	margin-bottom:50px;
 }
 .sidebar .popular-posts .post .post-thumb img {
-  min-height: 3.5rem;
+  min-height: 3.2rem;
 }
 .page-title{
   background-color: #fff;

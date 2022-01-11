@@ -75,7 +75,7 @@
                   <article class="post" v-if="recent_posts.data.length"  v-for="(post,i) in recent_posts.data" :key="i">
                     <div class="post-inner">
                       <figure class="post-thumb"><nuxt-link :to="localePath(`${post.slug}`)"><img :src="`${post.thumbnail}`" :alt="post.title_en"></nuxt-link></figure>
-                      <div class="text"><nuxt-link :to="`${post.slug}`">{{($i18n.locale =='en' ) ? post.title_en.slice(0,25) : post.title.slice(0,25)}}</nuxt-link></div>
+                      <div class="text"><nuxt-link :to="`${post.slug}`">{{($i18n.locale =='en' ) ? post.title_en.slice(0,40) : post.title.slice(0,40)}}</nuxt-link></div>
                       <div class="post-info">{{ $t('By') }} {{ post.author }}</div>
                     </div>
                   </article>
@@ -117,7 +117,7 @@
               <div class="image">
                 <img :src="post.cover_image" alt="" />
               </div>
-              <div v-html="($i18n.locale =='en' ) ?  post.content_en : post.content" > </div>
+              <div id="main-content-wrapper" v-html="($i18n.locale =='en' ) ?  post.content_en : post.content" > </div>
               <div class="social-box mt-5" v-if="post">
                 <span>{{$t('share_article')}} </span>
 
@@ -144,6 +144,17 @@
                   <v-icon style="">mdi-facebook-messenger</v-icon>
                 </ShareNetwork>
                 <ShareNetwork
+                  network="telegram"
+                  :url="getLocalUrl"
+                  :title="($i18n.locale =='en' ) ? post.title_en : post.title"
+                  :description="`in this post we gonna talk about ${($i18n.locale =='en' ) ? post.title_en : post.title} and we will go in deep with every single hidden information`"
+                  :quote="($i18n.locale = 'en') ? 'Learning made easy  with us in CoursatBarmaja' : 'التعلم لن يكون مملا معنا في منصة كورسات برمجة' "
+                  :hashtags="post.keywords"
+                  :media="post.cover_image"
+                >
+                  <v-icon style="">mdi-telegram</v-icon>
+                </ShareNetwork>
+                <ShareNetwork
                   network="twitter"
                   :url="getLocalUrl"
                   :title="($i18n.locale =='en' ) ? post.title_en : post.title"
@@ -166,8 +177,19 @@
                   <i  class="fa fa-linkedin-square"></i>
                 </ShareNetwork>
               </div>
-            </div>
 
+            </div>
+            <div class="media" id="writer-info">
+              <img class="mr-3" src="data:image/jpeg;base64,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
+                xvh0njd/yd+6xIQuX2hPSdnesFteOnqUIUMlmPpf6r/wBoef7rVzehCu5fxxQ4PyyJCEKhpCRQhA0IQgEIQgE23hCEH1IQhB//2Q==" alt="Generic placeholder image">
+              <div class="media-body">
+                <h5 class="mt-0">{{post.author}}</h5>
+                I'm a passionate web developer and instructor living in Adrar, Algeria.I make video courses and tutorials on youtube
+                and enjoy developing with different technologies, especially PHP(Laravel), JS(Vue,Nuxt), tailwindcss and Dart(Flutter).
+                <a @click.prevent href="">Support Me</a>
+
+              </div>
+            </div>
 
             <!-- Comments Area -->
             <div class="comments-area">
@@ -340,7 +362,7 @@ export default {
     try{
       const [tags,rposts] = await Promise.all([
         this.$axios.$get('api/tags'),
-        this.$axios.$get('api/posts?limit=3'),
+        this.$axios.$get('api/posts?limit=4'),
       ])
       this.tags = tags;
       this.recent_posts = rposts;
@@ -412,32 +434,32 @@ export default {
 pre {
   background: #0D0D0D;
   color: #FFF;
-  font-family: 'JetBrainsMono', monospace;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
 
 }
 blockquote {
-  padding-left: 1rem;
-  border-left: 4px solid #ff5773;
+  padding-left: 0.8rem;
+  border-left: 6px solid #ff5773;
   font-style: italic;
-  font-size: 1rem;
+  font-size: 1.4rem;
+  line-height: 1.5;
   font-family: inherit !important;
+  color: #000;
 }
 div[dir="rtl"] blockquote {
   padding-right: 1rem;
   border-right: 3px solid #ff5773;
 }
-em{
-  color: black;
+#main-content-wrapper em{
   font-style: italic;
   font-family: 'Roboto Condensed';
 }
-ul,
-ol {
+#main-content-wrapper ul,
+#main-content-wrapper ol {
   padding: 0 3rem;
 }
-hr {
+#main-content-wrapper hr {
   border: none;
   border-top: 2px solid grey;
   margin: 2rem 0;
@@ -448,7 +470,22 @@ hr {
 .ql-indent-1{
   list-style: initial;
   line-height: 2;
+  font-size: 18px;
+  color: #333030;
 }
+.ql-align-center{
+  text-align: center !important;
+}
+.ql-align-right{text-align: right} .ql-align-left{text-align: left}
+.blog-detail .inner-box h2{
+  font-weight: 600;
+}
+#writer-info{padding: 1.5rem 1rem;
+  margin-top: 1rem;
+  background: #fff;}
+#writer-info img{max-height:130px}
+#writer-info h5{font-weight: 500}
+#writer-info .media-body{color: #000;font-size: 16px;line-height: 1.7;}
 </style>
 <style>
 /*.main-header{*/
@@ -505,7 +542,7 @@ hr {
 }
 @media(max-width:768px){
   .blog-detail .inner-box p{
-    font-size: 14px;
+    font-size: 16px;
   }
   .blog-detail .inner-box .social-box span{
     font-size: 16px;
@@ -513,7 +550,7 @@ hr {
   .blog-detail .inner-box .social-box a{
     font-size: 19px;
   }
-  .blog-detail .inner-box h3{
+  .blog-detail .inner-box h2{
     font-size: 1.2rem;
   }
   .v-icon.mdi{

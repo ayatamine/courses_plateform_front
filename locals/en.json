@@ -65,5 +65,6 @@
   "comment_is_short_error": "the Comment Content is too short ...",
   "submit_your_comment": "Submit Your comment ",
   "contact_us": "Contact Us",
-  "cant_find_answers": "Can't find your answers?"
+  "cant_find_answers": "Can't find your answers?",
+  "Post": "Post | Posts | {0} Posts"
 }
