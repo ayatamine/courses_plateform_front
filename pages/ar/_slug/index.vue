@@ -142,6 +142,17 @@
                   <v-icon style="">mdi-facebook-messenger</v-icon>
                 </ShareNetwork>
                 <ShareNetwork
+                  network="telegram"
+                  :url="getLocalUrl"
+                  :title="post.title"
+                  :description="` في هذا المقال سنتكلم عن ${post.title} وسنقوم بالتفصيل في كل جوانبه `"
+                  :quote=" 'التعلم لن يكون مملا معنا في منصة كورسات برمجة' "
+                  :hashtags="post.keywords"
+                  :media="post.cover_image"
+                >
+                  <v-icon style="">mdi-telegram</v-icon>
+                </ShareNetwork>
+                <ShareNetwork
                   network="twitter"
                   :url="getLocalUrl"
                   :title="post.title"
@@ -166,7 +177,15 @@
               </div>
             </div>
 
+            <div class="media" id="writer-info">
+              <img class="mr-3" :src="post.author_info.photo" :alt="post.author">
+              <div class="media-body">
+                <h5 class="mt-0">{{post.author}}</h5>
+                {{post.author_info.bio}}
+                <a @click.prevent href="">Support Me</a>
 
+              </div>
+            </div>
             <!-- Comments Area -->
             <div class="comments-area">
               <div class="group-title d-flex " style=" justify-content: space-between;">
@@ -397,76 +416,8 @@ export default {
   }
 }
 </script>
-
 <style>
-/*.main-header{*/
-/*  background-color:#fff;*/
-/*}*/
-.page-title2 .auto-container{
-  padding: 2rem 1rem;
-  background-color: #115977;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='589' height='490.8' viewBox='0 0 1080 900'%3E%3Cg fill-opacity='0.08'%3E%3Cpolygon fill='%23444' points='90 150 0 300 180 300'/%3E%3Cpolygon points='90 150 180 0 0 0'/%3E%3Cpolygon fill='%23AAA' points='270 150 360 0 180 0'/%3E%3Cpolygon fill='%23DDD' points='450 150 360 300 540 300'/%3E%3Cpolygon fill='%23999' points='450 150 540 0 360 0'/%3E%3Cpolygon points='630 150 540 300 720 300'/%3E%3Cpolygon fill='%23DDD' points='630 150 720 0 540 0'/%3E%3Cpolygon fill='%23444' points='810 150 720 300 900 300'/%3E%3Cpolygon fill='%23FFF' points='810 150 900 0 720 0'/%3E%3Cpolygon fill='%23DDD' points='990 150 900 300 1080 300'/%3E%3Cpolygon fill='%23444' points='990 150 1080 0 900 0'/%3E%3Cpolygon fill='%23DDD' points='90 450 0 600 180 600'/%3E%3Cpolygon points='90 450 180 300 0 300'/%3E%3Cpolygon fill='%23666' points='270 450 180 600 360 600'/%3E%3Cpolygon fill='%23AAA' points='270 450 360 300 180 300'/%3E%3Cpolygon fill='%23DDD' points='450 450 360 600 540 600'/%3E%3Cpolygon fill='%23999' points='450 450 540 300 360 300'/%3E%3Cpolygon fill='%23999' points='630 450 540 600 720 600'/%3E%3Cpolygon fill='%23FFF' points='630 450 720 300 540 300'/%3E%3Cpolygon points='810 450 720 600 900 600'/%3E%3Cpolygon fill='%23DDD' points='810 450 900 300 720 300'/%3E%3Cpolygon fill='%23AAA' points='990 450 900 600 1080 600'/%3E%3Cpolygon fill='%23444' points='990 450 1080 300 900 300'/%3E%3Cpolygon fill='%23222' points='90 750 0 900 180 900'/%3E%3Cpolygon points='270 750 180 900 360 900'/%3E%3Cpolygon fill='%23DDD' points='270 750 360 600 180 600'/%3E%3Cpolygon points='450 750 540 600 360 600'/%3E%3Cpolygon points='630 750 540 900 720 900'/%3E%3Cpolygon fill='%23444' points='630 750 720 600 540 600'/%3E%3Cpolygon fill='%23AAA' points='810 750 720 900 900 900'/%3E%3Cpolygon fill='%23666' points='810 750 900 600 720 600'/%3E%3Cpolygon fill='%23999' points='990 750 900 900 1080 900'/%3E%3Cpolygon fill='%23999' points='180 0 90 150 270 150'/%3E%3Cpolygon fill='%23444' points='360 0 270 150 450 150'/%3E%3Cpolygon fill='%23FFF' points='540 0 450 150 630 150'/%3E%3Cpolygon points='900 0 810 150 990 150'/%3E%3Cpolygon fill='%23222' points='0 300 -90 450 90 450'/%3E%3Cpolygon fill='%23FFF' points='0 300 90 150 -90 150'/%3E%3Cpolygon fill='%23FFF' points='180 300 90 450 270 450'/%3E%3Cpolygon fill='%23666' points='180 300 270 150 90 150'/%3E%3Cpolygon fill='%23222' points='360 300 270 450 450 450'/%3E%3Cpolygon fill='%23FFF' points='360 300 450 150 270 150'/%3E%3Cpolygon fill='%23444' points='540 300 450 450 630 450'/%3E%3Cpolygon fill='%23222' points='540 300 630 150 450 150'/%3E%3Cpolygon fill='%23AAA' points='720 300 630 450 810 450'/%3E%3Cpolygon fill='%23666' points='720 300 810 150 630 150'/%3E%3Cpolygon fill='%23FFF' points='900 300 810 450 990 450'/%3E%3Cpolygon fill='%23999' points='900 300 990 150 810 150'/%3E%3Cpolygon points='0 600 -90 750 90 750'/%3E%3Cpolygon fill='%23666' points='0 600 90 450 -90 450'/%3E%3Cpolygon fill='%23AAA' points='180 600 90 750 270 750'/%3E%3Cpolygon fill='%23444' points='180 600 270 450 90 450'/%3E%3Cpolygon fill='%23444' points='360 600 270 750 450 750'/%3E%3Cpolygon fill='%23999' points='360 600 450 450 270 450'/%3E%3Cpolygon fill='%23666' points='540 600 630 450 450 450'/%3E%3Cpolygon fill='%23222' points='720 600 630 750 810 750'/%3E%3Cpolygon fill='%23FFF' points='900 600 810 750 990 750'/%3E%3Cpolygon fill='%23222' points='900 600 990 450 810 450'/%3E%3Cpolygon fill='%23DDD' points='0 900 90 750 -90 750'/%3E%3Cpolygon fill='%23444' points='180 900 270 750 90 750'/%3E%3Cpolygon fill='%23FFF' points='360 900 450 750 270 750'/%3E%3Cpolygon fill='%23AAA' points='540 900 630 750 450 750'/%3E%3Cpolygon fill='%23FFF' points='720 900 810 750 630 750'/%3E%3Cpolygon fill='%23222' points='900 900 990 750 810 750'/%3E%3Cpolygon fill='%23222' points='1080 300 990 450 1170 450'/%3E%3Cpolygon fill='%23FFF' points='1080 300 1170 150 990 150'/%3E%3Cpolygon points='1080 600 990 750 1170 750'/%3E%3Cpolygon fill='%23666' points='1080 600 1170 450 990 450'/%3E%3Cpolygon fill='%23DDD' points='1080 900 1170 750 990 750'/%3E%3C/g%3E%3C/svg%3E");
-  background-repeat: repeat;
-}
+@import "assets/css/blog-detail.css";
 </style>
-<style scoped>
 
-.page-title2{
-  background: #1c94c6;
-  padding: 6.3rem 0 0;
-  z-index: 1;
-}
-.page-title2 .blog-post-title{
-  background: rgba(0,0,0,.4);
-  padding: 1rem;
-  margin-bottom: 1rem;
-  color: #fff;
-}
-.page-title2 .post-detail-info  li{
-  color: #fff;
-  margin: 0 1rem;font-size: 0.9rem
-}
-.load-comments{
-  background: #ff5773;
-  color: #fff;
-  padding: 1rem;
-  height: 27px;
-  line-height: 0.4;
-  border-radius: 4px;font-weight:bold
-}
-.sidebar .popular-posts .post-info {
-  font-size: 14px;
-}
-.sidebar-page-container .comments-area .comment-box .theme-btn,
-.sidebar-page-container .comments-area .comment-info .comment-time:before,
-.blog-detail .inner-box .social-box a:hover,
-.blog-detail .inner-box .social-box i:hover{
-  color: #ff5773;
-}
-.blog-detail .inner-box .social-box a{
-  margin-right: 2px;
-}
-.sidebar-page-container .comments-area .comment-box .theme-btn:hover{
-  color: #3d415b;
-}
-.v-icon.mdi{
-  font-size: 26px;top: -3px;margin-right: 1px;
-}
-@media(max-width:768px){
-  .blog-detail .inner-box p{
-    font-size: 14px;
-  }
-  .blog-detail .inner-box .social-box span{
-    font-size: 16px;
-  }
-  .blog-detail .inner-box .social-box a{
-    font-size: 19px;
-  }
-  .blog-detail .inner-box h3{
-    font-size: 1.2rem;
-  }
-  .v-icon.mdi{
-    font-size: 21px !important;
-  }
-}
-</style>
+
