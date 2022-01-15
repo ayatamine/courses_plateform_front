@@ -279,8 +279,8 @@ export default {
       'Roboto+Condensed': {
         wght: [ 400,600,700,800],   ital: [100,200]
       },
-      'Cairo': {
-        wght: [ 400,500,600,700,800,900],
+      'Noto+Kufi+Arabic': {
+        wght: [ 300,400,500,600,700],
       },
     }
   },

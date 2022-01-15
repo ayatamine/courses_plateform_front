@@ -35,8 +35,8 @@
                   </li>
                   <li class="dropdown"><nuxt-link to="/" @click.prevent>{{$t('lang')}}</nuxt-link>
                     <ul>
-                      <li><nuxt-link :to="switchLocalePath('en')">{{$t('english')}}</nuxt-link></li>
-                      <li><nuxt-link :to="switchLocalePath('ar')">{{$t('arabic')}}</nuxt-link></li>
+                      <li><nuxt-link :to="($route.name == 'ar-slug') ? switchArticleLang('en') : switchLocalePath('en')">{{$t('english')}}</nuxt-link></li>
+                      <li><nuxt-link :to="($route.name == 'slug') ? switchArticleLang('ar') : switchLocalePath('ar')">{{$t('arabic')}}</nuxt-link></li>
                     </ul>
                   </li>
                   <li>
@@ -92,7 +92,8 @@
               <li><nuxt-link :to="localePath('courses')">{{$tc('course',2)}}</nuxt-link></li>
               <li><nuxt-link :to="localePath('tutorials')">{{ $tc('tutorial',2) }}</nuxt-link></li>
               <li><nuxt-link :to="localePath('blog')">{{$t('blog')}}</nuxt-link> </li>
-              <li><nuxt-link :to="$i18n.locale=='en' ? switchLocalePath('ar') : switchLocalePath('en')">{{$t('Change')}} {{$t('lang')}}</nuxt-link></li>
+              <li v-show="($route.name != 'slug') && ($route.name != 'ar-slug')"><nuxt-link :to="$i18n.locale=='en' ? switchLocalePath('ar') : switchLocalePath('en')">{{$t('Change')}} {{$t('lang')}}</nuxt-link></li>
+              <li v-show="($route.name == 'slug') || ($route.name == 'ar-slug')"><nuxt-link :to="($route.name == 'slug') ? switchArticleLang('ar')  : switchArticleLang('en')" >{{$t('Change')}} {{$t('lang')}}</nuxt-link></li>
               <li><nuxt-link :to="localePath('contact')">{{$t('contact')}}</nuxt-link></li>
             </ul>
             <ul class="login-nav navigation clearfix d-flex flex-row pt-2 justify-content-around" v-if="!$auth.loggedIn">
@@ -161,6 +162,14 @@ export default {
         .catch(errors => {
           console.dir(errors);
         });
+    },
+    switchArticleLang(local) {
+      if(local == 'ar'){
+        return `/ar/${this.$route.params.slug}`
+      }
+      else{
+        return `/${this.$route.params.slug}`
+      }
     }
   }
 }
