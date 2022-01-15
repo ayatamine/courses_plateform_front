@@ -306,6 +306,16 @@ export default {
         {hid:"og-twitter_card",property:"twitter:card", content:  ' في هذه المقالة سنتحدث عن '+this.post.title+' وسنقوم بالغوص عميقا في تفاصيله '},
         {hid:"og-title",property:"og:title", content: process.env.APP_NAME+ ' | '+this.post.title,}
       ],
+      link:[
+        {
+          type:"text/css", rel:"stylesheet" ,href:"//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-dark.min.css"
+        }
+      ],
+      script:[
+        {
+          type:"text/javascript" ,src:"//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"
+        }
+      ]
     }
 
   },
@@ -340,8 +350,10 @@ export default {
   },
   async mounted() {
 
-    document.querySelectorAll('.ql-syntax').forEach(syn =>syn.classList.add('hljs'));
-    // this.$root.$on('share_network_close', function (network, url) {
+    document.querySelectorAll('.ql-syntax').forEach(syn =>syn.classList.add('language-php'));
+    document.querySelectorAll("pre.ql-syntax").forEach(block => {
+      hljs.highlightBlock(block);
+    })    // this.$root.$on('share_network_close', function (network, url) {
     //   alert('thanks for sharing')
     // });
 

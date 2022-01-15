@@ -55,6 +55,7 @@ export default {
             // { src: 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', type: 'text/javascript' },
             { src: '/js/script.js', type: 'text/javascript'},
 
+
         ]
     },
 
@@ -106,7 +107,6 @@ export default {
         '@nuxtjs/dotenv',
 
       ["vue2-editor/nuxt"],
-      'nuxt-highlightjs',
       'vue-social-sharing/nuxt',
       '@nuxtjs/robots',
       '@nuxtjs/sitemap',

@@ -28,7 +28,6 @@
     "js-cookie": "^3.0.1",
     "laravel-vue-pagination": "^2.3.1",
     "nuxt": "^2.14.12",
-    "nuxt-highlightjs": "^1.0.1",
     "popper.js": "^1.16.1",
     "sharp": "^0.29.3",
     "v-video-embed": "^1.0.8",
