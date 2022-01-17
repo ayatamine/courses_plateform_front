@@ -167,7 +167,7 @@ export default {
       // for(var i=0;i< this.post.tags.length ; i++){
       //   fdata.append('tags[]',this.post.tags[i])
       // }
-      if(!typeof (this.post.thumbnail) == 'string'){
+      if(typeof (this.post.thumbnail) != 'string'){
         fdata.set('thumbnail',this.post.thumbnail,this.post.thumbnail.name);
       }
       else{

@@ -360,10 +360,16 @@ export default {
   //
   // },
   async mounted() {
-    document.querySelectorAll('.ql-syntax').forEach(syn =>syn.classList.add('language-php'));
-    document.querySelectorAll("pre.ql-syntax").forEach(block => {
-      hljs.highlightBlock(block);
-    })
+      setTimeout(function(){
+        if(hljs) {
+          document.querySelectorAll("pre.ql-syntax").forEach(block => {
+            hljs.highlightBlock(block);
+          })
+          document.querySelectorAll('pre.ql-syntax').forEach(syn =>   syn.classList.add('language-php'));
+        }else{
+          document.querySelectorAll('pre.ql-syntax').forEach(syn =>   syn.classList.add('hljs'));
+        }
+      },7000)
     // this.$root.$on('share_network_close', function (network, url) {
     //   alert('thanks for sharing')
     // });

@@ -72,8 +72,8 @@
                 <div class="widget-content">
                   <article class="post" v-show="recent_posts.data.length"  v-for="(post,i) in recent_posts.data" :key="i">
                     <div class="post-inner">
-                      <figure class="post-thumb"><nuxt-link :to="localePath(`ar/${post.slug}`)"><img :src="`${post.thumbnail}`" :alt="post.title"></nuxt-link></figure>
-                      <div class="text"><nuxt-link :to="`ar/${post.slug}`">{{post.title.slice(0,25)}}</nuxt-link></div>
+                      <figure class="post-thumb"><nuxt-link :to="localePath(`${post.slug}`)"><img :src="`${post.thumbnail}`" :alt="post.title"></nuxt-link></figure>
+                      <div class="text"><nuxt-link :to="`${post.slug}`">{{post.title.slice(0,25)}}</nuxt-link></div>
                       <div class="post-info">{{ $t('By') }} {{ post.author }}</div>
                     </div>
                   </article>
@@ -350,10 +350,19 @@ export default {
   },
   async mounted() {
 
-    document.querySelectorAll('.ql-syntax').forEach(syn =>syn.classList.add('language-php'));
-    document.querySelectorAll("pre.ql-syntax").forEach(block => {
-      hljs.highlightBlock(block);
-    })    // this.$root.$on('share_network_close', function (network, url) {
+    setTimeout(function(){
+      if(hljs) {
+        document.querySelectorAll("pre.ql-syntax").forEach(block => {
+          hljs.highlightBlock(block);
+        })
+        document.querySelectorAll('pre.ql-syntax').forEach(syn =>   syn.classList.add('language-php'));
+      }else{
+        document.querySelectorAll('pre.ql-syntax').forEach(syn =>   syn.classList.add('hljs'));
+      }
+    },7000)
+
+
+      // this.$root.$on('share_network_close', function (network, url) {
     //   alert('thanks for sharing')
     // });
 
