@@ -1,6 +1,6 @@
 <template>
   <footer class="main-footer style-two">
-
+  <v-app>
     <!-- Upper Box -->
     <div class="upper-box">
       <div class="auto-container">
@@ -15,7 +15,14 @@
               <br>
               <form-input-error v-show="emailError" :message="$t('enter_valid_email')"/>
               <button type="submit" class="theme-btn btn-style-four" @click.prevent="subscribe"><span class="txt">{{$t('subscribe_now')}}</span></button>
+
             </div>
+            <v-alert type="success" v-show="response_message.length">
+              <strong class="ml-3">{{response_message}}</strong>
+            </v-alert>
+            <v-alert type="error" v-show="response_message_error.length">
+              <strong class="ml-3">{{response_message_error}}</strong>
+            </v-alert>
           </form>
         </div>
 
@@ -109,13 +116,34 @@
       </div>
 
     </div>
+    <!-- show the loading request state -->
+    <v-dialog
+      v-model=" submiting_dialog"
+      persistent
+      width="300" style="overflow-y:auto"
+    >
+      <v-card
+        color="white" class="text-center p-2"
+        dark
+      >
+        <v-progress-circular
+          :size="70"
+          :width="7"
+          color="red accent-1"
+          indeterminate
+        ></v-progress-circular>
+      </v-card>
+    </v-dialog>
+
+
+  </v-app>
   </footer>
 </template>
 
 <script>
 
 import pattern2 from '~/assets/images/background/pattern-2.png';
-import FormInputError from "./Globals/formInputError";
+import FormInputError from "~/components/Globals/formInputError";
 export default {
   name: "footer2",
   components: {FormInputError},
@@ -128,6 +156,10 @@ export default {
     return {
       pattern2:pattern2,
       email:'',
+      submiting_dialog: false,
+      response_message:'',
+      response_message_error:''
+
     }
   },
   computed:{
@@ -140,14 +172,52 @@ export default {
   },
   methods:{
     async subscribe(){
+      let message='';
+      this.submiting_dialog = true
       await  this.$axios.$post('/api/subscribe_to_newslist',{email:this.email})
-             .then(response => console.log(response))
-             .catch(err => console.log(err))
+             .then(response => {
+
+               if(this.$i18n.locale == 'ar'){
+                  if(response.message == 'already subscribed'){
+                     message = 'هذا البريد مسجل بالفعل'
+                   }
+                   else{
+                     message = 'شكرا لانضمامك للقائمة البريدية، سنسعى جاهدا لإعلامك بكل جديد مفيد'
+                   }
+               }
+               else{
+                  message = response.message;
+               }
+
+               this.response_message = message
+               setTimeout(()=>{ this.response_message = ''},5000)
+
+             })
+             .catch((err) => {
+               this.response_message_error  = this.$i18n.locale == 'en' ? 'Internal Error, Please try later' : 'خطأ داخلي، يرجى إعادة المحاولة لاحقا'
+               setTimeout(()=>{ this.response_message_error = ''},5000)
+             })
+             this.submiting_dialog = false;
+
     }
-  }
+  },
+  watch: {
+    submiting_dialog (val) {
+      if (!val) return
+
+      setTimeout(() => (this. submiting_dialog = false), 4000)
+    },
+  },
 }
 </script>
-
+<style>
+.main-footer .v-dialog--persistent{
+  overflow-y: initial;
+}
+.main-footer .v-application{
+  background: none;color: initial;
+}
+</style>
 <style scoped>
 .subscribe-form .form-group .theme-btn{
   color: #fff;
@@ -155,4 +225,5 @@ export default {
 .subscribe-form .form-group .theme-btn:hover{
   color: #ff5773;
 }
+
 </style>

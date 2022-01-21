@@ -24,6 +24,7 @@
   <!-- Contact Page Section -->
   <div>
   <v-app>
+
   <section class="contact-page-section">
 
     <div class="auto-container">
@@ -36,12 +37,8 @@
         <!-- Contact Form -->
         <div class="contact-form">
 
-            <v-alert
-              type="success" :dark="false" v-show="responseMessage.length"
-            >{{responseMessage}}</v-alert>
-
           <!-- Profile Form -->
-          <form method="post" action="" id="contact-form">
+          <form method="post" action="" id="contact-form" ref="contactform">
             <div class="row clearfix">
 
               <div class="col-lg-6 col-md-6 col-sm-12 form-group">
@@ -86,7 +83,10 @@
 
             </div>
           </form>
-
+          <!-- handling the response messages-->
+          <v-alert :type="errorResponse ? 'error' : 'success'" v-show="responseMessage.length">
+            <strong class="ml-3">{{responseMessage}}</strong>
+          </v-alert>
         </div>
 
       </div>
@@ -152,6 +152,24 @@
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14106.58972041952!2d-0.2834729296144766!3d27.882098844471894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdf59f9d6c0eeb23%3A0x89f61e7931951feb!2sAlgerie%20poste!5e0!3m2!1sar!2sdz!4v1636108990765!5m2!1sar!2sdz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>    </div>
     </div>
   </section>
+    <!-- show the loading request state-->
+    <v-dialog
+      v-model=" loading"
+      persistent
+      width="300" style="overflow-y:auto"
+    >
+      <v-card
+        color="white" class="text-center p-2"
+        dark
+      >
+        <v-progress-circular
+          :size="70"
+          :width="7"
+          color="red accent-1"
+          indeterminate
+        ></v-progress-circular>
+      </v-card>
+    </v-dialog>
   </v-app>
   </div>
 
@@ -180,20 +198,34 @@ export default {
       phone:'',
       email:'',
       responseMessage:'',
-      loading:false
+      loading:false,
+      // submiting dialog
+      errorResponse:false
     }
   },
   methods:{
-    contact(){
+    async contact(){
+
      this.loading = true;
+     this.errorResponse = false;
 
      let {first_name,last_name,message,phone,email}= this;
-      this.$axios.$post('api/contact_us',{first_name,last_name,message,phone,email})
+      await  this.$axios.$post('api/contact_us',{first_name,last_name,message,phone,email})
       .then(res =>{
-        console.log(res)
            this.loading = false;
-           this.responseMessage = res.message
+           this.responseMessage =this.$i18n.locale == 'en' ? res.message : 'شكرا لتواصلك معنا، سيتم الرد في أقرب وقت ان شاء الله.'
+           setTimeout(()=>{this.responseMessage = ''},6000)
+           this.$refs.contactform.reset();
+
       })
+      .catch((err) => {
+        this.loading = false;
+        this.errorResponse = true;
+        this.responseMessage = this.$i18n.locale == 'en' ? 'Internal Error, Please Try later' : 'خطا داخلي ، يرجى إعادة المحاولة لاحقا'
+        setTimeout(()=>{this.responseMessage = ''},5000)
+      })
+
+
     }
   },
   computed:{
