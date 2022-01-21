@@ -23,7 +23,8 @@
 <template>
   <!-- Contact Page Section -->
   <div>
-  <v-app>
+    <page-title :title-content="$i18n.locale == 'en' ? 'contact Us' : 'اتصل بنا'" ></page-title>
+    <v-app>
 
   <section class="contact-page-section">
 
