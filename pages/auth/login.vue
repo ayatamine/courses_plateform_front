@@ -150,7 +150,5 @@ export default {
 .styled-form .form-group .check-box label a{
   color: #ff5773;
 }
-div[dir="rtl"] .fa-eye{
-  left: 20px;right:auto !important;
-}
+
 </style>

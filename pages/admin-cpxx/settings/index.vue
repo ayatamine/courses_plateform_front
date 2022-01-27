@@ -115,8 +115,8 @@ export default {
         fdata.set('logo_ar',this.settings.logo_ar,this.settings.logo_ar.name);
       }
       this.$nuxt.$loading.start();
-        await axios.post(`${process.env.APP_URL}/api/admin-cpx/update_site_settings`,fdata,
-          {headers:{Authorization:"Bearer "+process.env.APP_TOKEN, contentType:"multipart/form-data"}})
+        await axios.post(`/api/admin-cpx/update_site_settings`,fdata,
+          {headers:{Authorization:"Bearer "+this.$store.state['adminAuth'].token}})
           .then(res => {
             this.$nuxt.refresh()
             alert('updated')

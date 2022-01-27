@@ -15,3 +15,15 @@ body {
 div[dir="rtl"] .intro-section .intro-tabs .tab-btns .tab-btn{float: right}
 div[dir="rtl"] .accordion-box .block .play-icon .fa{padding-right: 4px;padding-left:0 ;
   margin-left: 30px;margin-right: 0}
+div[dir="rtl"]
+.styled-form .form-group .radio-box label:before,
+.styled-form .form-group .check-box label:before{
+  right: 0;
+}
+div[dir="rtl"] .styled-form .form-group .radio-box label,
+div[dir="rtl"] .styled-form .form-group .check-box label{
+  padding-right: 25px;padding-left: 0;
+}
+div[dir="rtl"] .fa-eye{
+  left: 20px;right:auto !important;
+}

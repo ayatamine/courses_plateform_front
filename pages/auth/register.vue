@@ -105,7 +105,7 @@
 							<div class="form-group col-lg-12 col-md-12 col-sm-12 text-center">
 								<button type="button" class="theme-btn btn-style-three modified"
                         @click.prevent="registerStudent" :disabled="!isValidForm">
-                        <span class="txt">{{ $t('sign_up')}}<i class="fa fa-angle-right"></i></span>
+                        <span class="txt">{{ $t('sign_up')}}<i class="fa " :class="$dir() =='ltr' ? 'fa-angle-right' : 'fa-angle-left ml-2'"></i></span>
                 </button>
 							</div>
 

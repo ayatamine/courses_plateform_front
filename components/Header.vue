@@ -33,8 +33,8 @@
                       <li><nuxt-link :to="localePath('blog')">{{$t('blog')}}</nuxt-link></li>
                     </ul>
                   </li>
-                  <li class="dropdown"><nuxt-link to="/" @click.prevent>{{$t('lang')}}</nuxt-link>
-                    <ul>
+                  <li class="dropdown" ><nuxt-link to="/" @click.prevent>{{$t('lang')}}</nuxt-link>
+                    <ul id="lang-links">
                       <li><nuxt-link :to="($route.name == 'ar-slug') ? switchArticleLang('en') : switchLocalePath('en')">{{$t('english')}}</nuxt-link></li>
                       <li><nuxt-link :to="($route.name == 'slug') ? switchArticleLang('ar') : switchLocalePath('ar')">{{$t('arabic')}}</nuxt-link></li>
                     </ul>
@@ -233,5 +233,11 @@ header > div.header-upper > div > div > div.logo-box > div > a > img{
    }
 
 }
-
+ .main-menu .navigation > li > ul > li:hover > a{
+  color: #fff !important;
+}
+ div[dir="rtl"] .main-menu .navigation > li > ul {
+   position: absolute;
+   right: 0px;
+ }
 </style>
