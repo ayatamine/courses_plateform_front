@@ -206,7 +206,7 @@ export default {
     robots: [
       {
         UserAgent: '*',
-        Disallow: ['/profile', '/admin-cpxx/','/* .env$'],
+        Disallow: ['/profile', '/admin-cpxx/','/* .env$','/admin-*'],
         Sitemap: process.env.APP_URL+'sitemap.xml'
       }
 
@@ -216,8 +216,7 @@ export default {
       hostname: process.env.APP_SITEMAP_URL,
       gzip: true,
       exclude: [
-        '/profile',
-        '/admin-cpxx/**'
+        '/admin-cpxx/**','/profile','/admin-*'
       ],
       defaults: {
         changefreq: 'daily',
