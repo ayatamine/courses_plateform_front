@@ -68,6 +68,7 @@ export default {
       {icon: 'mdi-account-star', text:'Skills', route: '/admin-cpxx/skills'},
       {icon: 'mdi-comment-question-outline', text:'Faqs', route: '/admin-cpxx/faqs'},
       {icon: 'mdi-cogs', text:'Settings', route: '/admin-cpxx/settings'},
+      {icon: 'mdi-email', text:'NewsLetter List', route: '/admin-cpxx/newsletterlist'},
     ]
 
   }),
