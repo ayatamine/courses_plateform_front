@@ -152,16 +152,17 @@ export default {
   },
   methods: {
     async logout() {
+      await this.$auth.logout()
       // console.log('logout')
-      await this.$axios.$post('/api/students/logout')
-        .then(resp => {
-          // this.$store.dispatch('usersAuth/logout');
-          this.$auth.logout()
-          this.$router.push(this.localePath('/'));
-        })
-        .catch(errors => {
-          console.dir(errors);
-        });
+      // await this.$axios.$post('/api/students/logout')
+      //   .then(resp => {
+      //     // this.$store.dispatch('usersAuth/logout');
+      //     this.$auth.logout()
+      //     this.$router.push(this.localePath('/'));
+      //   })
+      //   .catch(errors => {
+      //     console.dir(errors);
+      //   });
     },
     switchArticleLang(local) {
       if(local == 'ar'){

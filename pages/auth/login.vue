@@ -101,16 +101,19 @@ export default {
   methods:{
     async login(){
        this.authError = false;
-      await this.$axios.$post('/api/students/login', this.userData)
-        .then(({token,expiresIn}) => {
-          this.$auth.setStrategy('laravelPassport');
-          this.$auth.setUserToken(token);
-          //this.$store.dispatch('usersAuth/setToken', {token, expiresIn});
+      this.$auth.loginWith('laravelSanctum', {
+          data:  this.userData
+        })
+        .then((result) => {
+          this.$auth.setUserToken(result.data.access_token);
+          this.$store.dispatch('usersAuth/setToken', {token:result.data.access_token});
           this.$router.push('/blog');
         })
         .catch(error => {
+          console.log('err',error)
           if(error.response?.status == "401")   this.authError = true;
         });
+        
     },
 
   },

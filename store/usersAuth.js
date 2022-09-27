@@ -20,10 +20,9 @@ export const actions = {
   //
   //   return {}
   // },
-  setToken({commit}, {token, expiresIn}) {
+  setToken({commit}, {token}) {
     this.$axios.setToken(token, 'Bearer');
-    const expiryTime = new Date(new Date().getTime() + expiresIn * 1000);
-    cookies.set('x-access-token', token, {expires: expiryTime});
+    cookies.set('x-access-token', token);
     cookies.set('x-ac-tp','s*/t)t');
     commit('SET_TOKEN', token);
   },

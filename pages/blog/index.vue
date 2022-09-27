@@ -192,6 +192,7 @@ export default {
     }
   },
   async asyncData(context){
+    console.log('od',context.$auth)
     const [posts, categories,tags,recent_posts] = await Promise.all([
       context.$axios.$get('api/posts'),
       context.$axios.$get('api/categories'),
@@ -238,6 +239,12 @@ export default {
 </script>
 
 <style scoped>
+  .inner-box{
+    min-height: 100%;
+  }
+  .cource-block-three .inner-box .image {
+    max-width: 30%;
+  }
 .cource-block-two .inner-box .lower-content .students {
   font-size: 15px;
 }

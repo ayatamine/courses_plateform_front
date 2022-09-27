@@ -142,61 +142,74 @@ export default {
     },
     proxy: {
       '/api': {
-        target: process.env.IS_TEST_MODE ? process.env.APP_URL  || 'http://localhost:8001'
+        target: process.env.IS_TEST_MODE ? process.env.APP_URL  || 'http://localhost:8000'
           : process.env.APP_URL_S  || 'https://arabicdevs.com/course_plateform/public',
         pathRewrite: {'^/api/': ''}
       }
     },
     axios: {
-        baseURL: process.env.IS_TEST_MODE ? process.env.APP_URL  || 'http://localhost:8001'
+        baseURL: process.env.IS_TEST_MODE ? process.env.APP_URL  || 'http://localhost:8000'
                                           : process.env.APP_URL_S  || 'https://arabicdevs.com/course_plateform/public'
                                   ,
         proxy:true,
-        // credentials: true,
+        credentials: true,
     },
    //auth section
-    auth: {
+    // auth: {
 
-        strategies: {
-            local: {
-                endpoints: {
-                    login: { url: 'api/students/login', method: 'post', propertyName: 'data.token' },
-                    user: { url: 'api/students/details', method: 'get', propertyName: 'data.token' },
-                    logout: false
-                },
-                // tokenRequired: false,
-                // tokenType: false,
-              token: {
-                property: 'token',
-                global: true,
-                // required: true,
-                // type: 'Bearer'
-              },
-            },
-          'laravelPassport': {
-            provider: 'laravel/passport',
-            endpoints: {
-              register: { url: '/api/students/register', method: 'post', propertyName: 'data.token' },
-              login: { url: '/api/students/login', method: 'post', propertyName: 'data.token' },
-              authorization: '/oauth/authorize',
-              token:  '/oauth/token',
-              userInfo:  '/api/students/details',
-              logout: false
-            },
-            url: process.env.APP_URL,
-            // clientId: 4,
-            // clientSecret: '14p6dTQxfhS6Es7fxDC2yFnWBcL30yACf3uXCmpN',
-            grantType:"client_credentials",
-            clientId: "3",
-            clientSecret: '14p6dTQxfhS6Es7fxDC2yFnWBcL30yACf3uXCmpN',
+    //     strategies: {
+    //         local: {
+    //             endpoints: {
+    //                 login: { url: 'api/students/login', method: 'post', propertyName: 'data.token' },
+    //                 user: { url: 'api/students/details', method: 'get', propertyName: 'data.token' },
+    //                 logout: false
+    //             },
+    //             // tokenRequired: false,
+    //             // tokenType: false,
+    //           token: {
+    //             property: 'token',
+    //             global: true,
+    //             // required: true,
+    //             // type: 'Bearer'
+    //           },
+    //         },
+    //       'laravelPassport': {
+    //         provider: 'laravel/passport',
+    //         endpoints: {
+    //           register: { url: '/api/students/register', method: 'post', propertyName: 'data.token' },
+    //           login: { url: '/api/students/login', method: 'post', propertyName: 'data.token' },
+    //           authorization: '/oauth/authorize',
+    //           token:  '/oauth/token',
+    //           userInfo:  '/api/students/details',
+    //           logout: false
+    //         },
+    //         url: process.env.APP_URL,
+    //         // clientId: 4,
+    //         // clientSecret: '14p6dTQxfhS6Es7fxDC2yFnWBcL30yACf3uXCmpN',
+    //         grantType:"client_credentials",
+    //         clientId: "3",
+    //         clientSecret: '14p6dTQxfhS6Es7fxDC2yFnWBcL30yACf3uXCmpN',
+    //       },
+    //     },
+    //     redirect: {
+    //       login: '/auth/login',
+    //       logout: '/',
+    //       callback: '/auth/login',
+    //       home: '/'
+    //     }
+    // },
+    auth: {
+      strategies: {
+        laravelSanctum: {
+          provider: 'laravel/sanctum',
+          endpoints: {
+              login: { url: '/api/students/login', method: 'post',propertyName: 'data.access_token' ,withCredentials: true,},
+              user: { url: '/api/students/details', method: 'get', propertyName: 'user' },
+              logout: { url: '/api/students/logout', method: 'post'},
           },
+          url: process.env.APP_URL
         },
-        redirect: {
-          login: '/auth/login',
-          logout: '/',
-          callback: '/auth/login',
-          home: '/'
-        }
+      }
     },
     //router middlewares
     // router: {

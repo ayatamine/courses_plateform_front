@@ -193,23 +193,43 @@
             <div class="comments-area">
               <div class="group-title d-flex " style=" justify-content: space-between;">
                 <h4>{{ $t('Recent') }} {{ $tc('comment',[2]) }}</h4>
-                <button class="pull-right load-comments" v-show="loggedIn && post.comments_count > 0 && comments.length ==0"  @click.prevent="loadComments" > {{$t('Load')}} {{$tc('comment',2)}}</button>
+                <button class="pull-right load-comments" v-show="post.comments_count > 0 && comments.length ==0"  @click.prevent="loadComments" > {{$t('Load')}} {{$tc('comment',2)}}</button>
               </div>
 
-              <div class="alert alert-info w-100" v-if="!comments.length" >{{$t('no_comment_signin_to_see')}}</div>
+              <div class="alert alert-info w-100" v-if="!comments.length && !post.comments_count" >{{$t('no_comment_signin_to_see')}}</div>
               <div v-for="(comment,i) in comments" :key="i">
                 <div class="comment-box " >
-                  <div class="comment" >
-                    <div class="author-thumb"><img :src="comment.user.photo" alt=""></div>
+                  <div class="comment" :id="`comment-id-${comment.id}`" >
+                    <div class="author-thumb"> 
+                        <img :src="comment.user.photo" onerror="this.src = '~assets/images/dashboard/avatar5.png';"  alt="user avatar" height="auto" width="auto">
+                    </div>
                     <div class="comment-info clearfix"><strong>{{ `${comment.user.first_name} ${comment.user.last_name}`  }} </strong><div class="comment-time">
                       {{ comment.created_at }}</div></div>
                     <div class="text">{{comment.content}}</div>
-                    <a class="theme-btn reply-btn" href="#"> {{ $t('Reply') }}</a>
+                    <a class="theme-btn reply-btn" href="javascript:void()" @click.prevent="AddReply(comment.id)"> {{ $t('Reply') }}</a>
                   </div>
+
+                  <div class="comment-box reply-comment"  v-if="comment.children" v-for="(c,k) in comment.children" :key="k">
+                    <div class="comment" >
+                      <div class="author-thumb">
+                        <img :src="comment.user.photo" onerror="this.src = '~assets/images/dashboard/avatar5.png';"  alt="user avatar" height="auto" width="auto">
+                      </div>
+                      <div class="comment-info clearfix"><strong>{{ `${c.user.first_name} ${c.user.last_name}`  }} </strong><div class="comment-time">
+                        {{ c.created_at }}</div></div>
+                      <div class="text">{{c.content}}</div>
+                    </div>
+                  </div>
+                  
+                </div>
+
+                
+              </div>
                   <div class="comment-form reply-comment pt-3 pl-2" ref="reply-comment" >
-                    <div class="alert alert-info w-100" v-if="!loggedIn" >{{$t('login_to_reply')}}{{comment.user.first_name}} .</div>
+                    <div class="alert alert-info w-100" v-if="!loggedIn" >{{$t('login_to_reply')}}
+                      <!-- {{comment.user.first_name}} . -->
+                    </div>
                     <!--Comment Form-->
-                    <form method="post" v-else action="#" >
+                    <form method="post" v-show="isAReply" action="#" >
                       <div class="row clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 form-group m-0">
                         <textarea class="" v-model="new_comment.content" @keyup="replySizeError = false"
@@ -219,28 +239,18 @@
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12 form-group m-0">
-                          <button class="btn btn-success text-white" type="submit" name="submit-form" @click.prevent="addComment(comment.id)"><span class="txt">{{$t('submit_your_reply')}}<i class="fa " :class="$dir() == 'ltr' ? 'fa-angle-right' :'fa-angle-left ml-2'"></i></span></button>
+                          <button class="btn btn-success text-white" type="submit" name="submit-form" @click.prevent="addComment()"><span class="txt">{{$t('submit_your_reply')}}<i class="fa " :class="$dir() == 'ltr' ? 'fa-angle-right' :'fa-angle-left ml-2'"></i></span></button>
                         </div>
 
                       </div>
                     </form>
 
                   </div>
-                </div>
-                <div class="comment-box reply-comment"  v-if="comment.children" v-for="(c,k) in comment.children" :key="k">
-                  <div class="comment" >
-                    <div class="author-thumb"><img :src="comment.user.photo" alt=""></div>
-                    <div class="comment-info clearfix"><strong>{{ `${c.user.first_name} ${c.user.last_name}`  }} </strong><div class="comment-time">
-                      {{ c.created_at }}</div></div>
-                    <div class="text">{{c.content}}</div>
-                  </div>
-                </div>
-              </div>
 
             </div>
 
             <!-- Comment Form -->
-            <div class="comment-form">
+            <div class="comment-form" v-show="!isAReply">
               <div class="group-title"><h4>{{$t('Leave') +' '+ $tc('comment',[])}}</h4></div>
               <div class="alert alert-info w-100" v-if="!loggedIn" >{{$t('login_to_leave_comment')}}</div>
               <!--Comment Form-->
@@ -263,7 +273,7 @@
                   </div>
 
                   <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                    <button class="btn btn-success text-white" type="submit" name="submit-form" @click.prevent="addComment(null)"><span class="txt">{{$t('submit_your_comment')}} <i class="fa" :class="$dir() =='ltr' ? ' fa-angle-right' : ' fa-angle-left ml-1'"></i></span></button>
+                    <button class="btn btn-success text-white" type="submit" name="submit-form" @click.prevent="addComment()"><span class="txt">{{$t('submit_your_comment')}} <i class="fa" :class="$dir() =='ltr' ? ' fa-angle-right' : ' fa-angle-left ml-1'"></i></span></button>
                   </div>
 
                 </div>
@@ -350,6 +360,7 @@ export default {
                 maxHeight:"386px",
 
               },
+              isAReply:false
     }
   },
   // created() {
@@ -405,15 +416,15 @@ export default {
 
       try{
         this.comments=  await this.$axios.$get(`api/posts/${this.$route.params.slug}/comments`)
-
+        console.log(this.comments);
       }
       catch (e) {
         throw e;
       }
     },
-    async addComment(parent_id){
+    async addComment(){
       if(this.new_comment.content.length < 4){
-        if(parent_id == null)
+        if(this.new_comment.parent_id == null)
             {this.commentSizeError =  true;}
         else
             {this.replySizeError = true}
@@ -421,16 +432,32 @@ export default {
         return ;
       }
 
-      this.new_comment.parent_id = parent_id;
-
       // let token = this.$store.state['usersAuth'].token;
-      alert('the comment will open soon ..')
-      // this.$axios.setHeader('Authorization','bearer '+token);
+      // alert('the comment will open soon ..')
+      this.$axios.setHeader('Authorization','bearer '+this.$auth.strategy.token.get());
       // this.$axios.setHeader('Content-Type','application/x-www-form-urlencoded')
-      // await this.$axios.$post(`/api/posts/${this.$route.params.slug}/comments/new`,this.new_comment)
-      //       .then(res => console.log(res))
-      //       .catch(err => console.log(err));
+      await this.$axios.$post(`/api/posts/${this.$route.params.slug}/comments/new`,{
+        ...this.new_comment
+      })
+      .then(res =>{
+        this.new_comment.parent_id =null;
+        this.new_comment.content ='';
+        this.isAReply = false;
+        this.loadComments()
+      })
+      .catch(err => alert(err));
 
+    },
+    AddReply(comment_id){
+      if(!this.loggedIn) return;
+      //setting form to be a reply
+      this.isAReply = true;
+      //SHOW THE REPLY FORM
+      let commentBox = document.querySelector('#comment-id-'+comment_id);
+      let newNode = document.querySelectorAll('.comment-form.reply-comment')[0];
+      commentBox.parentNode.insertBefore(newNode, commentBox.nextSibling);
+      //setting the parent id  of the reply
+      this.new_comment.parent_id = comment_id
     }
 
   },
@@ -440,12 +467,23 @@ export default {
       return this.$auth.loggedIn
     },
     getLocalUrl(){
-      return this.localUrl;
+      return this.localUrl;  
     }
   }
 }
 </script>
 <style>
-@import "assets/css/blog-detail.css";
+@import "assets/css/blog-detail.css";  
+.blog-detail .inner-box p {
+  color:rgb(66 65 65);
+   font-family: source-serif-pro, Georgia, Cambria, "Times New Roman", Times, serif !important;
+}
+.blog-detail .inner-box .image img {
+    max-height: 24rem;
+}
+.ql-syntax.hljs{
+  font-family: source-serif-pro, Georgia, Cambria, "Times New Roman", Times, serif !important;
+    font-size: 16px !important;
+}
 </style>
 

@@ -112,7 +112,7 @@
 
       <!-- Footer Bottom -->
       <div class="footer-bottom text-center">
-        <div class="copyright"><span> {{$t('copyright')}} &copy;  {{new Date().getFullYear()}} </span>  <strong class="">{{ site_settings.site_name }}</strong></div>
+        <div class="copyright"><span> {{$t('copyright')}} &copy;  {{new Date().getFullYear()}} </span>  <strong class="">{{ site_settings.copyrights }}</strong></div>
       </div>
 
     </div>
@@ -164,7 +164,7 @@ export default {
   },
   computed:{
     site_settings(){
-      return this.$store.getters["site_settings"].settings;
+      return this.$store.getters["site_settings"];
     },
     emailError() {
       return !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) && this.email.length > 0

@@ -71,7 +71,7 @@
         <v-card>
           <v-row class="no-gutters">
             <div class="col-auto">
-              <div class="teal fill-height">&nbsp;</div>
+              <div class="teal                                                                                                                                                                                                                                                            fill-height">&nbsp;</div>
             </div>
             <div class="col pa-3 py-4 ">
               <h5 class="text-truncate text-uppercase teal--text">Project</h5>

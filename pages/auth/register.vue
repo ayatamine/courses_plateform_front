@@ -165,10 +165,11 @@ export default {
          this.termsError = true;
          return;
        }
-        await this.$axios.$post('/api/students/register', this.userData)
-         .then(({token,expiresIn} )=>{
-           this.$store.dispatch('usersAuth/setToken', {token, expiresIn});
-           this.$router.push('/');
+        await this.$axios.$post('/api/students/email/verify', this.userData)
+         .then(({access_token} )=>{
+           this.$store.dispatch('usersAuth/setToken', {token:access_token});
+           this.$auth.$storage.setLocalStorage('email_to_verify', this.userData.email)
+           this.$router.push('/auth/verify');
          })
       .catch(err =>{
         console.log(err)

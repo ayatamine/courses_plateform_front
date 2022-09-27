@@ -55,7 +55,7 @@ export const actions = {
     ctx.commit("setSiteSettings",site_settings)
 
 
-    refreshTokens(ctx,context);
+    // refreshTokens(ctx,context);
     return {tutorials,site_settings,loading:false}
   },
 
